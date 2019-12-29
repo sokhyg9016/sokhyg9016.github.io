@@ -1156,7 +1156,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #59fcdb;
+  background: #ff94ad;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1513,7 +1513,7 @@ pre .javascript .function {
 }
 @media (max-width: 413px) {
   .post-body {
-    font-size: 0.8125em;
+    font-size: 0.75em;
   }
 }
 .post-body span.exturl .fa {
@@ -1678,10 +1678,14 @@ pre .javascript .function {
 .posts-expand {
   padding-top: 40px;
 }
-@media (max-width: 767px) {
+@media (max-width: 567px) {
   .posts-expand {
-    margin: 0 20px;
-    font-size: 0.875em;
+    font-size: 0.8125em;
+  }
+}
+@media (max-width: 413px) {
+  .posts-expand {
+    font-size: 0.75em;
   }
 }
 @media (min-width: 992px) {
