@@ -1156,7 +1156,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #b849ff;
+  background: #1c712f;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1506,6 +1506,11 @@ pre .javascript .function {
     font-size: 0.875em;
   }
 }
+@media (max-width: 413px) {
+  .post-body {
+    font-size: 0.75em;
+  }
+}
 .post-body span.exturl .fa {
   font-size: 0.875em;
   margin-left: 4px;
@@ -1671,6 +1676,7 @@ pre .javascript .function {
 @media (max-width: 767px) {
   .posts-expand {
     margin: 0 20px;
+    font-size: 0.875em;
   }
 }
 @media (min-width: 992px) {

@@ -518,7 +518,7 @@
 
     - `setlocale(LC_ALL, nullptr);` 과 같이 작성한다면 아무런 언어 설정도 안했으므로 기본적인 언어 설정인 &quot;C&quot;로 리턴됨
     - `setlocale(LC_ALL, &quot;&quot;);` 와 같이 작성한다면 OS를 기반으로 한 지역언어 설정을 적용하게 된다.
-        - 즉, 작성하고 있는 컴퓨터의 국가 설정 텍스트 모드로 변경됨.
+    - 즉, 작성하고 있는 컴퓨터의 국가 설정 텍스트 모드로 변경됨.
 
     - 한글 설정 방법
         <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">setlocale(LC_ALL, <span class="string">""</span>);</span><br><span class="line">setlocale(LC_ALL, <span class="string">"kor"</span>); <span class="comment">//"Korean" 또는 "korean" 등도 됌.</span></span><br></pre></td></tr></table></figure></code></pre><hr>

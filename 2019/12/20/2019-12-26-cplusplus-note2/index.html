@@ -14,6 +14,8 @@
 
 
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-simple.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
 
 
 <script id="hexo-configurations">
@@ -554,7 +556,7 @@
 
     - `setlocale(LC_ALL, nullptr);` 과 같이 작성한다면 아무런 언어 설정도 안했으므로 기본적인 언어 설정인 &quot;C&quot;로 리턴됨
     - `setlocale(LC_ALL, &quot;&quot;);` 와 같이 작성한다면 OS를 기반으로 한 지역언어 설정을 적용하게 된다.
-        - 즉, 작성하고 있는 컴퓨터의 국가 설정 텍스트 모드로 변경됨.
+    - 즉, 작성하고 있는 컴퓨터의 국가 설정 텍스트 모드로 변경됨.
 
     - 한글 설정 방법
         <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">setlocale(LC_ALL, <span class="string">""</span>);</span><br><span class="line">setlocale(LC_ALL, <span class="string">"kor"</span>); <span class="comment">//"Korean" 또는 "korean" 등도 됌.</span></span><br></pre></td></tr></table></figure></code></pre><hr>
@@ -763,6 +765,7 @@
   </div>
 
   
+  <script color='66,69,73' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest-nomobile.min.js"></script>
   <script src="/lib/anime.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
@@ -839,4 +842,4 @@
 </html>
 
 <!-- Background Animation -->
-<script type="text/javascript" src="/js/src/particle.js"></script>
+<!-- <script type="text/javascript" src="/js/src/particle.js"></script> -->
