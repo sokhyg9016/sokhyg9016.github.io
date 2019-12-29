@@ -1156,7 +1156,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #1c712f;
+  background: #36bdff;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1506,9 +1506,9 @@ pre .javascript .function {
     font-size: 0.875em;
   }
 }
-@media (max-width: 413px) {
+@media (max-width: 767px) {
   .post-body {
-    font-size: 0.75em;
+    font-size: 0.875em;
   }
 }
 .post-body span.exturl .fa {
