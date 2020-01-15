@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-simple.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://sokhyg9016.github.io').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","width":320,"display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="What is Go language and how to programming that.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="What is Go language?">
+<meta property="og:url" content="http://sokhyg9016.github.io/2020/01/14/2020-01-14-What%20is%20Go%20language/index.html">
+<meta property="og:site_name" content="_BLOG">
+<meta property="og:description" content="What is Go language and how to programming that.">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://www.vertica.com/wp-content/uploads/2019/07/Golang.png">
+<meta property="article:published_time" content="2020-01-14T06:00:00.000Z">
+<meta property="article:modified_time" content="2020-01-14T06:00:00.000Z">
+<meta property="article:author" content="LSH">
+<meta property="article:tag" content="Go">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.vertica.com/wp-content/uploads/2019/07/Golang.png">
+
+<link rel="canonical" href="http://sokhyg9016.github.io/2020/01/14/2020-01-14-What%20is%20Go%20language/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>What is Go language? | _BLOG</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">_BLOG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">AI · Data Structure · Algorithm · Game Development</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>홈</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>태그</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>카테고리</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>아카이브</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-fw fa-calendar"></i>Schedule</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>검색
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="ko">
+    <link itemprop="mainEntityOfPage" href="http://sokhyg9016.github.io/2020/01/14/2020-01-14-What%20is%20Go%20language/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/avatar.png">
+      <meta itemprop="name" content="LSH">
+      <meta itemprop="description" content="Github + 뻘글 블로그.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="_BLOG">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          What is Go language?
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">작성일</span>
+
+              <time title="Post created: 2020-01-14 00:00:00" itemprop="dateCreated datePublished" datetime="2020-01-14T00:00:00-06:00">2020-01-14</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2020/01/14/2020-01-14-What%20is%20Go%20language/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/01/14/2020-01-14-What is Go language/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">What is Go language and how to programming that.</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="What-is-Go-language"><a href="#What-is-Go-language" class="headerlink" title="What is Go language?"></a>What is Go language?</h1><blockquote>
+<p>Go is an open source programming language that makes it easy to build <strong>simple</strong>, <strong>reliable</strong>, and <strong>efficient</strong> software.</p>
+</blockquote>
+<p><code>Go</code>는 2009년 구글이 개발한 프로그래밍 언어이다. 가비지 컬렉션 기능이 있고, 병행성(concurrent)을 잘 지원하는 컴파일 언어다.</p>
+<p><img src="https://www.vertica.com/wp-content/uploads/2019/07/Golang.png" alt="GO Character"><br>↑ <strong><code>Go Gopher</code></strong></p>
+<ol>
+<li>Go는 다른 언어의 긍정적인 특징들을 유지하면서 공통이 되는 문제들을 해결할 새로운 프로그래밍 언어를 설계하기 위해 구글의 엔지니어 Robert Griesemer, 롭 파이크, 켄 톰프슨에 의해 실험적으로 시작되었다.</li>
+<li>나중의 인터뷰에서, 언어 설계자 3명 모두 자신들이 C++의 복잡성을 싫어하며 이로 인해 새로운 언어를 설계하는 계기가 되었다고 언급하였다.</li>
+</ol>
+<hr>
+<h2 id="Go의-언어-설계-및-특징"><a href="#Go의-언어-설계-및-특징" class="headerlink" title="Go의 언어 설계 및 특징"></a><code>Go</code>의 언어 설계 및 특징</h2><h3 id="Go는-단순함과-실용성을-지향하는-언어다"><a href="#Go는-단순함과-실용성을-지향하는-언어다" class="headerlink" title="Go는 단순함과 실용성을 지향하는 언어다."></a>Go는 단순함과 실용성을 지향하는 언어다.</h3><ul>
+<li><code>keyword</code>가 25개밖에 되지 않고 문법 또한 간결해 입문이 쉬운 편이라고 한다.</li>
+</ul>
+<h3 id="Go의-문법은-대체로-C와-비슷하다"><a href="#Go의-문법은-대체로-C와-비슷하다" class="headerlink" title="Go의 문법은 대체로 C와 비슷하다:"></a><code>Go</code>의 문법은 대체로 <code>C</code>와 비슷하다:</h3><ul>
+<li>코드 블록들은 중괄호로 둘러싸고 <code>for</code>, <code>switch</code>, <code>if</code>를 포함한 일반적인 제어구조를 가지고 있다.</li>
+<li><code>C</code>와 다르게, 한 라인 끝의 세미콜론은 필수가 아닌 옵션이다.</li>
+<li>변수 선언은 다르게 작성되고 대개 옵션이다.</li>
+<li>형변환은 명시적으로 해야 한다.</li>
+</ul>
+<h3 id="Go는-그리-좋지-않은-하드웨어에서도-빠르게-컴파일될-수-있도록-디자인되었다"><a href="#Go는-그리-좋지-않은-하드웨어에서도-빠르게-컴파일될-수-있도록-디자인되었다" class="headerlink" title="Go는 그리 좋지 않은 하드웨어에서도 빠르게 컴파일될 수 있도록 디자인되었다."></a><code>Go</code>는 그리 좋지 않은 하드웨어에서도 빠르게 컴파일될 수 있도록 디자인되었다.</h3><ul>
+<li><code>Go</code> 언어의 특징은 컴파일 언어이지만 컴파일러의 컴파일 속도가 매우 빨라 인터프리터 언어처럼 쓸 수 있다는 점에 있다.</li>
+<li><code>C++</code>나 <code>Java</code>에 있는 기능들 중 타입 상속, 제너릭, 표명(assertion), 메서드 오버로딩, 포인터 연산은 <code>Go</code>에서 포함하고 있지 않다.</li>
+<li><code>Go</code>를 만들고 있는 개발자들은, 제너릭 등은 급하진 않지만 어느 시점에는 기능이 도입될 것이라고 한다.</li>
+</ul>
+<h3 id="Go는-일차적으로-시스템-프로그래밍을-위해-개발되었다"><a href="#Go는-일차적으로-시스템-프로그래밍을-위해-개발되었다" class="headerlink" title="Go는 일차적으로 시스템 프로그래밍을 위해 개발되었다."></a><code>Go</code>는 일차적으로 시스템 프로그래밍을 위해 개발되었다.</h3><ul>
+<li><code>C++</code>와 같이 <code>Go</code>는 컴파일러를 통해 컴파일되며, 정적 타입 (Statically Typed)의 언어이다.</li>
+<li>또한 <code>Java</code>와 같이 <code>Go</code>는 <code>Garbage Collection</code> 기능을 제공한다.</li>
+</ul>
+<hr>
+<h2 id="단점"><a href="#단점" class="headerlink" title="단점?"></a>단점?</h2><p>[1] 바이트코드를 생성하는 언어가 아니므로, 바이너리만 배포할 경우 <code>C/C++</code> 프로그램이 그렇듯 해당 타깃 머신에 맞춰서 각각 컴파일해야 한다.</p>
+<ul>
+<li>그렇게 하지 않고서 다중 플랫폼을 지원하려면 소스 코드째로 배포해야 한다.</li>
+</ul>
+<p>[2] Go 언어의 설계 지향점은 시스템 프로그래밍 언어였지만, 가비지 컬렉션의 지원이나 제네릭의 부재로 인해 박싱/언박싱이 불필요하게 많이 일어나는 등 <code>C/C++</code>을 대체할 수 있는 언어는 아니라는 것에 합의가 이루어지고 있는 상황이다.</p>
+<ul>
+<li>실제로 고성능 연산에 사용하기에는 <code>C/C++</code>에 비해 느리며, 저수준 시스템 개발에서는 가비지 컬렉션과 고루틴을 지원하기 위한 무거운 런타임 등으로 인해 사용이 불가능에 가깝다.</li>
+<li>그런 이유로 대체로 개발 속도와 실행 속도, 병행성 사이의 적정 지점이 필요한 서버 애플리케이션 개발에 많이 사용되는 편.</li>
+</ul>
+<hr>
+<h2 id="병행성"><a href="#병행성" class="headerlink" title="병행성"></a>병행성</h2><p><code>Go</code>를 이용해 프로그램들이 서로 소통하면서 상태를 공유하는 <code>동시성</code>(concurrency) 프로그램을 쉽게 만들 수 있다.</p>
+<ul>
+<li><code>동시성</code>이란 멀티쓰레딩, 병렬 컴퓨팅 뿐 아니라, 비동기성 입출력 또한 포함한다.</li>
+<li>예를 들어, 이벤트 기반 서버와 같이, 데이터베이스나 네트워크 작업과 같이 시간이 많이 걸리는 연산을 하는 동안 프로그램이 다른 일을 하는 것을 말한다.</li>
+</ul>
+<hr>
+<h2 id="목적"><a href="#목적" class="headerlink" title="목적"></a>목적</h2><p><code>Go</code>는 정적 타입 컴파일 언어의 효율성과 동적 언어처럼 <strong>쉬운 프로그래밍</strong>을 할 수 있도록 하는 것을 목표로 한다. 또다른 목적은:</p>
+<ul>
+<li>안전성 : 타입 안전성과 메모리 안전성</li>
+<li>병행성과 통신을 위한 훌륭한 지원</li>
+<li>효과적인 가비지 컬렉션</li>
+<li>빠른 컴파일</li>
+</ul>
+<hr>
+<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><h3 id="Hello-world-in-Go"><a href="#Hello-world-in-Go" class="headerlink" title="Hello world in Go"></a>Hello world in Go</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main <span class="comment">// main() 함수를 포함하는 패키지의 이름이 main이 아닐 경우 에러가 발생한다.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">"Hello, world!"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Hello-world-example-of-Cgo"><a href="#Hello-world-example-of-Cgo" class="headerlink" title="Hello world example of Cgo"></a>Hello world example of Cgo</h3><p>Go의 C 코드를 위한 <strong>FFI</strong>(Foreign Function Interface)이다.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">#include &lt;stdio.h&gt;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"C"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	C.puts(<span class="string">"Hello world!"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><a href="https://ko.wikipedia.org/wiki/Go_(%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D_%EC%96%B8%EC%96%B4)" target="_blank" rel="noopener">wiki</a></li>
+<li><a href="http://codingnuri.com/golang-book/" target="_blank" rel="noopener">Go 프로그래밍 입문</a></li>
+<li><a href="http://golang.site/go/basics" target="_blank" rel="noopener">예제로 배우는 Go 프로그래밍</a></li>
+</ul>
+<hr>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Go/" rel="tag"><i class="fa fa-tag"></i> Go</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/01/14/2020-01-14-position%20property%20note/" rel="prev" title="Position property">
+      <i class="fa fa-chevron-left"></i> Position property
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          목차
+        </li>
+        <li class="sidebar-nav-overview">
+          흝어보기
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#What-is-Go-language"><span class="nav-number">1.</span> <span class="nav-text">What is Go language?</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Go의-언어-설계-및-특징"><span class="nav-number">1.1.</span> <span class="nav-text">Go의 언어 설계 및 특징</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Go는-단순함과-실용성을-지향하는-언어다"><span class="nav-number">1.1.1.</span> <span class="nav-text">Go는 단순함과 실용성을 지향하는 언어다.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Go의-문법은-대체로-C와-비슷하다"><span class="nav-number">1.1.2.</span> <span class="nav-text">Go의 문법은 대체로 C와 비슷하다:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Go는-그리-좋지-않은-하드웨어에서도-빠르게-컴파일될-수-있도록-디자인되었다"><span class="nav-number">1.1.3.</span> <span class="nav-text">Go는 그리 좋지 않은 하드웨어에서도 빠르게 컴파일될 수 있도록 디자인되었다.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Go는-일차적으로-시스템-프로그래밍을-위해-개발되었다"><span class="nav-number">1.1.4.</span> <span class="nav-text">Go는 일차적으로 시스템 프로그래밍을 위해 개발되었다.</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#단점"><span class="nav-number">1.2.</span> <span class="nav-text">단점?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#병행성"><span class="nav-number">1.3.</span> <span class="nav-text">병행성</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#목적"><span class="nav-number">1.4.</span> <span class="nav-text">목적</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Example"><span class="nav-number">1.5.</span> <span class="nav-text">Example</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Hello-world-in-Go"><span class="nav-number">1.5.1.</span> <span class="nav-text">Hello world in Go</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hello-world-example-of-Cgo"><span class="nav-number">1.5.2.</span> <span class="nav-text">Hello world example of Cgo</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">1.6.</span> <span class="nav-text">Reference</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LSH"
+      src="/img/avatar.png">
+  <p class="site-author-name" itemprop="name">LSH</p>
+  <div class="site-description" itemprop="description">Github + 뻘글 블로그.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">포스트</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">카테고리</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">태그</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/sokhyg9016" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;sokhyg9016" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:sokhyg9016@gmail.com" title="E-Mail → mailto:sokhyg9016@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/users/10584779/%ec%9d%b4%ec%8a%b9%ed%9b%88" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;10584779&#x2F;%ec%9d%b4%ec%8a%b9%ed%9b%88" rel="noopener" target="_blank"><i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.youtube.com/channel/UC9bPZO7K_0a6Eh_nbcjD68A?view_as=subscriber" title="YouTube → https:&#x2F;&#x2F;www.youtube.com&#x2F;channel&#x2F;UC9bPZO7K_0a6Eh_nbcjD68A?view_as&#x3D;subscriber" rel="noopener" target="_blank"><i class="fa fa-fw fa-youtube"></i>YouTube</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LSH</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://sokhyg9016-github-io.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "http://sokhyg9016.github.io/2020/01/14/2020-01-14-What%20is%20Go%20language/",
+            identifier: "2020/01/14/2020-01-14-What is Go language/",
+            title: "What is Go language?"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://sokhyg9016-github-io.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
+
+<!-- Background Animation -->
+<!-- <script type="text/javascript" src="/js/src/particle.js"></script> -->
