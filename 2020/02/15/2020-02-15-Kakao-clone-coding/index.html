@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Code|Source+Code+Pro|Noto+Sans+KR|Noto+Serif+KR&display=swap, https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/RIDIBatang.woff, https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Simplehae.woff, https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_three@1.0/D2Coding.wof/css?family=Cafe24Simplehae:300,300italic,400,400italic,700,700italic|Noto Sans KR:300,300italic,400,400italic,700,700italic|RIDIBatang:300,300italic,400,400italic,700,700italic|Consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-simple.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://sokhyg9016.github.io').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","width":320,"display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="카카오 클론 코딩 by Nomad coders">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kakao clone coding">
+<meta property="og:url" content="http://sokhyg9016.github.io/2020/02/15/2020-02-15-Kakao-clone-coding/index.html">
+<meta property="og:site_name" content="_BLOG">
+<meta property="og:description" content="카카오 클론 코딩 by Nomad coders">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://raw.githubusercontent.com/sokhyg9016/Nomad-kakao-clone-2.0/master/Screenshots/2.15/friends.JPG">
+<meta property="og:image" content="https://raw.githubusercontent.com/sokhyg9016/Nomad-kakao-clone-2.0/master/Screenshots/2.15/chats.JPG">
+<meta property="og:image" content="https://raw.githubusercontent.com/sokhyg9016/Nomad-kakao-clone-2.0/master/Screenshots/2.15/chat.JPG">
+<meta property="og:image" content="https://raw.githubusercontent.com/sokhyg9016/Nomad-kakao-clone-2.0/master/Screenshots/2.15/find.JPG">
+<meta property="og:image" content="https://raw.githubusercontent.com/sokhyg9016/Nomad-kakao-clone-2.0/master/Screenshots/2.15/more.JPG">
+<meta property="og:image" content="https://raw.githubusercontent.com/sokhyg9016/Nomad-kakao-clone-2.0/master/Screenshots/2.15/settings.JPG">
+<meta property="article:published_time" content="2020-02-15T06:00:00.000Z">
+<meta property="article:modified_time" content="2020-02-15T06:00:00.000Z">
+<meta property="article:author" content="LSH">
+<meta property="article:tag" content="CSS3">
+<meta property="article:tag" content="HTML">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/sokhyg9016/Nomad-kakao-clone-2.0/master/Screenshots/2.15/friends.JPG">
+
+<link rel="canonical" href="http://sokhyg9016.github.io/2020/02/15/2020-02-15-Kakao-clone-coding/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Kakao clone coding | _BLOG</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">_BLOG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">AI · Data Structure · Algorithm · Game Development</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>홈</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>태그</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>카테고리</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>아카이브</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-fw fa-calendar"></i>Schedule</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>검색
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="ko">
+    <link itemprop="mainEntityOfPage" href="http://sokhyg9016.github.io/2020/02/15/2020-02-15-Kakao-clone-coding/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/avatar.png">
+      <meta itemprop="name" content="LSH">
+      <meta itemprop="description" content="Github + 뻘글 블로그.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="_BLOG">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Kakao clone coding
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">작성일</span>
+
+              <time title="Post created: 2020-02-15 00:00:00" itemprop="dateCreated datePublished" datetime="2020-02-15T00:00:00-06:00">2020-02-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web-Development/" itemprop="url" rel="index">
+                    <span itemprop="name">Web Development</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web-Development/Project/" itemprop="url" rel="index">
+                    <span itemprop="name">Project</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web-Development/Project/Clone-Coding/" itemprop="url" rel="index">
+                    <span itemprop="name">Clone Coding</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2020/02/15/2020-02-15-Kakao-clone-coding/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/02/15/2020-02-15-Kakao-clone-coding/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">카카오 클론 코딩 by Nomad coders</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<p>Preview: <a href="https://sokhyg9016.github.io/Nomad-kakao-clone-2.0/">Link</a></p>
+<h2 id="Screenshots-2020-01-20"><a href="#Screenshots-2020-01-20" class="headerlink" title="Screenshots (2020. 01. 20)"></a>Screenshots (2020. 01. 20)</h2><a href="https://raw.githubusercontent.com/sokhyg9016/Nomad-kakao-clone-2.0/master/Screenshots/2.15/friends.JPG" target="_blank" rel="noopener">
+<a href="https://raw.githubusercontent.com/sokhyg9016/Nomad-kakao-clone-2.0/master/Screenshots/2.15/friends.JPG" target="_blank" rel="noopener" title="friends" class="gallery-item"><img src="https://raw.githubusercontent.com/sokhyg9016/Nomad-kakao-clone-2.0/master/Screenshots/2.15/friends.JPG" align="left" width="125" alt = "friends"></a></a>
+<a href="https://raw.githubusercontent.com/sokhyg9016/Nomad-kakao-clone-2.0/master/Screenshots/2.15/chats.JPG" target="_blank" rel="noopener">
+<a href="https://raw.githubusercontent.com/sokhyg9016/Nomad-kakao-clone-2.0/master/Screenshots/2.15/chats.JPG" target="_blank" rel="noopener" title="chats" class="gallery-item"><img src="https://raw.githubusercontent.com/sokhyg9016/Nomad-kakao-clone-2.0/master/Screenshots/2.15/chats.JPG" align="left" width="125" alt = "chats"></a></a>
+<a href="https://raw.githubusercontent.com/sokhyg9016/Nomad-kakao-clone-2.0/master/Screenshots/2.15/chat.JPG" target="_blank" rel="noopener">
+<a href="https://raw.githubusercontent.com/sokhyg9016/Nomad-kakao-clone-2.0/master/Screenshots/2.15/chat.JPG" target="_blank" rel="noopener" title="chat" class="gallery-item"><img src="https://raw.githubusercontent.com/sokhyg9016/Nomad-kakao-clone-2.0/master/Screenshots/2.15/chat.JPG" align="left" width="125" alt = "chat"></a></a>
+<a href="https://raw.githubusercontent.com/sokhyg9016/Nomad-kakao-clone-2.0/master/Screenshots/2.15/find.JPG" target="_blank" rel="noopener">
+<a href="https://raw.githubusercontent.com/sokhyg9016/Nomad-kakao-clone-2.0/master/Screenshots/2.15/find.JPG" target="_blank" rel="noopener" title="find" class="gallery-item"><img src="https://raw.githubusercontent.com/sokhyg9016/Nomad-kakao-clone-2.0/master/Screenshots/2.15/find.JPG" align="left" width="125" alt = "find"></a></a>
+<a href="https://raw.githubusercontent.com/sokhyg9016/Nomad-kakao-clone-2.0/master/Screenshots/2.15/more.JPG" target="_blank" rel="noopener">
+<a href="https://raw.githubusercontent.com/sokhyg9016/Nomad-kakao-clone-2.0/master/Screenshots/2.15/more.JPG" target="_blank" rel="noopener" title="more" class="gallery-item"><img src="https://raw.githubusercontent.com/sokhyg9016/Nomad-kakao-clone-2.0/master/Screenshots/2.15/more.JPG" align="left" width="125" alt = "more"></a></a>
+<a href="https://raw.githubusercontent.com/sokhyg9016/Nomad-kakao-clone-2.0/master/Screenshots/2.15/settings.JPG" target="_blank" rel="noopener">
+<a href="https://raw.githubusercontent.com/sokhyg9016/Nomad-kakao-clone-2.0/master/Screenshots/2.15/settings.JPG" target="_blank" rel="noopener" title="settings" class="gallery-item"><img src="https://raw.githubusercontent.com/sokhyg9016/Nomad-kakao-clone-2.0/master/Screenshots/2.15/settings.JPG" align="left" width="125" alt = "settings"></a></a>
+
+<p style = "clear: both;"></p>
+
+<h2 id="Introducion-Video"><a href="#Introducion-Video" class="headerlink" title="Introducion Video"></a>Introducion Video</h2><iframe width="560" height="315" src="https://www.youtube.com/embed/6ZQAKorChFs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<h2 id="Project-Settings"><a href="#Project-Settings" class="headerlink" title="Project Settings"></a>Project Settings</h2><ul>
+<li>Make repository using Github desktop</li>
+<li>Make <code>.gitignore</code></li>
+<li>Make some html files</li>
+<li>Upload the Github online</li>
+</ul>
+<h2 id="Chrome-Web-Extension-Apps"><a href="#Chrome-Web-Extension-Apps" class="headerlink" title="Chrome Web Extension Apps"></a>Chrome Web Extension Apps</h2><ul>
+<li><a href="https://chrome.google.com/webstore/detail/colorzilla/bhlhnicpbhignbdhedgjhgdocnmhomnp?hl=en" target="_blank" rel="noopener">ColorZilla</a><ul>
+<li>Get a color reading from any point in your browser, quickly adjust this color and paste it into another program</li>
+</ul>
+</li>
+<li><a href="https://chrome.google.com/webstore/detail/page-ruler-redux/giejhjebcalaheckengmchjekofhhmal?hl=en" target="_blank" rel="noopener">PageRulerRedux</a><ul>
+<li>Get perfect pixel dimensions and positioning to measure elements on any web page.</li>
+</ul>
+</li>
+</ul>
+<h2 id="TIPs-for-development"><a href="#TIPs-for-development" class="headerlink" title="TIPs for development"></a>TIPs for development</h2><ol>
+<li>항상 컴포넌트 단위로 시작</li>
+<li>반복되는 페이지의 파트로 시작 (헤더, 스테이터스 바, 네비게이션 바)</li>
+<li>word를 나누기 위해 <code>-</code>를 사용 (e.g. <code>class = &quot;list-item&quot;</code>)</li>
+<li>파일들을 작게 쪼개서 하나씩 완성해나가는 게 가장 좋을 수 도 있다.</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>코드가 커지면 보기도 힘들고 기능별로 (파일을) 나누는 것도 좋다.</th>
+</tr>
+</thead>
+</table>
+<h3 id="e-g-s"><a href="#e-g-s" class="headerlink" title="e.g.s"></a>e.g.s</h3><ol>
+<li><p>부모자식을 나누기 위해 <code>__</code>를 사용<br>e.g.s <code>class = &quot;parent__child&quot;</code></p>
+</li>
+<li><p>한 클래스의 세부 속성을 나누기 위해 <code>--</code>를 사용<br>e.g.s <code>class = &quot;friend--lg&quot;</code> (lg =&gt; large)</p>
+</li>
+</ol>
+<hr>
+<h2 id="Components"><a href="#Components" class="headerlink" title="Components"></a>Components</h2><h3 id="html"><a href="#html" class="headerlink" title="html"></a>html</h3><ul>
+<li>index.html</li>
+<li>chat.html</li>
+<li>friends.html</li>
+<li>more.html</li>
+<li>find.html</li>
+<li>settings.html</li>
+</ul>
+<h3 id="css"><a href="#css" class="headerlink" title="css"></a>css</h3><p><strong>공통 속성</strong></p>
+<ul>
+<li>status-bar.css</li>
+<li>nav-bar.css</li>
+<li>header.css</li>
+<li>reset.css</li>
+</ul>
+<ul>
+<li><code>style.css</code> : 다른 세부적인 css file들을 연결 및 웹 페이지 전체의 기준 값들을 결정</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@import</span> url(<span class="string">"https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;display=swap"</span>);</span><br><span class="line"><span class="keyword">@import</span> <span class="string">"reset.css"</span>;</span><br><span class="line"><span class="keyword">@import</span> <span class="string">"status-bar.css"</span>;</span><br><span class="line"><span class="keyword">@import</span> <span class="string">"header.css"</span>;</span><br><span class="line"><span class="keyword">@import</span> <span class="string">"nav-bar.css"</span>;</span><br><span class="line"><span class="keyword">@import</span> <span class="string">"friend.css"</span>;</span><br><span class="line"><span class="keyword">@import</span> <span class="string">"friends.css"</span>;</span><br><span class="line"><span class="keyword">@import</span> <span class="string">"find.css"</span>;</span><br><span class="line"><span class="keyword">@import</span> <span class="string">"more.css"</span>;</span><br><span class="line"><span class="keyword">@import</span> <span class="string">"settings.css"</span>;</span><br><span class="line"><span class="keyword">@import</span> <span class="string">"chat.css"</span>;</span><br><span class="line"><span class="keyword">@import</span> <span class="string">"mobile.css"</span>;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>reset.css</strong>: 모든 기본 style 값을 0으로 바꾼다.</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">여기서 모든 style 값이란 margin, padding, display, font-size.. 등등의</span><br><span class="line">css 속성들을 말한다.</span><br><span class="line"></span><br><span class="line">Reset CSS란 설명하자면 브라우저간의 차이를 최대한 없에서,</span><br><span class="line">스타일이 0인 상태에서 디자인을 만들어 나가기 위해 생겨난것입니다.</span><br><span class="line">*font-size도 h1, h2, .. h7, p, a, font 가릴 것 없이 초기화 됨(크기가 같음.)</span><br><span class="line"></span><br><span class="line">또한 reset.css 대신 normalize.css를 사용할 수도 았다.</span><br><span class="line">reset.css가 모든 기본 값을 초기화시키는 것이라면 normalize.css는 기본적으로 각 브라우저의</span><br><span class="line">스타일을 따르고 있지만 기준을 만들어 줄 수 있다.</span><br><span class="line"></span><br><span class="line">즉, 모든 브라우저에서 한 태그(e.g.s h1)에 대한 크기를 같은 크기로 만드는 등의</span><br><span class="line">기준을 세울 수 있다.</span><br><span class="line"></span><br><span class="line">Refer: http://meyerweb.com/eric/tools/css/reset/</span><br></pre></td></tr></table></figure>
+
+<p><strong>각 페이지 별 속성</strong></p>
+<ul>
+<li>chat.css</li>
+<li>find.css</li>
+<li>friend.css</li>
+<li>friends.css</li>
+<li>mobile.css</li>
+<li>more.css</li>
+<li>setting.css</li>
+</ul>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://academy.nomadcoders.co/p/kakaoclone_total" target="_blank" rel="noopener">[이론+실전] 코코아톡 클론 코딩</a><br><a href="https://www.youtube.com/watch?v=6ZQAKorChFs" target="_blank" rel="noopener">노마드 아카데미 카카오톡 클론코딩 소개</a></p>
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/CSS3/" rel="tag"><i class="fa fa-tag"></i> CSS3</a>
+              <a href="/tags/HTML/" rel="tag"><i class="fa fa-tag"></i> HTML</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/02/15/2020-02-15-Baekjoon-10989/" rel="prev" title="BAEKJOON 10989 Solution">
+      <i class="fa fa-chevron-left"></i> BAEKJOON 10989 Solution
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          목차
+        </li>
+        <li class="sidebar-nav-overview">
+          흝어보기
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Screenshots-2020-01-20"><span class="nav-number">1.</span> <span class="nav-text">Screenshots (2020. 01. 20)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introducion-Video"><span class="nav-number">2.</span> <span class="nav-text">Introducion Video</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Project-Settings"><span class="nav-number">3.</span> <span class="nav-text">Project Settings</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chrome-Web-Extension-Apps"><span class="nav-number">4.</span> <span class="nav-text">Chrome Web Extension Apps</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TIPs-for-development"><span class="nav-number">5.</span> <span class="nav-text">TIPs for development</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#e-g-s"><span class="nav-number">5.1.</span> <span class="nav-text">e.g.s</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Components"><span class="nav-number">6.</span> <span class="nav-text">Components</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#html"><span class="nav-number">6.1.</span> <span class="nav-text">html</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#css"><span class="nav-number">6.2.</span> <span class="nav-text">css</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">7.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LSH"
+      src="/img/avatar.png">
+  <p class="site-author-name" itemprop="name">LSH</p>
+  <div class="site-description" itemprop="description">Github + 뻘글 블로그.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">포스트</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">카테고리</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">태그</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/sokhyg9016" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;sokhyg9016" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:sokhyg9016@gmail.com" title="E-Mail → mailto:sokhyg9016@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/users/10584779/%ec%9d%b4%ec%8a%b9%ed%9b%88" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;10584779&#x2F;%ec%9d%b4%ec%8a%b9%ed%9b%88" rel="noopener" target="_blank"><i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.youtube.com/channel/UC9bPZO7K_0a6Eh_nbcjD68A?view_as=subscriber" title="YouTube → https:&#x2F;&#x2F;www.youtube.com&#x2F;channel&#x2F;UC9bPZO7K_0a6Eh_nbcjD68A?view_as&#x3D;subscriber" rel="noopener" target="_blank"><i class="fa fa-fw fa-youtube"></i>YouTube</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LSH</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://sokhyg9016-github-io.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://sokhyg9016.github.io/2020/02/15/2020-02-15-Kakao-clone-coding/";
+    this.page.identifier = "2020/02/15/2020-02-15-Kakao-clone-coding/";
+    this.page.title = "Kakao clone coding";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://sokhyg9016-github-io.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
+
+<!-- Background Animation -->
+<!-- <script type="text/javascript" src="/js/src/particle.js"></script> -->

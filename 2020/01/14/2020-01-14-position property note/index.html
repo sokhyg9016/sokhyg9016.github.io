@@ -12,7 +12,7 @@
 
 <link rel="stylesheet" href="/css/main.css">
 
-
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Code|Source+Code+Pro|Noto+Sans+KR|Noto+Serif+KR&display=swap, https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/RIDIBatang.woff, https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Simplehae.woff, https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_three@1.0/D2Coding.wof/css?family=Cafe24Simplehae:300,300italic,400,400italic,700,700italic|Noto Sans KR:300,300italic,400,400italic,700,700italic|RIDIBatang:300,300italic,400,400italic,700,700italic|Consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="/lib/pace/pace-theme-center-simple.min.css">
   <script src="/lib/pace/pace.min.js"></script>
@@ -24,7 +24,7 @@
     hostname: new URL('http://sokhyg9016.github.io').hostname,
     root: '/',
     scheme: 'Muse',
-    version: '7.6.0',
+    version: '7.7.0',
     exturl: false,
     sidebar: {"position":"left","width":320,"display":"post","padding":18,"offset":12,"onmobile":false},
     copycode: {"enable":false,"show_result":true,"style":null},
@@ -278,7 +278,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="static"><a href="#static" class="headerlink" title="static"></a>static</h2><blockquote>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<h2 id="static"><a href="#static" class="headerlink" title="static"></a>static</h2><blockquote>
 <p>Default position value</p>
 </blockquote>
 <p><code>Default</code>로 모든 박스는 포지션이 static이다. 이 뜻은<br>그 element를 거기 놓으면 거기 있을 것이다~라는 뜻이다.</p>
@@ -302,8 +302,13 @@
 <p>[2] 그게 설정되어야 차일즈 element는 부모 element안에 위치할 수 있다.</p>
 <h2 id="position-html"><a href="#position-html" class="headerlink" title="position.html"></a><code>position.html</code></h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"ie=edge"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Position property<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">      /*</span><br><span class="line">            각 브라우저 마다 가지고 있는 Default 값을 상쇄하기 위해서</span><br><span class="line">            아래와 같은 설정을 해준다. </span><br><span class="line">        */</span><br><span class="line">      body,</span><br><span class="line">      html &#123;</span><br><span class="line">        height: 100%;</span><br><span class="line">        margin: 0;</span><br><span class="line">        padding: 0;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      body &#123;</span><br><span class="line">        height: 100%;</span><br><span class="line">        background-color: gray;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">      <span class="selector-class">.abs-box</span> &#123;</span></span><br><span class="line">        width: 400px;</span><br><span class="line">        height: 400px;</span><br><span class="line">        background-color: yellow;</span><br><span class="line">        position: relative;</span><br><span class="line">        top: 300px;</span><br><span class="line">        left: 50%;</span><br><span class="line">        transform: translate(-50%, -50%);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">      <span class="selector-class">.abs-child</span> &#123;</span></span><br><span class="line">        width: 100px;</span><br><span class="line">        height: 100px;</span><br><span class="line">        background-color: green;</span><br><span class="line">        position: absolute;</span><br><span class="line">        top: 10px;</span><br><span class="line">        left: 10px;</span><br><span class="line">      &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"abs-box"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"abs-child"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="../../../../img/position_property.png" alt="Image description"></p>
-
+<p><a href="../../../../img/position_property.png" title="Image description" class="gallery-item"><img src="../../../../img/position_property.png" alt="Image description"></a></p>
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>
     </div>
 
     
@@ -322,12 +327,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/01/14/2020-01-14-Advanced%20CSS/" rel="prev" title="Advanced CSS">
-      <i class="fa fa-chevron-left"></i> Advanced CSS
+    <a href="/2020/01/14/2020-01-14-What%20is%20Go%20language/" rel="prev" title="What is Go language?">
+      <i class="fa fa-chevron-left"></i> What is Go language?
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/01/14/2020-01-14-What%20is%20Go%20language/" rel="next" title="What is Go language?">
-      What is Go language? <i class="fa fa-chevron-right"></i>
+    <a href="/2020/01/14/2020-01-14-Advanced%20CSS/" rel="next" title="Advanced CSS">
+      Advanced CSS <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -395,7 +400,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#static"><span class="nav-number">1.</span> <span class="nav-text">static</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fixed"><span class="nav-number">2.</span> <span class="nav-text">fixed</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#absolute"><span class="nav-number">3.</span> <span class="nav-text">absolute</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NOTE"><span class="nav-number">3.1.</span> <span class="nav-text">NOTE</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#position-html"><span class="nav-number">4.</span> <span class="nav-text">position.html</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#fixed"><span class="nav-number">1.</span> <span class="nav-text">fixed</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#absolute"><span class="nav-number">2.</span> <span class="nav-text">absolute</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NOTE"><span class="nav-number">2.1.</span> <span class="nav-text">NOTE</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#position-html"><span class="nav-number">3.</span> <span class="nav-text">position.html</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -411,20 +416,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">포스트</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">카테고리</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">태그</span></a>
       </div>
   </nav>
@@ -472,7 +477,7 @@
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.6.0
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.0
   </div>
 
         
@@ -541,16 +546,16 @@
   window.addEventListener('load', loadCount, false);
 </script>
 <script>
+  var disqus_config = function() {
+    this.page.url = "http://sokhyg9016.github.io/2020/01/14/2020-01-14-position%20property%20note/";
+    this.page.identifier = "2020/01/14/2020-01-14-position property note/";
+    this.page.title = "Position property";
+    };
   NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
     if (window.DISQUS) {
       DISQUS.reset({
         reload: true,
-        config: {page: {
-            url: "http://sokhyg9016.github.io/2020/01/14/2020-01-14-position%20property%20note/",
-            identifier: "2020/01/14/2020-01-14-position property note/",
-            title: "Position property"
-          }
-        }
+        config: disqus_config
       });
     } else {
       var d = document, s = d.createElement('script');
