@@ -972,7 +972,7 @@ pre .javascript .function {
 }
 .site-title {
   display: inline-block;
-  font-family: 'Cafe24Simplehae', 'Noto Sans KR', "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: 'Noto Sans KR', 'Noto Sans KR', "PingFang SC", "Microsoft YaHei", sans-serif;
   font-size: 1.375em;
   font-weight: normal;
   line-height: 1.5;
@@ -1154,7 +1154,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #a2daf9;
+  background: #900481;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
