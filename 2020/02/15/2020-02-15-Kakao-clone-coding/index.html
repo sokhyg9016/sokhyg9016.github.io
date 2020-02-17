@@ -343,31 +343,29 @@
 </tr>
 </thead>
 </table>
-<h3 id="e-g-s"><a href="#e-g-s" class="headerlink" title="e.g.s"></a>e.g.s</h3><ol>
-<li><p>부모자식을 나누기 위해 <code>__</code>를 사용<br>e.g.s <code>class = &quot;parent__child&quot;</code></p>
-</li>
-<li><p>한 클래스의 세부 속성을 나누기 위해 <code>--</code>를 사용<br>e.g.s <code>class = &quot;friend--lg&quot;</code> (lg =&gt; large)</p>
-</li>
+<h3 id="E-g-s"><a href="#E-g-s" class="headerlink" title="E.g.s"></a>E.g.s</h3><ol>
+<li>부모자식을 나누기 위해 <code>__</code>를 사용</li>
+<li>한 클래스의 세부 속성을 나누기 위해 <code>--</code>를 사용</li>
 </ol>
+<blockquote>
+<p>For example,<br><code>class = &quot;parent__child&quot;</code><br><code>class = &quot;friend--lg&quot;</code> (lg =&gt; large)</p>
+</blockquote>
 <hr>
-<h2 id="Components"><a href="#Components" class="headerlink" title="Components"></a>Components</h2><h3 id="html"><a href="#html" class="headerlink" title="html"></a>html</h3><ul>
+<h2 id="Components"><a href="#Components" class="headerlink" title="Components"></a>Components</h2><h3 id="html"><a href="#html" class="headerlink" title="html"></a>html</h3><ol>
 <li>index.html</li>
 <li>chat.html</li>
 <li>friends.html</li>
 <li>more.html</li>
 <li>find.html</li>
 <li>settings.html</li>
-</ul>
-<h3 id="css"><a href="#css" class="headerlink" title="css"></a>css</h3><p><strong>공통 속성</strong></p>
-<ul>
+</ol>
+<h3 id="css"><a href="#css" class="headerlink" title="css"></a>css</h3><h4 id="공통-속성"><a href="#공통-속성" class="headerlink" title="공통 속성"></a>공통 속성</h4><ol>
 <li>status-bar.css</li>
 <li>nav-bar.css</li>
 <li>header.css</li>
 <li>reset.css</li>
-</ul>
-<ul>
 <li><code>style.css</code> : 다른 세부적인 css file들을 연결 및 웹 페이지 전체의 기준 값들을 결정</li>
-</ul>
+</ol>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@import</span> url(<span class="string">"https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;display=swap"</span>);</span><br><span class="line"><span class="keyword">@import</span> <span class="string">"reset.css"</span>;</span><br><span class="line"><span class="keyword">@import</span> <span class="string">"status-bar.css"</span>;</span><br><span class="line"><span class="keyword">@import</span> <span class="string">"header.css"</span>;</span><br><span class="line"><span class="keyword">@import</span> <span class="string">"nav-bar.css"</span>;</span><br><span class="line"><span class="keyword">@import</span> <span class="string">"friend.css"</span>;</span><br><span class="line"><span class="keyword">@import</span> <span class="string">"friends.css"</span>;</span><br><span class="line"><span class="keyword">@import</span> <span class="string">"find.css"</span>;</span><br><span class="line"><span class="keyword">@import</span> <span class="string">"more.css"</span>;</span><br><span class="line"><span class="keyword">@import</span> <span class="string">"settings.css"</span>;</span><br><span class="line"><span class="keyword">@import</span> <span class="string">"chat.css"</span>;</span><br><span class="line"><span class="keyword">@import</span> <span class="string">"mobile.css"</span>;</span><br></pre></td></tr></table></figure>
 
 <blockquote>
@@ -375,8 +373,7 @@
 </blockquote>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">여기서 모든 style 값이란 margin, padding, display, font-size.. 등등의</span><br><span class="line">css 속성들을 말한다.</span><br><span class="line"></span><br><span class="line">Reset CSS란 설명하자면 브라우저간의 차이를 최대한 없에서,</span><br><span class="line">스타일이 0인 상태에서 디자인을 만들어 나가기 위해 생겨난것입니다.</span><br><span class="line">*font-size도 h1, h2, .. h7, p, a, font 가릴 것 없이 초기화 됨(크기가 같음.)</span><br><span class="line"></span><br><span class="line">또한 reset.css 대신 normalize.css를 사용할 수도 았다.</span><br><span class="line">reset.css가 모든 기본 값을 초기화시키는 것이라면 normalize.css는 기본적으로 각 브라우저의</span><br><span class="line">스타일을 따르고 있지만 기준을 만들어 줄 수 있다.</span><br><span class="line"></span><br><span class="line">즉, 모든 브라우저에서 한 태그(e.g.s h1)에 대한 크기를 같은 크기로 만드는 등의</span><br><span class="line">기준을 세울 수 있다.</span><br><span class="line"></span><br><span class="line">Refer: http://meyerweb.com/eric/tools/css/reset/</span><br></pre></td></tr></table></figure>
 
-<p><strong>각 페이지 별 속성</strong></p>
-<ul>
+<h4 id="각-페이지-별-속성"><a href="#각-페이지-별-속성" class="headerlink" title="각 페이지 별 속성"></a>각 페이지 별 속성</h4><ol>
 <li>chat.css</li>
 <li>find.css</li>
 <li>friend.css</li>
@@ -384,8 +381,11 @@
 <li>mobile.css</li>
 <li>more.css</li>
 <li>setting.css</li>
+</ol>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><a href="https://academy.nomadcoders.co/p/kakaoclone_total" target="_blank" rel="noopener">[이론+실전] 코코아톡 클론 코딩</a></li>
+<li><a href="https://www.youtube.com/watch?v=6ZQAKorChFs" target="_blank" rel="noopener">노마드 아카데미 카카오톡 클론코딩 소개</a></li>
 </ul>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://academy.nomadcoders.co/p/kakaoclone_total" target="_blank" rel="noopener">[이론+실전] 코코아톡 클론 코딩</a><br><a href="https://www.youtube.com/watch?v=6ZQAKorChFs" target="_blank" rel="noopener">노마드 아카데미 카카오톡 클론코딩 소개</a></p>
 </div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
         var options = {
             selector: '.gallery-item'
@@ -484,7 +484,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Screenshots-2020-01-20"><span class="nav-number">1.</span> <span class="nav-text">Screenshots (2020. 01. 20)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introducion-Video"><span class="nav-number">2.</span> <span class="nav-text">Introducion Video</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Project-Settings"><span class="nav-number">3.</span> <span class="nav-text">Project Settings</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chrome-Web-Extension-Apps"><span class="nav-number">4.</span> <span class="nav-text">Chrome Web Extension Apps</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TIPs-for-development"><span class="nav-number">5.</span> <span class="nav-text">TIPs for development</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#e-g-s"><span class="nav-number">5.1.</span> <span class="nav-text">e.g.s</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Components"><span class="nav-number">6.</span> <span class="nav-text">Components</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#html"><span class="nav-number">6.1.</span> <span class="nav-text">html</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#css"><span class="nav-number">6.2.</span> <span class="nav-text">css</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">7.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Screenshots-2020-01-20"><span class="nav-number">1.</span> <span class="nav-text">Screenshots (2020. 01. 20)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introducion-Video"><span class="nav-number">2.</span> <span class="nav-text">Introducion Video</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Project-Settings"><span class="nav-number">3.</span> <span class="nav-text">Project Settings</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chrome-Web-Extension-Apps"><span class="nav-number">4.</span> <span class="nav-text">Chrome Web Extension Apps</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TIPs-for-development"><span class="nav-number">5.</span> <span class="nav-text">TIPs for development</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#E-g-s"><span class="nav-number">5.1.</span> <span class="nav-text">E.g.s</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Components"><span class="nav-number">6.</span> <span class="nav-text">Components</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#html"><span class="nav-number">6.1.</span> <span class="nav-text">html</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#css"><span class="nav-number">6.2.</span> <span class="nav-text">css</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#공통-속성"><span class="nav-number">6.2.1.</span> <span class="nav-text">공통 속성</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#각-페이지-별-속성"><span class="nav-number">6.2.2.</span> <span class="nav-text">각 페이지 별 속성</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">7.</span> <span class="nav-text">Reference</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
