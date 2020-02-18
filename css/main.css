@@ -964,7 +964,7 @@ pre .javascript .function {
 @media (max-width: 767px) {
   .site-meta {
     text-align: center;
-    padding-bottom: 25px;
+    padding-bottom: 10px;
     border-bottom: 1px solid #ddd;
   }
 }
@@ -979,6 +979,15 @@ pre .javascript .function {
 }
 .brand:hover {
   color: #fff;
+}
+@media (max-width: 767px) {
+  .brand {
+    background: none;
+    color: #222;
+  }
+  .brand:hover {
+    color: #404040;
+  }
 }
 .site-title {
   display: inline-block;
@@ -1169,7 +1178,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ff12eb;
+  background: #d9c69a;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1771,10 +1780,13 @@ pre .javascript .function {
   .posts-expand h1.post-title {
     font-size: 1.8125rem;
     text-align: left;
+    line-height: 1.25em;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #ddd;
   }
   .posts-expand div.post-meta {
     text-align: left;
-    margin: 3px 0 20px 0;
+    margin: 10px 0;
   }
   .posts-expand div.post-description {
     display: none;
@@ -1904,6 +1916,12 @@ pre .javascript .function {
 .posts-expand .post-header {
   font-size: 1.125em;
 }
+@media (max-width: 767px) {
+  .posts-expand .post-header {
+    margin-bottom: 30px;
+    border-bottom: 1px solid #ddd;
+  }
+}
 .posts-expand .post-title {
   font-weight: 400;
   margin: initial;
@@ -1955,12 +1973,31 @@ pre .javascript .function {
   border-bottom: 1px dashed #999;
   cursor: pointer;
 }
+@media (max-width: 767px) {
+  .posts-expand .post-meta time {
+    border-bottom: none;
+  }
+}
 .post-meta .post-meta-item + .post-meta-item::before {
   content: '|';
   margin: 0 0.5em;
 }
+@media (max-width: 767px) {
+  .post-meta .post-meta-item + .post-meta-item::before {
+    content: '';
+    display: block;
+    margin: 0 0.25em;
+  }
+}
 .post-meta-divider {
   margin: 0 0.5em;
+}
+@media (max-width: 767px) {
+  .post-meta-item a,
+  span.exturl {
+    border-bottom: none;
+    color: #999;
+  }
 }
 .post-meta-item-icon {
   margin-right: 3px;
@@ -2401,7 +2438,7 @@ ul.breadcrumb li + li:last-child {
 }
 @media (max-width: 767px) {
   .header-inner {
-    padding-top: 25px;
+    padding-top: 10px;
   }
 }
 .main-inner {
@@ -2442,7 +2479,6 @@ embed {
   .site-nav {
     background: #fff;
     border-bottom: 1px solid #ddd;
-    border-top: 1px solid #ddd;
     left: 0;
     margin: 0;
     padding: 0;
@@ -2454,7 +2490,7 @@ embed {
 }
 @media (max-width: 767px) {
   .site-nav-toggle {
-    top: 25px;
+    top: 10px;
   }
 }
 @media (max-width: 767px) {
