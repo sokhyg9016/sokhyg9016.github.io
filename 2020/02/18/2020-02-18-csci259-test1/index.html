@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap/css?family=NanumSquare:300,300italic,400,400italic,700,700italic|Iropke Batang:300,300italic,400,400italic,700,700italic|Inconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-simple.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://sokhyg9016.github.io').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","width":320,"display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Olemiss Csci 259 Programming in C++ Test1 Review Questions">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Csci 259 Test1 Review Questions">
+<meta property="og:url" content="http://sokhyg9016.github.io/2020/02/18/2020-02-18-csci259-test1/index.html">
+<meta property="og:site_name" content="Git Page">
+<meta property="og:description" content="Olemiss Csci 259 Programming in C++ Test1 Review Questions">
+<meta property="og:locale" content="ko_KR">
+<meta property="article:published_time" content="2020-02-18T06:00:00.000Z">
+<meta property="article:modified_time" content="2020-02-18T06:00:00.000Z">
+<meta property="article:author" content="LSH">
+<meta property="article:tag" content="Olemiss">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://sokhyg9016.github.io/2020/02/18/2020-02-18-csci259-test1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Csci 259 Test1 Review Questions | Git Page</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Git Page</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">AI · Data Structure · Algorithm · Game Development</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>홈</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>태그</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>카테고리</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>아카이브</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-fw fa-calendar"></i>Schedule</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>검색
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="ko">
+    <link itemprop="mainEntityOfPage" href="http://sokhyg9016.github.io/2020/02/18/2020-02-18-csci259-test1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/avatar.png">
+      <meta itemprop="name" content="LSH">
+      <meta itemprop="description" content="Github + 뻘글 블로그.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Git Page">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Csci 259 Test1 Review Questions
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">작성일</span>
+
+              <time title="Post created: 2020-02-18 00:00:00" itemprop="dateCreated datePublished" datetime="2020-02-18T00:00:00-06:00">2020-02-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Programming/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2020/02/18/2020-02-18-csci259-test1/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/02/18/2020-02-18-csci259-test1/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">Olemiss Csci 259 Programming in C++ Test1 Review Questions</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
+<h2 id="What-are-the-characteristics-of-machine-language-assembly-language-and-high-level-language"><a href="#What-are-the-characteristics-of-machine-language-assembly-language-and-high-level-language" class="headerlink" title="What are the characteristics of machine language, assembly language, and high-level language?"></a>What are the characteristics of machine language, assembly language, and high-level language?</h2><h3 id="Machine-Language"><a href="#Machine-Language" class="headerlink" title="Machine Language"></a>Machine Language</h3><ul>
+<li>Machine language is a set of primitive instructions built into every computer</li>
+<li>The instructions are in the form of <strong>binary code</strong>.</li>
+<li>The programs are highly difficult ti read and modify.</li>
+</ul>
+<h3 id="Assembly-Language"><a href="#Assembly-Language" class="headerlink" title="Assembly Language"></a>Assembly Language</h3><ul>
+<li>Assembly languages were developed to make programming easy.</li>
+<li>A program called <strong>assembler</strong> is used to convert assembly language programs into machine code.</li>
+</ul>
+<blockquote>
+<p>ADDF3 R1, R2, R3 –&gt; 1101101010011010</p>
+</blockquote>
+<h3 id="High-Level-Language"><a href="#High-Level-Language" class="headerlink" title="High-Level Language"></a>High-Level Language</h3><ul>
+<li>The high-level languages are English-like and easy to learn and program.</li>
+</ul>
+<hr>
+<h2 id="What-is-the-structure-of-a-simple-C-program"><a href="#What-is-the-structure-of-a-simple-C-program" class="headerlink" title="What is the structure of a simple C++ program?"></a>What is the structure of a simple C++ program?</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt; // preprocessor directive</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>; <span class="comment">// keywords (or reserved words)</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123; <span class="comment">// main function</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Welcome to C++!"</span> &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// statement</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p>The main function is the entry point where the program begins execution.</p>
+</li>
+<li><p>A statement represents an action or a sequence of actions.</p>
+</li>
+<li><p>Every statement in C++ ends with a semicolon (;).</p>
+<blockquote>
+<p><strong><code>;</code></strong> is known as the statement terminator in C++.</p>
+</blockquote>
+</li>
+<li><p>Key words or <strong>reserved words</strong> are words that have a specific meaning to the compiler and cannot be used for other purposes in the program.</p>
+</li>
+<li><p>The <code>#include &lt;iostream&gt;</code> directive tells the computer to include the contents of the iostream file in the current program</p>
+</li>
+<li><p>The using namespace std indicates that the definitions of standard C++ keywords and classes are located in the std namespace.</p>
+<blockquote>
+<p>A namespace is a special area in the computer’s internal memory.</p>
+</blockquote>
+</li>
+</ol>
+<hr>
+<h2 id="How-to-concatenate-items-in-cout"><a href="#How-to-concatenate-items-in-cout" class="headerlink" title="How to concatenate items in cout?"></a>How to concatenate items in cout?</h2><p>Just concatenate using stream insertion operator for cout, <code>&lt;&lt;</code></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> hours;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"How many hours did you work? "</span>;</span><br></pre></td></tr></table></figure>
+
+<p>–</p>
+<h2 id="What-are-the-data-types-we-learned"><a href="#What-are-the-data-types-we-learned" class="headerlink" title="What are the data types we learned?"></a>What are the data types we learned?</h2><h3 id="Integer-Data-Types"><a href="#Integer-Data-Types" class="headerlink" title="Integer Data Types"></a>Integer Data Types</h3><ul>
+<li>Integer variables can hold <strong>whole numbers</strong> such as $12, 7$, and $-99$.</li>
+<li>There are several integer data types in C++, we will mainly use <strong>int</strong> in class.</li>
+<li>Variables of the same type can be defined on separate lines or on the same line.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">Data Types</th>
+<th align="left">Typical Size</th>
+<th align="left">Range</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">short int (unsigned)</td>
+<td align="left">2 bytes</td>
+<td align="left">$-2^{15}$ ~ $2^{15}-1$</td>
+</tr>
+<tr>
+<td align="left">int (unsigned)</td>
+<td align="left">4 bytes</td>
+<td align="left">$-2^{31}$ ~ $2^{31}-1$</td>
+</tr>
+<tr>
+<td align="left">long int (unsinged)</td>
+<td align="left">4 bytes</td>
+<td align="left">$-2^{31}$ ~ $2^{31}-1$</td>
+</tr>
+<tr>
+<td align="left">long long int (unsigned)</td>
+<td align="left">8 bytes</td>
+<td align="left">$-2^{63}$ ~ $2^{63}-1$</td>
+</tr>
+</tbody></table>
+<h3 id="Floating-point-Data-Types"><a href="#Floating-point-Data-Types" class="headerlink" title="Floating-point Data Types"></a>Floating-point Data Types</h3><ul>
+<li>They can hold <strong>real numbers</strong> such as $12.45, -3.8$.</li>
+<li>Theare are three floating-point data types in C++.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">Data Type</th>
+<th align="left">Key Word</th>
+<th align="left">Range</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Single precision</td>
+<td align="left">float</td>
+<td align="left">4 bytes. Numbers between $\pm3.4E-38$ and $\pm3.4E38$</td>
+</tr>
+<tr>
+<td align="left">Double precision</td>
+<td align="left">double</td>
+<td align="left">8 bytes. Numbers between $\pm1.7E-308$ and $\pm1.7E308$</td>
+</tr>
+<tr>
+<td align="left">Long double precision</td>
+<td align="left">long double</td>
+<td align="left">8 bytes. Numbers between $\pm1.7E-308$ and $\pm1.7E308$</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="What-are-the-restrictions-for-variable-names"><a href="#What-are-the-restrictions-for-variable-names" class="headerlink" title="What are the restrictions for variable names?"></a>What are the restrictions for variable names?</h2><ol>
+<li>An <strong>identifier</strong> is a sequence of characters that consist of <code>letters</code>, <code>digits</code>, and <code>underscores</code>(_).</li>
+<li>An identifier must start with a letter or an underscore (_). It cannot start with a digit.</li>
+<li>An identifier cannot be a reserved word.</li>
+<li>An identifier cannot be true, false, or null.</li>
+<li>An identifier can be of any length.</li>
+<li>Variables and named constants are identifiers.</li>
+</ol>
+<h2 id="How-to-declare-a-constant"><a href="#How-to-declare-a-constant" class="headerlink" title="How to declare a constant?"></a>How to declare a constant?</h2><p>A named constant is an identifier that represents a permanent value.</p>
+<ul>
+<li><p>General form:</p>
+<blockquote>
+<p>const datatype CONSTANTNAME = VALUE;</p>
+</blockquote>
+</li>
+<li><p>Exmaples:</p>
+</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> PI = <span class="number">3.14159</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAX_VALUE = <span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="What-are-the-operators-in-C-and-their-order-of-precedence"><a href="#What-are-the-operators-in-C-and-their-order-of-precedence" class="headerlink" title="What are the operators in C++ and their order of precedence?"></a>What are the operators in C++ and their order of precedence?</h2><h3 id="standard-arithmetic-operator"><a href="#standard-arithmetic-operator" class="headerlink" title="standard arithmetic operator"></a>standard arithmetic operator</h3><blockquote>
+<p>**&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;&nbsp;&nbsp;%&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;&nbsp;&nbsp;&nbsp;-</p>
+</blockquote>
+<p>[$\to$ : priority]</p>
+<h3 id="standard-boolean-operators"><a href="#standard-boolean-operators" class="headerlink" title="standard boolean operators"></a>standard boolean operators</h3><blockquote>
+<p>and&nbsp;&nbsp;&nbsp;&nbsp;or&nbsp;&nbsp;&nbsp;&nbsp;not</p>
+</blockquote>
+<p>[$\to$ : priority]</p>
+<hr>
+<h2 id="What-are-the-possible-format-specifications-in-printf"><a href="#What-are-the-possible-format-specifications-in-printf" class="headerlink" title="What are the possible format specifications in printf?"></a>What are the possible format specifications in printf?</h2><table>
+<thead>
+<tr>
+<th align="left">formats</th>
+<th align="left">data</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">%d</td>
+<td align="left">integers</td>
+</tr>
+<tr>
+<td align="left">%.nf</td>
+<td align="left">doubles withs <code>n</code> decimal places</td>
+</tr>
+<tr>
+<td align="left">%c</td>
+<td align="left">single characters</td>
+</tr>
+<tr>
+<td align="left">%s</td>
+<td align="left">strings (must use <strong>c_str()</strong> function with the string variable)</td>
+</tr>
+</tbody></table>
+<p>e.g.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> zipCode = <span class="number">38655</span>;</span><br><span class="line"><span class="built_in">string</span> city = <span class="string">"Oxford"</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"The city %s has the zip code %d\n"</span>, city.c_str(), zipCode);</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="What-are-the-possible-escape-sequences"><a href="#What-are-the-possible-escape-sequences" class="headerlink" title="What are the possible escape sequences?"></a>What are the possible escape sequences?</h2><table>
+<thead>
+<tr>
+<th align="left">Escape sequence</th>
+<th align="left">Name</th>
+<th align="left">Unicode</th>
+<th align="left">Decimal value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">\b</td>
+<td align="left">Backspace</td>
+<td align="left">\u0008</td>
+<td align="left">8</td>
+</tr>
+<tr>
+<td align="left">\t</td>
+<td align="left">Tab</td>
+<td align="left">\u0009</td>
+<td align="left">9</td>
+</tr>
+<tr>
+<td align="left">\n</td>
+<td align="left">Linefeed</td>
+<td align="left">\u000A</td>
+<td align="left">10</td>
+</tr>
+<tr>
+<td align="left">\f</td>
+<td align="left">Formfeed</td>
+<td align="left">\u000C</td>
+<td align="left">12</td>
+</tr>
+<tr>
+<td align="left">\r</td>
+<td align="left">Carriage Return</td>
+<td align="left">\u000D</td>
+<td align="left">13</td>
+</tr>
+<tr>
+<td align="left">\\</td>
+<td align="left">Backslash</td>
+<td align="left">\u005C</td>
+<td align="left">92</td>
+</tr>
+<tr>
+<td align="left">&quot;</td>
+<td align="left">Double Quote</td>
+<td align="left">\u0022</td>
+<td align="left">34</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="Single-line-comments-and-multi-line-comments"><a href="#Single-line-comments-and-multi-line-comments" class="headerlink" title="Single-line comments and multi-line comments"></a>Single-line comments and multi-line comments</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// single-line comments</span></span><br><span class="line"><span class="comment">//int zipCode = 38655;</span></span><br><span class="line"><span class="comment">//string city = "Oxford";</span></span><br><span class="line"><span class="comment">//printf("The city %s has the zip code %d\n", city.c_str(), zipCode);</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* multi-line comments */</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">int zipCode = 38655;</span></span><br><span class="line"><span class="comment">string city = "Oxford";</span></span><br><span class="line"><span class="comment">printf("The city %s has the zip code %d\n", city.c_str(), zipCode);</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="What-are-the-three-types-of-programming-errors"><a href="#What-are-the-three-types-of-programming-errors" class="headerlink" title="What are the three types of programming errors?"></a>What are the three types of programming errors?</h2><ol>
+<li><strong>Syntax</strong> Errors</li>
+</ol>
+<ul>
+<li>Syntax is a set of rules that must be followed when writing a program.</li>
+<li>Detected by the compiler<blockquote>
+<p>identified during compilation.</p>
+</blockquote>
+</li>
+</ul>
+<ol>
+<li><strong>Runtime</strong> Errors</li>
+</ol>
+<ul>
+<li>Causes the program to abort</li>
+</ul>
+<ol start="3">
+<li><strong>Logic</strong> Errors</li>
+</ol>
+<ul>
+<li>Produces incorrect result</li>
+</ul>
+<h3 id="Common-Error-1-Undeclared-Uninitialzed-Vavriables-and-Unused-Variables"><a href="#Common-Error-1-Undeclared-Uninitialzed-Vavriables-and-Unused-Variables" class="headerlink" title="Common Error 1: Undeclared/Uninitialzed Vavriables and Unused Variables"></a>Common Error 1: Undeclared/Uninitialzed Vavriables and Unused Variables</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> interestRate = <span class="number">0.05</span>;</span><br><span class="line"><span class="keyword">double</span> interest = interestrate * <span class="number">45</span>; <span class="comment">// case-sensitive</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Common-Error-2-Integer-Overflow"><a href="#Common-Error-2-Integer-Overflow" class="headerlink" title="Common Error 2: Integer Overflow"></a>Common Error 2: Integer Overflow</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> value = <span class="number">2147483647</span> + <span class="number">1</span>;</span><br><span class="line"><span class="comment">//value will actually be 2147483648</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Common-Error-3-Unintended-Integer-Division"><a href="#Common-Error-3-Unintended-Integer-Division" class="headerlink" title="Common Error 3: Unintended Integer Division"></a>Common Error 3: Unintended Integer Division</h3><blockquote>
+<p>CASE a</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> num1 = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> num2 = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">double</span> avg = (num1 + num2)/<span class="number">2</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; avg &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>CASE b</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> num1 = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> num2 = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">double</span> avg = (num1 + num2)/<span class="number">2.0</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; avg &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// 1.5</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="How-to-use-cin-to-get-input-from-the-user"><a href="#How-to-use-cin-to-get-input-from-the-user" class="headerlink" title="How to use cin to get input from the user?"></a>How to use cin to get input from the user?</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">double</span> radius;</span><br><span class="line">    <span class="keyword">double</span> area;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Enter the radius of the circle: "</span>;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; radius;</span><br><span class="line"></span><br><span class="line">    area = radius * radius * <span class="number">3.14159</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"The area for the circle of radius "</span> &lt;&lt; radius;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">" is "</span> &lt;&lt; area &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="1-234e-2-is-what-number-1-234e-2-is-what-number"><a href="#1-234e-2-is-what-number-1-234e-2-is-what-number" class="headerlink" title="$1.234e+2$ is what number? $1.234e-2$ is what number?"></a>$1.234e+2$ is what number? $1.234e-2$ is what number?</h2><p>Scientific notation,</p>
+<ol>
+<li>$1.23456e2$ = $123.456$ = $1.23456e+2$</li>
+<li>$1.23456e-2$ = $0.012345$</li>
+</ol>
+<p>so,</p>
+<ul>
+<li>$1.234e+2$ is $123.4$</li>
+<li>$1.234e-2$ is $0.01234$</li>
+</ul>
+<hr>
+<h2 id="Functions-for-Random-Numbers"><a href="#Functions-for-Random-Numbers" class="headerlink" title="Functions for Random Numbers"></a>Functions for Random Numbers</h2><ul>
+<li>These require <code>cstdlib</code> header file</li>
+<li>Generate random numbers within a range: <code>rand()</code></li>
+<li>To randomize the results of rand(), the srand() function must be used as follows: <code>srand(time(0))</code></li>
+<li>The time function requires the <code>ctime</code> header file</li>
+</ul>
+<ol>
+<li>A random integer between 0-9: <code>rand() % 10</code></li>
+<li>A random integer between 50-99: <code>50 + rand() % 10</code></li>
+<li>A random integer between 5-25: <code>5 + rand() % 21</code></li>
+</ol>
+<ul>
+<li>In general, to generate an integer from <code>a</code> to <code>b</code>:</li>
+</ul>
+<blockquote>
+<p>a + rand() % (b - a + 1)</p>
+</blockquote>
+<p>E.g.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ctime&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">    srand(time(<span class="number">0</span>));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">int</span> b = <span class="number">30</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; a + rand()%(b - a + <span class="number">1</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        <span class="comment">//generate random number between 10 ~ 30</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="How-would-you-write-the-following-arithmetic-expression-in-C"><a href="#How-would-you-write-the-following-arithmetic-expression-in-C" class="headerlink" title="How would you write the following arithmetic expression in C++?"></a>How would you write the following arithmetic expression in C++?</h2><p>$$P = \frac{L(\frac{r}{12})}{1 - (1+\frac{r}{12})^{-m}}$$</p>
+<p>assuming that all variables are pre-declared and initialized.</p>
+<blockquote>
+<p>P = (L * r/12)/(1 - pow(1 + (r/12),-1*m))</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">double</span> L, r, m, P;</span><br><span class="line"></span><br><span class="line">    L = <span class="number">2.0</span>;</span><br><span class="line">    r = <span class="number">12.0</span>;</span><br><span class="line">    m = <span class="number">4.0</span>;</span><br><span class="line"></span><br><span class="line">    P = (L * r/<span class="number">12</span>)/(<span class="number">1</span> - <span class="built_in">pow</span>(<span class="number">1</span> + (r/<span class="number">12</span>),<span class="number">-1</span>*m));</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; P &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Olemiss/" rel="tag"><i class="fa fa-tag"></i> Olemiss</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/02/17/2020-02-17-csci356-test1/" rel="prev" title="Csci 356 Data Structures in Python Test1">
+      <i class="fa fa-chevron-left"></i> Csci 356 Data Structures in Python Test1
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          목차
+        </li>
+        <li class="sidebar-nav-overview">
+          흝어보기
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#What-are-the-characteristics-of-machine-language-assembly-language-and-high-level-language"><span class="nav-number">1.</span> <span class="nav-text">What are the characteristics of machine language, assembly language, and high-level language?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Machine-Language"><span class="nav-number">1.1.</span> <span class="nav-text">Machine Language</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Assembly-Language"><span class="nav-number">1.2.</span> <span class="nav-text">Assembly Language</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#High-Level-Language"><span class="nav-number">1.3.</span> <span class="nav-text">High-Level Language</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#What-is-the-structure-of-a-simple-C-program"><span class="nav-number">2.</span> <span class="nav-text">What is the structure of a simple C++ program?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-to-concatenate-items-in-cout"><span class="nav-number">3.</span> <span class="nav-text">How to concatenate items in cout?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#What-are-the-data-types-we-learned"><span class="nav-number">4.</span> <span class="nav-text">What are the data types we learned?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Integer-Data-Types"><span class="nav-number">4.1.</span> <span class="nav-text">Integer Data Types</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Floating-point-Data-Types"><span class="nav-number">4.2.</span> <span class="nav-text">Floating-point Data Types</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#What-are-the-restrictions-for-variable-names"><span class="nav-number">5.</span> <span class="nav-text">What are the restrictions for variable names?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-to-declare-a-constant"><span class="nav-number">6.</span> <span class="nav-text">How to declare a constant?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#What-are-the-operators-in-C-and-their-order-of-precedence"><span class="nav-number">7.</span> <span class="nav-text">What are the operators in C++ and their order of precedence?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#standard-arithmetic-operator"><span class="nav-number">7.1.</span> <span class="nav-text">standard arithmetic operator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#standard-boolean-operators"><span class="nav-number">7.2.</span> <span class="nav-text">standard boolean operators</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#What-are-the-possible-format-specifications-in-printf"><span class="nav-number">8.</span> <span class="nav-text">What are the possible format specifications in printf?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#What-are-the-possible-escape-sequences"><span class="nav-number">9.</span> <span class="nav-text">What are the possible escape sequences?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Single-line-comments-and-multi-line-comments"><span class="nav-number">10.</span> <span class="nav-text">Single-line comments and multi-line comments</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#What-are-the-three-types-of-programming-errors"><span class="nav-number">11.</span> <span class="nav-text">What are the three types of programming errors?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Common-Error-1-Undeclared-Uninitialzed-Vavriables-and-Unused-Variables"><span class="nav-number">11.1.</span> <span class="nav-text">Common Error 1: Undeclared&#x2F;Uninitialzed Vavriables and Unused Variables</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Common-Error-2-Integer-Overflow"><span class="nav-number">11.2.</span> <span class="nav-text">Common Error 2: Integer Overflow</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Common-Error-3-Unintended-Integer-Division"><span class="nav-number">11.3.</span> <span class="nav-text">Common Error 3: Unintended Integer Division</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-to-use-cin-to-get-input-from-the-user"><span class="nav-number">12.</span> <span class="nav-text">How to use cin to get input from the user?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-234e-2-is-what-number-1-234e-2-is-what-number"><span class="nav-number">13.</span> <span class="nav-text">$1.234e+2$ is what number? $1.234e-2$ is what number?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Functions-for-Random-Numbers"><span class="nav-number">14.</span> <span class="nav-text">Functions for Random Numbers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-would-you-write-the-following-arithmetic-expression-in-C"><span class="nav-number">15.</span> <span class="nav-text">How would you write the following arithmetic expression in C++?</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LSH"
+      src="/img/avatar.png">
+  <p class="site-author-name" itemprop="name">LSH</p>
+  <div class="site-description" itemprop="description">Github + 뻘글 블로그.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">포스트</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">카테고리</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">태그</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/sokhyg9016" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;sokhyg9016" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:sokhyg9016@gmail.com" title="E-Mail → mailto:sokhyg9016@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/users/10584779/%ec%9d%b4%ec%8a%b9%ed%9b%88" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;10584779&#x2F;%ec%9d%b4%ec%8a%b9%ed%9b%88" rel="noopener" target="_blank"><i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.youtube.com/channel/UC9bPZO7K_0a6Eh_nbcjD68A?view_as=subscriber" title="YouTube → https:&#x2F;&#x2F;www.youtube.com&#x2F;channel&#x2F;UC9bPZO7K_0a6Eh_nbcjD68A?view_as&#x3D;subscriber" rel="noopener" target="_blank"><i class="fa fa-fw fa-youtube"></i>YouTube</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LSH</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://sokhyg9016-github-io.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://sokhyg9016.github.io/2020/02/18/2020-02-18-csci259-test1/";
+    this.page.identifier = "2020/02/18/2020-02-18-csci259-test1/";
+    this.page.title = "Csci 259 Test1 Review Questions";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://sokhyg9016-github-io.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
+
+<!-- Background Animation -->
+<!-- <script type="text/javascript" src="/js/src/particle.js"></script> -->

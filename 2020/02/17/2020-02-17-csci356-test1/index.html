@@ -411,6 +411,90 @@
 <td align="left">Modules, Classes, Functions, Methods, etc.</td>
 </tr>
 </tbody></table>
+<h3 id="Built-in-Atomic-Data-Types-Cont’d"><a href="#Built-in-Atomic-Data-Types-Cont’d" class="headerlink" title="Built-in Atomic Data Types (Cont’d)"></a>Built-in Atomic Data Types (Cont’d)</h3><ul>
+<li><p>Python has the Boolean data type, implemented as the <strong>bool</strong> class, will be quite useful for representing truth values:</p>
+<blockquote>
+<p><strong><em>True</em></strong> and <strong><em>False</em></strong></p>
+</blockquote>
+</li>
+<li><p>The standard comparision operators:</p>
+<blockquote>
+<p>&gt;&nbsp;&nbsp;&nbsp;&nbsp;&gt;=&nbsp;&nbsp;&nbsp;&nbsp;&lt;&nbsp;&nbsp;&nbsp;&nbsp;&lt;=&nbsp;&nbsp;&nbsp;&nbsp;==&nbsp;&nbsp;&nbsp;&nbsp;!=</p>
+</blockquote>
+</li>
+<li><p>The standard boolean operators:</p>
+<blockquote>
+<p><strong>not</strong>&nbsp;&nbsp;&nbsp;<strong>and</strong>&nbsp;&nbsp;&nbsp;<strong>or</strong></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="Identifiers-and-Assignment"><a href="#Identifiers-and-Assignment" class="headerlink" title="Identifiers and Assignment"></a>Identifiers and Assignment</h3><ul>
+<li><strong>Identifiers</strong> are names in programming langauges.</li>
+<li>In Python, identifiers start with a letter or an underscore(_), can contain letters, digits, and underscores, no spaces, can’t be a keyword, and are case-sensitive.<ul>
+<li>Use names that are meaningful for readability</li>
+</ul>
+</li>
+<li><strong>Assignment statements</strong> provide a way to associate a name with a value.</li>
+<li>The same variable can refer to <strong>different</strong> types of data.</li>
+</ul>
+<h3 id="Built-in-Collection-Data-Types"><a href="#Built-in-Collection-Data-Types" class="headerlink" title="Built-in Collection Data Types"></a>Built-in Collection Data Types</h3><p>Python has a number of very powerful built-in collection classes.</p>
+<ol>
+<li><strong>Ordered</strong> collections: <code>lists</code>, <code>strings</code> and <code>tuples</code></li>
+<li><strong>Unordered</strong> collections: <code>sets</code> and <code>dictionaries</code></li>
+</ol>
+<h3 id="Lists"><a href="#Lists" class="headerlink" title="Lists"></a>Lists</h3><ul>
+<li><p><strong>Lists</strong> are written as comma-delimited values enclosed in <strong>square brackets</strong>.</p>
+<blockquote>
+<p>Empty list is simply []</p>
+</blockquote>
+</li>
+<li><p>Lists are <strong>heterogeneous</strong>, meaning that elements in the list need not all be of the same data type.</p>
+</li>
+<li><p>The collection can be assigned to a <strong>varaible</strong>.</p>
+</li>
+<li><p>E.g.</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myList = [<span class="number">1</span>, <span class="number">3</span>, <span class="literal">True</span>, <span class="number">6.5</span>]</span><br></pre></td></tr></table></figure>
+
+<h4 id="Operations-on-Lists"><a href="#Operations-on-Lists" class="headerlink" title="Operations on Lists"></a>Operations on Lists</h4><ul>
+<li><strong>Lists</strong> are considered to be <strong>sequentially ordered</strong>, they support a number of operations that can be applied to any Python sequence.</li>
+</ul>
+<h3 id="Strings"><a href="#Strings" class="headerlink" title="Strings"></a>Strings</h3><ul>
+<li><strong>Strings</strong> are sequential collections of zero or more <strong>characters</strong> (letters, numbers, and other symbols).</li>
+<li>Python uses <strong>quotation marks</strong> to enclose strings (either single or double).</li>
+<li>since strings are sequences, the sequence operations described in lists would work.</li>
+</ul>
+<h3 id="Difference-between-Lists-and-Strings"><a href="#Difference-between-Lists-and-Strings" class="headerlink" title="Difference between Lists and Strings"></a>Difference between Lists and Strings</h3><ul>
+<li>Lists can be modified while strings cannot (i.e. Lists are mutable and strings are immutable).</li>
+<li>You can change an item in a list by using indexing and assignment; this change is not allowed in a string.</li>
+<li>E.g.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">myName = <span class="string">'David'</span></span><br><span class="line">myName[<span class="number">3</span>] = <span class="string">'e'</span> <span class="comment"># Error!</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Tuples"><a href="#Tuples" class="headerlink" title="Tuples"></a>Tuples</h3><ul>
+<li><strong>Tuples</strong> are very similar to lists, they are heterogeneous sequences of data</li>
+<li>The difference is that tuple is <strong>immuntable</strong>, like a string.</li>
+<li>Tuples are written as comma-delimited values enclosed in <strong>parentheses</strong>.</li>
+</ul>
+<h3 id="Sets"><a href="#Sets" class="headerlink" title="Sets"></a>Sets</h3><ul>
+<li><strong>Sets</strong> are <strong>unorderd</strong> collections of zero or more data objects.</li>
+<li>Sets are <strong>heterogeneous</strong> and do <strong>not</strong> allow duplicates.</li>
+<li>Sets are written as comma-delimited values enclosed in <strong>curly braces</strong>.</li>
+<li>E.g.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mySet = &#123;<span class="literal">False</span>, <span class="number">4.5</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="string">'cat'</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Dictionaries"><a href="#Dictionaries" class="headerlink" title="Dictionaries"></a>Dictionaries</h3><ul>
+<li><strong>Dictionaries</strong> are <strong>unorderd</strong> collections of associated pairs of itmes where each pair consists of a <strong>key</strong> and a <strong>value</strong>.</li>
+<li>This key-value pair is typically written as <strong>key : value</strong>.</li>
+<li>Dictionaries are written as comma-delimited <code>key:value</code> pairs enclosed in <strong>curly braces</strong>.</li>
+<li>E.g.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myDict = &#123;<span class="string">'MS'</span>:<span class="string">'Jackson'</span>, <span class="string">'TN'</span>:<span class="string">'Nashville'</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Source-Code"><a href="#Source-Code" class="headerlink" title="Source Code"></a>Source Code</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LogicGate</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span> <span class="params">(self, n)</span>:</span></span><br><span class="line">        self.label = n</span><br><span class="line">        self.output = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getLabel</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.label</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getOutput</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.output = self.performGateLogic()</span><br><span class="line">        <span class="keyword">return</span> self.output</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BinaryGate</span><span class="params">(LogicGate)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, n)</span>:</span></span><br><span class="line">        LogicGate.__init__(self, n)</span><br><span class="line"></span><br><span class="line">        self.pinA = <span class="literal">None</span></span><br><span class="line">        self.pinB = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getPinA</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> self.pinA == <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> int(input(<span class="string">"Enter pin A input for gate "</span> + self.getLabel() + <span class="string">":"</span>))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> self.pinA.getFrom().getOutput()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getPinB</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> self.pinB == <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> int(input(<span class="string">"Enter pin B input for gate "</span> + self.getLabel() + <span class="string">":"</span>))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> self.pinB.getFrom().getOutput()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">setNextPin</span><span class="params">(self, source)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> self.pinA == <span class="literal">None</span>:</span><br><span class="line">            self.pinA = source</span><br><span class="line">        <span class="keyword">elif</span> self.pinB == <span class="literal">None</span>:</span><br><span class="line">            self.pinB = source</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">raise</span> RunTimeError(<span class="string">"Error, No Entry Pins"</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AndGate</span><span class="params">(BinaryGate)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, n)</span>:</span></span><br><span class="line">        BinaryGate.__init__(self, n)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">performGateLogic</span><span class="params">(self)</span>:</span></span><br><span class="line"></span><br><span class="line">        a = self.getPinA()</span><br><span class="line">        b = self.getPinB()</span><br><span class="line">        <span class="keyword">if</span> a == <span class="number">1</span> <span class="keyword">and</span> b == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OrGate</span><span class="params">(BinaryGate)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, n)</span>:</span></span><br><span class="line">        BinaryGate.__init__(self, n)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">performGateLogic</span><span class="params">(self)</span>:</span></span><br><span class="line"></span><br><span class="line">        a = self.getPinA()</span><br><span class="line">        b = self.getPinB()</span><br><span class="line">        <span class="keyword">if</span> a == <span class="number">1</span> <span class="keyword">or</span> b == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UnaryGate</span><span class="params">(LogicGate)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, n)</span>:</span></span><br><span class="line">        LogicGate.__init__(self, n)</span><br><span class="line">        self.pin = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getPin</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> self.pin == <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> int(input(<span class="string">"Enter pin input for gate "</span> + self.getLabel() + <span class="string">":"</span>))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> self.pin.getFrom().getOutput()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">setNextPin</span><span class="params">(self,source)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> self.pin == <span class="literal">None</span>:</span><br><span class="line">            self.pin = source</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            print(<span class="string">"Cannot Connect: NO EMPTY PINS on this gate"</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NotGate</span><span class="params">(UnaryGate)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, n)</span>:</span></span><br><span class="line">        UnaryGate.__init__(self, n)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">performGateLogic</span><span class="params">(self)</span>:</span></span><br><span class="line">        a = self.getPin()</span><br><span class="line">        <span class="keyword">if</span> a == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">        <span class="keyword">elif</span> a == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Connector</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span> <span class="params">(self, fgate, tgate)</span>:</span></span><br><span class="line">        self.fromGate = fgate</span><br><span class="line">        self.toGate = tgate</span><br><span class="line">        tgate.setNextPin(self)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getFrom</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.fromGate</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getTo</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.toGate</span><br></pre></td></tr></table></figure>
+
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
 <li><a href="https://ko.wikipedia.org/wiki/%EC%B6%94%EC%83%81_%EC%9E%90%EB%A3%8C%ED%98%95" target="_blank" rel="noopener">추상 자료형 (Abstract Data Type)</a></li>
 <li><a href="https://runestone.academy/runestone/books/published/pythonds/_images/adt.png" target="_blank" rel="noopener">Abstract Data type</a></li>
@@ -444,7 +528,10 @@
     <a href="/2020/02/15/2020-02-15-Baekjoon-10989/" rel="prev" title="BAEKJOON 10989 Solution">
       <i class="fa fa-chevron-left"></i> BAEKJOON 10989 Solution
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/02/18/2020-02-18-csci259-test1/" rel="next" title="Csci 259 Test1 Review Questions">
+      Csci 259 Test1 Review Questions <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -511,7 +598,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#What-is-Computer-Science"><span class="nav-number">1.</span> <span class="nav-text">What is Computer Science</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#What-is-Programming"><span class="nav-number">2.</span> <span class="nav-text">What is Programming</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Why-Study-Data-Structures-and-Abstract-Data-Types"><span class="nav-number">3.</span> <span class="nav-text">Why Study Data Structures and Abstract Data Types</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Abstract-Data-Type"><span class="nav-number">3.1.</span> <span class="nav-text">Abstract Data Type</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Why-Study-Algorithms"><span class="nav-number">4.</span> <span class="nav-text">Why Study Algorithms</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Review-of-Basic-Python"><span class="nav-number">5.</span> <span class="nav-text">Review of Basic Python</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Built-in-Atomic-Data-Types"><span class="nav-number">5.1.</span> <span class="nav-text">Built-in Atomic Data Types</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">6.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#What-is-Computer-Science"><span class="nav-number">1.</span> <span class="nav-text">What is Computer Science</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#What-is-Programming"><span class="nav-number">2.</span> <span class="nav-text">What is Programming</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Why-Study-Data-Structures-and-Abstract-Data-Types"><span class="nav-number">3.</span> <span class="nav-text">Why Study Data Structures and Abstract Data Types</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Abstract-Data-Type"><span class="nav-number">3.1.</span> <span class="nav-text">Abstract Data Type</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Why-Study-Algorithms"><span class="nav-number">4.</span> <span class="nav-text">Why Study Algorithms</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Review-of-Basic-Python"><span class="nav-number">5.</span> <span class="nav-text">Review of Basic Python</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Built-in-Atomic-Data-Types"><span class="nav-number">5.1.</span> <span class="nav-text">Built-in Atomic Data Types</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Built-in-Atomic-Data-Types-Cont’d"><span class="nav-number">5.2.</span> <span class="nav-text">Built-in Atomic Data Types (Cont’d)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Identifiers-and-Assignment"><span class="nav-number">5.3.</span> <span class="nav-text">Identifiers and Assignment</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Built-in-Collection-Data-Types"><span class="nav-number">5.4.</span> <span class="nav-text">Built-in Collection Data Types</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lists"><span class="nav-number">5.5.</span> <span class="nav-text">Lists</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Operations-on-Lists"><span class="nav-number">5.5.1.</span> <span class="nav-text">Operations on Lists</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Strings"><span class="nav-number">5.6.</span> <span class="nav-text">Strings</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Difference-between-Lists-and-Strings"><span class="nav-number">5.7.</span> <span class="nav-text">Difference between Lists and Strings</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tuples"><span class="nav-number">5.8.</span> <span class="nav-text">Tuples</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sets"><span class="nav-number">5.9.</span> <span class="nav-text">Sets</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dictionaries"><span class="nav-number">5.10.</span> <span class="nav-text">Dictionaries</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Source-Code"><span class="nav-number">6.</span> <span class="nav-text">Source Code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">7.</span> <span class="nav-text">Reference</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -527,14 +614,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">11</span>
           <span class="site-state-item-name">포스트</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">카테고리</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -641,6 +728,8 @@
 
 
 
+
+  
 
   
 
