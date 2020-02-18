@@ -52,7 +52,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="BAEKJOON 10989 Solution">
 <meta property="og:url" content="http://sokhyg9016.github.io/2020/02/15/2020-02-15-Baekjoon-10989/index.html">
-<meta property="og:site_name" content="_BLOG">
+<meta property="og:site_name" content="Git Page">
 <meta property="og:description" content="solved the baekjoon&#39;s coding test.">
 <meta property="og:locale" content="ko_KR">
 <meta property="article:published_time" content="2020-02-15T06:00:00.000Z">
@@ -73,7 +73,7 @@
   };
 </script>
 
-  <title>BAEKJOON 10989 Solution | _BLOG</title>
+  <title>BAEKJOON 10989 Solution | Git Page</title>
   
 
 
@@ -117,7 +117,7 @@
     <div>
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">_BLOG</span>
+        <span class="site-title">Git Page</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -222,7 +222,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="_BLOG">
+      <meta itemprop="name" content="Git Page">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -244,20 +244,14 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Programming/" itemprop="url" rel="index">
-                    <span itemprop="name">Programming</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Programming/Baekjoon/" itemprop="url" rel="index">
-                    <span itemprop="name">Baekjoon</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Programming/Baekjoon/Algorithm/" itemprop="url" rel="index">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
                     <span itemprop="name">Algorithm</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithm/Baekjoon/" itemprop="url" rel="index">
+                    <span itemprop="name">Baekjoon</span>
                   </a>
                 </span>
             </span>
@@ -291,7 +285,7 @@
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<h2 id="Setting"><a href="#Setting" class="headerlink" title="Setting"></a>Setting</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> CNT_INFO[<span class="number">151</span>]; <span class="comment">// count of numbers</span></span><br><span class="line"><span class="keyword">char</span> buf[<span class="number">30</span>];      <span class="comment">// store &amp; output area</span></span><br></pre></td></tr></table></figure>
 
 <blockquote>
-<p>buf[30] (10 * 4 +  4 = 44) [if all data is stored once.]</p>
+<p>buf[30] (10 * 4 + 4 = 44) [if all data is stored once.]</p>
 </blockquote>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">+-----+</span><br><span class="line">| 10  |   Size</span><br><span class="line">+-----+----------+</span><br><span class="line">| 10  |          |</span><br><span class="line">+-----+          |</span><br><span class="line">| 20  |          |</span><br><span class="line">+-----+          |</span><br><span class="line">| 30  |          |</span><br><span class="line">+-----+          |</span><br><span class="line">| 40  |          |</span><br><span class="line">+-----+          -</span><br><span class="line">| 100 |          D</span><br><span class="line">+-----+          A</span><br><span class="line">| 100 |          T</span><br><span class="line">+-----+          A</span><br><span class="line">| 100 |          -</span><br><span class="line">+-----+          |</span><br><span class="line">| 120 |          |</span><br><span class="line">+-----+          |</span><br><span class="line">| 130 |          |</span><br><span class="line">+-----+          |</span><br><span class="line">| 140 |          |</span><br><span class="line">+-----+----------+</span><br></pre></td></tr></table></figure>
 
@@ -338,7 +332,10 @@
     <a href="/2020/02/15/2020-02-15-Kakao-clone-coding/" rel="prev" title="Kakao clone coding">
       <i class="fa fa-chevron-left"></i> Kakao clone coding
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/02/17/2020-02-17-csci356-test1/" rel="next" title="Csci 356 Data Structures in Python Test1">
+      Csci 356 Data Structures in Python Test1 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -421,20 +418,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-count">10</span>
           <span class="site-state-item-name">포스트</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">카테고리</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">태그</span></a>
       </div>
   </nav>
