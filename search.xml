@@ -1,6 +1,522 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Csci 343 - Distributions</title>
+    <url>/2020/02/19/2020-02-20-csci343-lec6/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
+<h2 id="Probability-Density-Functions"><a href="#Probability-Density-Functions" class="headerlink" title="Probability Density Functions"></a>Probability Density Functions</h2><blockquote>
+<p>Function representing distribution of probability variables</p>
+</blockquote>
+<ol>
+<li>Given a range of possible outcomes (some measurable value), what is the probability that a our Random Variable will have one of these values?  <ul>
+<li>Often, fits a <strong>normal distribution</strong>.</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>Probability Density Functions, is a function whose value at any given sample in the sample space can be interpreted as providing a relative likelihood that the value of the random variable would equal that sample.</p>
+</blockquote>
+<p>확률 밀도 함수는 표본 공간에서 주어진 표본의 값이 표본과 동일한 상대적 가능성을 제공하는 것으로 해석될 수 있는 함수다.</p>
+<p>확률 밀도 함수 (Probability Density Function, PDF)는 확률 변수의 분포를 나타내는 함수로, 확률 밀도 함수 $f(x)$와 구간 $[a,b]$에 대해서 확률 변수 $X$가 구간에 포함될 확률 $(a \leq X \leq b)$는</p>
+<p>$$<br>\int _{a}^{b}f(x)dx<br>$$<br>가 된다.</p>
+<p>확률 밀도 함수 $f(x)$는 다음의 두 조건을 만족해야 한다.</p>
+<ol>
+<li>모든 실수값 $X$에 대해 $f(x) \geq 0$</li>
+<li>$\int _{-\infty}^{\infty}f(x)dx = 1$</li>
+</ol>
+<p>확률 밀도 함수와 누적 분포 함수에는 다음과 같은 수식이 성립한다.</p>
+<ol>
+<li>$F(x) = \int _{-\infty}^{x}f(x)dx$</li>
+<li>$f(x) = \frac{d}{dx}F(x)$</li>
+</ol>
+<h2 id="Central-Limit-Theorem"><a href="#Central-Limit-Theorem" class="headerlink" title="Central Limit Theorem"></a>Central Limit Theorem</h2><ol>
+<li><p>A random variable with random variation centered about some value within a given interval will be approximately normally distributed as the number of samples increases.</p>
+<blockquote>
+<p>주어진 간격 내에 어떤 값을 중심으로 임의의 변동을 가지는 임의의 변수는 표본 수가 증가함에 따라 대략 정상적으로 분포될 것이라는 정리이다.</p>
+</blockquote>
+</li>
+<li><p>This is similar to concept of limits in calculus.</p>
+</li>
+</ol>
+<blockquote>
+<p>정규 분포가 중요한 이유 중 하나는 중심극한정리(central limit theorem) 때문이다. 중심 극한 정리(central limit theorem)는 동일한 확률분포를 가진 독립 확률 변수 n개의 평균의 분포는 n이 적당히 크다면 정규분포에 가까워진다는 정리이다</p>
+</blockquote>
+<p><a href="https://upload.wikimedia.org/wikipedia/commons/c/cd/Clt_in_action.gif" title="wiki" class="gallery-item"><img src="https://upload.wikimedia.org/wikipedia/commons/c/cd/Clt_in_action.gif" alt="wiki"></a></p>
+<p>매우 불규칙한 분포도 충분히 많은 수를 더하면 중심극한정리에 따라 결국 정규분포로 수렴한다.</p>
+<h2 id="Recall"><a href="#Recall" class="headerlink" title="Recall"></a>Recall</h2><ul>
+<li>When we sample(measure) something over and over, the samples often fit a Normal Distribution.</li>
+</ul>
+<blockquote>
+<p>These are examples of <ins>Probability Density/Distribution Functions</ins>(PDFs)</p>
+</blockquote>
+<h3 id="What-do-these-tell-us"><a href="#What-do-these-tell-us" class="headerlink" title="What do these tell us?"></a>What do these tell us?</h3><p>Visually, we can quickly approximate the sample population average and dispersion/spread.</p>
+<h2 id="Cumulative-Distribution-Functions-CDF"><a href="#Cumulative-Distribution-Functions-CDF" class="headerlink" title="Cumulative Distribution Functions (CDF)"></a>Cumulative Distribution Functions (CDF)</h2><ul>
+<li><p>Provides the probability that a random value is less than or equal to a given value within a <em>normally distributed population</em>.</p>
+<ul>
+<li>무작위 값이 정규 분포 모집단 내에서 주어진 값보다 작거나 같을 확률을 제공한다.</li>
+</ul>
+</li>
+<li><p>It means that CDF tells us the probability that some value lies below a certain threshold.</p>
+<ul>
+<li>즉 CDF는 어떤 값이 특정 임계값보다 낮을 확률을 우리에게 알려준것을 의미한다.</li>
+</ul>
+</li>
+<li><p>Describes probability <em>over</em> the PDF.</p>
+</li>
+</ul>
+<blockquote>
+<p>누적 분포 함수(cumulative distribution function, cdf)는 주어진 확률 변수가 특정 값보다 작거나 같은 확률을 나타내는 함수이다.</p>
+</blockquote>
+<p>The probability density function $f(x)$ is defined as the differential of the cumulative distribution function $F(x)$.</p>
+<p>$$<br>\frac{dF(x)}{dx} = f(x)<br>$$</p>
+<ul>
+<li>확률밀도함수(PDF)는 특정 확률 변수 구간의 확률이 다른 구간에 비해 <strong>상대적으로</strong> 얼마나 높은가를 나타내는 것이며 그 값 자체가 확률은 아니다라는 점을 명심해야 한다.</li>
+</ul>
+<hr>
+<h2 id="Confidence-amp-CDF"><a href="#Confidence-amp-CDF" class="headerlink" title="Confidence &amp; CDF"></a>Confidence &amp; CDF</h2><ul>
+<li>Our CDF tells us the probability that some value lies below a certain threshold.</li>
+<li>50% of the population should lie on either side of the vertical line.</li>
+<li>This kind of statistical test is called a <ins>one-tailed test.</ins></li>
+</ul>
+<blockquote>
+<p>통계적 가설 검정(statistical hypothesis test)은 통계적 추측의 하나로서, 모집단 실제의 값이 얼마가 된다는 주장과 관련해, 표본의 정보를 사용해서 가설의 합당성 여부를 판정하는 과정을 의미한다.<br><br>간단히 가설 검정(hypothesis test)이라고 부르는 경우가 많다.</p>
+</blockquote>
+<p>통계적으로 가설을 검정하기 위해 먼저 귀무가설과 대립가설을 세워야 한다. 어떤 모수(평균, 분산, 비울, etc.)에 대해 가설을 설정할 때, 일반적을 5 가지 경우가 있다.</p>
+<ol>
+<li>유의수준의 결정, 귀무가설과 대립가설 설정</li>
+<li>검정통계량의 설정</li>
+<li>기각역의 설정</li>
+<li>검정통계량 계산</li>
+<li>통계적인 의사결정</li>
+</ol>
+<h3 id="귀무가설과-대립-가설-설정"><a href="#귀무가설과-대립-가설-설정" class="headerlink" title="귀무가설과 대립 가설 설정"></a>귀무가설과 대립 가설 설정</h3><p><strong>귀무 가설</strong><br>귀무 가설(null hypothesis, $H_{0}$)은 통계학에서 처음부터 버릴 것을 예상하는 가설이다. 차이가 없거나 의미있는 차이가 없는 경우의 가설이며 이것이 맞거나 맞지 않다는 통계학적 증거를 통해 증명하려는 가설이다.</p>
+<p><strong>대립 가설</strong><br>대립 가설(alternative hypothesis, $H_{1}$) 또는 연구 가설 또는 유지 가설은 귀무가설에 대립하는 명제이다. 보통, 모집단에서 독립변수와 결과변수 사이에 어떤 특정한 관련이 있다는 꼴이다. 어떤 가능성에 대해 확률적인 가설검정을 할 때 귀무가설과 함께 사용된다. 이 가설은 귀무가설처럼 검정을 직접 수행하기는 불가능하며 귀무가설을 기각함으로써 받아들여지는 반증의 과정을 거쳐 받아들여질 수 있다.</p>
+<p>대립 가설은 <strong>양측 대립 가설</strong> 과 <strong>단측 대립 가설</strong> 이 있다.</p>
+<ol>
+<li><p><strong>단측 대립 가설</strong><br>독립 변수와 결과 변수와의 관련성을 검정할 때 그 방향이 미리 어느 한쪽으로 결정되어 있는 경우이다. 예를 들어 새로 개발된 심장병 치료 약물이 기존의 약물요법에 비교하여 더 효과가 좋은가?라는 것을 밝혀낼 때에 더 효과가 좋다는 가설이 단측대립가설이다.</p>
+</li>
+<li><p><strong>양측 대립 가설</strong><br>독립변수와 종속변수간에 관련성 혹은 차이가 존재하는가?라는 면에서만 관심을 가지는 것이며 그 방향은 따지지 않는 가설이다. 예를 들어 새로 개발된 심장병 치료 약물이 기존의 약물요법에 비교하여 효과에 차이가 있다라고 가정하는 것이다.</p>
+</li>
+</ol>
+<ul>
+<li><p>먼저 연구 가설 내용을 (e.g. 미국 성인여자의 신장은 크다)을 통계적 가설 (e.g. 미국 성인여자의 평균신장은 180cm이다.)로 바꾸어 줌으로써 가설 검정이 시작된다.</p>
+</li>
+<li><p>가령, 미국 성인 여성의 평균 신장이 180cm라는 하나의 가설을 검정할 계획이라면, 귀무 가설의 표기는 다음과 같다.</p>
+</li>
+</ul>
+<p>$$<br>H_{0}: \mu = 180<br>$$</p>
+<p>해당 귀무 가설과 반대되는 대립 가설은 다음과 같은 형태가 있다.</p>
+<ul>
+<li>제1형: $H_{1} : \mu \ne 180$</li>
+<li>제2형: $H_{1} : \mu \le 180$</li>
+<li>제3형: $H_{1} : \mu \ge 180$</li>
+</ul>
+<p>여기서 제 1형은 <strong>양측 검정</strong>(two-sided test, two tailed test), 제 2형, 제 3형은 <strong>단측 검정(one-sided test)</strong> 이라고 지칭한다. 단측검정을 나누자면 제 2형을 <strong>좌측 검정</strong> (lower tailed test)이라고 하며, 제 3형은 <strong>우측 검정</strong> (upper tailed test)이라고 부른다.</p>
+<p>양측검정은 가설 검증에서 <strong>기각 영역</strong>(rejection region)이 양쪽에 있는 것이고, 그러므로 유의수준 $\alpha$ 도 양극단으로 갈라져 한쪽의 면적이 $\frac{\alpha}{2}$가 된다. 기각영역이 어느 한쪽에만 있게 되는 경우를 <strong>단측검정</strong> 이라고 한다.</p>
+<blockquote>
+<p>즉, 단측 검정이란 대립 가설이 어느 특정 모수 이상이거나 이하일 때 검정하는 것이다.</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>Has limitations due to only testing if something is above or below a certain value</p>
+</blockquote>
+<ul>
+<li>We can say that values below this level differ from 90% of the population, values below this that cut off could be at most 10% of the population we are measuring. This means they are less likely to be the same population.</li>
+</ul>
+<blockquote>
+<p>이 수준 이하의 값은 모집단의 90 %와 다르다고 말할 수 있습니다.이 차단 ​​값 아래의 값은 측정중인 모집단의 최대 10 % 일 수 있습니다. 이것은 그들이 같은 인구가 될 가능성이 적다는 것을 의미합니다.</p>
+</blockquote>
+<ul>
+<li>For the values that lie <strong>below</strong> the cut off we will incorrectly  reject 10% of the time!</li>
+</ul>
+<blockquote>
+<p>This is called a <ins>False Negative</ins>.(AKA a Type II Error).</p>
+</blockquote>
+<ul>
+<li>For the values that lie <strong>above</strong> the cut off that are NOT in our population, we incorrectly  accept the values as members.</li>
+</ul>
+<blockquote>
+<p>This is called a <ins>False Positive</ins>.(AKA a Type I Error).</p>
+</blockquote>
+<ol>
+<li><p><strong>거짓 음성(false negative)</strong> 또는 2종 오류(type II error)는 통계상 실제로는 양성인데 검사 결과는 음성이라고 나오는 것이다. 예를 들어, 어떤 메일이 스팸 메일인지 검사하는 프로그램이 있다고 하자. 이때 어떤 메일이 실제로는 스팸 메일임에도 불구하고 프로그램 검사 결과 스팸 메일이 아니라고 판정한다면, 이것이 거짓 음성이다. 이러한 현상은 암 진단이나 보안 진단과 같은 분야에서는 거짓 양성에 비해 오 탐지에 대한 비용이 커서 그것을 잘 고려하여 검사 알고리즘을 개발해야 한다.</p>
+</li>
+<li><p><strong>거짓 양성(false positive)</strong> 또는 1종 오류(type I error)는 통계상 실제로는 음성인데 검사 결과는 양성이라고 나오는 것이다. 예를 들어, 어떤 메일이 스팸 메일인지 검사하는 프로그램이 있다고 하자. 이때 어떤 메일이 실제로는 스팸 메일이 아니지만 프로그램 검사 결과 스팸 메일이라고 판정한다면, 이것이 거짓 양성이다. 위양성, 혹은 거짓 경보(false alarm)라고도 한다.</p>
+</li>
+</ol>
+<p>실제로 검사 알고리즘을 개발한다면, 거짓 양성과 거짓 음성 사이에 trade-off(어느 한편을 늘리면 다른 한편은 그 만큼 줄어드는 것)가 필연적으로 생기게 된다.</p>
+<hr>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><h3 id="Probability-Density-Function-PDF"><a href="#Probability-Density-Function-PDF" class="headerlink" title="Probability Density Function (PDF)"></a>Probability Density Function (PDF)</h3><blockquote>
+<p>unction representing distribution of probability variables</p>
+</blockquote>
+<ul>
+<li>Given a range of possible outcomes (some measurable value), what is the probability that a our Random Variable will have one of these values?</li>
+</ul>
+<blockquote>
+<p>Often, fits a <strong>normal distribution</strong></p>
+</blockquote>
+<ul>
+<li>Visually, we can quickly approximate the sample population average and dispersion/spread.</li>
+</ul>
+<h3 id="Central-Limit-Theorem-CLT"><a href="#Central-Limit-Theorem-CLT" class="headerlink" title="Central Limit Theorem (CLT)"></a>Central Limit Theorem (CLT)</h3><p>A random variable with random variation centered about some value within a given interval will be approximately normally distributed as the number of samples increases.</p>
+<blockquote>
+<p>주어진 간격 내에 어떤 값을 중심으로 임의의 변동을 가지는 임의의 변수는 표본 수가 증가함에 따라 대략 정상적으로 분포될 것이라는 정리이다.</p>
+</blockquote>
+<h3 id="Cumulative-Density-Function-CDF"><a href="#Cumulative-Density-Function-CDF" class="headerlink" title="Cumulative Density Function (CDF)"></a>Cumulative Density Function (CDF)</h3><ul>
+<li>Provides the probability that a random value is less than or equal to a given value within a <em>normally distributed population</em>.</li>
+<li>It means that CDF tells us the probability that some value lies below a certain threshold.</li>
+<li>Describes probability <em>over</em> the PDF.</li>
+</ul>
+<h3 id="False-Positive-Negative"><a href="#False-Positive-Negative" class="headerlink" title="False Positive/Negative"></a>False Positive/Negative</h3><ul>
+<li><p>False Positive (Type I Error) is a result that indicates a given condition exists, when it does not.</p>
+</li>
+<li><p>False negative (Type II Error) is a test result that indicates that a condition does not hold, while in fact it does.</p>
+</li>
+</ul>
+<h3 id="one-tailed-test"><a href="#one-tailed-test" class="headerlink" title="one-tailed test"></a>one-tailed test</h3><ul>
+<li>A one-sided test is a test when the alternative hypothesis is above or below any specific parameter.</li>
+<li>Has limitations due to only testing if something is above or below a certain value</li>
+</ul>
+<hr>
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>]]></content>
+      <categories>
+        <category>Data Science</category>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>Olemiss</tag>
+        <tag>CSCI 343</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Csci 343 - Descriptive Statistics</title>
+    <url>/2020/02/19/2020-02-19-csci343-lec5/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
+<h2 id="Samples-and-Population"><a href="#Samples-and-Population" class="headerlink" title="Samples and Population"></a>Samples and Population</h2><ol>
+<li><strong>Statistics</strong> are usually meant to tell us something about a group or set of things (could be groups of people, cars on an aseembly line, or produce at a grocery store).</li>
+<li>We can’t measure EVERYONE, so we usually take a <ins>sample</ins> from the whole.</li>
+<li>we call this our <strong>sample population</strong> or just <strong>population</strong>.</li>
+<li>Populations are made up of <ins>samples</ins>. Samples are individual measurements within a population.</li>
+</ol>
+<hr>
+<p><strong>통계</strong>(statistics)란 데이터를 이해하는 바탕이 되는 수리적 기법이다.</p>
+<p>만약 데이터의 수가 적다면 데이터 자체를 보여 주는 것이 가장 좋은 방법일 수 있다. 하지만 데이터가 많다면 데이터를 다루는 것도 불편하고 이해하기도 힘들 것이다. 이럴 때 통계를 사용하면 데이터를 정제해서 중요한 정보만 전달해 줄 수 있다.</p>
+<blockquote>
+<p>통계학(tatistics)은 산술적 방법을 기초로 하여, 주로 다량의 데이터를 관찰하고 정리 및 분석하는 방법을 연구하는 수학의 한 분야이다.</p>
+</blockquote>
+<ul>
+<li><a href="https://ko.wikipedia.org/wiki/%ED%86%B5%EA%B3%84%ED%95%99" target="_blank" rel="noopener">[Wiki]통계학</a></li>
+</ul>
+<hr>
+<p>통계학에서는 주어진 데이터를 표본(sample), 데이터가 대표하는 현상을 모집단(population)이라고 하며, 표본을 바탕으로 모집단의 특성에 대한 결론을 유도하는 것을 통계적 추론(statistical inference)이라고 부른다. 즉 통계적 추론은 통계 이론을 바탕으로 한 현상의 일반화하고 하겠다. 현상에 대한 관찰에서 일반화할 수 있는 지식을 이끌어내는 것은 과학의 본령이니, 통계적 추론은 데이터 ‘과학’의 본질과도 맞닿아 있다고 하겠다.</p>
+<p><a href="https://lh6.googleusercontent.com/dGLNLDXsDQH-vbf8u8ADMUeIE-tGuN9vetm5TR0H-6mRHxuwzdl_IsLPHRRa4aYGNoqGiAyO1C24ieuS3S3UaCx7pAkXdlZKCQ9fg-9lQZTZIvIHNgOQBDZsVfUcGtT2J1pu1MdB3m2IcAFs" title="데이터과학 프로세스(5): 통계적 추론" class="gallery-item"><img src="https://lh6.googleusercontent.com/dGLNLDXsDQH-vbf8u8ADMUeIE-tGuN9vetm5TR0H-6mRHxuwzdl_IsLPHRRa4aYGNoqGiAyO1C24ieuS3S3UaCx7pAkXdlZKCQ9fg-9lQZTZIvIHNgOQBDZsVfUcGtT2J1pu1MdB3m2IcAFs" alt="데이터과학 프로세스(5): 통계적 추론"></a></p>
+<p>언뜻 마법처럼 들리는 통계적 추론을 가능하게 하는 것은 주어진 현상에 관한 통계적 모델이다. 주어진 현상이 어떤 모델에서 의해 발생했다고 가정하고, 그 모델에서 발생한 일정량의 결과물을 안다면 (표본), 그 모델에서 일반적으로 어떤 현상이 발생할지를 예측할 수 있는 것이다. 따라서 통계적 추론은 주어진 현상에 대한 가정과 데이터를 사용해 이런 통계적 모델을 만들고, 여기서 다양한 결론을 도출해내는 과정이다.</p>
+<ul>
+<li><a href="http://www.hellodatascience.com/?p=366" target="_blank" rel="noopener">데이터과학 프로세스(5): 통계적 추론</a></li>
+</ul>
+<hr>
+<h3 id="Normal-Distribution"><a href="#Normal-Distribution" class="headerlink" title="Normal Distribution"></a>Normal Distribution</h3><ul>
+<li>Generally, we expect a population to be somwhat homogeneous.</li>
+<li>This means that the individuals in a population are fairly similar to each other.</li>
+<li>Homogeneous populations often fit a <ins>Normal Distribution</ins>.</li>
+</ul>
+<hr>
+<p><strong>확률 변수</strong></p>
+<ul>
+<li>확률에 따라 변하는 값</li>
+<li>특정확률로 나타나는 어떠한 사건에 수치를 부여한 변수</li>
+<li>즉 무작위 실험을 했을 때, 특정 확률로 발생하는 각각의 결과를 수치적 값으로 표현하는 변수를 말한다.</li>
+</ul>
+<blockquote>
+<p>확률 변수는 임의로 진행되는 실험에서 일정한 확률을 가지고 발생하는 결과에 실수 값을 부여하는 변수를 말한다.</p>
+</blockquote>
+<ol>
+<li>예를 들어 동전을 2번 던져서 그림 또는 숫자가 나오는 실험을 한다고 가정하면</li>
+<li>그림이 나올 확률을 $\frac{1}{2}$, 숫자가 나올 확률을 $\frac{1}{2}$ 이라고 하자.</li>
+<li>그리고 이 확률에 따라 발생하는 결과에 실수 값을 각각 그림의 경우 $1$, 숫자의 경우 $0$ 을 부여한다고 하자.</li>
+</ol>
+<p><a href="../../../../img/csci343-lec5/random_variable.jpg" title="sample" class="gallery-item"><img src="../../../../img/csci343-lec5/random_variable.jpg" alt="sample"></a></p>
+<ol>
+<li>이때 표본 공간을 대문자로 $S$, 그에 상응하는 실수 값을 부여하는 값을 $X$, 그리고 부여된 실수값 $X$에 따라 계산된 실수 값을 $R$이라고 하면 관계는 아래 그림과 같다.</li>
+</ol>
+<p><a href="../../../../img/csci343-lec5/random_variable2.jpg" title="sample" class="gallery-item"><img src="../../../../img/csci343-lec5/random_variable2.jpg" alt="sample"></a></p>
+<p>위 그림에서 표본공간(S)는 그림 또는 숫자가 나오는 조합이 되고, 각 조합에 그림=1, 숫자=0을 부여했을 때 나오는 값(R)이 {0, 1, 2}가 된다. 이를 확률 변수라고 한다.</p>
+<blockquote>
+<p>이때 산출된 값 R은 확률변수를 표본 공간의 각 조합에 부여함에 따라 나오는 값, 즉  (1,1), (0,1)과 같이 나타나는 조합 안의 숫자들을 더하여 나온 결과이다. (e.g.s <code>(1,1)</code> -&gt; 1 + 1 = 2)</p>
+</blockquote>
+<p>이때 확률 변수(R)가 취하는 모든 실수들의 집합을 <strong>상태 공간</strong>(State space)라고 하고, 그 상태공간을 구성하는 각 값이 나올 수 있는 가능성은 특정 확률로 주어지게 된다.</p>
+<table>
+<thead>
+<tr>
+<th>값</th>
+<th>확률</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>$\frac{1}{4}$</td>
+</tr>
+<tr>
+<td>1</td>
+<td>$\frac{1}{2}$</td>
+</tr>
+<tr>
+<td>2</td>
+<td>$\frac{1}{4}$</td>
+</tr>
+</tbody></table>
+<p>&nbsp;</p>
+<p><strong>확률 함수</strong><br>확률 변수를 확률 값으로 대응시키는 함수</p>
+<ul>
+<li>이 확률 변수와 확률 함수를 이용하면 특정 사건이 일어날 확률을 계산할 수 있다.</li>
+<li>그리고 그것을 도식화 시킨 것이 바로 확률 분포이다.</li>
+</ul>
+<p><strong>확률 분포</strong><br>확률변수에 의해 정의된 실수를 확률($0$ ~ $1$사이)에 대응시키는 함수</p>
+<ul>
+<li>즉, 위에서 정의한 표에 따라 x가 <code>0</code>이면 그에 대응되는 확률은 $\frac{1}{4}$ , <code>1</code>이면 $\frac{1}{2}$ 과 같이 이렇게 확률 변수의 상태공간의 각 실수 값과 확률 값을 대응시키는 것이 바로 확률 함수이다.</li>
+</ul>
+<p><strong>E.g.s</strong></p>
+<ul>
+<li>동전을 2번 던져 나오는 수: $x$</li>
+<li>$x$가 취할 수 있는 값은 $x = 0, x = 1, x = 2$</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">$x$</th>
+<th align="center">0</th>
+<th align="center">1</th>
+<th align="center">2</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">$P(x)$</td>
+<td align="center">$\frac{1}{4}$</td>
+<td align="center">$\frac{1}{2}$</td>
+<td align="center">$\frac{1}{4}$</td>
+</tr>
+</tbody></table>
+<p>확률 변수, 확률 분포, 그리고 확률 함수의 관계를 정리하자면 다음과 같이 표현 할 수 있다.</p>
+<p><a href="../../../../img/csci343-lec5/random_variable3.jpg" title="sample" class="gallery-item"><img src="../../../../img/csci343-lec5/random_variable3.jpg" alt="sample"></a></p>
+<hr>
+<ul>
+<li><strong>표본공간(<code>S</code>, sample space)</strong>: 어떤 특정 실험 또는 무작위 실험을 했을 때, 측정가능한 모든 결과들의 집합 (The set of all possible outcomes or results of that experiment)</li>
+</ul>
+<blockquote>
+<p>표본 공간은 정의 그대로 “측정 가능한 모든 결과의 집합”이다. 따라서 표본 공간을 이루는 개개의 관찰 결과를 우리는 <strong>표본점(sample</strong>이라고 한다.<br>&nbsp;<br>즉, 우리가 수집한 표본은 표본 공간의 부분집합이라고 할 수 있다.</p>
+</blockquote>
+<ul>
+<li><strong>사건(Event)</strong>: 표본공간(S)의 부분 집합으로 어떤 조건을 만족하는 특정한 표본점(Sample)들의 집합</li>
+<li><strong>확률(Probability)</strong>: 동일한 조건 하에서 동일한 실험을 무수히 많이 반복하여 실시할 때, 어떤 특정한 사건이 발생하는 비율</li>
+</ul>
+<blockquote>
+<p>확률이란 어떤 실험을 했을 때, 나올 수 있는 모든 경우의 수 중 어떤 특정한 조건을 만족하는 사건이 발생하는 비율을 말한다.</p>
+</blockquote>
+<p>$$<br>P(A) = \frac {\text{A 사건이 일어나는 경우의 수}}{\text{모든 사건이 일어나는 경우의 수}}<br>$$</p>
+<p>출처:</p>
+<ul>
+<li><a href="https://drhongdatanote.tistory.com/49" target="_blank" rel="noopener">[개념 통계]확률 변수와 확률 함수</a></li>
+</ul>
+<hr>
+<h4 id="정규분포-Normal-distribution"><a href="#정규분포-Normal-distribution" class="headerlink" title="정규분포(Normal distribution)"></a>정규분포(Normal distribution)</h4><ul>
+<li>정규분포는 통계학에서 가장 많이 쓰이는 확률분포이다.</li>
+<li>우리 주변에서 일반적으로 발견되는 좌우 대칭의 종 모양으로 생긴 분포이다. (가우스 분포라고도 부른다.)</li>
+<li>우리 주변의 많은 변수 또는 자료들이 정규분포를 따른다고 알려져 있다.</li>
+</ul>
+<blockquote>
+<p>E.g.s 대한민국 남성의 키 분포, 수능 점수의 분포 등</p>
+</blockquote>
+<ul>
+<li>정규 분포는 평균 값에 가장 많은 데이터가 분포되어 있고 평균과 떨어질 수록 적게 분포되는 특징을 가지고 있다.</li>
+</ul>
+<p>출처:</p>
+<ul>
+<li><a href="https://drhongdatanote.tistory.com/50" target="_blank" rel="noopener">[개념 통계]정규분포와 표준정규분포 그리고 Z-score</a></li>
+</ul>
+<hr>
+<p>인간과 자연 세상에서 일어나는 수많은 일을 설명하는 핵심 개념이다.<br>통계학에서 사용하는 각종 확률분포 중에서도 가장 중요하게 다루는 분포이다.</p>
+<p>정규분포는 특정값의 출현비율을 그렸을 때, 중심(평균값)을 기준으로 좌우 대칭 형태가 나타나며, 좌우 극단으로 갈수록 급격하게 수치가 낮아지는 특징이 있다. </p>
+<p><a href="https://ww.namu.la/s/8a577c27dc206b771919ed57c079106a8b5b3d5e7b71b061bbe1e0b2a1589e045fe1515556cfff97e673aab42a897a62508018a15a09bfc9fc2ad850f571346d776c8fdb7b6a81f28f0ec8963bbe605b16cfad49c902f6c95a308b5c16c18a39" title="Normal Distribution" class="gallery-item"><img src="https://ww.namu.la/s/8a577c27dc206b771919ed57c079106a8b5b3d5e7b71b061bbe1e0b2a1589e045fe1515556cfff97e673aab42a897a62508018a15a09bfc9fc2ad850f571346d776c8fdb7b6a81f28f0ec8963bbe605b16cfad49c902f6c95a308b5c16c18a39" alt="Normal Distribution"></a></p>
+<p>그래서 변곡점도 2개 있는데, 모두 $μ$에서 $\sigma$만큼 떨어져 있다.하지만 표준편차의 수치가 위의 이미지처럼 꼭 기계적으로 딱딱 맞아야 하는 것은 아니고 대략 저런 ‘종’ 형태로 나타난다.</p>
+<hr>
+<h3 id="Outliers"><a href="#Outliers" class="headerlink" title="Outliers"></a>Outliers</h3><ul>
+<li><p>We expect our samples to have some spread to them, but that in the end they will appear “normal”</p>
+</li>
+<li><p>Values that radically differ from this distribution are called <ins>outliers</ins></p>
+</li>
+<li><p><strong>An outlier is an observation that lies an abnormal distance from other values in a random sample from a population</strong></p>
+<ul>
+<li>이상값은 모집단(population)에서 무작위로 추출한 표본(simple)의 다른 값과의 비정상적인 거리를 나타내는 관측치 입니다</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>“…또한 데이터에는 다양한 이유로 정상 범주를 벗어난 값이 존재할 수 있는데, 이런 이상값(outlier)을 찾아내는 것도 탐험적 데이터 분석에서 이루어져야 한다.”</p>
+</blockquote>
+<ul>
+<li>When we take measurements we can to measure a signal indicative of something we are interested in.</li>
+<li>If we have, two separate groups when we expect only one, we may be accidentally sampling from two differing populations.</li>
+</ul>
+<blockquote>
+<p>This relates to the <ins>Central limit Theorem</ins>.</p>
+</blockquote>
+<h2 id="Averages"><a href="#Averages" class="headerlink" title="Averages"></a>Averages</h2><h3 id="Means"><a href="#Means" class="headerlink" title="Means"></a>Means</h3><ul>
+<li>This is what most people think of when they think “average”.</li>
+</ul>
+<blockquote>
+<p>Means are most representative of homogenous populations where few outliers exist.</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># from __future__ import division을 선언해 주지 않으면 값이 틀리게 계산될 수도 있다.</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mean</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> sum(x)/len(x)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Medians"><a href="#Medians" class="headerlink" title="Medians"></a>Medians</h3><ul>
+<li>This is the value at which 50% of your samples are above and 50% of your samples are below it.</li>
+</ul>
+<blockquote>
+<p>For very noisy data, medians can be more descriptive of the population than the mean.</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">median</span><span class="params">(v)</span>:</span></span><br><span class="line"><span class="string">''''''</span>v의 중앙값을 계산 <span class="string">''''''</span></span><br><span class="line">    n = len(v)</span><br><span class="line">    sorted_v = sorted(v)</span><br><span class="line">    midpoint = n // <span class="number">2</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> n % <span class="number">2</span> == <span class="number">1</span>:</span><br><span class="line">    <span class="comment"># 데이터 포인트의 개수가 홀수면 중앙값을 반환</span></span><br><span class="line">        <span class="keyword">return</span> sorted_v[midpoint]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        lo = midpoint - <span class="number">1</span></span><br><span class="line">        hi = midpoint</span><br><span class="line">        <span class="keyword">return</span> (sorted_v[lo] + sorted_v[hi]) / <span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Modes"><a href="#Modes" class="headerlink" title="Modes"></a>Modes</h3><ul>
+<li>This is the number that appears most frequently in your samples</li>
+<li>This one is a bit less useful for general purposes<ul>
+<li>Count the number of unique samples in your data set.</li>
+<li>The sample with the most occurrences (highest count) is your mode</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>In the typical case, mode is not better then mean and median as a general representation of the population. Because most values we work with are on a gradient and seldom repeat due to fractional differences. It just depends in the ideal case.</p>
+</blockquote>
+<ul>
+<li>일반적인 경우 Mode는 모집단(population)의 일반적 표현으로 평균과 중앙값을 사용하는 경우보다 좋지 않다. 왜냐하면 우리가 다루는 대부분의 데이터들은 기울기(gradient)가 있고 이견이 거의 없어 반복되지 않기 때문이다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mode</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="string">''''''</span>최빈 값이 하나보다 많다면 list를 반환<span class="string">''''''</span></span><br><span class="line">    counts = Counter(x)</span><br><span class="line">    max_count = max(counts.value())</span><br><span class="line">    <span class="keyword">return</span> [x_i <span class="keyword">for</span> x_i, count <span class="keyword">in</span> counts.iteritems() <span class="keyword">if</span> count == max_count]</span><br></pre></td></tr></table></figure>
+
+<h2 id="Dispersion"><a href="#Dispersion" class="headerlink" title="Dispersion"></a>Dispersion</h2><p>Samples and Populations usually have a spread of data</p>
+<blockquote>
+<p>The size of the <em>distribution</em></p>
+</blockquote>
+<ul>
+<li>This is called <strong>dispersion</strong>.</li>
+<li>Dispersion is how spread out your samples are from each other.</li>
+</ul>
+<blockquote>
+<p><strong>산포도(dispersion)</strong> 는 데이터가 얼마나 퍼져 있는지를 나타낸다. 보통 0과 근접한 값이면 데이터가 거의 퍼져있지 않다는 의미이고 큰 값이면 매우 퍼져있다는 것을 의미하는 통계치이다.</p>
+</blockquote>
+<ul>
+<li>예를 들어, 가장 큰 값과 작은 값의 차이를 나타내는 범위는 신포도를 나타내는 가장 간단한 통계치이다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">data_range</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> max(x) - min(x)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Variance"><a href="#Variance" class="headerlink" title="Variance"></a>Variance</h3><blockquote>
+<p>Variance is a calculation of how far a variable is from the mean of a variable.</p>
+</blockquote>
+<ol>
+<li><p>essentially the average sum of squares of average difference from the group mean.</p>
+<ul>
+<li>그룹 평균(group mean)과 다른 평균 제곱합(average sum of squares of average)</li>
+</ul>
+</li>
+<li><p>It’s give us <ins>units squared</ins> which can be difficult to understand intuitively.</p>
+</li>
+</ol>
+<blockquote>
+<p>분산(Variance)은 하나의 변수가 변수의 평균에서 얼마나 멀리 떨어져 있는지 계산한 것이다. 분산은 산포도를 측정하는 더 복잡한 개념이며 다음과 같이 계산된다.</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">de_mean</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="string">''''''</span>x의 모든 데이터 포인트에서 평균을 뺌(평균을 <span class="number">0</span>으로 만들기 위해)<span class="string">''''''</span></span><br><span class="line">    x_bar = mean(x)</span><br><span class="line">    <span class="keyword">return</span> [x_i - x_bar <span class="keyword">for</span> x_i <span class="keyword">in</span> x]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">variance</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="string">''''''</span>x에 <span class="number">2</span>개 이상의 데이터 포인트가 존재한다고 가정<span class="string">''''''</span></span><br><span class="line">    n = len(x)</span><br><span class="line">    deviations = de_mean(x)</span><br><span class="line">    <span class="keyword">return</span> sum_of_squares(deviations) / (n - <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<p>식에서 편차의 제곱의 평균을 계산하는데 <code>n</code> 대신 <code>n - 1</code>로 나눈 것은 편차의 제곱합을 n으로 나누면 <code>bias</code> 때문에 모분산(population)에 대한 추정값이 실제 모분산보다 적게 계산되는 것을 보정해주기 위함이다.</p>
+<h3 id="Standard-Deviation"><a href="#Standard-Deviation" class="headerlink" title="Standard Deviation"></a>Standard Deviation</h3><ul>
+<li>A more common measure of dispersion is <ins>standard deviation</ins>.</li>
+<li>It is the square root of the variance.<ul>
+<li>It’s units are the <strong>same</strong> as your mean (not squared units)</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>분산의 단위는 기존 단위의 제곱이다. 그렇기 때문에 분산 대신 원래 단위와 같은 단위를 가지는 표준 편차(standard dispersion)를 이용할 때가 많다.</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">standard_deviation</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> math.sqrt(variance(x))</span><br></pre></td></tr></table></figure>
+
+<h4 id="Quantiles"><a href="#Quantiles" class="headerlink" title="Quantiles"></a>Quantiles</h4><p>The value below which some percentage falls</p>
+<ol>
+<li>Median is a special case quantile. It’s for 50 % of the population.</li>
+<li>A common use of quantiles is to specify the Interquartile Range (or the values that fall above 25% of the population and below 75% of the population - i.e. the central 50%).</li>
+<li>Interquartile range is often used with box plots<ul>
+<li>Box = interquartile range</li>
+<li>Mid-line = median</li>
+<li>Whiskers = 95% of the population</li>
+<li>Stars = outliers</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>분위(quantile)는 중앙값(median)을 포괄하는 개념인데, 데이터의 특정 백분위보다 낮은 값을 의미한다. (즉, median은 상위 50%보다 작은 값을 의미하는 것이다.)</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">quantile</span><span class="params">(x, p)</span>:</span></span><br><span class="line">    <span class="string">''''''</span>x의 p분위에 속하는 값을 반환<span class="string">''''''</span></span><br><span class="line">    p_index= int(p * len(x))</span><br><span class="line">    <span class="keyword">return</span> sorted(x)[p_index]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">interquetile</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="string">''''''</span>사분범위의 일반적인 사용은 사분범위 간 범위(또는 모집단의 <span class="number">25</span>% 이상과 모집단의 <span class="number">75</span>% 미만으로 떨어지는 값 - 즉 중심 <span class="number">50</span>%)를 지정하는 것이다.<span class="string">''''''</span></span><br><span class="line">    <span class="keyword">return</span> quantile(x, <span class="number">0.75</span>) - quantile(x, <span class="number">0.25</span>)</span><br><span class="line"></span><br><span class="line">s = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>quantile(s, <span class="number">0.25</span>)</span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>quantile(s, <span class="number">0.5</span>)</span><br><span class="line"><span class="number">6</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>quantile(s, <span class="number">0.75</span>)</span><br><span class="line"><span class="number">8</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>interquartile(s)</span><br><span class="line"><span class="number">5</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Correlation"><a href="#Correlation" class="headerlink" title="Correlation"></a>Correlation</h2><ul>
+<li>Correlation is how two different variable/measurements relate to each other.</li>
+<li>Variable that vary together are said to <strong>covary</strong>.</li>
+<li>When things covary, they have a correlation. (they co-relate)</li>
+</ul>
+<blockquote>
+<p>상관 분석(Correlation analysis) 또는 ‘상관관계’ 또는 ‘상관’은 확률론과 통계학에서 두 변수간에 어떤 선형적 또는 비선형적 관계를 갖고 있는 지를 분석하는 방법이다.<br><br>확률론과 통계학에서, 공분산(covariance)은 2개의 확률변수의 상관정도를 나타내는 값이다.(1개의 변수의 이산정도를 나타내는 분산과는 별개임) 만약 2개의 변수중 하나의 값이 상승하는 경향을 보일 때, 다른 값도 상승하는 경향의 상관관계에 있다면, 공분산의 값은 양수가 될 것이다. 반대로 2개의 변수중 하나의 값이 상승하는 경향을 보일 때, 다른 값이 하강하는 경향을 보인다면 공분산의 값은 음수가 된다.</p>
+</blockquote>
+<p>분산(Variance)는 하나의 변수가 변수의 평균에서 얼마나 떨어져 있는지 계산한다면, 공분산(Covariance)은 두 변수가 각각 평균에서 얼마나 떨어져 있는지 살펴본다.</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">covariance</span><span class="params">(x, y)</span>:</span></span><br><span class="line">    n = len(x)</span><br><span class="line">    <span class="keyword">return</span> dot(de_mean(x), de_mean(y)) / (n - <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>dot</code>은 각 성분별로 곱한 값을 더해 준다.</li>
+<li>만약 x와 y 모두 각각의 평균보다 크거나 작은 경우, 양수가 더해질 것이다. (Positive Correlation)</li>
+<li>반면 둘 중 하나는 평균보다 크고, 다른 하나는 평균보다 작을 경우, 음수가 더해질 것이다. (Negative Correlation)</li>
+<li>만약 공분산이 0이면 그와 같은 관계가 존재하지 않는다는 것을 의미한다.</li>
+</ul>
+<hr>
+<ul>
+<li>Things can correlate positivly, negatively, or not at all.</li>
+</ul>
+<ol>
+<li><strong>Positive Correlation</strong>: When one variable is high, so is the other. When one variable is low, so is the other.</li>
+<li><strong>Negative Correlation</strong>: When one variable is high, the other is low, and vice versa.</li>
+</ol>
+<ul>
+<li>When the correlation gets closer to zero, that means that there is likely no correlation between two variables.</li>
+<li>Just because something correlates with something does mean that<br>one <strong>CAUSED</strong> the other.</li>
+</ul>
+<hr>
+<p>만약 두 변수 A, B 중 A는 변하지 않고 B만 2배로 증가한다면 공분산 또한 2배로 증가할 것이다, 하지만 생각해 보면 두 변수의 상관관계는 변하지 않았다. 다르게 이야기 하면, 값이 얼마나 커야 공분산이 크다고 판단할 수 있을까?</p>
+<blockquote>
+<p>이 경우 공분산에서 각각의 표준 편차를 나눠 준 상관 관계를 더 자주 살펴본다.</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">correlation</span><span class="params">(x, y)</span>:</span></span><br><span class="line">    stdev_x = standard_deviation(x)</span><br><span class="line">    stdev_y = standard_deviation(y)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> stdev_x &gt; <span class="number">0</span> <span class="keyword">and</span> stdev_y &gt; <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> covariance(x, y) / stdev_x / stdev_y</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span> <span class="comment"># 편차가 존재하지 않는다면 상관 관계는 0</span></span><br></pre></td></tr></table></figure>
+
+<p>이때 이상치를 제거하면 더 강력한 상관관계를 볼 수 있다.</p>
+<hr>
+<h3 id="Correlation-and-Causation"><a href="#Correlation-and-Causation" class="headerlink" title="Correlation and Causation"></a>Correlation and Causation</h3><blockquote>
+<p>상관관계(correlation)는 인과관계(Causation)를 의미하지 않는다. 라는 애기를 많이 들어봤을 것이다, 특히 본인의 확고한 견해와 반대되는 데이터를 본 사람들이 자주하는 말이다. 하지만 이 말은 매우 중요하다.<br><br>만약 x와 y가 강한 상관관계를 보인다면 x가 y를 발생시켰다고 볼 수도 이고, y가 x를 발생시켰다고 볼 수도 있다.<br><br>혹은 서로가 서로를 동시에 발생시키거나, 다른 외부 요인이 발생시키거나 아니면 아무런 인과관계가 없을 수도 있다.<br><br>예를 들어, 전기요금이 낮다고 해서 가스요금이 낮은 것은 아닌 것과 같은 경우이다.</p>
+</blockquote>
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>]]></content>
+      <categories>
+        <category>Data Science</category>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>Olemiss</tag>
+        <tag>CSCI 343</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Csci 259 Test1 Review Questions</title>
     <url>/2020/02/18/2020-02-18-csci259-test1/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
@@ -952,127 +1468,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Advanced CSS</title>
-    <url>/2020/01/14/2020-01-14-Advanced%20CSS/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
-<h2 id="What-is-Transitions"><a href="#What-is-Transitions" class="headerlink" title="What is Transitions?"></a>What is Transitions?</h2><ol>
-<li>트랜지션(Transitions)이란 element의 이동 및 변경을 멋지게 보여주는 효과들이다.</li>
-<li>트랜지션은 focus, active, hover에서 효과적으로 사용된다.</li>
-<li>즉 <strong>transition</strong> 이란 element가 하나의 state에서 다른 state로 넘어갈 때의 효과를 말한다.</li>
-</ol>
-<h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span>Text<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: green;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">  <span class="attribute">transition</span>: background-color <span class="number">5s</span> ease-in-out;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>여기서,</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">transition</span>: <span class="selector-tag">background-color</span> 5<span class="selector-tag">s</span> <span class="selector-tag">ease-in-out</span>;</span><br></pre></td></tr></table></figure>
-
-<ol>
-<li>위 코드의 의미는 배경색(background-color)를 <code>5s</code> 안에 <strong>ease-in-out</strong> 애니메이션 효과를 적용하여 바꾸라는 의미이다.</li>
-<li>또한 이렇게 <strong>transition</strong> 앞에 바꾸고 싶은 property 값을 명시해주면 그 속성 값만 특정 효과를 적용하여 바꾸는 것이며, 만약 1개 이상의 설정값을 바꾸고 싶다면 transition 앞에 <code>all</code>이라고 적으면 된다.</li>
-</ol>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">transition</span>: <span class="selector-tag">all</span> 5<span class="selector-tag">s</span> <span class="selector-tag">ease-in-out</span>;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a href="https://developer.mozilla.org/en/docs/Web/CSS/transition" target="_blank" rel="noopener">Official Transition Documentation</a></p>
-<h2 id="What-is-Transformation"><a href="#What-is-Transformation" class="headerlink" title="What is Transformation?"></a>What is Transformation?</h2><ol>
-<li>트랜스포매이션(Transformation)은 html문서의 element들을 변경, 모습이 변하는 효과를 뜻한다.</li>
-<li>즉 transform이란 element의 모양새(shape)를 바꾸는 것이다.</li>
-<li><code>Transition</code>과 같이 합쳐서 사용할 수 있다. (즉 하나의 state에서 다른 state로 변할 때의 그 state에서의 모양새를 변경할 수 있다.)</li>
-</ol>
-<h3 id="Example-1"><a href="#Example-1" class="headerlink" title="Example"></a>Example</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">500px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">500px</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: red;</span><br><span class="line">  <span class="attribute">transition</span>: transform <span class="number">0.5s</span> ease-in-out;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.box</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">skew</span>(<span class="number">30deg</span>, <span class="number">20deg</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>이렇게 되면 <code>.box</code>에 해당하는 element에 마우스를 올려놓았을 때 0.5s 초 안에 해당 element가<br>설정한 [<code>skew(...)</code>] 모습으로 변화한다.</p>
-<p>또한 <code>transform</code> 설정을 복수로 결합하여 사용할 수 있다.</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">transform</span>: <span class="selector-tag">rotate</span>(1<span class="selector-tag">turn</span>) <span class="selector-tag">scale</span>(0<span class="selector-class">.5</span>, 0<span class="selector-class">.5</span>);</span><br></pre></td></tr></table></figure>
-
-<h3 id="Reference-1"><a href="#Reference-1" class="headerlink" title="Reference"></a>Reference</h3><p><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transform" target="_blank" rel="noopener">CSS Transform Documentation</a></p>
-<h2 id="What-is-Animation"><a href="#What-is-Animation" class="headerlink" title="What is Animation?"></a>What is Animation?</h2><ul>
-<li><strong>Keyframe</strong> 은 CSS로 하여금 사용자가 animation을 생성했다는 것을 알려준다.</li>
-</ul>
-<blockquote>
-<p>&nbsp;<br><strong>First step</strong>: Default status<br><strong>Second step</strong>: The element that Something changes</p>
-</blockquote>
-<ul>
-<li>Animation status가 2개만 필요할 때는 <code>from</code> ~ <code>to</code>만 작성하면 된다.</li>
-<li>더 세부적인 각 단계별 status step를 작성하고 싶을 때는 <strong>0% ~ 100%</strong> 까지 작성하면 된다.</li>
-</ul>
-<h3 id="Example-2"><a href="#Example-2" class="headerlink" title="Example"></a>Example</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span>Text<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">70px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">70px</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: red;</span><br><span class="line">  <span class="attribute">animation</span>: <span class="number">1.5s</span> ScaleAndRotateSquare infinite ease-in-out;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@keyframes</span> ScaleAndRotateSquare &#123;</span><br><span class="line">  0% &#123;</span><br><span class="line">    <span class="attribute">transform</span>: none;</span><br><span class="line">  &#125;</span><br><span class="line">  50% &#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">rotate</span>(<span class="number">1turn</span>) <span class="built_in">scale</span>(<span class="number">0.5</span>, <span class="number">0.5</span>);</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  100% &#123;</span><br><span class="line">    <span class="attribute">transform</span>: none;</span><br><span class="line">    <span class="attribute">color</span>: blue;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="What-is-media-query"><a href="#What-is-media-query" class="headerlink" title="What is media query?"></a>What is media query?</h2><blockquote>
-<p>Media queries are conditions that let me change the CSS based on the size of the browser</p>
-</blockquote>
-<ol>
-<li><code>media query</code>는 사용자의 디스플레이 환경에 따른 CSS 설정을 바꾸어 줄 수 있는 기능이다.</li>
-<li>mobile - desktop 환경에 따른 디자인 변경을 가능하게 해준다.</li>
-<li>반응형 웹 디자인에 유용</li>
-</ol>
-<h3 id="Example-3"><a href="#Example-3" class="headerlink" title="Example"></a>Example</h3><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: green;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">min-width:</span> <span class="number">320px</span>) <span class="keyword">and</span> (<span class="attribute">max-width:</span> <span class="number">640px</span>) &#123;</span><br><span class="line">  <span class="selector-tag">body</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: blue;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
-        var options = {
-            selector: '.gallery-item'
-        };
-        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
-        }</script>]]></content>
-      <categories>
-        <category>CSS3</category>
-      </categories>
-      <tags>
-        <tag>CSS3</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Position property</title>
-    <url>/2020/01/14/2020-01-14-position%20property%20note/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<h2 id="static"><a href="#static" class="headerlink" title="static"></a>static</h2><blockquote>
-<p>Default position value</p>
-</blockquote>
-<p><code>Default</code>로 모든 박스는 포지션이 static이다. 이 뜻은<br>그 element를 거기 놓으면 거기 있을 것이다~라는 뜻이다.</p>
-<hr>
-<h2 id="fixed"><a href="#fixed" class="headerlink" title="fixed"></a>fixed</h2><blockquote>
-<p>Fixed stays with me while I scroll.</p>
-</blockquote>
-<p>포지션이 fixed 라면 화면 상에 표시되는 위치에 고정되어 스크롤해도 사라지지 않는다.<br>즉, element가 그 위치에 overwrap해서 고정된다.</p>
-<hr>
-<h2 id="absolute"><a href="#absolute" class="headerlink" title="absolute"></a>absolute</h2><ol>
-<li>Not stays with me while I scroll.</li>
-<li>Positioning relative to <code>relative</code>.</li>
-</ol>
-<hr>
-<ul>
-<li>absolute는 fixed와 비슷하다. 어디에든 붙일 수 있지만 스크롤한다고 보이지는 않는다.</li>
-<li>포지션을 absolute로 설정하고 설정 값을 주면 html 상에서 부모(father)에 해당하는 박스를 찾지 못할 수도 있다.</li>
-<li>따라서 relative 포지션이 없는 경우, absolute는 문서의 본무 body에 맞춰서 포지션을 잡게 된다.</li>
-</ul>
-<blockquote>
-<p>즉, <code>position: absolute;</code>가 설정되면 html 상에서 해당 element와 관계가 있는 (relative - 부모박스) element를 살펴보고 이에 상응해서 포지션이 결정된다. 이 경우 부모 박스가 상응하는 관계가 없어서 그냥 우리가 설정한 값대로 움직이게 됨으로 부모에 해당하는 박스를 찾지 못한다는 뜻이다.</p>
-</blockquote>
-<p>그렇기 때문에 만약 부모 박스가 없으면 child box는 문서 본문 body에 맞춰서 position을 잡을 것이다. 반대로 부모 박스에 <strong>position: relative;</strong> 를 설정하면 child box는 그에 상대해서 <code>absolute</code> 포지션을 잡을 것이다.</p>
-<hr>
-<h3 id="NOTE"><a href="#NOTE" class="headerlink" title="NOTE"></a>NOTE</h3><ol>
-<li>주의해야 할 점은 <code>absolute</code> 포지션을 부모 element에 상대적으로 사용하려면 부모 element에서 <code>relative</code> 포지션을 먼저 설정해줘야 한다.</li>
-<li>그게 설정되어야 차일즈 element는 부모 element 안에 위치할 수 있다.</li>
-</ol>
-<h2 id="position-html"><a href="#position-html" class="headerlink" title="position.html"></a><code>position.html</code></h2><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"ie=edge"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Position property<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">      /*</span><br><span class="line">            각 브라우저 마다 가지고 있는 Default 값을 상쇄하기 위해서</span><br><span class="line">            아래와 같은 설정을 해준다. </span><br><span class="line">        */</span><br><span class="line">      body,</span><br><span class="line">      html &#123;</span><br><span class="line">        height: 100%;</span><br><span class="line">        margin: 0;</span><br><span class="line">        padding: 0;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      body &#123;</span><br><span class="line">        height: 100%;</span><br><span class="line">        background-color: gray;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">      <span class="selector-class">.abs-box</span> &#123;</span></span><br><span class="line">        width: 400px;</span><br><span class="line">        height: 400px;</span><br><span class="line">        background-color: yellow;</span><br><span class="line">        position: relative;</span><br><span class="line">        top: 300px;</span><br><span class="line">        left: 50%;</span><br><span class="line">        transform: translate(-50%, -50%);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">      <span class="selector-class">.abs-child</span> &#123;</span></span><br><span class="line">        width: 100px;</span><br><span class="line">        height: 100px;</span><br><span class="line">        background-color: green;</span><br><span class="line">        position: absolute;</span><br><span class="line">        top: 10px;</span><br><span class="line">        left: 10px;</span><br><span class="line">      &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"abs-box"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"abs-child"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><a href="../../../../img/position_property.png" title="Image description" class="gallery-item"><img src="../../../../img/position_property.png" alt="Image description"></a></p>
-</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
-        var options = {
-            selector: '.gallery-item'
-        };
-        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
-        }</script>]]></content>
-      <categories>
-        <category>CSS3</category>
-      </categories>
-      <tags>
-        <tag>CSS3</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>What is Go language?</title>
     <url>/2020/01/14/2020-01-14-What%20is%20Go%20language/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<h1 id="What-is-Go-language"><a href="#What-is-Go-language" class="headerlink" title="What is Go language?"></a>What is Go language?</h1><blockquote>
@@ -1154,6 +1549,127 @@
       </categories>
       <tags>
         <tag>Go</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Position property</title>
+    <url>/2020/01/14/2020-01-14-position%20property%20note/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<h2 id="static"><a href="#static" class="headerlink" title="static"></a>static</h2><blockquote>
+<p>Default position value</p>
+</blockquote>
+<p><code>Default</code>로 모든 박스는 포지션이 static이다. 이 뜻은<br>그 element를 거기 놓으면 거기 있을 것이다~라는 뜻이다.</p>
+<hr>
+<h2 id="fixed"><a href="#fixed" class="headerlink" title="fixed"></a>fixed</h2><blockquote>
+<p>Fixed stays with me while I scroll.</p>
+</blockquote>
+<p>포지션이 fixed 라면 화면 상에 표시되는 위치에 고정되어 스크롤해도 사라지지 않는다.<br>즉, element가 그 위치에 overwrap해서 고정된다.</p>
+<hr>
+<h2 id="absolute"><a href="#absolute" class="headerlink" title="absolute"></a>absolute</h2><ol>
+<li>Not stays with me while I scroll.</li>
+<li>Positioning relative to <code>relative</code>.</li>
+</ol>
+<hr>
+<ul>
+<li>absolute는 fixed와 비슷하다. 어디에든 붙일 수 있지만 스크롤한다고 보이지는 않는다.</li>
+<li>포지션을 absolute로 설정하고 설정 값을 주면 html 상에서 부모(father)에 해당하는 박스를 찾지 못할 수도 있다.</li>
+<li>따라서 relative 포지션이 없는 경우, absolute는 문서의 본무 body에 맞춰서 포지션을 잡게 된다.</li>
+</ul>
+<blockquote>
+<p>즉, <code>position: absolute;</code>가 설정되면 html 상에서 해당 element와 관계가 있는 (relative - 부모박스) element를 살펴보고 이에 상응해서 포지션이 결정된다. 이 경우 부모 박스가 상응하는 관계가 없어서 그냥 우리가 설정한 값대로 움직이게 됨으로 부모에 해당하는 박스를 찾지 못한다는 뜻이다.</p>
+</blockquote>
+<p>그렇기 때문에 만약 부모 박스가 없으면 child box는 문서 본문 body에 맞춰서 position을 잡을 것이다. 반대로 부모 박스에 <strong>position: relative;</strong> 를 설정하면 child box는 그에 상대해서 <code>absolute</code> 포지션을 잡을 것이다.</p>
+<hr>
+<h3 id="NOTE"><a href="#NOTE" class="headerlink" title="NOTE"></a>NOTE</h3><ol>
+<li>주의해야 할 점은 <code>absolute</code> 포지션을 부모 element에 상대적으로 사용하려면 부모 element에서 <code>relative</code> 포지션을 먼저 설정해줘야 한다.</li>
+<li>그게 설정되어야 차일즈 element는 부모 element 안에 위치할 수 있다.</li>
+</ol>
+<h2 id="position-html"><a href="#position-html" class="headerlink" title="position.html"></a><code>position.html</code></h2><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"ie=edge"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Position property<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">      /*</span><br><span class="line">            각 브라우저 마다 가지고 있는 Default 값을 상쇄하기 위해서</span><br><span class="line">            아래와 같은 설정을 해준다. </span><br><span class="line">        */</span><br><span class="line">      body,</span><br><span class="line">      html &#123;</span><br><span class="line">        height: 100%;</span><br><span class="line">        margin: 0;</span><br><span class="line">        padding: 0;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      body &#123;</span><br><span class="line">        height: 100%;</span><br><span class="line">        background-color: gray;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">      <span class="selector-class">.abs-box</span> &#123;</span></span><br><span class="line">        width: 400px;</span><br><span class="line">        height: 400px;</span><br><span class="line">        background-color: yellow;</span><br><span class="line">        position: relative;</span><br><span class="line">        top: 300px;</span><br><span class="line">        left: 50%;</span><br><span class="line">        transform: translate(-50%, -50%);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">      <span class="selector-class">.abs-child</span> &#123;</span></span><br><span class="line">        width: 100px;</span><br><span class="line">        height: 100px;</span><br><span class="line">        background-color: green;</span><br><span class="line">        position: absolute;</span><br><span class="line">        top: 10px;</span><br><span class="line">        left: 10px;</span><br><span class="line">      &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"abs-box"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"abs-child"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><a href="../../../../img/position_property.png" title="Image description" class="gallery-item"><img src="../../../../img/position_property.png" alt="Image description"></a></p>
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>]]></content>
+      <categories>
+        <category>CSS3</category>
+      </categories>
+      <tags>
+        <tag>CSS3</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Advanced CSS</title>
+    <url>/2020/01/14/2020-01-14-Advanced%20CSS/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
+<h2 id="What-is-Transitions"><a href="#What-is-Transitions" class="headerlink" title="What is Transitions?"></a>What is Transitions?</h2><ol>
+<li>트랜지션(Transitions)이란 element의 이동 및 변경을 멋지게 보여주는 효과들이다.</li>
+<li>트랜지션은 focus, active, hover에서 효과적으로 사용된다.</li>
+<li>즉 <strong>transition</strong> 이란 element가 하나의 state에서 다른 state로 넘어갈 때의 효과를 말한다.</li>
+</ol>
+<h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span>Text<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: green;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">  <span class="attribute">transition</span>: background-color <span class="number">5s</span> ease-in-out;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>여기서,</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">transition</span>: <span class="selector-tag">background-color</span> 5<span class="selector-tag">s</span> <span class="selector-tag">ease-in-out</span>;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>위 코드의 의미는 배경색(background-color)를 <code>5s</code> 안에 <strong>ease-in-out</strong> 애니메이션 효과를 적용하여 바꾸라는 의미이다.</li>
+<li>또한 이렇게 <strong>transition</strong> 앞에 바꾸고 싶은 property 값을 명시해주면 그 속성 값만 특정 효과를 적용하여 바꾸는 것이며, 만약 1개 이상의 설정값을 바꾸고 싶다면 transition 앞에 <code>all</code>이라고 적으면 된다.</li>
+</ol>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">transition</span>: <span class="selector-tag">all</span> 5<span class="selector-tag">s</span> <span class="selector-tag">ease-in-out</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a href="https://developer.mozilla.org/en/docs/Web/CSS/transition" target="_blank" rel="noopener">Official Transition Documentation</a></p>
+<h2 id="What-is-Transformation"><a href="#What-is-Transformation" class="headerlink" title="What is Transformation?"></a>What is Transformation?</h2><ol>
+<li>트랜스포매이션(Transformation)은 html문서의 element들을 변경, 모습이 변하는 효과를 뜻한다.</li>
+<li>즉 transform이란 element의 모양새(shape)를 바꾸는 것이다.</li>
+<li><code>Transition</code>과 같이 합쳐서 사용할 수 있다. (즉 하나의 state에서 다른 state로 변할 때의 그 state에서의 모양새를 변경할 수 있다.)</li>
+</ol>
+<h3 id="Example-1"><a href="#Example-1" class="headerlink" title="Example"></a>Example</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">500px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">500px</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: red;</span><br><span class="line">  <span class="attribute">transition</span>: transform <span class="number">0.5s</span> ease-in-out;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.box</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">skew</span>(<span class="number">30deg</span>, <span class="number">20deg</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>이렇게 되면 <code>.box</code>에 해당하는 element에 마우스를 올려놓았을 때 0.5s 초 안에 해당 element가<br>설정한 [<code>skew(...)</code>] 모습으로 변화한다.</p>
+<p>또한 <code>transform</code> 설정을 복수로 결합하여 사용할 수 있다.</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">transform</span>: <span class="selector-tag">rotate</span>(1<span class="selector-tag">turn</span>) <span class="selector-tag">scale</span>(0<span class="selector-class">.5</span>, 0<span class="selector-class">.5</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="Reference-1"><a href="#Reference-1" class="headerlink" title="Reference"></a>Reference</h3><p><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transform" target="_blank" rel="noopener">CSS Transform Documentation</a></p>
+<h2 id="What-is-Animation"><a href="#What-is-Animation" class="headerlink" title="What is Animation?"></a>What is Animation?</h2><ul>
+<li><strong>Keyframe</strong> 은 CSS로 하여금 사용자가 animation을 생성했다는 것을 알려준다.</li>
+</ul>
+<blockquote>
+<p>&nbsp;<br><strong>First step</strong>: Default status<br><strong>Second step</strong>: The element that Something changes</p>
+</blockquote>
+<ul>
+<li>Animation status가 2개만 필요할 때는 <code>from</code> ~ <code>to</code>만 작성하면 된다.</li>
+<li>더 세부적인 각 단계별 status step를 작성하고 싶을 때는 <strong>0% ~ 100%</strong> 까지 작성하면 된다.</li>
+</ul>
+<h3 id="Example-2"><a href="#Example-2" class="headerlink" title="Example"></a>Example</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span>Text<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">70px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">70px</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: red;</span><br><span class="line">  <span class="attribute">animation</span>: <span class="number">1.5s</span> ScaleAndRotateSquare infinite ease-in-out;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@keyframes</span> ScaleAndRotateSquare &#123;</span><br><span class="line">  0% &#123;</span><br><span class="line">    <span class="attribute">transform</span>: none;</span><br><span class="line">  &#125;</span><br><span class="line">  50% &#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">rotate</span>(<span class="number">1turn</span>) <span class="built_in">scale</span>(<span class="number">0.5</span>, <span class="number">0.5</span>);</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  100% &#123;</span><br><span class="line">    <span class="attribute">transform</span>: none;</span><br><span class="line">    <span class="attribute">color</span>: blue;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="What-is-media-query"><a href="#What-is-media-query" class="headerlink" title="What is media query?"></a>What is media query?</h2><blockquote>
+<p>Media queries are conditions that let me change the CSS based on the size of the browser</p>
+</blockquote>
+<ol>
+<li><code>media query</code>는 사용자의 디스플레이 환경에 따른 CSS 설정을 바꾸어 줄 수 있는 기능이다.</li>
+<li>mobile - desktop 환경에 따른 디자인 변경을 가능하게 해준다.</li>
+<li>반응형 웹 디자인에 유용</li>
+</ol>
+<h3 id="Example-3"><a href="#Example-3" class="headerlink" title="Example"></a>Example</h3><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: green;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">min-width:</span> <span class="number">320px</span>) <span class="keyword">and</span> (<span class="attribute">max-width:</span> <span class="number">640px</span>) &#123;</span><br><span class="line">  <span class="selector-tag">body</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: blue;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>]]></content>
+      <categories>
+        <category>CSS3</category>
+      </categories>
+      <tags>
+        <tag>CSS3</tag>
       </tags>
   </entry>
   <entry>
@@ -1579,195 +2095,6 @@
         }</script>]]></content>
   </entry>
   <entry>
-    <title>C++ Primer Plus (6th Edition) [1/2]</title>
-    <url>/2019/12/20/2019-12-26-cplusplus-note1/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<p>This site was built using <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a>.</p>
-<hr>
-<h2 id="C와-C-언어의-역사와-철학"><a href="#C와-C-언어의-역사와-철학" class="headerlink" title="C와 C++언어의 역사와 철학"></a>C와 C++언어의 역사와 철학</h2><p>일반적으로 컴퓨터 언어는 데이터와 알고리즘이라는 두가지 개념을 다룬다.</p>
-<ol>
-<li>데이터(data): 프로그램이 사용하고 처리하는 정보</li>
-<li>알고리즘(algorithm): 프로그램이 데이터를 처리하는 방법</li>
-</ol>
-<h3 id="C의-프로그래밍-철학"><a href="#C의-프로그래밍-철학" class="headerlink" title="C의 프로그래밍 철학"></a>C의 프로그래밍 철학</h3><p>C언어는 <code>절차적(procedural)</code>언어이다.</p>
-<blockquote>
-<p>절차적이라는 말은 프로그래밍에서 데이터보다 알고리즘을 더 치중한다는 뜻이다.</p>
-</blockquote>
-<p>절차적 프로그래밍은 컴퓨터가 수행해야 할 동작들을 명확히 구분하고, 그 구분된 동작들을 프로그래밍 언어로 구현하는 것이다.</p>
-<p>원하는 결과를 얻기 위해 컴퓨터가 따라야 할 절차들을 규정해 놓은 것이 <code>절차적 프로그램</code>이다.</p>
-<h4 id="하향식-top-down-설계"><a href="#하향식-top-down-설계" class="headerlink" title="하향식(top-down)설계"></a>하향식(top-down)설계</h4><ol>
-<li>구조적 프로그래밍이 고수하는 또 하나의 철학</li>
-<li>규모가 큰 프로그램을 작고 쉽게 다룰 수 있는 최소한의 단위로 더욱 잘게 쪼개는 것</li>
-<li>전체 프로그램이 프로그래밍하기 쉬운 작은 모듈들의 집합이 될 때까지 계속해서 쪼개 나간다.</li>
-</ol>
-<hr>
-<h3 id="Cpp의-프로그래밍-철학"><a href="#Cpp의-프로그래밍-철학" class="headerlink" title="Cpp의 프로그래밍 철학"></a>Cpp의 프로그래밍 철학</h3><p>구조적 프로그래밍 철학이 프로그램의 간결성과 신뢰성, 유지 보수의 용이성에 많은 향상을 가져온 것은 사실이나, 규모가 큰 프로그래밍은 여전히 어려운 문제로 남아 있었다.</p>
-<p>이 문제의 해결책으로 객체 지향 프로그래밍 철학이 등장함.</p>
-<table>
-<thead>
-<tr>
-<th>절차적 프로그래밍</th>
-<th>객체 지향 프로그래밍</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>알고리즘 강조</td>
-<td>데이터 강조</td>
-</tr>
-</tbody></table>
-<p>객체 지향 프로그래밍은 해결해야 할 문제를 언어의 절차적 접근 방식에 억지로 끼워 맞추지 않고, 언어 자체를 해결해야 할 문제에 맞춘다.</p>
-<blockquote>
-<p>해결해야 할 문제의 특성에 맞게 데이터형 자체를 설계한다.</p>
-</blockquote>
-<h4 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h4><ol>
-<li>C++에서는 클래스(Class) 가 그와 같은 목적으로 설계되는 새로운 데이터형이다.</li>
-<li>객체(object) 는 그러한 클래스에 의해 만들어지는 특정한 데이터 구조이다.</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th>NOTE: OOP 환경에서는 모든 것을 <code>객체</code>로 표현하고, 이 객체의 형식을 갖는 변수를 <code>인스턴스(instance)</code>라고 한다.</th>
-</tr>
-</thead>
-</table>
-<h4 id="상향식-bottom-up-설계"><a href="#상향식-bottom-up-설계" class="headerlink" title="상향식(bottom-up)설계"></a>상향식(bottom-up)설계</h4><ol>
-<li>저수준의 클래스를 먼저 설계한 후에 고수준의 프로그램 설계로 진행하는 것</li>
-<li>객체 지향적으로 프로그램을 설계하라면 프로그램이 다루는 객체를 정확하게 서술하는 클래스를 먼저 설계해야 한다.</li>
-<li>각 클래스에 해당하는 객체를 만들면서 프로그램 설계를 진행하는 것을 상향식(bottom-up)프로그래밍이라 한다.</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th>NOTE: <code>설계</code> 와 <code>구현</code> 을 분리하는 것은 OOP의 중요한 특징 중 하나이다.</th>
-</tr>
-</thead>
-</table>
-<hr>
-<h3 id="이-외의-OOP의-장점"><a href="#이-외의-OOP의-장점" class="headerlink" title="이 외의 OOP의 장점"></a>이 외의 OOP의 장점</h3><p>OOP는 재활용이 가능한 소스 코드를 쉽게 작성할 수 있다.</p>
-<h4 id="정보-은닉"><a href="#정보-은닉" class="headerlink" title="정보 은닉"></a>정보 은닉</h4><p>정보를 은닉할 수 있기 때문에 비인가된 접근으로부터 데이터를 안전하게 보호할 수 있음.</p>
-<h4 id="다형성-polymorphism"><a href="#다형성-polymorphism" class="headerlink" title="다형성(polymorphism)"></a>다형성(polymorphism)</h4><p>다형성(polymorphism)을 이용하여 이름이 같은 연산자와 함수를 여러 벌 정의할 수 있기 때문에 상황에 따라 적당한 연산자나 함수를 프로그램이 스스로 선택하게 할 수 있다.</p>
-<h4 id="상속-inheritance"><a href="#상속-inheritance" class="headerlink" title="상속(inheritance)"></a>상속(inheritance)</h4><p>상속을 이용하여 하나의 클래스로부터 새로운 클래스를 유도하는 등 절차적 프로그래밍과는 완전히 다른 접근 방식을 취할 수 있음.</p>
-<hr>
-<h2 id="Cpp와-일반화-프로그래밍"><a href="#Cpp와-일반화-프로그래밍" class="headerlink" title="Cpp와 일반화 프로그래밍"></a>Cpp와 일반화 프로그래밍</h2><ol>
-<li>일반화 프로그래밍은 C++가 내걸고 있는 또 하나의 프로그래밍 철학이다.</li>
-<li>일반화 프로그래밍과 OOP는 소스 코드의 재활용이라는 목표와, 포괄 개념의 추상화 기술을 서로 공유한다.</li>
-<li>OOP는 데이터 를 강조하는 반면, 일반화 프로그래밍은 알고리즘 측면을 강조한다.</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th>객체 지향 프로그래밍</th>
-<th>일반화 프로그래밍</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong><code>데이터</code></strong> 를 강조</td>
-<td><strong><code>알고리즘</code></strong> 를 강조</td>
-</tr>
-<tr>
-<td>큰 프로젝트 진행시 좋음</td>
-<td>데이터를 정렬(sort)하거나, 리스트를 병합(marge)하는 등의 일반적인 작업을 할 때 편리하다.</td>
-</tr>
-</tbody></table>
-<blockquote>
-<p>여기서 일반화(generic)이라는 말은 데이터형과 무관한 코드를 작성한다는 것을 의미한다.</p>
-</blockquote>
-<hr>
-<h2 id="C-전처리기와-iostream-파일"><a href="#C-전처리기와-iostream-파일" class="headerlink" title="C++ 전처리기와 iostream 파일"></a>C++ 전처리기와 <code>iostream</code> 파일</h2><p>C와 마찬가지로 C++도 전처리기(preprocessor)를 사용한다.</p>
-<blockquote>
-<p>전처리기는 컴파일을 하기 전에 소스 파일에 대해 어떤 처리를 수행하는 프로그램이다.</p>
-</blockquote>
-<p>전처리기는 소스 파일을 컴파일할 때 자동으로 생성된다.<br>전처리 지시자(directive)는 이름이 <code>#</code>으로 시작하는 지시자이다.</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt; //전처리 지시자</span></span></span><br></pre></td></tr></table></figure>
-
-<p><code>iostream</code>파일에는 C++의 몇 가지 입출력 기능이 정의되어 있다.<br>이 지시자는 전처리기에게 <code>iostream</code>파일의 내용을 프로그램에 추가하라고 지시한다.<br>컴파일되기 전에 소스 코드에 텍스트를 추가하거나 텍스트를 대체하는 것이 전처리기가 수행하는 기본적인 역할이다.</p>
-<hr>
-<h2 id="이름-공간-namespace"><a href="#이름-공간-namespace" class="headerlink" title="이름 공간(namespace)"></a>이름 공간(namespace)</h2><p><strong>이름 공간</strong>은 C++의 새로운 기능이다.<br>이름 공간은 프로그램을 작성할 때 여러 소프트웨어 개발업체들이 제공하는 코드를 사용할 수 있도록 도와준다.</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">Microflop::wanda(<span class="string">"go dancing?"</span>); <span class="comment">//Microflop 이름 공간의 버전</span></span><br><span class="line">Piscine::wanda(<span class="string">"a fish named Desire"</span>); <span class="comment">//Piscine 이름 공간의 버전</span></span><br></pre></td></tr></table></figure>
-
-<p>이러한 방식에 의해, C++ 컴파일러의 표준 구성 요소인 클래스, 함수, 변수는 <code>std</code>라는 이름 공간안에 담겨진다.<br>이와 같은 일은 <code>.h</code> 확장자가 없는 헤더 파일들 안에서 일어난다.</p>
-<h3 id="using-지시자"><a href="#using-지시자" class="headerlink" title="using 지시자"></a>using 지시자</h3><p>다음과 같은 행을 소스 코드에 넣으면 <code>std::</code>접두어를 붙이지 않고도 std 이름 공간에 정의되어 있는 이름들을 사용할 수 있다.</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br></pre></td></tr></table></figure>
-
-<p><code>using</code> 지시자는 std 이름 공간에 들어있는 모든 이름을 사용할 수 있게 해 준다.</p>
-<hr>
-<h2 id="C-소스-코드-스타일"><a href="#C-소스-코드-스타일" class="headerlink" title="C++ 소스 코드 스타일"></a>C++ 소스 코드 스타일</h2><ol>
-<li>C++ 프로그램은 함수들의 집합이다.</li>
-<li>이름 공간(namespace)은 프로그램을 작성할 때 여러 소프트웨어 개발업체들이 제공하는 코드를 사용할 수 있도록 도와준다.</li>
-</ol>
-<h2 id="cin과-cout클래스-맛보기"><a href="#cin과-cout클래스-맛보기" class="headerlink" title="cin과 cout클래스 맛보기"></a>cin과 cout클래스 맛보기</h2><p><code>클래스</code>는 사용자가 정의하는 자료형이다. 클래스를 정의하려면, 클래스로 표현 할 수 있는 정보의 종류가 무엇이고, 그것으로 수행할 수 있는 동작은 무엇인지 서술해야 한다.</p>
-<p>클래스와 객체의 관계는 데이터형과 변수의 관계와 같다.</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>클래스</th>
-<th>객체</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>정의</td>
-<td>데이터 형식과 그것이 사용되는 방법을 서술하는 것</td>
-<td>클래스에 서술된 형식에 따라 실제로 생성되는 구체물</td>
-</tr>
-<tr>
-<td>예시</td>
-<td>유명 배우 (추상화적 개념)</td>
-<td>제임스 딘 (클래스가 구체화된 객체)</td>
-</tr>
-</tbody></table>
-<p>이러한 비유를 더 확장시킨다면, <code>배우</code>라는 클래스에는 그 배우의 활동까지도 포함시킬 수 있다.<br>예를 들어, 대사 외우기, 반항아 이미지 표현하기 등등이 <code>배우</code>클래스의 동작이 될 수 있다.</p>
-<table>
-<thead>
-<tr>
-<th>NOTE: <strong>클래스</strong>는 데이터 형식의 모든 속성을 서술한 것이고, <strong>객체</strong>는 그 서술에 따라 실제로 생성된 구체물이다.</th>
-</tr>
-</thead>
-</table>
-<hr>
-<p>이제 <code>cout</code>을 살펴보자면,</p>
-<blockquote>
-<p><strong>iostream</strong></p>
-</blockquote>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">...</span><br><span class="line">__PURE_APPDOMAIN_GLOBAL <span class="keyword">extern</span> _CRTDATA2_IMPORT istream <span class="built_in">cin</span>, *_Ptr_cin;</span><br><span class="line">__PURE_APPDOMAIN_GLOBAL <span class="keyword">extern</span> _CRTDATA2_IMPORT ostream <span class="built_in">cout</span>, *_Ptr_cout;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-<p><strong>cout</strong>은 ostream 클래스의 속성을 가지고 생성된 객체이다.<br>ostream클래스는 iostream 파일에 정의되어 있다.</p>
-<ul>
-<li><p><strong>ostream</strong> 클래스 정의에는 ostream 객체가 표현할 수 있는 데이터 형식이나, 그 데이터 형식을 가지고 수행할 수 있는 동작, 예를 들어 문자열을 출력 스트림에 삽입하는 동작 등을 정의하고 있다.</p>
-</li>
-<li><p>마찬가지로 <strong>cin</strong>은 istream 클래스의 속성을 가지고 생성된 객체이며, 이것 역시 iostream 파일에 정의되어 있다.</p>
-</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>NOTE: 주의해야 할 점은 <strong>cin</strong>은 C언어의 <code>scanf(&quot;%s&quot;, str);</code>와 같이 문자열을 공백문자로 구분하기 때문에 문자열 추출 시 항상 구문(phrase)나 전체 문장(sentence)가 아닌 하나의 단어(word)를 추출한다.</th>
-</tr>
-</thead>
-</table>
-<p>따라서 cin 으로부터 전체 문장을 받기 위해서는 <code>getline</code>함수를 사용한다.</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">//C++ 11</span></span><br><span class="line"><span class="function">istream&amp; <span class="title">getline</span> <span class="params">(istream&amp; is, <span class="built_in">string</span>&amp; str, <span class="keyword">char</span> delim)</span></span>;</span><br><span class="line"><span class="function">istream&amp; <span class="title">getline</span> <span class="params">(istream&amp;&amp; is, <span class="built_in">string</span>&amp; str, <span class="keyword">char</span> delim)</span></span>;</span><br><span class="line"><span class="function">istream&amp; <span class="title">getline</span> <span class="params">(istream&amp; is, <span class="built_in">string</span>&amp; str)</span></span>;</span><br><span class="line"><span class="function">istream&amp; <span class="title">getline</span> <span class="params">(istream&amp;&amp; is, <span class="built_in">string</span>&amp; str)</span></span>;</span><br><span class="line"></span><br><span class="line">/_</span><br><span class="line">is: istream object from which characters are extracted.</span><br><span class="line">str: <span class="built_in">string</span> object where the extracted line is stored.</span><br><span class="line">The contents in the string before the call (if any) are discarded and replaced by the extracted line.</span><br><span class="line"></span><br><span class="line">Return value: The same as parameter is.</span><br><span class="line">_/</span><br><span class="line"></span><br><span class="line"><span class="comment">//Example</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// extract to string</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">string</span> name;</span><br><span class="line"></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Please, enter your full name: "</span>;</span><br><span class="line"><span class="built_in">std</span>::getline (<span class="built_in">std</span>::<span class="built_in">cin</span>, name);</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Hello, "</span> &lt;&lt; name &lt;&lt; <span class="string">"!\n"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ol>
-<li>Get line from stream into string.</li>
-<li>Extract characters from <code>is</code> and stores them into <code>str</code> until the delimitation character <code>delim</code> is found. (or the new line, <code>\n</code>).</li>
-</ol>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
-<li><a href="https://isocpp.org/" target="_blank" rel="noopener">https://isocpp.org/</a></li>
-</ul>
-</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
-        var options = {
-            selector: '.gallery-item'
-        };
-        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
-        }</script>]]></content>
-      <categories>
-        <category>C++</category>
-      </categories>
-      <tags>
-        <tag>C++</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>C++ Primer Plus (6th Edition) [2/2]</title>
     <url>/2019/12/20/2019-12-26-cplusplus-note2/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
@@ -2111,6 +2438,195 @@
 <li><a href="https://araikuma.tistory.com/599" target="_blank" rel="noopener">프로그램 개발 지식 공유</a></a></li>
 <li><a href=""https://m.blog.naver.com/PostView.nhn?blogId=assortrockp&logNo=220764067554&proxyReferer=https%3A%2F%2Fwww.google.com%2F"">c++ 및 api 언어설정에 대하여 알아보자.</a></li>
 <li><a href="https://m.blog.naver.com/PostView.nhn?blogId=tipsware&logNo=221235708158&proxyReferer=https%3A%2F%2Fwww.google.com%2F" target="_blank" rel="noopener">멀티 바이트 문자와 지역(국가)코드</a></li>
+</ul>
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>]]></content>
+      <categories>
+        <category>C++</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C++ Primer Plus (6th Edition) [1/2]</title>
+    <url>/2019/12/20/2019-12-26-cplusplus-note1/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<p>This site was built using <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a>.</p>
+<hr>
+<h2 id="C와-C-언어의-역사와-철학"><a href="#C와-C-언어의-역사와-철학" class="headerlink" title="C와 C++언어의 역사와 철학"></a>C와 C++언어의 역사와 철학</h2><p>일반적으로 컴퓨터 언어는 데이터와 알고리즘이라는 두가지 개념을 다룬다.</p>
+<ol>
+<li>데이터(data): 프로그램이 사용하고 처리하는 정보</li>
+<li>알고리즘(algorithm): 프로그램이 데이터를 처리하는 방법</li>
+</ol>
+<h3 id="C의-프로그래밍-철학"><a href="#C의-프로그래밍-철학" class="headerlink" title="C의 프로그래밍 철학"></a>C의 프로그래밍 철학</h3><p>C언어는 <code>절차적(procedural)</code>언어이다.</p>
+<blockquote>
+<p>절차적이라는 말은 프로그래밍에서 데이터보다 알고리즘을 더 치중한다는 뜻이다.</p>
+</blockquote>
+<p>절차적 프로그래밍은 컴퓨터가 수행해야 할 동작들을 명확히 구분하고, 그 구분된 동작들을 프로그래밍 언어로 구현하는 것이다.</p>
+<p>원하는 결과를 얻기 위해 컴퓨터가 따라야 할 절차들을 규정해 놓은 것이 <code>절차적 프로그램</code>이다.</p>
+<h4 id="하향식-top-down-설계"><a href="#하향식-top-down-설계" class="headerlink" title="하향식(top-down)설계"></a>하향식(top-down)설계</h4><ol>
+<li>구조적 프로그래밍이 고수하는 또 하나의 철학</li>
+<li>규모가 큰 프로그램을 작고 쉽게 다룰 수 있는 최소한의 단위로 더욱 잘게 쪼개는 것</li>
+<li>전체 프로그램이 프로그래밍하기 쉬운 작은 모듈들의 집합이 될 때까지 계속해서 쪼개 나간다.</li>
+</ol>
+<hr>
+<h3 id="Cpp의-프로그래밍-철학"><a href="#Cpp의-프로그래밍-철학" class="headerlink" title="Cpp의 프로그래밍 철학"></a>Cpp의 프로그래밍 철학</h3><p>구조적 프로그래밍 철학이 프로그램의 간결성과 신뢰성, 유지 보수의 용이성에 많은 향상을 가져온 것은 사실이나, 규모가 큰 프로그래밍은 여전히 어려운 문제로 남아 있었다.</p>
+<p>이 문제의 해결책으로 객체 지향 프로그래밍 철학이 등장함.</p>
+<table>
+<thead>
+<tr>
+<th>절차적 프로그래밍</th>
+<th>객체 지향 프로그래밍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>알고리즘 강조</td>
+<td>데이터 강조</td>
+</tr>
+</tbody></table>
+<p>객체 지향 프로그래밍은 해결해야 할 문제를 언어의 절차적 접근 방식에 억지로 끼워 맞추지 않고, 언어 자체를 해결해야 할 문제에 맞춘다.</p>
+<blockquote>
+<p>해결해야 할 문제의 특성에 맞게 데이터형 자체를 설계한다.</p>
+</blockquote>
+<h4 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h4><ol>
+<li>C++에서는 클래스(Class) 가 그와 같은 목적으로 설계되는 새로운 데이터형이다.</li>
+<li>객체(object) 는 그러한 클래스에 의해 만들어지는 특정한 데이터 구조이다.</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>NOTE: OOP 환경에서는 모든 것을 <code>객체</code>로 표현하고, 이 객체의 형식을 갖는 변수를 <code>인스턴스(instance)</code>라고 한다.</th>
+</tr>
+</thead>
+</table>
+<h4 id="상향식-bottom-up-설계"><a href="#상향식-bottom-up-설계" class="headerlink" title="상향식(bottom-up)설계"></a>상향식(bottom-up)설계</h4><ol>
+<li>저수준의 클래스를 먼저 설계한 후에 고수준의 프로그램 설계로 진행하는 것</li>
+<li>객체 지향적으로 프로그램을 설계하라면 프로그램이 다루는 객체를 정확하게 서술하는 클래스를 먼저 설계해야 한다.</li>
+<li>각 클래스에 해당하는 객체를 만들면서 프로그램 설계를 진행하는 것을 상향식(bottom-up)프로그래밍이라 한다.</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>NOTE: <code>설계</code> 와 <code>구현</code> 을 분리하는 것은 OOP의 중요한 특징 중 하나이다.</th>
+</tr>
+</thead>
+</table>
+<hr>
+<h3 id="이-외의-OOP의-장점"><a href="#이-외의-OOP의-장점" class="headerlink" title="이 외의 OOP의 장점"></a>이 외의 OOP의 장점</h3><p>OOP는 재활용이 가능한 소스 코드를 쉽게 작성할 수 있다.</p>
+<h4 id="정보-은닉"><a href="#정보-은닉" class="headerlink" title="정보 은닉"></a>정보 은닉</h4><p>정보를 은닉할 수 있기 때문에 비인가된 접근으로부터 데이터를 안전하게 보호할 수 있음.</p>
+<h4 id="다형성-polymorphism"><a href="#다형성-polymorphism" class="headerlink" title="다형성(polymorphism)"></a>다형성(polymorphism)</h4><p>다형성(polymorphism)을 이용하여 이름이 같은 연산자와 함수를 여러 벌 정의할 수 있기 때문에 상황에 따라 적당한 연산자나 함수를 프로그램이 스스로 선택하게 할 수 있다.</p>
+<h4 id="상속-inheritance"><a href="#상속-inheritance" class="headerlink" title="상속(inheritance)"></a>상속(inheritance)</h4><p>상속을 이용하여 하나의 클래스로부터 새로운 클래스를 유도하는 등 절차적 프로그래밍과는 완전히 다른 접근 방식을 취할 수 있음.</p>
+<hr>
+<h2 id="Cpp와-일반화-프로그래밍"><a href="#Cpp와-일반화-프로그래밍" class="headerlink" title="Cpp와 일반화 프로그래밍"></a>Cpp와 일반화 프로그래밍</h2><ol>
+<li>일반화 프로그래밍은 C++가 내걸고 있는 또 하나의 프로그래밍 철학이다.</li>
+<li>일반화 프로그래밍과 OOP는 소스 코드의 재활용이라는 목표와, 포괄 개념의 추상화 기술을 서로 공유한다.</li>
+<li>OOP는 데이터 를 강조하는 반면, 일반화 프로그래밍은 알고리즘 측면을 강조한다.</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>객체 지향 프로그래밍</th>
+<th>일반화 프로그래밍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong><code>데이터</code></strong> 를 강조</td>
+<td><strong><code>알고리즘</code></strong> 를 강조</td>
+</tr>
+<tr>
+<td>큰 프로젝트 진행시 좋음</td>
+<td>데이터를 정렬(sort)하거나, 리스트를 병합(marge)하는 등의 일반적인 작업을 할 때 편리하다.</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>여기서 일반화(generic)이라는 말은 데이터형과 무관한 코드를 작성한다는 것을 의미한다.</p>
+</blockquote>
+<hr>
+<h2 id="C-전처리기와-iostream-파일"><a href="#C-전처리기와-iostream-파일" class="headerlink" title="C++ 전처리기와 iostream 파일"></a>C++ 전처리기와 <code>iostream</code> 파일</h2><p>C와 마찬가지로 C++도 전처리기(preprocessor)를 사용한다.</p>
+<blockquote>
+<p>전처리기는 컴파일을 하기 전에 소스 파일에 대해 어떤 처리를 수행하는 프로그램이다.</p>
+</blockquote>
+<p>전처리기는 소스 파일을 컴파일할 때 자동으로 생성된다.<br>전처리 지시자(directive)는 이름이 <code>#</code>으로 시작하는 지시자이다.</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt; //전처리 지시자</span></span></span><br></pre></td></tr></table></figure>
+
+<p><code>iostream</code>파일에는 C++의 몇 가지 입출력 기능이 정의되어 있다.<br>이 지시자는 전처리기에게 <code>iostream</code>파일의 내용을 프로그램에 추가하라고 지시한다.<br>컴파일되기 전에 소스 코드에 텍스트를 추가하거나 텍스트를 대체하는 것이 전처리기가 수행하는 기본적인 역할이다.</p>
+<hr>
+<h2 id="이름-공간-namespace"><a href="#이름-공간-namespace" class="headerlink" title="이름 공간(namespace)"></a>이름 공간(namespace)</h2><p><strong>이름 공간</strong>은 C++의 새로운 기능이다.<br>이름 공간은 프로그램을 작성할 때 여러 소프트웨어 개발업체들이 제공하는 코드를 사용할 수 있도록 도와준다.</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">Microflop::wanda(<span class="string">"go dancing?"</span>); <span class="comment">//Microflop 이름 공간의 버전</span></span><br><span class="line">Piscine::wanda(<span class="string">"a fish named Desire"</span>); <span class="comment">//Piscine 이름 공간의 버전</span></span><br></pre></td></tr></table></figure>
+
+<p>이러한 방식에 의해, C++ 컴파일러의 표준 구성 요소인 클래스, 함수, 변수는 <code>std</code>라는 이름 공간안에 담겨진다.<br>이와 같은 일은 <code>.h</code> 확장자가 없는 헤더 파일들 안에서 일어난다.</p>
+<h3 id="using-지시자"><a href="#using-지시자" class="headerlink" title="using 지시자"></a>using 지시자</h3><p>다음과 같은 행을 소스 코드에 넣으면 <code>std::</code>접두어를 붙이지 않고도 std 이름 공간에 정의되어 있는 이름들을 사용할 수 있다.</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br></pre></td></tr></table></figure>
+
+<p><code>using</code> 지시자는 std 이름 공간에 들어있는 모든 이름을 사용할 수 있게 해 준다.</p>
+<hr>
+<h2 id="C-소스-코드-스타일"><a href="#C-소스-코드-스타일" class="headerlink" title="C++ 소스 코드 스타일"></a>C++ 소스 코드 스타일</h2><ol>
+<li>C++ 프로그램은 함수들의 집합이다.</li>
+<li>이름 공간(namespace)은 프로그램을 작성할 때 여러 소프트웨어 개발업체들이 제공하는 코드를 사용할 수 있도록 도와준다.</li>
+</ol>
+<h2 id="cin과-cout클래스-맛보기"><a href="#cin과-cout클래스-맛보기" class="headerlink" title="cin과 cout클래스 맛보기"></a>cin과 cout클래스 맛보기</h2><p><code>클래스</code>는 사용자가 정의하는 자료형이다. 클래스를 정의하려면, 클래스로 표현 할 수 있는 정보의 종류가 무엇이고, 그것으로 수행할 수 있는 동작은 무엇인지 서술해야 한다.</p>
+<p>클래스와 객체의 관계는 데이터형과 변수의 관계와 같다.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>클래스</th>
+<th>객체</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>정의</td>
+<td>데이터 형식과 그것이 사용되는 방법을 서술하는 것</td>
+<td>클래스에 서술된 형식에 따라 실제로 생성되는 구체물</td>
+</tr>
+<tr>
+<td>예시</td>
+<td>유명 배우 (추상화적 개념)</td>
+<td>제임스 딘 (클래스가 구체화된 객체)</td>
+</tr>
+</tbody></table>
+<p>이러한 비유를 더 확장시킨다면, <code>배우</code>라는 클래스에는 그 배우의 활동까지도 포함시킬 수 있다.<br>예를 들어, 대사 외우기, 반항아 이미지 표현하기 등등이 <code>배우</code>클래스의 동작이 될 수 있다.</p>
+<table>
+<thead>
+<tr>
+<th>NOTE: <strong>클래스</strong>는 데이터 형식의 모든 속성을 서술한 것이고, <strong>객체</strong>는 그 서술에 따라 실제로 생성된 구체물이다.</th>
+</tr>
+</thead>
+</table>
+<hr>
+<p>이제 <code>cout</code>을 살펴보자면,</p>
+<blockquote>
+<p><strong>iostream</strong></p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">...</span><br><span class="line">__PURE_APPDOMAIN_GLOBAL <span class="keyword">extern</span> _CRTDATA2_IMPORT istream <span class="built_in">cin</span>, *_Ptr_cin;</span><br><span class="line">__PURE_APPDOMAIN_GLOBAL <span class="keyword">extern</span> _CRTDATA2_IMPORT ostream <span class="built_in">cout</span>, *_Ptr_cout;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p><strong>cout</strong>은 ostream 클래스의 속성을 가지고 생성된 객체이다.<br>ostream클래스는 iostream 파일에 정의되어 있다.</p>
+<ul>
+<li><p><strong>ostream</strong> 클래스 정의에는 ostream 객체가 표현할 수 있는 데이터 형식이나, 그 데이터 형식을 가지고 수행할 수 있는 동작, 예를 들어 문자열을 출력 스트림에 삽입하는 동작 등을 정의하고 있다.</p>
+</li>
+<li><p>마찬가지로 <strong>cin</strong>은 istream 클래스의 속성을 가지고 생성된 객체이며, 이것 역시 iostream 파일에 정의되어 있다.</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>NOTE: 주의해야 할 점은 <strong>cin</strong>은 C언어의 <code>scanf(&quot;%s&quot;, str);</code>와 같이 문자열을 공백문자로 구분하기 때문에 문자열 추출 시 항상 구문(phrase)나 전체 문장(sentence)가 아닌 하나의 단어(word)를 추출한다.</th>
+</tr>
+</thead>
+</table>
+<p>따라서 cin 으로부터 전체 문장을 받기 위해서는 <code>getline</code>함수를 사용한다.</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">//C++ 11</span></span><br><span class="line"><span class="function">istream&amp; <span class="title">getline</span> <span class="params">(istream&amp; is, <span class="built_in">string</span>&amp; str, <span class="keyword">char</span> delim)</span></span>;</span><br><span class="line"><span class="function">istream&amp; <span class="title">getline</span> <span class="params">(istream&amp;&amp; is, <span class="built_in">string</span>&amp; str, <span class="keyword">char</span> delim)</span></span>;</span><br><span class="line"><span class="function">istream&amp; <span class="title">getline</span> <span class="params">(istream&amp; is, <span class="built_in">string</span>&amp; str)</span></span>;</span><br><span class="line"><span class="function">istream&amp; <span class="title">getline</span> <span class="params">(istream&amp;&amp; is, <span class="built_in">string</span>&amp; str)</span></span>;</span><br><span class="line"></span><br><span class="line">/_</span><br><span class="line">is: istream object from which characters are extracted.</span><br><span class="line">str: <span class="built_in">string</span> object where the extracted line is stored.</span><br><span class="line">The contents in the string before the call (if any) are discarded and replaced by the extracted line.</span><br><span class="line"></span><br><span class="line">Return value: The same as parameter is.</span><br><span class="line">_/</span><br><span class="line"></span><br><span class="line"><span class="comment">//Example</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// extract to string</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">string</span> name;</span><br><span class="line"></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Please, enter your full name: "</span>;</span><br><span class="line"><span class="built_in">std</span>::getline (<span class="built_in">std</span>::<span class="built_in">cin</span>, name);</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Hello, "</span> &lt;&lt; name &lt;&lt; <span class="string">"!\n"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>Get line from stream into string.</li>
+<li>Extract characters from <code>is</code> and stores them into <code>str</code> until the delimitation character <code>delim</code> is found. (or the new line, <code>\n</code>).</li>
+</ol>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><a href="https://isocpp.org/" target="_blank" rel="noopener">https://isocpp.org/</a></li>
 </ul>
 </div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
         var options = {

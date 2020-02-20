@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap/css?family=NanumSquare:300,300italic,400,400italic,700,700italic|Inconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-simple.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://sokhyg9016.github.io').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","width":320,"display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Csci 343 Fundamentals of Data Science Lecture 5">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Csci 343 - Descriptive Statistics">
+<meta property="og:url" content="http://sokhyg9016.github.io/2020/02/19/2020-02-19-csci343-lec5/index.html">
+<meta property="og:site_name" content="Git Page">
+<meta property="og:description" content="Csci 343 Fundamentals of Data Science Lecture 5">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://lh6.googleusercontent.com/dGLNLDXsDQH-vbf8u8ADMUeIE-tGuN9vetm5TR0H-6mRHxuwzdl_IsLPHRRa4aYGNoqGiAyO1C24ieuS3S3UaCx7pAkXdlZKCQ9fg-9lQZTZIvIHNgOQBDZsVfUcGtT2J1pu1MdB3m2IcAFs">
+<meta property="og:image" content="http://sokhyg9016.github.io/img/csci343-lec5/random_variable.jpg">
+<meta property="og:image" content="http://sokhyg9016.github.io/img/csci343-lec5/random_variable2.jpg">
+<meta property="og:image" content="http://sokhyg9016.github.io/img/csci343-lec5/random_variable3.jpg">
+<meta property="og:image" content="https://ww.namu.la/s/8a577c27dc206b771919ed57c079106a8b5b3d5e7b71b061bbe1e0b2a1589e045fe1515556cfff97e673aab42a897a62508018a15a09bfc9fc2ad850f571346d776c8fdb7b6a81f28f0ec8963bbe605b16cfad49c902f6c95a308b5c16c18a39">
+<meta property="article:published_time" content="2020-02-19T06:00:00.000Z">
+<meta property="article:modified_time" content="2020-02-19T06:00:00.000Z">
+<meta property="article:author" content="LSH">
+<meta property="article:tag" content="Olemiss">
+<meta property="article:tag" content="CSCI 343">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lh6.googleusercontent.com/dGLNLDXsDQH-vbf8u8ADMUeIE-tGuN9vetm5TR0H-6mRHxuwzdl_IsLPHRRa4aYGNoqGiAyO1C24ieuS3S3UaCx7pAkXdlZKCQ9fg-9lQZTZIvIHNgOQBDZsVfUcGtT2J1pu1MdB3m2IcAFs">
+
+<link rel="canonical" href="http://sokhyg9016.github.io/2020/02/19/2020-02-19-csci343-lec5/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Csci 343 - Descriptive Statistics | Git Page</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Git Page</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">AI · Data Structure · Algorithm · Game Development</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>홈</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>태그</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>카테고리</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>아카이브</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-fw fa-calendar"></i>Schedule</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>검색
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="ko">
+    <link itemprop="mainEntityOfPage" href="http://sokhyg9016.github.io/2020/02/19/2020-02-19-csci343-lec5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/avatar.png">
+      <meta itemprop="name" content="LSH">
+      <meta itemprop="description" content="Github + 뻘글 블로그.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Git Page">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Csci 343 - Descriptive Statistics
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">작성일</span>
+
+              <time title="Post created: 2020-02-19 00:00:00" itemprop="dateCreated datePublished" datetime="2020-02-19T00:00:00-06:00">2020-02-19</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Data-Science/" itemprop="url" rel="index">
+                    <span itemprop="name">Data Science</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Data-Science/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2020/02/19/2020-02-19-csci343-lec5/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/02/19/2020-02-19-csci343-lec5/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">Csci 343 Fundamentals of Data Science Lecture 5</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
+<h2 id="Samples-and-Population"><a href="#Samples-and-Population" class="headerlink" title="Samples and Population"></a>Samples and Population</h2><ol>
+<li><strong>Statistics</strong> are usually meant to tell us something about a group or set of things (could be groups of people, cars on an aseembly line, or produce at a grocery store).</li>
+<li>We can’t measure EVERYONE, so we usually take a <ins>sample</ins> from the whole.</li>
+<li>we call this our <strong>sample population</strong> or just <strong>population</strong>.</li>
+<li>Populations are made up of <ins>samples</ins>. Samples are individual measurements within a population.</li>
+</ol>
+<hr>
+<p><strong>통계</strong>(statistics)란 데이터를 이해하는 바탕이 되는 수리적 기법이다.</p>
+<p>만약 데이터의 수가 적다면 데이터 자체를 보여 주는 것이 가장 좋은 방법일 수 있다. 하지만 데이터가 많다면 데이터를 다루는 것도 불편하고 이해하기도 힘들 것이다. 이럴 때 통계를 사용하면 데이터를 정제해서 중요한 정보만 전달해 줄 수 있다.</p>
+<blockquote>
+<p>통계학(tatistics)은 산술적 방법을 기초로 하여, 주로 다량의 데이터를 관찰하고 정리 및 분석하는 방법을 연구하는 수학의 한 분야이다.</p>
+</blockquote>
+<ul>
+<li><a href="https://ko.wikipedia.org/wiki/%ED%86%B5%EA%B3%84%ED%95%99" target="_blank" rel="noopener">[Wiki]통계학</a></li>
+</ul>
+<hr>
+<p>통계학에서는 주어진 데이터를 표본(sample), 데이터가 대표하는 현상을 모집단(population)이라고 하며, 표본을 바탕으로 모집단의 특성에 대한 결론을 유도하는 것을 통계적 추론(statistical inference)이라고 부른다. 즉 통계적 추론은 통계 이론을 바탕으로 한 현상의 일반화하고 하겠다. 현상에 대한 관찰에서 일반화할 수 있는 지식을 이끌어내는 것은 과학의 본령이니, 통계적 추론은 데이터 ‘과학’의 본질과도 맞닿아 있다고 하겠다.</p>
+<p><a href="https://lh6.googleusercontent.com/dGLNLDXsDQH-vbf8u8ADMUeIE-tGuN9vetm5TR0H-6mRHxuwzdl_IsLPHRRa4aYGNoqGiAyO1C24ieuS3S3UaCx7pAkXdlZKCQ9fg-9lQZTZIvIHNgOQBDZsVfUcGtT2J1pu1MdB3m2IcAFs" target="_blank" rel="noopener" title="데이터과학 프로세스(5): 통계적 추론" class="gallery-item"><img src="https://lh6.googleusercontent.com/dGLNLDXsDQH-vbf8u8ADMUeIE-tGuN9vetm5TR0H-6mRHxuwzdl_IsLPHRRa4aYGNoqGiAyO1C24ieuS3S3UaCx7pAkXdlZKCQ9fg-9lQZTZIvIHNgOQBDZsVfUcGtT2J1pu1MdB3m2IcAFs" alt="데이터과학 프로세스(5): 통계적 추론"></a></p>
+<p>언뜻 마법처럼 들리는 통계적 추론을 가능하게 하는 것은 주어진 현상에 관한 통계적 모델이다. 주어진 현상이 어떤 모델에서 의해 발생했다고 가정하고, 그 모델에서 발생한 일정량의 결과물을 안다면 (표본), 그 모델에서 일반적으로 어떤 현상이 발생할지를 예측할 수 있는 것이다. 따라서 통계적 추론은 주어진 현상에 대한 가정과 데이터를 사용해 이런 통계적 모델을 만들고, 여기서 다양한 결론을 도출해내는 과정이다.</p>
+<ul>
+<li><a href="http://www.hellodatascience.com/?p=366" target="_blank" rel="noopener">데이터과학 프로세스(5): 통계적 추론</a></li>
+</ul>
+<hr>
+<h3 id="Normal-Distribution"><a href="#Normal-Distribution" class="headerlink" title="Normal Distribution"></a>Normal Distribution</h3><ul>
+<li>Generally, we expect a population to be somwhat homogeneous.</li>
+<li>This means that the individuals in a population are fairly similar to each other.</li>
+<li>Homogeneous populations often fit a <ins>Normal Distribution</ins>.</li>
+</ul>
+<hr>
+<p><strong>확률 변수</strong></p>
+<ul>
+<li>확률에 따라 변하는 값</li>
+<li>특정확률로 나타나는 어떠한 사건에 수치를 부여한 변수</li>
+<li>즉 무작위 실험을 했을 때, 특정 확률로 발생하는 각각의 결과를 수치적 값으로 표현하는 변수를 말한다.</li>
+</ul>
+<blockquote>
+<p>확률 변수는 임의로 진행되는 실험에서 일정한 확률을 가지고 발생하는 결과에 실수 값을 부여하는 변수를 말한다.</p>
+</blockquote>
+<ol>
+<li>예를 들어 동전을 2번 던져서 그림 또는 숫자가 나오는 실험을 한다고 가정하면</li>
+<li>그림이 나올 확률을 $\frac{1}{2}$, 숫자가 나올 확률을 $\frac{1}{2}$ 이라고 하자.</li>
+<li>그리고 이 확률에 따라 발생하는 결과에 실수 값을 각각 그림의 경우 $1$, 숫자의 경우 $0$ 을 부여한다고 하자.</li>
+</ol>
+<p><a href="../../../../img/csci343-lec5/random_variable.jpg" title="sample" class="gallery-item"><img src="../../../../img/csci343-lec5/random_variable.jpg" alt="sample"></a></p>
+<ol>
+<li>이때 표본 공간을 대문자로 $S$, 그에 상응하는 실수 값을 부여하는 값을 $X$, 그리고 부여된 실수값 $X$에 따라 계산된 실수 값을 $R$이라고 하면 관계는 아래 그림과 같다.</li>
+</ol>
+<p><a href="../../../../img/csci343-lec5/random_variable2.jpg" title="sample" class="gallery-item"><img src="../../../../img/csci343-lec5/random_variable2.jpg" alt="sample"></a></p>
+<p>위 그림에서 표본공간(S)는 그림 또는 숫자가 나오는 조합이 되고, 각 조합에 그림=1, 숫자=0을 부여했을 때 나오는 값(R)이 {0, 1, 2}가 된다. 이를 확률 변수라고 한다.</p>
+<blockquote>
+<p>이때 산출된 값 R은 확률변수를 표본 공간의 각 조합에 부여함에 따라 나오는 값, 즉  (1,1), (0,1)과 같이 나타나는 조합 안의 숫자들을 더하여 나온 결과이다. (e.g.s <code>(1,1)</code> -&gt; 1 + 1 = 2)</p>
+</blockquote>
+<p>이때 확률 변수(R)가 취하는 모든 실수들의 집합을 <strong>상태 공간</strong>(State space)라고 하고, 그 상태공간을 구성하는 각 값이 나올 수 있는 가능성은 특정 확률로 주어지게 된다.</p>
+<table>
+<thead>
+<tr>
+<th>값</th>
+<th>확률</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>$\frac{1}{4}$</td>
+</tr>
+<tr>
+<td>1</td>
+<td>$\frac{1}{2}$</td>
+</tr>
+<tr>
+<td>2</td>
+<td>$\frac{1}{4}$</td>
+</tr>
+</tbody></table>
+<p>&nbsp;</p>
+<p><strong>확률 함수</strong><br>확률 변수를 확률 값으로 대응시키는 함수</p>
+<ul>
+<li>이 확률 변수와 확률 함수를 이용하면 특정 사건이 일어날 확률을 계산할 수 있다.</li>
+<li>그리고 그것을 도식화 시킨 것이 바로 확률 분포이다.</li>
+</ul>
+<p><strong>확률 분포</strong><br>확률변수에 의해 정의된 실수를 확률($0$ ~ $1$사이)에 대응시키는 함수</p>
+<ul>
+<li>즉, 위에서 정의한 표에 따라 x가 <code>0</code>이면 그에 대응되는 확률은 $\frac{1}{4}$ , <code>1</code>이면 $\frac{1}{2}$ 과 같이 이렇게 확률 변수의 상태공간의 각 실수 값과 확률 값을 대응시키는 것이 바로 확률 함수이다.</li>
+</ul>
+<p><strong>E.g.s</strong></p>
+<ul>
+<li>동전을 2번 던져 나오는 수: $x$</li>
+<li>$x$가 취할 수 있는 값은 $x = 0, x = 1, x = 2$</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">$x$</th>
+<th align="center">0</th>
+<th align="center">1</th>
+<th align="center">2</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">$P(x)$</td>
+<td align="center">$\frac{1}{4}$</td>
+<td align="center">$\frac{1}{2}$</td>
+<td align="center">$\frac{1}{4}$</td>
+</tr>
+</tbody></table>
+<p>확률 변수, 확률 분포, 그리고 확률 함수의 관계를 정리하자면 다음과 같이 표현 할 수 있다.</p>
+<p><a href="../../../../img/csci343-lec5/random_variable3.jpg" title="sample" class="gallery-item"><img src="../../../../img/csci343-lec5/random_variable3.jpg" alt="sample"></a></p>
+<hr>
+<ul>
+<li><strong>표본공간(<code>S</code>, sample space)</strong>: 어떤 특정 실험 또는 무작위 실험을 했을 때, 측정가능한 모든 결과들의 집합 (The set of all possible outcomes or results of that experiment)</li>
+</ul>
+<blockquote>
+<p>표본 공간은 정의 그대로 “측정 가능한 모든 결과의 집합”이다. 따라서 표본 공간을 이루는 개개의 관찰 결과를 우리는 <strong>표본점(sample</strong>이라고 한다.<br>&nbsp;<br>즉, 우리가 수집한 표본은 표본 공간의 부분집합이라고 할 수 있다.</p>
+</blockquote>
+<ul>
+<li><strong>사건(Event)</strong>: 표본공간(S)의 부분 집합으로 어떤 조건을 만족하는 특정한 표본점(Sample)들의 집합</li>
+<li><strong>확률(Probability)</strong>: 동일한 조건 하에서 동일한 실험을 무수히 많이 반복하여 실시할 때, 어떤 특정한 사건이 발생하는 비율</li>
+</ul>
+<blockquote>
+<p>확률이란 어떤 실험을 했을 때, 나올 수 있는 모든 경우의 수 중 어떤 특정한 조건을 만족하는 사건이 발생하는 비율을 말한다.</p>
+</blockquote>
+<p>$$<br>P(A) = \frac {\text{A 사건이 일어나는 경우의 수}}{\text{모든 사건이 일어나는 경우의 수}}<br>$$</p>
+<p>출처:</p>
+<ul>
+<li><a href="https://drhongdatanote.tistory.com/49" target="_blank" rel="noopener">[개념 통계]확률 변수와 확률 함수</a></li>
+</ul>
+<hr>
+<h4 id="정규분포-Normal-distribution"><a href="#정규분포-Normal-distribution" class="headerlink" title="정규분포(Normal distribution)"></a>정규분포(Normal distribution)</h4><ul>
+<li>정규분포는 통계학에서 가장 많이 쓰이는 확률분포이다.</li>
+<li>우리 주변에서 일반적으로 발견되는 좌우 대칭의 종 모양으로 생긴 분포이다. (가우스 분포라고도 부른다.)</li>
+<li>우리 주변의 많은 변수 또는 자료들이 정규분포를 따른다고 알려져 있다.</li>
+</ul>
+<blockquote>
+<p>E.g.s 대한민국 남성의 키 분포, 수능 점수의 분포 등</p>
+</blockquote>
+<ul>
+<li>정규 분포는 평균 값에 가장 많은 데이터가 분포되어 있고 평균과 떨어질 수록 적게 분포되는 특징을 가지고 있다.</li>
+</ul>
+<p>출처:</p>
+<ul>
+<li><a href="https://drhongdatanote.tistory.com/50" target="_blank" rel="noopener">[개념 통계]정규분포와 표준정규분포 그리고 Z-score</a></li>
+</ul>
+<hr>
+<p>인간과 자연 세상에서 일어나는 수많은 일을 설명하는 핵심 개념이다.<br>통계학에서 사용하는 각종 확률분포 중에서도 가장 중요하게 다루는 분포이다.</p>
+<p>정규분포는 특정값의 출현비율을 그렸을 때, 중심(평균값)을 기준으로 좌우 대칭 형태가 나타나며, 좌우 극단으로 갈수록 급격하게 수치가 낮아지는 특징이 있다. </p>
+<p><a href="https://ww.namu.la/s/8a577c27dc206b771919ed57c079106a8b5b3d5e7b71b061bbe1e0b2a1589e045fe1515556cfff97e673aab42a897a62508018a15a09bfc9fc2ad850f571346d776c8fdb7b6a81f28f0ec8963bbe605b16cfad49c902f6c95a308b5c16c18a39" target="_blank" rel="noopener" title="Normal Distribution" class="gallery-item"><img src="https://ww.namu.la/s/8a577c27dc206b771919ed57c079106a8b5b3d5e7b71b061bbe1e0b2a1589e045fe1515556cfff97e673aab42a897a62508018a15a09bfc9fc2ad850f571346d776c8fdb7b6a81f28f0ec8963bbe605b16cfad49c902f6c95a308b5c16c18a39" alt="Normal Distribution"></a></p>
+<p>그래서 변곡점도 2개 있는데, 모두 $μ$에서 $\sigma$만큼 떨어져 있다.하지만 표준편차의 수치가 위의 이미지처럼 꼭 기계적으로 딱딱 맞아야 하는 것은 아니고 대략 저런 ‘종’ 형태로 나타난다.</p>
+<hr>
+<h3 id="Outliers"><a href="#Outliers" class="headerlink" title="Outliers"></a>Outliers</h3><ul>
+<li><p>We expect our samples to have some spread to them, but that in the end they will appear “normal”</p>
+</li>
+<li><p>Values that radically differ from this distribution are called <ins>outliers</ins></p>
+</li>
+<li><p><strong>An outlier is an observation that lies an abnormal distance from other values in a random sample from a population</strong></p>
+<ul>
+<li>이상값은 모집단(population)에서 무작위로 추출한 표본(simple)의 다른 값과의 비정상적인 거리를 나타내는 관측치 입니다</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>“…또한 데이터에는 다양한 이유로 정상 범주를 벗어난 값이 존재할 수 있는데, 이런 이상값(outlier)을 찾아내는 것도 탐험적 데이터 분석에서 이루어져야 한다.”</p>
+</blockquote>
+<ul>
+<li>When we take measurements we can to measure a signal indicative of something we are interested in.</li>
+<li>If we have, two separate groups when we expect only one, we may be accidentally sampling from two differing populations.</li>
+</ul>
+<blockquote>
+<p>This relates to the <ins>Central limit Theorem</ins>.</p>
+</blockquote>
+<h2 id="Averages"><a href="#Averages" class="headerlink" title="Averages"></a>Averages</h2><h3 id="Means"><a href="#Means" class="headerlink" title="Means"></a>Means</h3><ul>
+<li>This is what most people think of when they think “average”.</li>
+</ul>
+<blockquote>
+<p>Means are most representative of homogenous populations where few outliers exist.</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># from __future__ import division을 선언해 주지 않으면 값이 틀리게 계산될 수도 있다.</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mean</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> sum(x)/len(x)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Medians"><a href="#Medians" class="headerlink" title="Medians"></a>Medians</h3><ul>
+<li>This is the value at which 50% of your samples are above and 50% of your samples are below it.</li>
+</ul>
+<blockquote>
+<p>For very noisy data, medians can be more descriptive of the population than the mean.</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">median</span><span class="params">(v)</span>:</span></span><br><span class="line"><span class="string">''''''</span>v의 중앙값을 계산 <span class="string">''''''</span></span><br><span class="line">    n = len(v)</span><br><span class="line">    sorted_v = sorted(v)</span><br><span class="line">    midpoint = n // <span class="number">2</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> n % <span class="number">2</span> == <span class="number">1</span>:</span><br><span class="line">    <span class="comment"># 데이터 포인트의 개수가 홀수면 중앙값을 반환</span></span><br><span class="line">        <span class="keyword">return</span> sorted_v[midpoint]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        lo = midpoint - <span class="number">1</span></span><br><span class="line">        hi = midpoint</span><br><span class="line">        <span class="keyword">return</span> (sorted_v[lo] + sorted_v[hi]) / <span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Modes"><a href="#Modes" class="headerlink" title="Modes"></a>Modes</h3><ul>
+<li>This is the number that appears most frequently in your samples</li>
+<li>This one is a bit less useful for general purposes<ul>
+<li>Count the number of unique samples in your data set.</li>
+<li>The sample with the most occurrences (highest count) is your mode</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>In the typical case, mode is not better then mean and median as a general representation of the population. Because most values we work with are on a gradient and seldom repeat due to fractional differences. It just depends in the ideal case.</p>
+</blockquote>
+<ul>
+<li>일반적인 경우 Mode는 모집단(population)의 일반적 표현으로 평균과 중앙값을 사용하는 경우보다 좋지 않다. 왜냐하면 우리가 다루는 대부분의 데이터들은 기울기(gradient)가 있고 이견이 거의 없어 반복되지 않기 때문이다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mode</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="string">''''''</span>최빈 값이 하나보다 많다면 list를 반환<span class="string">''''''</span></span><br><span class="line">    counts = Counter(x)</span><br><span class="line">    max_count = max(counts.value())</span><br><span class="line">    <span class="keyword">return</span> [x_i <span class="keyword">for</span> x_i, count <span class="keyword">in</span> counts.iteritems() <span class="keyword">if</span> count == max_count]</span><br></pre></td></tr></table></figure>
+
+<h2 id="Dispersion"><a href="#Dispersion" class="headerlink" title="Dispersion"></a>Dispersion</h2><p>Samples and Populations usually have a spread of data</p>
+<blockquote>
+<p>The size of the <em>distribution</em></p>
+</blockquote>
+<ul>
+<li>This is called <strong>dispersion</strong>.</li>
+<li>Dispersion is how spread out your samples are from each other.</li>
+</ul>
+<blockquote>
+<p><strong>산포도(dispersion)</strong> 는 데이터가 얼마나 퍼져 있는지를 나타낸다. 보통 0과 근접한 값이면 데이터가 거의 퍼져있지 않다는 의미이고 큰 값이면 매우 퍼져있다는 것을 의미하는 통계치이다.</p>
+</blockquote>
+<ul>
+<li>예를 들어, 가장 큰 값과 작은 값의 차이를 나타내는 범위는 신포도를 나타내는 가장 간단한 통계치이다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">data_range</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> max(x) - min(x)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Variance"><a href="#Variance" class="headerlink" title="Variance"></a>Variance</h3><blockquote>
+<p>Variance is a calculation of how far a variable is from the mean of a variable.</p>
+</blockquote>
+<ol>
+<li><p>essentially the average sum of squares of average difference from the group mean.</p>
+<ul>
+<li>그룹 평균(group mean)과 다른 평균 제곱합(average sum of squares of average)</li>
+</ul>
+</li>
+<li><p>It’s give us <ins>units squared</ins> which can be difficult to understand intuitively.</p>
+</li>
+</ol>
+<blockquote>
+<p>분산(Variance)은 하나의 변수가 변수의 평균에서 얼마나 멀리 떨어져 있는지 계산한 것이다. 분산은 산포도를 측정하는 더 복잡한 개념이며 다음과 같이 계산된다.</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">de_mean</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="string">''''''</span>x의 모든 데이터 포인트에서 평균을 뺌(평균을 <span class="number">0</span>으로 만들기 위해)<span class="string">''''''</span></span><br><span class="line">    x_bar = mean(x)</span><br><span class="line">    <span class="keyword">return</span> [x_i - x_bar <span class="keyword">for</span> x_i <span class="keyword">in</span> x]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">variance</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="string">''''''</span>x에 <span class="number">2</span>개 이상의 데이터 포인트가 존재한다고 가정<span class="string">''''''</span></span><br><span class="line">    n = len(x)</span><br><span class="line">    deviations = de_mean(x)</span><br><span class="line">    <span class="keyword">return</span> sum_of_squares(deviations) / (n - <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<p>식에서 편차의 제곱의 평균을 계산하는데 <code>n</code> 대신 <code>n - 1</code>로 나눈 것은 편차의 제곱합을 n으로 나누면 <code>bias</code> 때문에 모분산(population)에 대한 추정값이 실제 모분산보다 적게 계산되는 것을 보정해주기 위함이다.</p>
+<h3 id="Standard-Deviation"><a href="#Standard-Deviation" class="headerlink" title="Standard Deviation"></a>Standard Deviation</h3><ul>
+<li>A more common measure of dispersion is <ins>standard deviation</ins>.</li>
+<li>It is the square root of the variance.<ul>
+<li>It’s units are the <strong>same</strong> as your mean (not squared units)</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>분산의 단위는 기존 단위의 제곱이다. 그렇기 때문에 분산 대신 원래 단위와 같은 단위를 가지는 표준 편차(standard dispersion)를 이용할 때가 많다.</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">standard_deviation</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> math.sqrt(variance(x))</span><br></pre></td></tr></table></figure>
+
+<h4 id="Quantiles"><a href="#Quantiles" class="headerlink" title="Quantiles"></a>Quantiles</h4><p>The value below which some percentage falls</p>
+<ol>
+<li>Median is a special case quantile. It’s for 50 % of the population.</li>
+<li>A common use of quantiles is to specify the Interquartile Range (or the values that fall above 25% of the population and below 75% of the population - i.e. the central 50%).</li>
+<li>Interquartile range is often used with box plots<ul>
+<li>Box = interquartile range</li>
+<li>Mid-line = median</li>
+<li>Whiskers = 95% of the population</li>
+<li>Stars = outliers</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>분위(quantile)는 중앙값(median)을 포괄하는 개념인데, 데이터의 특정 백분위보다 낮은 값을 의미한다. (즉, median은 상위 50%보다 작은 값을 의미하는 것이다.)</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">quantile</span><span class="params">(x, p)</span>:</span></span><br><span class="line">    <span class="string">''''''</span>x의 p분위에 속하는 값을 반환<span class="string">''''''</span></span><br><span class="line">    p_index= int(p * len(x))</span><br><span class="line">    <span class="keyword">return</span> sorted(x)[p_index]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">interquetile</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="string">''''''</span>사분범위의 일반적인 사용은 사분범위 간 범위(또는 모집단의 <span class="number">25</span>% 이상과 모집단의 <span class="number">75</span>% 미만으로 떨어지는 값 - 즉 중심 <span class="number">50</span>%)를 지정하는 것이다.<span class="string">''''''</span></span><br><span class="line">    <span class="keyword">return</span> quantile(x, <span class="number">0.75</span>) - quantile(x, <span class="number">0.25</span>)</span><br><span class="line"></span><br><span class="line">s = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>quantile(s, <span class="number">0.25</span>)</span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>quantile(s, <span class="number">0.5</span>)</span><br><span class="line"><span class="number">6</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>quantile(s, <span class="number">0.75</span>)</span><br><span class="line"><span class="number">8</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>interquartile(s)</span><br><span class="line"><span class="number">5</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Correlation"><a href="#Correlation" class="headerlink" title="Correlation"></a>Correlation</h2><ul>
+<li>Correlation is how two different variable/measurements relate to each other.</li>
+<li>Variable that vary together are said to <strong>covary</strong>.</li>
+<li>When things covary, they have a correlation. (they co-relate)</li>
+</ul>
+<blockquote>
+<p>상관 분석(Correlation analysis) 또는 ‘상관관계’ 또는 ‘상관’은 확률론과 통계학에서 두 변수간에 어떤 선형적 또는 비선형적 관계를 갖고 있는 지를 분석하는 방법이다.<br><br>확률론과 통계학에서, 공분산(covariance)은 2개의 확률변수의 상관정도를 나타내는 값이다.(1개의 변수의 이산정도를 나타내는 분산과는 별개임) 만약 2개의 변수중 하나의 값이 상승하는 경향을 보일 때, 다른 값도 상승하는 경향의 상관관계에 있다면, 공분산의 값은 양수가 될 것이다. 반대로 2개의 변수중 하나의 값이 상승하는 경향을 보일 때, 다른 값이 하강하는 경향을 보인다면 공분산의 값은 음수가 된다.</p>
+</blockquote>
+<p>분산(Variance)는 하나의 변수가 변수의 평균에서 얼마나 떨어져 있는지 계산한다면, 공분산(Covariance)은 두 변수가 각각 평균에서 얼마나 떨어져 있는지 살펴본다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">covariance</span><span class="params">(x, y)</span>:</span></span><br><span class="line">    n = len(x)</span><br><span class="line">    <span class="keyword">return</span> dot(de_mean(x), de_mean(y)) / (n - <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>dot</code>은 각 성분별로 곱한 값을 더해 준다.</li>
+<li>만약 x와 y 모두 각각의 평균보다 크거나 작은 경우, 양수가 더해질 것이다. (Positive Correlation)</li>
+<li>반면 둘 중 하나는 평균보다 크고, 다른 하나는 평균보다 작을 경우, 음수가 더해질 것이다. (Negative Correlation)</li>
+<li>만약 공분산이 0이면 그와 같은 관계가 존재하지 않는다는 것을 의미한다.</li>
+</ul>
+<hr>
+<ul>
+<li>Things can correlate positivly, negatively, or not at all.</li>
+</ul>
+<ol>
+<li><strong>Positive Correlation</strong>: When one variable is high, so is the other. When one variable is low, so is the other.</li>
+<li><strong>Negative Correlation</strong>: When one variable is high, the other is low, and vice versa.</li>
+</ol>
+<ul>
+<li>When the correlation gets closer to zero, that means that there is likely no correlation between two variables.</li>
+<li>Just because something correlates with something does mean that<br>one <strong>CAUSED</strong> the other.</li>
+</ul>
+<hr>
+<p>만약 두 변수 A, B 중 A는 변하지 않고 B만 2배로 증가한다면 공분산 또한 2배로 증가할 것이다, 하지만 생각해 보면 두 변수의 상관관계는 변하지 않았다. 다르게 이야기 하면, 값이 얼마나 커야 공분산이 크다고 판단할 수 있을까?</p>
+<blockquote>
+<p>이 경우 공분산에서 각각의 표준 편차를 나눠 준 상관 관계를 더 자주 살펴본다.</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">correlation</span><span class="params">(x, y)</span>:</span></span><br><span class="line">    stdev_x = standard_deviation(x)</span><br><span class="line">    stdev_y = standard_deviation(y)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> stdev_x &gt; <span class="number">0</span> <span class="keyword">and</span> stdev_y &gt; <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> covariance(x, y) / stdev_x / stdev_y</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span> <span class="comment"># 편차가 존재하지 않는다면 상관 관계는 0</span></span><br></pre></td></tr></table></figure>
+
+<p>이때 이상치를 제거하면 더 강력한 상관관계를 볼 수 있다.</p>
+<hr>
+<h3 id="Correlation-and-Causation"><a href="#Correlation-and-Causation" class="headerlink" title="Correlation and Causation"></a>Correlation and Causation</h3><blockquote>
+<p>상관관계(correlation)는 인과관계(Causation)를 의미하지 않는다. 라는 애기를 많이 들어봤을 것이다, 특히 본인의 확고한 견해와 반대되는 데이터를 본 사람들이 자주하는 말이다. 하지만 이 말은 매우 중요하다.<br><br>만약 x와 y가 강한 상관관계를 보인다면 x가 y를 발생시켰다고 볼 수도 이고, y가 x를 발생시켰다고 볼 수도 있다.<br><br>혹은 서로가 서로를 동시에 발생시키거나, 다른 외부 요인이 발생시키거나 아니면 아무런 인과관계가 없을 수도 있다.<br><br>예를 들어, 전기요금이 낮다고 해서 가스요금이 낮은 것은 아닌 것과 같은 경우이다.</p>
+</blockquote>
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Olemiss/" rel="tag"><i class="fa fa-tag"></i> Olemiss</a>
+              <a href="/tags/CSCI-343/" rel="tag"><i class="fa fa-tag"></i> CSCI 343</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/02/18/2020-02-18-csci259-test1/" rel="prev" title="Csci 259 Test1 Review Questions">
+      <i class="fa fa-chevron-left"></i> Csci 259 Test1 Review Questions
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/02/19/2020-02-20-csci343-lec6/" rel="next" title="Csci 343 - Distributions">
+      Csci 343 - Distributions <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          목차
+        </li>
+        <li class="sidebar-nav-overview">
+          흝어보기
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Samples-and-Population"><span class="nav-number">1.</span> <span class="nav-text">Samples and Population</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Normal-Distribution"><span class="nav-number">1.1.</span> <span class="nav-text">Normal Distribution</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#정규분포-Normal-distribution"><span class="nav-number">1.1.1.</span> <span class="nav-text">정규분포(Normal distribution)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Outliers"><span class="nav-number">1.2.</span> <span class="nav-text">Outliers</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Averages"><span class="nav-number">2.</span> <span class="nav-text">Averages</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Means"><span class="nav-number">2.1.</span> <span class="nav-text">Means</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Medians"><span class="nav-number">2.2.</span> <span class="nav-text">Medians</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Modes"><span class="nav-number">2.3.</span> <span class="nav-text">Modes</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dispersion"><span class="nav-number">3.</span> <span class="nav-text">Dispersion</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Variance"><span class="nav-number">3.1.</span> <span class="nav-text">Variance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Standard-Deviation"><span class="nav-number">3.2.</span> <span class="nav-text">Standard Deviation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Quantiles"><span class="nav-number">3.2.1.</span> <span class="nav-text">Quantiles</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Correlation"><span class="nav-number">4.</span> <span class="nav-text">Correlation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Correlation-and-Causation"><span class="nav-number">4.1.</span> <span class="nav-text">Correlation and Causation</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LSH"
+      src="/img/avatar.png">
+  <p class="site-author-name" itemprop="name">LSH</p>
+  <div class="site-description" itemprop="description">Github + 뻘글 블로그.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">포스트</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">카테고리</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">태그</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/sokhyg9016" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;sokhyg9016" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:sokhyg9016@gmail.com" title="E-Mail → mailto:sokhyg9016@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/users/10584779/%ec%9d%b4%ec%8a%b9%ed%9b%88" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;10584779&#x2F;%ec%9d%b4%ec%8a%b9%ed%9b%88" rel="noopener" target="_blank"><i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.youtube.com/channel/UC9bPZO7K_0a6Eh_nbcjD68A?view_as=subscriber" title="YouTube → https:&#x2F;&#x2F;www.youtube.com&#x2F;channel&#x2F;UC9bPZO7K_0a6Eh_nbcjD68A?view_as&#x3D;subscriber" rel="noopener" target="_blank"><i class="fa fa-fw fa-youtube"></i>YouTube</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LSH</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://sokhyg9016-github-io.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://sokhyg9016.github.io/2020/02/19/2020-02-19-csci343-lec5/";
+    this.page.identifier = "2020/02/19/2020-02-19-csci343-lec5/";
+    this.page.title = "Csci 343 - Descriptive Statistics";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://sokhyg9016-github-io.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
+
+<!-- Background Animation -->
+<!-- <script type="text/javascript" src="/js/src/particle.js"></script> -->
