@@ -178,6 +178,27 @@
 <li>Has limitations due to only testing if something is above or below a certain value</li>
 </ul>
 <hr>
+<h2 id="summary"><a href="#summary" class="headerlink" title="summary"></a>summary</h2><h3 id="Probability-density-functions-PDF"><a href="#Probability-density-functions-PDF" class="headerlink" title="Probability density functions (PDF)"></a>Probability density functions (PDF)</h3><ol>
+<li>Function representing distribution of probability variables</li>
+<li>Ofthen fits a Normal distribution!</li>
+</ol>
+<h3 id="Central-limit-theorm-CLT"><a href="#Central-limit-theorm-CLT" class="headerlink" title="Central limit theorm (CLT)"></a>Central limit theorm (CLT)</h3><ol>
+<li>It is a theorm that if N is moderaely large, then the distribution of mean of N probability variable (with same probabiliy distribution) is closer to the normal distribution</li>
+</ol>
+<h3 id="Comulative-Distribution-Functions-CDF"><a href="#Comulative-Distribution-Functions-CDF" class="headerlink" title="Comulative Distribution Functions (CDF)"></a>Comulative Distribution Functions (CDF)</h3><ol>
+<li>Provides the probability that a random value is ‘&lt;’  or ‘=’ to a given value within a normally distributed population.</li>
+<li>It means that CDF tells us the probability that some value lies below a certain threshold.</li>
+</ol>
+<h3 id="False-positive-negative"><a href="#False-positive-negative" class="headerlink" title="False positive/negative"></a>False positive/negative</h3><ol>
+<li>False Positive (Type I Error) is a result that indicates a given condition exists, when it does not.</li>
+<li>False negative (Type II Error) is a test result that indicates that a condition does not hold, while in fact it does.</li>
+</ol>
+<h3 id="One-tail-test"><a href="#One-tail-test" class="headerlink" title="One-tail test"></a>One-tail test</h3><ol>
+<li>A one-tailed test is a (statistical) test (in which the critical area of a distribution is one-sided so that) it is either [greater than or less than] a certain value, but not both.</li>
+</ol>
+<h3 id="Two-tail-test"><a href="#Two-tail-test" class="headerlink" title="Two-tail test"></a>Two-tail test</h3><ol>
+<li>A two-tailed test is a method (in which the critical area of a distribution is two-sided) and tests whether a sample is [greater than or less than] a certain range of values.</li>
+</ol>
 </div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
         var options = {
             selector: '.gallery-item'
@@ -501,6 +522,60 @@
 <h3 id="Correlation-and-Causation"><a href="#Correlation-and-Causation" class="headerlink" title="Correlation and Causation"></a>Correlation and Causation</h3><blockquote>
 <p>상관관계(correlation)는 인과관계(Causation)를 의미하지 않는다. 라는 애기를 많이 들어봤을 것이다, 특히 본인의 확고한 견해와 반대되는 데이터를 본 사람들이 자주하는 말이다. 하지만 이 말은 매우 중요하다.<br><br>만약 x와 y가 강한 상관관계를 보인다면 x가 y를 발생시켰다고 볼 수도 이고, y가 x를 발생시켰다고 볼 수도 있다.<br><br>혹은 서로가 서로를 동시에 발생시키거나, 다른 외부 요인이 발생시키거나 아니면 아무런 인과관계가 없을 수도 있다.<br><br>예를 들어, 전기요금이 낮다고 해서 가스요금이 낮은 것은 아닌 것과 같은 경우이다.</p>
 </blockquote>
+<hr>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><h3 id="Statistic"><a href="#Statistic" class="headerlink" title="Statistic"></a>Statistic</h3><p>Somethin about a group / set of things.</p>
+<h3 id="Population"><a href="#Population" class="headerlink" title="Population"></a>Population</h3><ol>
+<li>population or sample population</li>
+<li>It’s sample from whole.</li>
+<li>It’s made up of samples</li>
+</ol>
+<h3 id="Sample"><a href="#Sample" class="headerlink" title="Sample"></a>Sample</h3><p>Individual measurement within a population</p>
+<h3 id="Nomal-Distribution"><a href="#Nomal-Distribution" class="headerlink" title="Nomal Distribution"></a>Nomal Distribution</h3><ol>
+<li>Type of continuous probability distribution for a real-valued random variable.</li>
+<li>Samples in a population are fairly similar each other</li>
+<li>Homogeneous population usually fit a normal distribution.</li>
+</ol>
+<h3 id="Outlier"><a href="#Outlier" class="headerlink" title="Outlier"></a>Outlier</h3><ol>
+<li>Values that radically differ from distribution.</li>
+<li>Related to Central Limit Theorm(CLT).</li>
+</ol>
+<h3 id="Average"><a href="#Average" class="headerlink" title="Average"></a>Average</h3><p>Is it a good for general representatoin of a population?</p>
+<ol>
+<li>Means: with few outliers exist</li>
+<li>Median: For very noisy data</li>
+<li>less useful: Modes (depends on case.. -&gt; cause, data are gradient &amp; seldom repeat due to fractional difference.)</li>
+</ol>
+<h3 id="dispersion-신포도"><a href="#dispersion-신포도" class="headerlink" title="dispersion(신포도)"></a>dispersion(신포도)</h3><ol>
+<li>How spread out your samples from each other</li>
+<li>The size of the distribution</li>
+</ol>
+<h3 id="variance-분산"><a href="#variance-분산" class="headerlink" title="variance(분산)"></a>variance(분산)</h3><ol>
+<li>calculation of how far a variable is from the mean of a variable</li>
+<li>The average sum of square of average difference from the group mean.</li>
+</ol>
+<h3 id="standard-deviation-표준-편차"><a href="#standard-deviation-표준-편차" class="headerlink" title="standard deviation(표준 편차)"></a>standard deviation(표준 편차)</h3><ol>
+<li>A more common measure of dispersion</li>
+<li>It’s units are the same as our mean</li>
+</ol>
+<h3 id="quantile"><a href="#quantile" class="headerlink" title="quantile"></a>quantile</h3><ol>
+<li>The value below which some percentage falls</li>
+<li>Median is a special case quantile. It’s for 50% of population</li>
+</ol>
+<h3 id="Interqurtile"><a href="#Interqurtile" class="headerlink" title="Interqurtile"></a>Interqurtile</h3><ol>
+<li>Values that fall above 25% of population and below 75% of population.</li>
+<li>Or the central 50%</li>
+</ol>
+<h3 id="Correlation-상관관계"><a href="#Correlation-상관관계" class="headerlink" title="Correlation (상관관계)"></a>Correlation (상관관계)</h3><p>How two different variable/measurements relate to each other</p>
+<h3 id="Covery"><a href="#Covery" class="headerlink" title="Covery"></a>Covery</h3><ol>
+<li>Or Coveriance</li>
+<li>Variable that vary together</li>
+<li>When things covary, they have a correlation.</li>
+<li>A value that indicates the correlation of two probability variables</li>
+</ol>
+<h4 id="Positive-Corrleation"><a href="#Positive-Corrleation" class="headerlink" title="Positive Corrleation"></a>Positive Corrleation</h4><p>one is high, so is the other</p>
+<h4 id="Negative-Correlation"><a href="#Negative-Correlation" class="headerlink" title="Negative Correlation"></a>Negative Correlation</h4><p>ohe is high, the other is low, vice versa.</p>
+<h4 id="Get-closer-to-Zero"><a href="#Get-closer-to-Zero" class="headerlink" title="Get closer to Zero"></a>Get closer to Zero</h4><p>No corrleation between two varaibles.</p>
+<h3 id="correlation-and-causation-상관관계와-인과관계"><a href="#correlation-and-causation-상관관계와-인과관계" class="headerlink" title="correlation and causation(상관관계와 인과관계)"></a>correlation and causation(상관관계와 인과관계)</h3><p>Correlation may not mean Causation</p>
 </div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
         var options = {
             selector: '.gallery-item'
