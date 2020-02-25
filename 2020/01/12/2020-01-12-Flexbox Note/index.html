@@ -14,7 +14,7 @@
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap/css?family=NanumSquare:300,300italic,400,400italic,700,700italic|Inconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
-  <link rel="stylesheet" href="/lib/pace/pace-theme-center-simple.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-material.min.css">
   <script src="/lib/pace/pace.min.js"></script>
 
 
@@ -27,7 +27,7 @@
     version: '7.7.0',
     exturl: false,
     sidebar: {"position":"left","width":320,"display":"post","padding":18,"offset":12,"onmobile":false},
-    copycode: {"enable":false,"show_result":true,"style":null},
+    copycode: {"enable":true,"show_result":true,"style":"flat"},
     back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
     fancybox: false,
@@ -387,7 +387,7 @@
 </tr>
 </tbody></table>
 <h3 id="주-축-main-axis-과-교차-축-cross-axis"><a href="#주-축-main-axis-과-교차-축-cross-axis" class="headerlink" title="주 축(main-axis)과 교차 축(cross-axis)"></a>주 축(main-axis)과 교차 축(cross-axis)</h3><p>주 축(main-axis)과 교차 축(cross-axis)의 개념은 다음과 같습니다.</p>
-<p><strong>row</strong>: Items를 수평축으로 표시하므로 이때는 주 축이 수평이며 교차 축은 수직이 됩니다.<br><strong>column</strong>: Items를 수직축으로 표시하므로 주 축은 수직이며 교차 축은 수평이 됩니다.</p>
+<p><strong><code>row</code></strong>: Items를 수평축으로 표시하므로 이때는 주 축이 수평이며 교차 축은 수직이 됩니다.<br><strong><code>column</code></strong>: Items를 수직축으로 표시하므로 주 축은 수직이며 교차 축은 수평이 됩니다.</p>
 <p>즉, 방향(수평, 수직)에 따라 주 축과 교차 축이 달라집니다.</p>
 <p><a href="../../../../img/flex-axis.jpg" title="Image description" class="gallery-item"><img src="../../../../img/flex-axis.jpg" alt="Image description"></a></p>
 <h3 id="시작점-flex-start-과-끝점-flex-end"><a href="#시작점-flex-start-과-끝점-flex-end" class="headerlink" title="시작점(flex-start)과 끝점(flex-end)"></a>시작점(flex-start)과 끝점(flex-end)</h3><ol>
@@ -491,9 +491,9 @@
 <p><a href="../../../../img/flex-order.jpg" title="Image description" class="gallery-item"><img src="../../../../img/flex-order.jpg" alt="Image description"></a></p>
 <h3 id="flex"><a href="#flex" class="headerlink" title="flex"></a>flex</h3><p>The flex property is a shorthand property for:</p>
 <ul>
-<li>flex-grow</li>
-<li>flex-shrink</li>
-<li>flex-basis</li>
+<li><code>flex-grow</code></li>
+<li><code>flex-shrink</code></li>
+<li><code>flex-basis</code></li>
 </ul>
 <p>The <code>flex</code> property sets the flexible length on flexible items.</p>
 <blockquote>
@@ -665,7 +665,7 @@
 <p><a href="../../../../img/flex-align-self.jpg" title="Image description" class="gallery-item"><img src="../../../../img/flex-align-self.jpg" alt="Image description"></a></p>
 <hr>
 <h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><ol>
-<li>부모 컨테이너(parent)를 <code>flex</code>로 선언하면, 그 안에 종속된 자식 박스(child)들을 움직일 수 있다. <blockquote>
+<li>부모 컨테이너(parent)를 <code>flex</code>로 선언하면, 그 안에 종속된 자식 박스(child)들을 움직일 수 있다.<blockquote>
 <p>그렇기 때문에 각각 박스에게 일일이 명령할 필요가 없다.</p>
 </blockquote>
 </li>
@@ -792,14 +792,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">14</span>
           <span class="site-state-item-name">포스트</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">카테고리</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -903,8 +903,40 @@
 
 
 
+<script>
+if (document.querySelectorAll('div.pdf').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js', () => {
+    document.querySelectorAll('div.pdf').forEach(element => {
+      PDFObject.embed(element.getAttribute('target'), element, {
+        pdfOpenParams: {
+          navpanes: 0,
+          toolbar: 0,
+          statusbar: 0,
+          pagemode: 'thumbs',
+          view: 'FitH'
+        },
+        PDFJS_URL: '/lib/pdf/web/viewer.html',
+        height: element.getAttribute('height') || '500px'
+      });
+    });
+  }, window.PDFObject);
+}
+</script>
 
 
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme: 'forest',
+      logLevel: 3,
+      flowchart: { curve: 'linear' },
+      gantt: { axisFormat: '%m/%d/%Y' },
+      sequence: { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
 
 
   

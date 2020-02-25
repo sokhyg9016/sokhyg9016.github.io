@@ -14,7 +14,7 @@
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap/css?family=NanumSquare:300,300italic,400,400italic,700,700italic|Inconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
-  <link rel="stylesheet" href="/lib/pace/pace-theme-center-simple.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-material.min.css">
   <script src="/lib/pace/pace.min.js"></script>
 
 
@@ -27,7 +27,7 @@
     version: '7.7.0',
     exturl: false,
     sidebar: {"position":"left","width":320,"display":"post","padding":18,"offset":12,"onmobile":false},
-    copycode: {"enable":false,"show_result":true,"style":null},
+    copycode: {"enable":true,"show_result":true,"style":"flat"},
     back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
     fancybox: false,
@@ -304,6 +304,7 @@
 <blockquote>
 <p>컴퓨터 과학은 또한 추상화에 대한 학문이다: 필수적인 정보만을 표시하고 세부사항을 숨긴다.</p>
 </blockquote>
+<hr>
 <h2 id="What-is-Programming"><a href="#What-is-Programming" class="headerlink" title="What is Programming"></a>What is Programming</h2><ul>
 <li><strong>Programming</strong> is the process of taking an algorithm and encoding it into a programming language, so that it can be executed by a computer<ul>
 <li>Programming is the way that create a <strong>representation</strong> for our solutions.</li>
@@ -318,6 +319,7 @@
 <blockquote>
 <p>프로그래밍(Programming)은 알고리즘을 가져다가 프로그래밍 언어로 인코딩하여 컴퓨터에 의해 실행될 수 있도록 하는 과정이다.<Br><br>프로그래밍 언어는 프로세스와 데이터를 모두 나타낼 수 있는 표기법을 제공해야 한다. (이를 위해 언어는 제어 구조와 데이터 유형을 제공한다.)</p>
 </blockquote>
+<hr>
 <h2 id="Why-Study-Data-Structures-and-Abstract-Data-Types"><a href="#Why-Study-Data-Structures-and-Abstract-Data-Types" class="headerlink" title="Why Study Data Structures and Abstract Data Types"></a>Why Study Data Structures and Abstract Data Types</h2><ul>
 <li>An <strong>abstract data type</strong> (ADT) is a logical description of how we view data and opeartions without regard to how they will be implemented.<ul>
 <li>The idea of encapsulating the details of implementaion and hiding them from user’s view is called <strong>information hiding</strong>.</li>
@@ -331,15 +333,20 @@
 </tr>
 </thead>
 </table>
-<blockquote>
-<p>추상적 자료형(Abstract Data Type, 줄여서 ADT)은 컴퓨터 과학에서 자료들과 그 자료들에 대한 연산들을 명기한 것이다. 추상적 자료형은 구현 방법을 명시하고 있지 않다는 점에서 자료 구조와 다르다. 비슷한 개념의 추상적 자료 구조는 각 연산의 시간 복잡도를 명기하고 있지만 추상적 자료형에서는 이것조차 명기하지 않는다.<br><br>추상적 자료형은 인터페이스와 구현을 분리하여 추상화 계층을 둔 것이다. 예를 들어, 전기 밥솥을 추상적 자료형에 비유한다면, 그 속에 들어가는 밥은 자료가 되고, 밥솥에 있는 취사, 예약취사 버튼들과 남은 시간을 표시하는 디스플레이에 어떤 내용들이 표시되어야 하는지를 명기한 것이다. 추상적 자료형에서는 이것들이 어떻게 구성되는지 관심이 없고, 몇 와트의 전기를 소모하는지에 대해서도 관심이 없다.<br><br>자료에 대한 연산은 자료에 대하여 질의를 던지는 것과 자료를 변경하기 위한 연산으로 나뉜다. 유명한 자료구조인 스택에서 자료를 변경하기 위한 연산은 기본적으로 push와 pop이 있다. 여기에 자료에 대하여 질의를 던지는 연산으로 스택의 크기를 알 수 있는 size 연산, 스택이 가득차거나 비었는지를 알 수 있는 full, empty 연산이 있고, 추가적으로 pop을 하면 제거될 자료를 볼 수 있는 peek 연산 등을 정의할 수 있다. 만약 여기에 각 연산들은 모두 상수 시간 복잡도(즉, O(1))에 일어나야 한다고 명기한다면 이것은 ‘추상적 자료 구조’가 된다.<br><br>잘 알려진 추상 자료형에는 복소수, 리스트, 스택, 큐, 맵, 우선순위 큐, 집합 등이 있다.</p>
-</blockquote>
 <h3 id="Abstract-Data-Type"><a href="#Abstract-Data-Type" class="headerlink" title="Abstract Data Type"></a>Abstract Data Type</h3><ul>
 <li>The ADT is the <strong>shell</strong> that the user interacts with.</li>
 <li>The implementation is <strong>hidden</strong>, and the user is not concerned with details of implementation.</li>
 <li>The implementation of an ADT is often referred to as a <strong>data structure</strong>.</li>
 </ul>
 <p><a href="https://runestone.academy/runestone/books/published/pythonds/_images/adt.png" target="_blank" rel="noopener" title="Abstract Data type" class="gallery-item"><img src="https://runestone.academy/runestone/books/published/pythonds/_images/adt.png" alt="Abstract Data type"></a></p>
+<div class="note primary">
+            <h4 id="추상자료형-Abstract-Data-Type"><a href="#추상자료형-Abstract-Data-Type" class="headerlink" title="추상자료형(Abstract Data Type)"></a>추상자료형(Abstract Data Type)</h4><p>추상적 자료형(Abstract Data Type, 줄여서 ADT)은 컴퓨터 과학에서 자료들과 그 자료들에 대한 연산들을 명기한 것이다. 추상적 자료형은 구현 방법을 명시하고 있지 않다는 점에서 자료 구조와 다르다. 비슷한 개념의 추상적 자료 구조는 각 연산의 시간 복잡도를 명기하고 있지만 추상적 자료형에서는 이것조차 명기하지 않는다.</p>
+          </div>
+
+<p>추상적 자료형은 인터페이스와 구현을 분리하여 추상화 계층을 둔 것이다. 예를 들어, 전기 밥솥을 추상적 자료형에 비유한다면, 그 속에 들어가는 밥은 자료가 되고, 밥솥에 있는 취사, 예약취사 버튼들과 남은 시간을 표시하는 디스플레이에 어떤 내용들이 표시되어야 하는지를 명기한 것이다. 추상적 자료형에서는 이것들이 어떻게 구성되는지 관심이 없고, 몇 와트의 전기를 소모하는지에 대해서도 관심이 없다.</p>
+<p>자료에 대한 연산은 자료에 대하여 질의를 던지는 것과 자료를 변경하기 위한 연산으로 나뉜다. 유명한 자료구조인 스택에서 자료를 변경하기 위한 연산은 기본적으로 push와 pop이 있다. 여기에 자료에 대하여 질의를 던지는 연산으로 스택의 크기를 알 수 있는 size 연산, 스택이 가득차거나 비었는지를 알 수 있는 full, empty 연산이 있고, 추가적으로 pop을 하면 제거될 자료를 볼 수 있는 peek 연산 등을 정의할 수 있다. 만약 여기에 각 연산들은 모두 상수 시간 복잡도 $O(1)$ 에 일어나야 한다고 명기한다면 이것은 ‘추상적 자료 구조’가 된다.</p>
+<p>잘 알려진 추상 자료형에는 복소수, 리스트, 스택, 큐, 맵, 우선순위 큐, 집합 등이 있다.</p>
+<hr>
 <h2 id="Why-Study-Algorithms"><a href="#Why-Study-Algorithms" class="headerlink" title="Why Study Algorithms"></a>Why Study Algorithms</h2><ul>
 <li>Algorithms are often quite different from one another</li>
 <li>Consider the <em><strong>sqrt</strong></em> example, if there are two ways to implement the function that computes the square root of a number, one is perhaps “better” than the other:<blockquote>
@@ -440,15 +447,17 @@
 </ul>
 <h3 id="Built-in-Collection-Data-Types"><a href="#Built-in-Collection-Data-Types" class="headerlink" title="Built-in Collection Data Types"></a>Built-in Collection Data Types</h3><p>Python has a number of very powerful built-in collection classes.</p>
 <ol>
-<li><strong>Ordered</strong> collections<ul>
+<li><strong>Ordered</strong> collections</li>
+</ol>
+<ul>
 <li>lists, strings and tuples</li>
 </ul>
-</li>
-<li><strong>Unordered</strong> collections<ul>
+<ol start="2">
+<li><strong>Unordered</strong> collections</li>
+</ol>
+<ul>
 <li>sets and dictionaries</li>
 </ul>
-</li>
-</ol>
 <h3 id="Lists"><a href="#Lists" class="headerlink" title="Lists"></a>Lists</h3><ul>
 <li><p><strong>Lists</strong> are written as comma-delimited values enclosed in <strong>square brackets</strong>.</p>
 <blockquote>
@@ -533,8 +542,8 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/02/15/2020-02-15-Baekjoon-10989/" rel="prev" title="BAEKJOON 10989 Solution">
-      <i class="fa fa-chevron-left"></i> BAEKJOON 10989 Solution
+    <a href="/2020/02/15/2020-02-15-Kakao-clone-coding/" rel="prev" title="Kakao clone coding">
+      <i class="fa fa-chevron-left"></i> Kakao clone coding
     </a></div>
       <div class="post-nav-item">
     <a href="/2020/02/18/2020-02-18-csci259-test1/" rel="next" title="Csci 259 Test1 Review Questions">
@@ -606,7 +615,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#What-is-Computer-Science"><span class="nav-number">1.</span> <span class="nav-text">What is Computer Science</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#What-is-Programming"><span class="nav-number">2.</span> <span class="nav-text">What is Programming</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Why-Study-Data-Structures-and-Abstract-Data-Types"><span class="nav-number">3.</span> <span class="nav-text">Why Study Data Structures and Abstract Data Types</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Abstract-Data-Type"><span class="nav-number">3.1.</span> <span class="nav-text">Abstract Data Type</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Why-Study-Algorithms"><span class="nav-number">4.</span> <span class="nav-text">Why Study Algorithms</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Review-of-Basic-Python"><span class="nav-number">5.</span> <span class="nav-text">Review of Basic Python</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Built-in-Atomic-Data-Types"><span class="nav-number">5.1.</span> <span class="nav-text">Built-in Atomic Data Types</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Built-in-Atomic-Data-Types-Cont’d"><span class="nav-number">5.2.</span> <span class="nav-text">Built-in Atomic Data Types (Cont’d)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Identifiers-and-Assignment"><span class="nav-number">5.3.</span> <span class="nav-text">Identifiers and Assignment</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Built-in-Collection-Data-Types"><span class="nav-number">5.4.</span> <span class="nav-text">Built-in Collection Data Types</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lists"><span class="nav-number">5.5.</span> <span class="nav-text">Lists</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Operations-on-Lists"><span class="nav-number">5.5.1.</span> <span class="nav-text">Operations on Lists</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Strings"><span class="nav-number">5.6.</span> <span class="nav-text">Strings</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Difference-between-Lists-and-Strings"><span class="nav-number">5.7.</span> <span class="nav-text">Difference between Lists and Strings</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tuples"><span class="nav-number">5.8.</span> <span class="nav-text">Tuples</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sets"><span class="nav-number">5.9.</span> <span class="nav-text">Sets</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dictionaries"><span class="nav-number">5.10.</span> <span class="nav-text">Dictionaries</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Source-Code"><span class="nav-number">6.</span> <span class="nav-text">Source Code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">7.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#What-is-Computer-Science"><span class="nav-number">1.</span> <span class="nav-text">What is Computer Science</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#What-is-Programming"><span class="nav-number">2.</span> <span class="nav-text">What is Programming</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Why-Study-Data-Structures-and-Abstract-Data-Types"><span class="nav-number">3.</span> <span class="nav-text">Why Study Data Structures and Abstract Data Types</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Abstract-Data-Type"><span class="nav-number">3.1.</span> <span class="nav-text">Abstract Data Type</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#추상자료형-Abstract-Data-Type"><span class="nav-number">3.1.1.</span> <span class="nav-text">추상자료형(Abstract Data Type)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Why-Study-Algorithms"><span class="nav-number">4.</span> <span class="nav-text">Why Study Algorithms</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Review-of-Basic-Python"><span class="nav-number">5.</span> <span class="nav-text">Review of Basic Python</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Built-in-Atomic-Data-Types"><span class="nav-number">5.1.</span> <span class="nav-text">Built-in Atomic Data Types</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Built-in-Atomic-Data-Types-Cont’d"><span class="nav-number">5.2.</span> <span class="nav-text">Built-in Atomic Data Types (Cont’d)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Identifiers-and-Assignment"><span class="nav-number">5.3.</span> <span class="nav-text">Identifiers and Assignment</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Built-in-Collection-Data-Types"><span class="nav-number">5.4.</span> <span class="nav-text">Built-in Collection Data Types</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lists"><span class="nav-number">5.5.</span> <span class="nav-text">Lists</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Operations-on-Lists"><span class="nav-number">5.5.1.</span> <span class="nav-text">Operations on Lists</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Strings"><span class="nav-number">5.6.</span> <span class="nav-text">Strings</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Difference-between-Lists-and-Strings"><span class="nav-number">5.7.</span> <span class="nav-text">Difference between Lists and Strings</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tuples"><span class="nav-number">5.8.</span> <span class="nav-text">Tuples</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sets"><span class="nav-number">5.9.</span> <span class="nav-text">Sets</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dictionaries"><span class="nav-number">5.10.</span> <span class="nav-text">Dictionaries</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Source-Code"><span class="nav-number">6.</span> <span class="nav-text">Source Code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">7.</span> <span class="nav-text">Reference</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -622,14 +631,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">14</span>
           <span class="site-state-item-name">포스트</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">카테고리</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -733,13 +742,93 @@
 
 
 
+<script>
+if (document.querySelectorAll('div.pdf').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js', () => {
+    document.querySelectorAll('div.pdf').forEach(element => {
+      PDFObject.embed(element.getAttribute('target'), element, {
+        pdfOpenParams: {
+          navpanes: 0,
+          toolbar: 0,
+          statusbar: 0,
+          pagemode: 'thumbs',
+          view: 'FitH'
+        },
+        PDFJS_URL: '/lib/pdf/web/viewer.html',
+        height: element.getAttribute('height') || '500px'
+      });
+    });
+  }, window.PDFObject);
+}
+</script>
 
 
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme: 'forest',
+      logLevel: 3,
+      flowchart: { curve: 'linear' },
+      gantt: { axisFormat: '%m/%d/%Y' },
+      sequence: { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
 
 
   
 
   
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
 
   
 

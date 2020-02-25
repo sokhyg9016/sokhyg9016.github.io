@@ -14,7 +14,7 @@
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap/css?family=NanumSquare:300,300italic,400,400italic,700,700italic|Inconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
-  <link rel="stylesheet" href="/lib/pace/pace-theme-center-simple.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-material.min.css">
   <script src="/lib/pace/pace.min.js"></script>
 
 
@@ -27,7 +27,7 @@
     version: '7.7.0',
     exturl: false,
     sidebar: {"position":"left","width":320,"display":"post","padding":18,"offset":12,"onmobile":false},
-    copycode: {"enable":false,"show_result":true,"style":null},
+    copycode: {"enable":true,"show_result":true,"style":"flat"},
     back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
     fancybox: false,
@@ -299,9 +299,10 @@
 <hr>
 <p><strong>통계</strong>(statistics)란 데이터를 이해하는 바탕이 되는 수리적 기법이다.</p>
 <p>만약 데이터의 수가 적다면 데이터 자체를 보여 주는 것이 가장 좋은 방법일 수 있다. 하지만 데이터가 많다면 데이터를 다루는 것도 불편하고 이해하기도 힘들 것이다. 이럴 때 통계를 사용하면 데이터를 정제해서 중요한 정보만 전달해 줄 수 있다.</p>
-<blockquote>
-<p>통계학(tatistics)은 산술적 방법을 기초로 하여, 주로 다량의 데이터를 관찰하고 정리 및 분석하는 방법을 연구하는 수학의 한 분야이다.</p>
-</blockquote>
+<div class="note info">
+            <h3 id="통계학-statistics"><a href="#통계학-statistics" class="headerlink" title="통계학(statistics)"></a>통계학(statistics)</h3><p>통계학(statistics)은 산술적 방법을 기초로 하여, 주로 다량의 데이터를 관찰하고 정리 및 분석하는 방법을 연구하는 수학의 한 분야이다.</p>
+          </div>
+
 <ul>
 <li><a href="https://ko.wikipedia.org/wiki/%ED%86%B5%EA%B3%84%ED%95%99" target="_blank" rel="noopener">[Wiki]통계학</a></li>
 </ul>
@@ -318,20 +319,14 @@
 <li>This means that the individuals in a population are fairly similar to each other.</li>
 <li>Homogeneous populations often fit a <ins>Normal Distribution</ins>.</li>
 </ul>
-<hr>
-<p><strong>확률 변수</strong></p>
-<ul>
-<li>확률에 따라 변하는 값</li>
-<li>특정확률로 나타나는 어떠한 사건에 수치를 부여한 변수</li>
-<li>즉 무작위 실험을 했을 때, 특정 확률로 발생하는 각각의 결과를 수치적 값으로 표현하는 변수를 말한다.</li>
-</ul>
-<blockquote>
-<p>확률 변수는 임의로 진행되는 실험에서 일정한 확률을 가지고 발생하는 결과에 실수 값을 부여하는 변수를 말한다.</p>
-</blockquote>
+<div class="note info no-icon">
+            <h4 id="확률-변수"><a href="#확률-변수" class="headerlink" title="확률 변수"></a>확률 변수</h4><ol><li>확률에 따라 변하는 값</li><li>특정확률로 나타나는 어떠한 사건에 수치를 부여한 변수</li><li>즉 무작위 실험을 했을 때, 특정 확률로 발생하는 각각의 결과를 수치적 값으로 표현하는 변수를 말한다.</li><li>예를 들어 확률 변수는 임의로 진행되는 실험에서 일정한 확률을 가지고 발생하는 결과에 실수 값을 부여하는 변수를 말한다.</li></ol>
+          </div>
+
 <ol>
 <li>예를 들어 동전을 2번 던져서 그림 또는 숫자가 나오는 실험을 한다고 가정하면</li>
 <li>그림이 나올 확률을 $\frac{1}{2}$, 숫자가 나올 확률을 $\frac{1}{2}$ 이라고 하자.</li>
-<li>그리고 이 확률에 따라 발생하는 결과에 실수 값을 각각 그림의 경우 $1$, 숫자의 경우 $0$ 을 부여한다고 하자.</li>
+<li>그리고 이 확률에 따라 발생하는 결과에 실수 값을 각각 그림의 경우 <code>1</code>, 숫자의 경우 <code>0</code> 을 부여한다고 하자.</li>
 </ol>
 <p><a href="../../../../img/csci343-lec5/random_variable.jpg" title="sample" class="gallery-item"><img src="../../../../img/csci343-lec5/random_variable.jpg" alt="sample"></a></p>
 <ol>
@@ -339,9 +334,10 @@
 </ol>
 <p><a href="../../../../img/csci343-lec5/random_variable2.jpg" title="sample" class="gallery-item"><img src="../../../../img/csci343-lec5/random_variable2.jpg" alt="sample"></a></p>
 <p>위 그림에서 표본공간(S)는 그림 또는 숫자가 나오는 조합이 되고, 각 조합에 그림=1, 숫자=0을 부여했을 때 나오는 값(R)이 {0, 1, 2}가 된다. 이를 확률 변수라고 한다.</p>
-<blockquote>
-<p>이때 산출된 값 R은 확률변수를 표본 공간의 각 조합에 부여함에 따라 나오는 값, 즉  (1,1), (0,1)과 같이 나타나는 조합 안의 숫자들을 더하여 나온 결과이다. (e.g.s <code>(1,1)</code> -&gt; 1 + 1 = 2)</p>
-</blockquote>
+<div class="note danger">
+            <h4 id="Warning"><a href="#Warning" class="headerlink" title="Warning"></a>Warning</h4><p>이때 산출된 값 R은 확률변수를 표본 공간의 각 조합에 부여함에 따라 나오는 값, 즉 (1,1), (0,1)과 같이 나타나는 조합 안의 숫자들을 더하여 나온 결과이다.<br>e.g. <code>(1,1)</code> -&gt; 1 + 1 = 2</p>
+          </div>
+
 <p>이때 확률 변수(R)가 취하는 모든 실수들의 집합을 <strong>상태 공간</strong>(State space)라고 하고, 그 상태공간을 구성하는 각 값이 나올 수 있는 가능성은 특정 확률로 주어지게 된다.</p>
 <table>
 <thead>
@@ -398,20 +394,20 @@
 <p><a href="../../../../img/csci343-lec5/random_variable3.jpg" title="sample" class="gallery-item"><img src="../../../../img/csci343-lec5/random_variable3.jpg" alt="sample"></a></p>
 <hr>
 <ul>
-<li><strong>표본공간(<code>S</code>, sample space)</strong>: 어떤 특정 실험 또는 무작위 실험을 했을 때, 측정가능한 모든 결과들의 집합 (The set of all possible outcomes or results of that experiment)</li>
+<li><code>표본공간(S, sample space)</code>: 어떤 특정 실험 또는 무작위 실험을 했을 때, 측정가능한 모든 결과들의 집합 (The set of all possible outcomes or results of that experiment)</li>
 </ul>
-<blockquote>
-<p>표본 공간은 정의 그대로 “측정 가능한 모든 결과의 집합”이다. 따라서 표본 공간을 이루는 개개의 관찰 결과를 우리는 <strong>표본점(sample</strong>이라고 한다.<br>&nbsp;<br>즉, 우리가 수집한 표본은 표본 공간의 부분집합이라고 할 수 있다.</p>
-</blockquote>
+<div class="note info">
+            <h5 id="표본점-sample"><a href="#표본점-sample" class="headerlink" title="표본점(sample)"></a>표본점(sample)</h5><p>표본 공간은 정의 그대로 “측정 가능한 모든 결과의 집합”이다. 따라서 표본 공간을 이루는 개개의 관찰 결과를 우리는 표본점(sample)이라고 한다.</p><p>즉, 우리가 수집한 표본은 표본 공간의 부분집합이라고 할 수 있다.</p>
+          </div>
+
 <ul>
-<li><strong>사건(Event)</strong>: 표본공간(S)의 부분 집합으로 어떤 조건을 만족하는 특정한 표본점(Sample)들의 집합</li>
-<li><strong>확률(Probability)</strong>: 동일한 조건 하에서 동일한 실험을 무수히 많이 반복하여 실시할 때, 어떤 특정한 사건이 발생하는 비율</li>
+<li><code>사건(Event)</code>: 표본공간(S)의 부분 집합으로 어떤 조건을 만족하는 특정한 표본점(Sample)들의 집합</li>
+<li><code>확률(Probability)</code>: 동일한 조건 하에서 동일한 실험을 무수히 많이 반복하여 실시할 때, 어떤 특정한 사건이 발생하는 비율</li>
 </ul>
 <blockquote>
 <p>확률이란 어떤 실험을 했을 때, 나올 수 있는 모든 경우의 수 중 어떤 특정한 조건을 만족하는 사건이 발생하는 비율을 말한다.</p>
 </blockquote>
 <p>$$<br>P(A) = \frac {\text{A 사건이 일어나는 경우의 수}}{\text{모든 사건이 일어나는 경우의 수}}<br>$$</p>
-<p>출처:</p>
 <ul>
 <li><a href="https://drhongdatanote.tistory.com/49" target="_blank" rel="noopener">[개념 통계]확률 변수와 확률 함수</a></li>
 </ul>
@@ -427,30 +423,25 @@
 <ul>
 <li>정규 분포는 평균 값에 가장 많은 데이터가 분포되어 있고 평균과 떨어질 수록 적게 분포되는 특징을 가지고 있다.</li>
 </ul>
-<p>출처:</p>
 <ul>
 <li><a href="https://drhongdatanote.tistory.com/50" target="_blank" rel="noopener">[개념 통계]정규분포와 표준정규분포 그리고 Z-score</a></li>
 </ul>
 <hr>
 <p>인간과 자연 세상에서 일어나는 수많은 일을 설명하는 핵심 개념이다.<br>통계학에서 사용하는 각종 확률분포 중에서도 가장 중요하게 다루는 분포이다.</p>
-<p>정규분포는 특정값의 출현비율을 그렸을 때, 중심(평균값)을 기준으로 좌우 대칭 형태가 나타나며, 좌우 극단으로 갈수록 급격하게 수치가 낮아지는 특징이 있다. </p>
+<p>정규분포는 특정값의 출현비율을 그렸을 때, 중심(평균값)을 기준으로 좌우 대칭 형태가 나타나며, 좌우 극단으로 갈수록 급격하게 수치가 낮아지는 특징이 있다.</p>
 <p><a href="https://ww.namu.la/s/8a577c27dc206b771919ed57c079106a8b5b3d5e7b71b061bbe1e0b2a1589e045fe1515556cfff97e673aab42a897a62508018a15a09bfc9fc2ad850f571346d776c8fdb7b6a81f28f0ec8963bbe605b16cfad49c902f6c95a308b5c16c18a39" target="_blank" rel="noopener" title="Normal Distribution" class="gallery-item"><img src="https://ww.namu.la/s/8a577c27dc206b771919ed57c079106a8b5b3d5e7b71b061bbe1e0b2a1589e045fe1515556cfff97e673aab42a897a62508018a15a09bfc9fc2ad850f571346d776c8fdb7b6a81f28f0ec8963bbe605b16cfad49c902f6c95a308b5c16c18a39" alt="Normal Distribution"></a></p>
 <p>그래서 변곡점도 2개 있는데, 모두 $μ$에서 $\sigma$만큼 떨어져 있다.하지만 표준편차의 수치가 위의 이미지처럼 꼭 기계적으로 딱딱 맞아야 하는 것은 아니고 대략 저런 ‘종’ 형태로 나타난다.</p>
 <hr>
 <h3 id="Outliers"><a href="#Outliers" class="headerlink" title="Outliers"></a>Outliers</h3><ul>
-<li><p>We expect our samples to have some spread to them, but that in the end they will appear “normal”</p>
-</li>
-<li><p>Values that radically differ from this distribution are called <ins>outliers</ins></p>
+<li><p>We expect our samples to have some spread to them, but that in the end they will appear “normal”, Values that radically differ from this distribution are called <strong><code>outliers</code></strong></p>
 </li>
 <li><p><strong>An outlier is an observation that lies an abnormal distance from other values in a random sample from a population</strong></p>
-<ul>
-<li>이상값은 모집단(population)에서 무작위로 추출한 표본(simple)의 다른 값과의 비정상적인 거리를 나타내는 관측치 입니다</li>
-</ul>
 </li>
 </ul>
-<blockquote>
-<p>“…또한 데이터에는 다양한 이유로 정상 범주를 벗어난 값이 존재할 수 있는데, 이런 이상값(outlier)을 찾아내는 것도 탐험적 데이터 분석에서 이루어져야 한다.”</p>
-</blockquote>
+<div class="note primary">
+            <h4 id="outlier"><a href="#outlier" class="headerlink" title="outlier"></a>outlier</h4><p>이상값은 모집단(population)에서 무작위로 추출한 표본(simple)의 다른 값과의 비정상적인 거리를 나타내는 관측치 입니다. 예를 들어 데이터에는 다양한 이유로 정상 범주를 벗어난 값이 존재할 수 있는데, 이런 값을 이상값(outlier)이라고 합니다.</p>
+          </div>
+
 <ul>
 <li>When we take measurements we can to measure a signal indicative of something we are interested in.</li>
 <li>If we have, two separate groups when we expect only one, we may be accidentally sampling from two differing populations.</li>
@@ -474,12 +465,12 @@
 </blockquote>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">median</span><span class="params">(v)</span>:</span></span><br><span class="line"><span class="string">''''''</span>v의 중앙값을 계산 <span class="string">''''''</span></span><br><span class="line">    n = len(v)</span><br><span class="line">    sorted_v = sorted(v)</span><br><span class="line">    midpoint = n // <span class="number">2</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> n % <span class="number">2</span> == <span class="number">1</span>:</span><br><span class="line">    <span class="comment"># 데이터 포인트의 개수가 홀수면 중앙값을 반환</span></span><br><span class="line">        <span class="keyword">return</span> sorted_v[midpoint]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        lo = midpoint - <span class="number">1</span></span><br><span class="line">        hi = midpoint</span><br><span class="line">        <span class="keyword">return</span> (sorted_v[lo] + sorted_v[hi]) / <span class="number">2</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="Modes"><a href="#Modes" class="headerlink" title="Modes"></a>Modes</h3><ul>
-<li>This is the number that appears most frequently in your samples</li>
-<li>This one is a bit less useful for general purposes<ul>
+<h3 id="Modes"><a href="#Modes" class="headerlink" title="Modes"></a>Modes</h3><p>This is the number that appears most frequently in your samples</p>
+<ul>
+<li>This one is a bit <code>less useful</code> for general purposes<ol>
 <li>Count the number of unique samples in your data set.</li>
 <li>The sample with the most occurrences (highest count) is your mode</li>
-</ul>
+</ol>
 </li>
 </ul>
 <blockquote>
@@ -498,9 +489,10 @@
 <li>This is called <strong>dispersion</strong>.</li>
 <li>Dispersion is how spread out your samples are from each other.</li>
 </ul>
-<blockquote>
-<p><strong>산포도(dispersion)</strong> 는 데이터가 얼마나 퍼져 있는지를 나타낸다. 보통 0과 근접한 값이면 데이터가 거의 퍼져있지 않다는 의미이고 큰 값이면 매우 퍼져있다는 것을 의미하는 통계치이다.</p>
-</blockquote>
+<div class="note info">
+            <h3 id="산포도-dispersion"><a href="#산포도-dispersion" class="headerlink" title="산포도(dispersion)"></a>산포도(dispersion)</h3><p>산포도(dispersion) 는 데이터가 얼마나 퍼져 있는지를 나타낸다. 보통 0과 근접한 값이면 데이터가 거의 퍼져있지 않다는 의미이고 큰 값이면 매우 퍼져있다는 것을 의미하는 통계치이다.</p>
+          </div>
+
 <ul>
 <li>예를 들어, 가장 큰 값과 작은 값의 차이를 나타내는 범위는 신포도를 나타내는 가장 간단한 통계치이다.</li>
 </ul>
@@ -510,13 +502,13 @@
 <p>Variance is a calculation of how far a variable is from the mean of a variable.</p>
 </blockquote>
 <ol>
-<li><p>essentially the average sum of squares of average difference from the group mean.</p>
+<li>essentially the average sum of squares of average difference from the group mean.</li>
+</ol>
 <ul>
 <li>그룹 평균(group mean)과 다른 평균 제곱합(average sum of squares of average)</li>
 </ul>
-</li>
-<li><p>It’s give us <ins>units squared</ins> which can be difficult to understand intuitively.</p>
-</li>
+<ol start="2">
+<li>It’s give us <ins>units squared</ins> which can be difficult to understand intuitively.</li>
 </ol>
 <blockquote>
 <p>분산(Variance)은 하나의 변수가 변수의 평균에서 얼마나 멀리 떨어져 있는지 계산한 것이다. 분산은 산포도를 측정하는 더 복잡한 개념이며 다음과 같이 계산된다.</p>
@@ -540,14 +532,14 @@
 <ol>
 <li>Median is a special case quantile. It’s for 50 % of the population.</li>
 <li>A common use of quantiles is to specify the Interquartile Range (or the values that fall above 25% of the population and below 75% of the population - i.e. the central 50%).</li>
-<li>Interquartile range is often used with box plots<ul>
+<li>Interquartile range is often used with box plots</li>
+</ol>
+<ul>
 <li>Box = interquartile range</li>
 <li>Mid-line = median</li>
 <li>Whiskers = 95% of the population</li>
 <li>Stars = outliers</li>
 </ul>
-</li>
-</ol>
 <blockquote>
 <p>분위(quantile)는 중앙값(median)을 포괄하는 개념인데, 데이터의 특정 백분위보다 낮은 값을 의미한다. (즉, median은 상위 50%보다 작은 값을 의미하는 것이다.)</p>
 </blockquote>
@@ -558,18 +550,10 @@
 <li>Variable that vary together are said to <strong>covary</strong>.</li>
 <li>When things covary, they have a correlation. (they co-relate)</li>
 </ul>
-<blockquote>
-<p>상관 분석(Correlation analysis) 또는 ‘상관관계’ 또는 ‘상관’은 확률론과 통계학에서 두 변수간에 어떤 선형적 또는 비선형적 관계를 갖고 있는 지를 분석하는 방법이다.<br><br>확률론과 통계학에서, 공분산(covariance)은 2개의 확률변수의 상관정도를 나타내는 값이다.(1개의 변수의 이산정도를 나타내는 분산과는 별개임) 만약 2개의 변수중 하나의 값이 상승하는 경향을 보일 때, 다른 값도 상승하는 경향의 상관관계에 있다면, 공분산의 값은 양수가 될 것이다. 반대로 2개의 변수중 하나의 값이 상승하는 경향을 보일 때, 다른 값이 하강하는 경향을 보인다면 공분산의 값은 음수가 된다.</p>
-</blockquote>
-<p>분산(Variance)는 하나의 변수가 변수의 평균에서 얼마나 떨어져 있는지 계산한다면, 공분산(Covariance)은 두 변수가 각각 평균에서 얼마나 떨어져 있는지 살펴본다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">covariance</span><span class="params">(x, y)</span>:</span></span><br><span class="line">    n = len(x)</span><br><span class="line">    <span class="keyword">return</span> dot(de_mean(x), de_mean(y)) / (n - <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<div class="note primary">
+            <h3 id="Correlation-analysis"><a href="#Correlation-analysis" class="headerlink" title="Correlation analysis"></a>Correlation analysis</h3><p>상관 분석(Correlation analysis) 또는 ‘상관관계’ 또는 ‘상관’은 확률론과 통계학에서 두 변수간에 어떤 선형적 또는 비선형적 관계를 갖고 있는 지를 분석하는 방법이다.</p><p>확률론과 통계학에서, 공분산(covariance)은 2개의 확률변수의 상관정도를 나타내는 값이다.(1개의 변수의 이산정도를 나타내는 분산과는 별개임) 만약 2개의 변수중 하나의 값이 상승하는 경향을 보일 때, 다른 값도 상승하는 경향의 상관관계에 있다면, 공분산의 값은 양수가 될 것이다. 반대로 2개의 변수중 하나의 값이 상승하는 경향을 보일 때, 다른 값이 하강하는 경향을 보인다면 공분산의 값은 음수가 된다.</p><p>분산(Variance)는 하나의 변수가 변수의 평균에서 얼마나 떨어져 있는지 계산한다면, 공분산(Covariance)은 두 변수가 각각 평균에서 얼마나 떨어져 있는지 살펴본다.</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">covariance</span><span class="params">(x, y)</span>:</span></span><br><span class="line">    n = len(x)</span><br><span class="line">    <span class="keyword">return</span> dot(de_mean(x), de_mean(y)) / (n - <span class="number">1</span>)</span><br></pre></td></tr></table></figure><ul><li><code>dot</code>은 각 성분별로 곱한 값을 더해 준다.</li><li>만약 x와 y 모두 각각의 평균보다 크거나 작은 경우, 양수가 더해질 것이다. (Positive Correlation)</li><li>반면 둘 중 하나는 평균보다 크고, 다른 하나는 평균보다 작을 경우, 음수가 더해질 것이다. (Negative Correlation)</li><li>만약 공분산이 0이면 그와 같은 관계가 존재하지 않는다는 것을 의미한다.</li></ul>
+          </div>
 
-<ul>
-<li><code>dot</code>은 각 성분별로 곱한 값을 더해 준다.</li>
-<li>만약 x와 y 모두 각각의 평균보다 크거나 작은 경우, 양수가 더해질 것이다. (Positive Correlation)</li>
-<li>반면 둘 중 하나는 평균보다 크고, 다른 하나는 평균보다 작을 경우, 음수가 더해질 것이다. (Negative Correlation)</li>
-<li>만약 공분산이 0이면 그와 같은 관계가 존재하지 않는다는 것을 의미한다.</li>
-</ul>
 <hr>
 <ul>
 <li>Things can correlate positivly, negatively, or not at all.</li>
@@ -673,12 +657,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/02/18/2020-02-18-csci259-test1/" rel="prev" title="Csci 259 Test1 Review Questions">
-      <i class="fa fa-chevron-left"></i> Csci 259 Test1 Review Questions
+    <a href="/2020/02/19/2020-02-20-csci343-lec6/" rel="prev" title="Csci 343 - Distributions">
+      <i class="fa fa-chevron-left"></i> Csci 343 - Distributions
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/02/19/2020-02-20-csci343-lec6/" rel="next" title="Csci 343 - Distributions">
-      Csci 343 - Distributions <i class="fa fa-chevron-right"></i>
+    <a href="/2020/02/24/2020-02-24-NexT-Theme-test/" rel="next" title="NexT Theme Plugin">
+      NexT Theme Plugin <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -746,7 +730,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Samples-and-Population"><span class="nav-number">1.</span> <span class="nav-text">Samples and Population</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Normal-Distribution"><span class="nav-number">1.1.</span> <span class="nav-text">Normal Distribution</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#정규분포-Normal-distribution"><span class="nav-number">1.1.1.</span> <span class="nav-text">정규분포(Normal distribution)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Outliers"><span class="nav-number">1.2.</span> <span class="nav-text">Outliers</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Averages"><span class="nav-number">2.</span> <span class="nav-text">Averages</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Means"><span class="nav-number">2.1.</span> <span class="nav-text">Means</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Medians"><span class="nav-number">2.2.</span> <span class="nav-text">Medians</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Modes"><span class="nav-number">2.3.</span> <span class="nav-text">Modes</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dispersion"><span class="nav-number">3.</span> <span class="nav-text">Dispersion</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Variance"><span class="nav-number">3.1.</span> <span class="nav-text">Variance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Standard-Deviation"><span class="nav-number">3.2.</span> <span class="nav-text">Standard Deviation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Quantiles"><span class="nav-number">3.2.1.</span> <span class="nav-text">Quantiles</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Correlation"><span class="nav-number">4.</span> <span class="nav-text">Correlation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Correlation-and-Causation"><span class="nav-number">4.1.</span> <span class="nav-text">Correlation and Causation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary"><span class="nav-number">5.</span> <span class="nav-text">Summary</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Statistic"><span class="nav-number">5.1.</span> <span class="nav-text">Statistic</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Population"><span class="nav-number">5.2.</span> <span class="nav-text">Population</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sample"><span class="nav-number">5.3.</span> <span class="nav-text">Sample</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nomal-Distribution"><span class="nav-number">5.4.</span> <span class="nav-text">Nomal Distribution</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Outlier"><span class="nav-number">5.5.</span> <span class="nav-text">Outlier</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Average"><span class="nav-number">5.6.</span> <span class="nav-text">Average</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dispersion-신포도"><span class="nav-number">5.7.</span> <span class="nav-text">dispersion(신포도)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#variance-분산"><span class="nav-number">5.8.</span> <span class="nav-text">variance(분산)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#standard-deviation-표준-편차"><span class="nav-number">5.9.</span> <span class="nav-text">standard deviation(표준 편차)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#quantile"><span class="nav-number">5.10.</span> <span class="nav-text">quantile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Interqurtile"><span class="nav-number">5.11.</span> <span class="nav-text">Interqurtile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Correlation-상관관계"><span class="nav-number">5.12.</span> <span class="nav-text">Correlation (상관관계)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Covery"><span class="nav-number">5.13.</span> <span class="nav-text">Covery</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Positive-Corrleation"><span class="nav-number">5.13.1.</span> <span class="nav-text">Positive Corrleation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Negative-Correlation"><span class="nav-number">5.13.2.</span> <span class="nav-text">Negative Correlation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Get-closer-to-Zero"><span class="nav-number">5.13.3.</span> <span class="nav-text">Get closer to Zero</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#correlation-and-causation-상관관계와-인과관계"><span class="nav-number">5.14.</span> <span class="nav-text">correlation and causation(상관관계와 인과관계)</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Samples-and-Population"><span class="nav-number">1.</span> <span class="nav-text">Samples and Population</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#통계학-statistics"><span class="nav-number">1.1.</span> <span class="nav-text">통계학(statistics)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Normal-Distribution"><span class="nav-number">1.2.</span> <span class="nav-text">Normal Distribution</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#확률-변수"><span class="nav-number">1.2.1.</span> <span class="nav-text">확률 변수</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Warning"><span class="nav-number">1.2.2.</span> <span class="nav-text">Warning</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#표본점-sample"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">표본점(sample)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#정규분포-Normal-distribution"><span class="nav-number">1.2.3.</span> <span class="nav-text">정규분포(Normal distribution)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Outliers"><span class="nav-number">1.3.</span> <span class="nav-text">Outliers</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#outlier"><span class="nav-number">1.3.1.</span> <span class="nav-text">outlier</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Averages"><span class="nav-number">2.</span> <span class="nav-text">Averages</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Means"><span class="nav-number">2.1.</span> <span class="nav-text">Means</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Medians"><span class="nav-number">2.2.</span> <span class="nav-text">Medians</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Modes"><span class="nav-number">2.3.</span> <span class="nav-text">Modes</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dispersion"><span class="nav-number">3.</span> <span class="nav-text">Dispersion</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#산포도-dispersion"><span class="nav-number">3.1.</span> <span class="nav-text">산포도(dispersion)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Variance"><span class="nav-number">3.2.</span> <span class="nav-text">Variance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Standard-Deviation"><span class="nav-number">3.3.</span> <span class="nav-text">Standard Deviation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Quantiles"><span class="nav-number">3.3.1.</span> <span class="nav-text">Quantiles</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Correlation"><span class="nav-number">4.</span> <span class="nav-text">Correlation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Correlation-analysis"><span class="nav-number">4.1.</span> <span class="nav-text">Correlation analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Correlation-and-Causation"><span class="nav-number">4.2.</span> <span class="nav-text">Correlation and Causation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary"><span class="nav-number">5.</span> <span class="nav-text">Summary</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Statistic"><span class="nav-number">5.1.</span> <span class="nav-text">Statistic</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Population"><span class="nav-number">5.2.</span> <span class="nav-text">Population</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sample"><span class="nav-number">5.3.</span> <span class="nav-text">Sample</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nomal-Distribution"><span class="nav-number">5.4.</span> <span class="nav-text">Nomal Distribution</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Outlier"><span class="nav-number">5.5.</span> <span class="nav-text">Outlier</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Average"><span class="nav-number">5.6.</span> <span class="nav-text">Average</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dispersion-신포도"><span class="nav-number">5.7.</span> <span class="nav-text">dispersion(신포도)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#variance-분산"><span class="nav-number">5.8.</span> <span class="nav-text">variance(분산)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#standard-deviation-표준-편차"><span class="nav-number">5.9.</span> <span class="nav-text">standard deviation(표준 편차)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#quantile"><span class="nav-number">5.10.</span> <span class="nav-text">quantile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Interqurtile"><span class="nav-number">5.11.</span> <span class="nav-text">Interqurtile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Correlation-상관관계"><span class="nav-number">5.12.</span> <span class="nav-text">Correlation (상관관계)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Covery"><span class="nav-number">5.13.</span> <span class="nav-text">Covery</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Positive-Corrleation"><span class="nav-number">5.13.1.</span> <span class="nav-text">Positive Corrleation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Negative-Correlation"><span class="nav-number">5.13.2.</span> <span class="nav-text">Negative Correlation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Get-closer-to-Zero"><span class="nav-number">5.13.3.</span> <span class="nav-text">Get closer to Zero</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#correlation-and-causation-상관관계와-인과관계"><span class="nav-number">5.14.</span> <span class="nav-text">correlation and causation(상관관계와 인과관계)</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -762,14 +746,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">14</span>
           <span class="site-state-item-name">포스트</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">카테고리</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -873,8 +857,40 @@
 
 
 
+<script>
+if (document.querySelectorAll('div.pdf').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js', () => {
+    document.querySelectorAll('div.pdf').forEach(element => {
+      PDFObject.embed(element.getAttribute('target'), element, {
+        pdfOpenParams: {
+          navpanes: 0,
+          toolbar: 0,
+          statusbar: 0,
+          pagemode: 'thumbs',
+          view: 'FitH'
+        },
+        PDFJS_URL: '/lib/pdf/web/viewer.html',
+        height: element.getAttribute('height') || '500px'
+      });
+    });
+  }, window.PDFObject);
+}
+</script>
 
 
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme: 'forest',
+      logLevel: 3,
+      flowchart: { curve: 'linear' },
+      gantt: { axisFormat: '%m/%d/%Y' },
+      sequence: { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
 
 
   
