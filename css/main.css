@@ -183,6 +183,23 @@ body {
     padding-right: 0 !important;
   }
 }
+h2,
+h3,
+h4,
+h5,
+h6 {
+  border-bottom: 1px solid #ddd;
+}
+@media (max-width: 767px) {
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 0px 0px 10px 0px;
+    border-bottom: 1px solid #eee;
+  }
+}
 h1,
 h2,
 h3,
@@ -244,6 +261,11 @@ hr {
   border: 0;
   height: 3px;
   margin: 40px 0;
+}
+@media (max-width: 767px) {
+  hr {
+    margin: 20px 0 25px 0;
+  }
 }
 blockquote {
   border-left: 4px solid #ddd;
@@ -767,8 +789,9 @@ pre .javascript .function {
 .post-body .note h6 {
   margin-top: 3px;
   border-bottom: initial;
-  margin-bottom: 0;
+  margin-bottom: 10px;
   padding-top: 0;
+  font-weight: 800;
 }
 .post-body .note p:first-child,
 .post-body .note ul:first-child,
@@ -1255,7 +1278,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ff38f2;
+  background: #dfff3c;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1593,6 +1616,16 @@ pre .javascript .function {
     opacity: 0.8;
   }
 }
+.reading-progress-bar {
+  background: #222222;
+  display: block;
+  height: 2px;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 0;
+  z-index: 1500;
+}
 .post-body {
   font-family: 'NanumSquare', 'NanumSquare', "PingFang SC", "Microsoft YaHei", sans-serif;
   margin: 0 0 1.5em 0;
@@ -1628,7 +1661,6 @@ pre .javascript .function {
 }
 .post-body h3 {
   font-size: 1.575rem;
-  font-weight: 500;
 }
 .post-body h4 {
   font-size: 1.175rem;
@@ -1662,7 +1694,7 @@ pre .javascript .function {
   text-align: left;
 }
 .post-body ol {
-  padding-inline-start: 20px;
+  padding-inline-start: 25px;
 }
 .post-body ul {
   padding-inline-start: 0px;
@@ -1750,7 +1782,7 @@ pre .javascript .function {
 @media screen and (min-width: 50em) {
   .post-body {
     font-size: 1.05rem;
-    line-height: 1.9rem;
+    line-height: 1.6;
   }
 }
 .phost-sticky-flag {
@@ -1930,7 +1962,7 @@ pre .javascript .function {
     border-bottom: 1px solid #404040;
   }
   .posts-expand h1.post-title {
-    font-size: 1.8125rem;
+    font-size: 1.5rem;
     text-align: left;
     line-height: 1.25em;
     padding-bottom: 30px;
@@ -1945,13 +1977,13 @@ pre .javascript .function {
     display: none;
   }
   .posts-expand h2 {
-    font-size: 1.675rem;
+    font-size: 1.2rem;
   }
   .posts-expand h3 {
-    font-size: 1.375rem;
+    font-size: 1rem;
   }
   .posts-expand h4 {
-    font-size: 1.075rem;
+    font-size: 0.9rem;
   }
   .posts-expand code {
     font-family: Consolas, sans-serif;
