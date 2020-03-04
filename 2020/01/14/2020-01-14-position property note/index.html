@@ -74,14 +74,6 @@
     isPost: true
   };
 </script>
-<script>
-  ((w, d) => {
-    'use strict';
-      const userScheme = localStorage.getItem('Scheme');
-      if (!userScheme) return;
-    d.documentElement.className += ' darkScheme';
-  })(window, document);
-</script>
 
   <title>Position property | Git Page</title>
   
@@ -346,12 +338,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/01/14/2020-01-14-Advanced%20CSS/" rel="prev" title="Advanced CSS">
-      <i class="fa fa-chevron-left"></i> Advanced CSS
+    <a href="/2020/01/12/2020-01-12-Flexbox%20Note/" rel="prev" title="Fluid layouts with Flexbox">
+      <i class="fa fa-chevron-left"></i> Fluid layouts with Flexbox
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/02/15/2020-02-15-Baekjoon-10989/" rel="next" title="BAEKJOON 10989 Solution">
-      BAEKJOON 10989 Solution <i class="fa fa-chevron-right"></i>
+    <a href="/2020/01/14/2020-01-14-Advanced%20CSS/" rel="next" title="Advanced CSS">
+      Advanced CSS <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -469,12 +461,6 @@
   </div>
 
 
-<div class="night-mode motion-element">
-  <a role="button" class="night-btn">
-    <i class="fa fa-lightbulb-o"></i>
-    Night Mode
-  </a>
-</div>
 
       </div>
 
@@ -623,25 +609,6 @@ if (document.querySelectorAll('pre.mermaid').length) {
       (d.head || d.body).appendChild(s);
     }
   });
-</script>
-<script>
-  ((w, d) => {
-    'use strict';
-      let userScheme = localStorage.getItem('Scheme');
-      if (userScheme) d.documentElement.className += ' darkScheme';
-      const btn = d.querySelector('.night-btn');
-      w.addEventListener('keydown', e => {
-        if (e.altKey && e.code === 'KeyX') btn.click();
-      });
-      btn.addEventListener('click', () => {
-        d.documentElement.classList.toggle('darkScheme');
-        if ( d.documentElement.classList.contains('darkScheme') ) {
-          localStorage.setItem('Scheme', 'Dark');
-          return;
-        }
-        localStorage.removeItem('Scheme');
-      });
-  })(window, document);
 </script>
 
 </body>

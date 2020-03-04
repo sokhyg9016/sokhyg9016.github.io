@@ -75,14 +75,6 @@
     isPost: true
   };
 </script>
-<script>
-  ((w, d) => {
-    'use strict';
-      const userScheme = localStorage.getItem('Scheme');
-      if (!userScheme) return;
-    d.documentElement.className += ' darkScheme';
-  })(window, document);
-</script>
 
   <title>Challenge 2 - Sentiment Analysis | Git Page</title>
   
@@ -384,8 +376,9 @@
 </tbody></table>
 <h3 id="NOTE"><a href="#NOTE" class="headerlink" title="NOTE"></a>NOTE</h3><ol>
 <li>플롯 형식이 포함된 샘플(시리즈 이름이 포함된 축 레이블(axis labels) 및 제목(d title) 포함)과 일치하는지 확인하십시오.</li>
-<li>프로그램 실행 시 표시할 영상 시리즈의 이름을 입력하라는 메시지가 표시되어야 합니다.(아래 예 참조)</li>
+<li>프로그램 실행 시 표시할 영상 시리즈의 이름을 입력하라는 메시지가 표시되어야 합니다.[^1]</li>
 </ol>
+<p>[^1]: 아래 그림 참조</p>
 <div class="pdf" target="../../../../pdf/Csci343/ch2/Challenge_2.pdf" height=""></div>
 
 <hr>
@@ -559,12 +552,6 @@
   </div>
 
 
-<div class="night-mode motion-element">
-  <a role="button" class="night-btn">
-    <i class="fa fa-lightbulb-o"></i>
-    Night Mode
-  </a>
-</div>
 
       </div>
 
@@ -761,25 +748,6 @@ if (document.querySelectorAll('pre.mermaid').length) {
       (d.head || d.body).appendChild(s);
     }
   });
-</script>
-<script>
-  ((w, d) => {
-    'use strict';
-      let userScheme = localStorage.getItem('Scheme');
-      if (userScheme) d.documentElement.className += ' darkScheme';
-      const btn = d.querySelector('.night-btn');
-      w.addEventListener('keydown', e => {
-        if (e.altKey && e.code === 'KeyX') btn.click();
-      });
-      btn.addEventListener('click', () => {
-        d.documentElement.classList.toggle('darkScheme');
-        if ( d.documentElement.classList.contains('darkScheme') ) {
-          localStorage.setItem('Scheme', 'Dark');
-          return;
-        }
-        localStorage.removeItem('Scheme');
-      });
-  })(window, document);
 </script>
 
 </body>

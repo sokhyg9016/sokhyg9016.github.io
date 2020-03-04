@@ -79,14 +79,6 @@
     isPost: true
   };
 </script>
-<script>
-  ((w, d) => {
-    'use strict';
-      const userScheme = localStorage.getItem('Scheme');
-      if (!userScheme) return;
-    d.documentElement.className += ' darkScheme';
-  })(window, document);
-</script>
 
   <title>Csci 343 - Descriptive Statistics | Git Page</title>
   
@@ -425,11 +417,9 @@
 <h4 id="정규분포-Normal-distribution"><a href="#정규분포-Normal-distribution" class="headerlink" title="정규분포(Normal distribution)"></a>정규분포(Normal distribution)</h4><ul>
 <li>정규분포는 통계학에서 가장 많이 쓰이는 확률분포이다.</li>
 <li>우리 주변에서 일반적으로 발견되는 좌우 대칭의 종 모양으로 생긴 분포이다. (가우스 분포라고도 부른다.)</li>
-<li>우리 주변의 많은 변수 또는 자료들이 정규분포를 따른다고 알려져 있다.</li>
+<li>우리 주변의 많은 변수 또는 자료들이 정규분포를 따른다고 알려져 있다.[^1]</li>
 </ul>
-<blockquote>
-<p>E.g.s 대한민국 남성의 키 분포, 수능 점수의 분포 등</p>
-</blockquote>
+<p>[^1]:E.g.s 대한민국 남성의 키 분포, 수능 점수의 분포 등</p>
 <ul>
 <li>정규 분포는 평균 값에 가장 많은 데이터가 분포되어 있고 평균과 떨어질 수록 적게 분포되는 특징을 가지고 있다.</li>
 </ul>
@@ -812,12 +802,6 @@
   </div>
 
 
-<div class="night-mode motion-element">
-  <a role="button" class="night-btn">
-    <i class="fa fa-lightbulb-o"></i>
-    Night Mode
-  </a>
-</div>
 
       </div>
 
@@ -1014,25 +998,6 @@ if (document.querySelectorAll('pre.mermaid').length) {
       (d.head || d.body).appendChild(s);
     }
   });
-</script>
-<script>
-  ((w, d) => {
-    'use strict';
-      let userScheme = localStorage.getItem('Scheme');
-      if (userScheme) d.documentElement.className += ' darkScheme';
-      const btn = d.querySelector('.night-btn');
-      w.addEventListener('keydown', e => {
-        if (e.altKey && e.code === 'KeyX') btn.click();
-      });
-      btn.addEventListener('click', () => {
-        d.documentElement.classList.toggle('darkScheme');
-        if ( d.documentElement.classList.contains('darkScheme') ) {
-          localStorage.setItem('Scheme', 'Dark');
-          return;
-        }
-        localStorage.removeItem('Scheme');
-      });
-  })(window, document);
 </script>
 
 </body>
