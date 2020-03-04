@@ -2239,79 +2239,6 @@ merge newbranch
       </tags>
   </entry>
   <entry>
-    <title>Advanced CSS</title>
-    <url>/2020/01/14/2020-01-14-Advanced%20CSS/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
-<h2 id="What-is-Transitions"><a href="#What-is-Transitions" class="headerlink" title="What is Transitions?"></a>What is Transitions?</h2><ol>
-<li>트랜지션(Transitions)이란 element의 이동 및 변경을 멋지게 보여주는 효과들이다.</li>
-<li>트랜지션은 focus, active, hover에서 효과적으로 사용된다.</li>
-<li>즉 <strong>transition</strong> 이란 element가 하나의 state에서 다른 state로 넘어갈 때의 효과를 말한다.</li>
-</ol>
-<h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span>Text<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: green;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">  <span class="attribute">transition</span>: background-color <span class="number">5s</span> ease-in-out;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>여기서,</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">transition</span>: <span class="selector-tag">background-color</span> 5<span class="selector-tag">s</span> <span class="selector-tag">ease-in-out</span>;</span><br></pre></td></tr></table></figure>
-
-<ol>
-<li>위 코드의 의미는 배경색(background-color)를 <code>5s</code> 안에 <strong>ease-in-out</strong> 애니메이션 효과를 적용하여 바꾸라는 의미이다.</li>
-<li>또한 이렇게 <strong>transition</strong> 앞에 바꾸고 싶은 property 값을 명시해주면 그 속성 값만 특정 효과를 적용하여 바꾸는 것이며, 만약 1개 이상의 설정값을 바꾸고 싶다면 transition 앞에 <code>all</code>이라고 적으면 된다.</li>
-</ol>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">transition</span>: <span class="selector-tag">all</span> 5<span class="selector-tag">s</span> <span class="selector-tag">ease-in-out</span>;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a href="https://developer.mozilla.org/en/docs/Web/CSS/transition" target="_blank" rel="noopener">Official Transition Documentation</a></p>
-<h2 id="What-is-Transformation"><a href="#What-is-Transformation" class="headerlink" title="What is Transformation?"></a>What is Transformation?</h2><ol>
-<li>트랜스포매이션(Transformation)은 html문서의 element들을 변경, 모습이 변하는 효과를 뜻한다.</li>
-<li>즉 transform이란 element의 모양새(shape)를 바꾸는 것이다.</li>
-<li><code>Transition</code>과 같이 합쳐서 사용할 수 있다. (즉 하나의 state에서 다른 state로 변할 때의 그 state에서의 모양새를 변경할 수 있다.)</li>
-</ol>
-<h3 id="Example-1"><a href="#Example-1" class="headerlink" title="Example"></a>Example</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">500px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">500px</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: red;</span><br><span class="line">  <span class="attribute">transition</span>: transform <span class="number">0.5s</span> ease-in-out;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.box</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">skew</span>(<span class="number">30deg</span>, <span class="number">20deg</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>이렇게 되면 <code>.box</code>에 해당하는 element에 마우스를 올려놓았을 때 0.5s 초 안에 해당 element가<br>설정한 [<code>skew(...)</code>] 모습으로 변화한다.</p>
-<p>또한 <code>transform</code> 설정을 복수로 결합하여 사용할 수 있다.</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">transform</span>: <span class="selector-tag">rotate</span>(1<span class="selector-tag">turn</span>) <span class="selector-tag">scale</span>(0<span class="selector-class">.5</span>, 0<span class="selector-class">.5</span>);</span><br></pre></td></tr></table></figure>
-
-<h3 id="Reference-1"><a href="#Reference-1" class="headerlink" title="Reference"></a>Reference</h3><p><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transform" target="_blank" rel="noopener">CSS Transform Documentation</a></p>
-<h2 id="What-is-Animation"><a href="#What-is-Animation" class="headerlink" title="What is Animation?"></a>What is Animation?</h2><ul>
-<li><strong>Keyframe</strong> 은 CSS로 하여금 사용자가 animation을 생성했다는 것을 알려준다.</li>
-</ul>
-<blockquote>
-<p>&nbsp;<br><strong>First step</strong>: Default status<br><strong>Second step</strong>: The element that Something changes</p>
-</blockquote>
-<ul>
-<li>Animation status가 2개만 필요할 때는 <code>from</code> ~ <code>to</code>만 작성하면 된다.</li>
-<li>더 세부적인 각 단계별 status step를 작성하고 싶을 때는 <strong>0% ~ 100%</strong> 까지 작성하면 된다.</li>
-</ul>
-<h3 id="Example-2"><a href="#Example-2" class="headerlink" title="Example"></a>Example</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span>Text<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">70px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">70px</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: red;</span><br><span class="line">  <span class="attribute">animation</span>: <span class="number">1.5s</span> ScaleAndRotateSquare infinite ease-in-out;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@keyframes</span> ScaleAndRotateSquare &#123;</span><br><span class="line">  0% &#123;</span><br><span class="line">    <span class="attribute">transform</span>: none;</span><br><span class="line">  &#125;</span><br><span class="line">  50% &#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">rotate</span>(<span class="number">1turn</span>) <span class="built_in">scale</span>(<span class="number">0.5</span>, <span class="number">0.5</span>);</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  100% &#123;</span><br><span class="line">    <span class="attribute">transform</span>: none;</span><br><span class="line">    <span class="attribute">color</span>: blue;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="What-is-media-query"><a href="#What-is-media-query" class="headerlink" title="What is media query?"></a>What is media query?</h2><blockquote>
-<p>Media queries are conditions that let me change the CSS based on the size of the browser</p>
-</blockquote>
-<ol>
-<li><code>media query</code>는 사용자의 디스플레이 환경에 따른 CSS 설정을 바꾸어 줄 수 있는 기능이다.</li>
-<li>mobile - desktop 환경에 따른 디자인 변경을 가능하게 해준다.</li>
-<li>반응형 웹 디자인에 유용</li>
-</ol>
-<h3 id="Example-3"><a href="#Example-3" class="headerlink" title="Example"></a>Example</h3><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: green;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">min-width:</span> <span class="number">320px</span>) <span class="keyword">and</span> (<span class="attribute">max-width:</span> <span class="number">640px</span>) &#123;</span><br><span class="line">  <span class="selector-tag">body</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: blue;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
-        var options = {
-            selector: '.gallery-item'
-        };
-        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
-        }</script>]]></content>
-      <categories>
-        <category>CSS3</category>
-      </categories>
-      <tags>
-        <tag>CSS3</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Position property</title>
     <url>/2020/01/14/2020-01-14-position%20property%20note/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
@@ -2349,6 +2276,83 @@ merge newbranch
 <h2 id="position-html"><a href="#position-html" class="headerlink" title="position.html"></a>position.html</h2><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"ie=edge"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Position property<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">      /*</span><br><span class="line">            각 브라우저 마다 가지고 있는 Default 값을 상쇄하기 위해서</span><br><span class="line">            아래와 같은 설정을 해준다. </span><br><span class="line">        */</span><br><span class="line">      body,</span><br><span class="line">      html &#123;</span><br><span class="line">        height: 100%;</span><br><span class="line">        margin: 0;</span><br><span class="line">        padding: 0;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      body &#123;</span><br><span class="line">        height: 100%;</span><br><span class="line">        background-color: gray;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">      <span class="selector-class">.abs-box</span> &#123;</span></span><br><span class="line">        width: 400px;</span><br><span class="line">        height: 400px;</span><br><span class="line">        background-color: yellow;</span><br><span class="line">        position: relative;</span><br><span class="line">        top: 300px;</span><br><span class="line">        left: 50%;</span><br><span class="line">        transform: translate(-50%, -50%);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">      <span class="selector-class">.abs-child</span> &#123;</span></span><br><span class="line">        width: 100px;</span><br><span class="line">        height: 100px;</span><br><span class="line">        background-color: green;</span><br><span class="line">        position: absolute;</span><br><span class="line">        top: 10px;</span><br><span class="line">        left: 10px;</span><br><span class="line">      &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"abs-box"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"abs-child"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p><a href="../../../../img/position_property.png" title="Image description" class="gallery-item"><img src="../../../../img/position_property.png" alt="Image description"></a></p>
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>]]></content>
+      <categories>
+        <category>CSS3</category>
+      </categories>
+      <tags>
+        <tag>CSS3</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Advanced CSS</title>
+    <url>/2020/01/14/2020-01-14-Advanced%20CSS/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
+<h2 id="What-is-Transitions"><a href="#What-is-Transitions" class="headerlink" title="What is Transitions?"></a>What is Transitions?</h2><ol>
+<li>트랜지션(Transitions)이란 element의 이동 및 변경을 멋지게 보여주는 효과들이다.</li>
+<li>트랜지션은 focus, active, hover에서 효과적으로 사용된다.</li>
+<li>즉 <strong>transition</strong> 이란 element가 하나의 state에서 다른 state로 넘어갈 때의 효과를 말한다.</li>
+</ol>
+<h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span>Text<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><figcaption><span>CSS</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: green;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">  <span class="attribute">transition</span>: background-color <span class="number">5s</span> ease-in-out;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>여기서,</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">transition</span>: <span class="selector-tag">background-color</span> 5<span class="selector-tag">s</span> <span class="selector-tag">ease-in-out</span>;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>위 코드의 의미는 배경색(background-color)를 <code>5s</code> 안에 <strong>ease-in-out</strong> 애니메이션 효과를 적용하여 바꾸라는 의미이다.</li>
+<li>또한 이렇게 <strong>transition</strong> 앞에 바꾸고 싶은 property 값을 명시해주면 그 속성 값만 특정 효과를 적용하여 바꾸는 것이며, 만약 1개 이상의 설정값을 바꾸고 싶다면 transition 앞에 <code>all</code>이라고 적으면 된다.</li>
+</ol>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">transition</span>: <span class="selector-tag">all</span> 5<span class="selector-tag">s</span> <span class="selector-tag">ease-in-out</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a href="https://developer.mozilla.org/en/docs/Web/CSS/transition" target="_blank" rel="noopener">Official Transition Documentation</a></p>
+<hr>
+<h2 id="What-is-Transformation"><a href="#What-is-Transformation" class="headerlink" title="What is Transformation?"></a>What is Transformation?</h2><ol>
+<li>트랜스포매이션(Transformation)은 html문서의 element들을 변경, 모습이 변하는 효과를 뜻한다.</li>
+<li>즉 transform이란 element의 모양새(shape)를 바꾸는 것이다.</li>
+<li><code>Transition</code>과 같이 합쳐서 사용할 수 있다. (즉 하나의 state에서 다른 state로 변할 때의 그 state에서의 모양새를 변경할 수 있다.)</li>
+</ol>
+<h3 id="Example-1"><a href="#Example-1" class="headerlink" title="Example"></a>Example</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">500px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">500px</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: red;</span><br><span class="line">  <span class="attribute">transition</span>: transform <span class="number">0.5s</span> ease-in-out;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.box</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">skew</span>(<span class="number">30deg</span>, <span class="number">20deg</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>이렇게 되면 <code>.box</code>에 해당하는 element에 마우스를 올려놓았을 때 0.5s 초 안에 해당 element가<br>설정한 [<code>skew(...)</code>] 모습으로 변화한다.</p>
+<p>또한 <code>transform</code> 설정을 복수로 결합하여 사용할 수 있다.</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">transform</span>: <span class="selector-tag">rotate</span>(1<span class="selector-tag">turn</span>) <span class="selector-tag">scale</span>(0<span class="selector-class">.5</span>, 0<span class="selector-class">.5</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="Reference-1"><a href="#Reference-1" class="headerlink" title="Reference"></a>Reference</h3><ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transform" target="_blank" rel="noopener">CSS Transform Documentation</a></li>
+</ul>
+<hr>
+<h2 id="What-is-Animation"><a href="#What-is-Animation" class="headerlink" title="What is Animation?"></a>What is Animation?</h2><ul>
+<li><strong>Keyframe</strong> 은 CSS로 하여금 사용자가 animation을 생성했다는 것을 알려준다.</li>
+</ul>
+<blockquote>
+<p><strong>First step</strong>: Default status<br><strong>Second step</strong>: The element that Something changes</p>
+</blockquote>
+<ul>
+<li>Animation status가 2개만 필요할 때는 <code>from</code> ~ <code>to</code>만 작성하면 된다.</li>
+<li>더 세부적인 각 단계별 status step를 작성하고 싶을 때는 <strong>0% ~ 100%</strong> 까지 작성하면 된다.</li>
+</ul>
+<h3 id="Example-2"><a href="#Example-2" class="headerlink" title="Example"></a>Example</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span>Text<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">70px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">70px</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: red;</span><br><span class="line">  <span class="attribute">animation</span>: <span class="number">1.5s</span> ScaleAndRotateSquare infinite ease-in-out;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@keyframes</span> ScaleAndRotateSquare &#123;</span><br><span class="line">  0% &#123;</span><br><span class="line">    <span class="attribute">transform</span>: none;</span><br><span class="line">  &#125;</span><br><span class="line">  50% &#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">rotate</span>(<span class="number">1turn</span>) <span class="built_in">scale</span>(<span class="number">0.5</span>, <span class="number">0.5</span>);</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  100% &#123;</span><br><span class="line">    <span class="attribute">transform</span>: none;</span><br><span class="line">    <span class="attribute">color</span>: blue;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="What-is-media-query"><a href="#What-is-media-query" class="headerlink" title="What is media query?"></a>What is media query?</h2><blockquote>
+<p>Media queries are conditions that let me change the CSS based on the size of the browser</p>
+</blockquote>
+<ol>
+<li><code>media query</code>는 사용자의 디스플레이 환경에 따른 CSS 설정을 바꾸어 줄 수 있는 기능이다.</li>
+<li>mobile - desktop 환경에 따른 디자인 변경을 가능하게 해준다.</li>
+<li>반응형 웹 디자인에 유용</li>
+</ol>
+<h3 id="Example-3"><a href="#Example-3" class="headerlink" title="Example"></a>Example</h3><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: green;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">min-width:</span> <span class="number">320px</span>) <span class="keyword">and</span> (<span class="attribute">max-width:</span> <span class="number">640px</span>) &#123;</span><br><span class="line">  <span class="selector-tag">body</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: blue;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
         var options = {
             selector: '.gallery-item'
