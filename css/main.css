@@ -174,8 +174,8 @@ body {
   background: #fff;
   color: #404040;
   font-family: 'NanumSquare', "PingFang SC", "Microsoft YaHei", sans-serif;
-  font-size: 1.05rem;
-  line-height: 1.35rem;
+  font-size: 100%;
+  line-height: 1.65;
 }
 @media (max-width: 991px) {
   body {
@@ -428,7 +428,7 @@ td {
 pre {
   background: #f7f7f7;
   color: #4d4d4c;
-  line-height: 1.6;
+  line-height: 1.65;
   margin: 0 auto 20px;
 }
 pre,
@@ -1271,7 +1271,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #4eff50;
+  background: #ffdf88;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1621,16 +1621,19 @@ pre .javascript .function {
 }
 .post-body {
   font-family: 'NanumSquare', 'NanumSquare', "PingFang SC", "Microsoft YaHei", sans-serif;
-  margin: 0 0 1.5em 0;
+  margin: 0.5em 0 1em 0;
   font-weight: 400;
   color: #55585a;
   overflow-wrap: break-word;
   word-wrap: break-word;
 }
-@media (min-width: 1200px) {
+@media (max-width: 767px) {
   .post-body {
-    font-size: 1.05rem;
+    color: #222;
   }
+}
+.post-body p {
+  margin: 0 0 20px 0;
 }
 .post-body strong>code {
   font-family: 'Menlo';
@@ -1656,13 +1659,16 @@ pre .javascript .function {
   background-color: #f0f0f0;
 }
 .post-body h2 {
-  font-size: 1.975rem;
+  font-size: 1.75rem;
 }
 .post-body h3 {
-  font-size: 1.575rem;
+  font-size: 1.55rem;
 }
 .post-body h4 {
-  font-size: 1.175rem;
+  font-size: 1.35rem;
+}
+.post-body h5 {
+  font-size: 1.15rem;
 }
 .post-body strong,
 .post-body b {
@@ -1676,7 +1682,8 @@ pre .javascript .function {
   border-bottom: 1px solid #ddd;
 }
 .post-body table {
-  font-family: Consolas, sans-serif;
+  font-family: 'Segoe UI', Consolas, sans-serif;
+  font-size: 90%;
 }
 .post-body table>thead {
   border-left: none;
@@ -1700,7 +1707,7 @@ pre .javascript .function {
   border: 1px solid #e3e3e3;
   border-left: 5px solid #ccc;
   margin: 10px 0px;
-  padding: 0.5em 1em;
+  padding: 0 1em;
 }
 .post-body blockquote p {
   margin: 0.6em 0;
@@ -1717,18 +1724,11 @@ pre .javascript .function {
 .post-body ul {
   text-align: left;
 }
-.post-body ol {
-  padding-inline-start: 25px;
-}
-.post-body ul {
-  padding-inline-start: 0px;
-  list-style: none;
-}
 .post-body ul>li {
   margin-top: 3px;
 }
 .post-body ol>li {
-  margin-top: 6px;
+  margin-top: 3px;
 }
 .post-body ul>li:not(.tab)>a:not(.category-list-link):before {
   content: "\f0c1"; /* FontAwesome Unicode */
@@ -1752,63 +1752,38 @@ pre .javascript .function {
   color: #f9f9f9;
   background-color: #404040;
 }
-.post-body ul>li>ul>li:not(.category-list-item) {
+.post-body ul.category-list-child {
+  list-style: none;
+}
+.post-body ul>li>ul>li.category-list-item {
   font-size: 0.95rem;
-  padding-left: 20px;
+  padding-left: 10px;
 }
-.post-body ul>li>ul>li:not(.category-list-item):first-child {
-  margin-top: 15px;
+.post-body ul>li>ul>li.category-list-item:last-child {
+  margin-bottom: 10px;
 }
-.post-body ul>li>ul>li:not(.category-list-item):last-child {
-  margin-bottom: 25px;
+.post-body ul>li>ul>li.category-list-item>a {
+  opacity: 0.8;
 }
-.post-body ol>li>ul>li:not(.category-list-item) {
-  font-size: 0.95rem;
-  padding: 10px 10px 10px 20px;
-}
-.post-body ul>li>ul>li:not(.category-list-item):before {
-  content: "\f14a"; /* FontAwesome Unicode */
+.post-body ul>li>ul>li.category-list-item:before {
+  content: "┗";
   font-family: FontAwesome;
-  font-weight: bold;
+  font-weight: 100;
   display: inline-block;
   text-decoration: none;
   border: none;
-  margin-right: 0.7rem; /* same as padding-left set on li */
-  width: 0.7rem; /* same as padding-left set on li */
+  margin-right: 0.5rem;
+  width: 0.5rem;
 }
 .post-body .category-list>li.category-list-item:before {
-  content: "\f07b"; /* FontAwesome Unicode */
+  content: "\f07b";
   font-family: FontAwesome;
   font-weight: bold;
   display: inline-block;
   text-decoration: none;
   border: none;
-  margin-right: 0.7rem; /* same as padding-left set on li */
-  width: 0.7rem; /* same as padding-left set on li */
-}
-.post-body ul>li>ul>li,
-.post-body ul>li>ul>li:before {
-  font-size: 90%;
-}
-.post-body ul>li>ul>li:before {
-  content: "\f105"; /* FontAwesome Unicode */
-  font-family: FontAwesome;
-  font-weight: bold;
-  display: inline-block;
-  text-decoration: none;
-  border: none;
-  margin-right: 0rem; /* same as padding-left set on li */
-  width: 0.5rem; /* same as padding-left set on li */
-}
-.post-body ol>li>ul>li:before {
-  content: "\f105"; /* FontAwesome Unicode */
-  font-family: FontAwesome;
-  font-weight: bold;
-  display: inline-block;
-  text-decoration: none;
-  border: none;
-  margin-left: 0; /* same as padding-left set on li */
-  width: 0.7rem; /* same as padding-left set on li */
+  margin-right: 0.7rem;
+  width: 0.7rem;
 }
 .post-body span.exturl .fa {
   font-size: 0.875em;
@@ -1823,25 +1798,9 @@ pre .javascript .function {
   margin: -20px auto 15px;
   text-align: center;
 }
-.post-body thead {
-  font-family: NanumSquare;
-}
-.post-body sup>a,
-.post-body sup>span.exturl {
-  color: #b34e4d;
-  border-bottom: none;
-}
-@media screen and (min-width: 70em) {
-  .post-body {
-    font-size: 17px;
-    font-size: 1.05rem;
-    line-height: 1.8rem;
-  }
-}
 @media screen and (min-width: 50em) {
   .post-body {
-    font-size: 1.05rem;
-    line-height: 1.6;
+    font-size: 100%;
   }
 }
 .phost-sticky-flag {
@@ -2012,9 +1971,9 @@ pre .javascript .function {
 @media (max-width: 767px) {
   .posts-expand {
     padding-top: 0px;
-    margin: 0 15px;
-    font-size: 95%;
-    line-height: 1.6;
+    margin: 0 20px;
+    font-size: 1.05rem;
+    line-height: 1.65;
     word-break: break-word;
   }
   .posts-expand article.post-block.home {
@@ -2035,6 +1994,9 @@ pre .javascript .function {
   }
   .posts-expand div.post-description {
     display: none;
+  }
+  .posts-expand p {
+    margin: 0.5em 0 1em 0;
   }
   .posts-expand h2 {
     font-size: 1.4rem;
@@ -2057,9 +2019,22 @@ pre .javascript .function {
     border: 1px solid #e3e3e3;
     border-left: 5px solid #ddd;
   }
+  .posts-expand blockquote p {
+    margin: 0.6em 0;
+    font-size: 90%;
+  }
+  .posts-expand .note {
+    padding: 5px;
+    padding-left: 7px;
+    border-left-width: 2px;
+  }
   .posts-expand strong,
   .posts-expand b {
     font-weight: 800;
+  }
+  .posts-expand ol,
+  .posts-expand ul {
+    padding-inline-start: 20px;
   }
   .posts-expand ul>li,
   .posts-expand ol>li {
@@ -2071,7 +2046,6 @@ pre .javascript .function {
   }
   .posts-expand ul>li>ul>li:not(.category-list-item) {
     margin-top: 5px;
-    font-size: 90%;
     padding-left: 10px;
   }
   .posts-expand ol>li>ul>li:not(.category-list-item) {
@@ -2081,7 +2055,7 @@ pre .javascript .function {
   }
   .posts-expand thead,
   .posts-expand td {
-    font-size: 0.9rem;
+    font-size: 85%;
     word-break: normal;
   }
   .posts-expand thead {
@@ -2189,7 +2163,7 @@ pre .javascript .function {
 }
 .posts-expand .post-title {
   font-weight: 100;
-  font-size: 2.475rem;
+  font-size: 2.35rem;
   padding-bottom: 20px;
   margin: initial;
   text-align: center;
