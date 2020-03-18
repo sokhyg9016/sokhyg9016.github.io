@@ -21,10 +21,10 @@
   var CONFIG = {
     hostname: new URL('http://sokhyg9016.github.io').hostname,
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Mist',
     version: '7.7.0',
     exturl: false,
-    sidebar: {"position":"left","width":320,"display":"post","padding":18,"offset":12,"onmobile":false},
+    sidebar: {"position":"right","width":320,"display":"post","padding":18,"offset":12,"onmobile":false},
     copycode: {"enable":true,"show_result":true,"style":"flat"},
     back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
@@ -48,21 +48,21 @@
 
   <meta name="description" content="Csci343 Challenge 2 Test">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Challenge 2 - Sentiment Analysis">
-<meta property="og:url" content="http://sokhyg9016.github.io/2020/02/26/2020-02-26-csci343-challenge2/index.html">
+<meta property="og:title" content="Sentiment Analysis">
+<meta property="og:url" content="http://sokhyg9016.github.io/2020/02/28/2020-02-26-csci343-challenge2/index.html">
 <meta property="og:site_name" content="Git Page">
 <meta property="og:description" content="Csci343 Challenge 2 Test">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:image" content="http://www.programmersought.com/images/262/05e075183140efc5c169148cd2abbe5e.png">
-<meta property="article:published_time" content="2020-02-26T06:00:00.000Z">
-<meta property="article:modified_time" content="2020-02-26T06:00:00.000Z">
+<meta property="article:published_time" content="2020-02-28T06:00:00.000Z">
+<meta property="article:modified_time" content="2020-03-17T05:00:00.000Z">
 <meta property="article:author" content="LSH">
 <meta property="article:tag" content="Olemiss">
 <meta property="article:tag" content="CSCI 343">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://www.programmersought.com/images/262/05e075183140efc5c169148cd2abbe5e.png">
 
-<link rel="canonical" href="http://sokhyg9016.github.io/2020/02/26/2020-02-26-csci343-challenge2/">
+<link rel="canonical" href="http://sokhyg9016.github.io/2020/02/28/2020-02-26-csci343-challenge2/">
 
 
 <script id="page-configurations">
@@ -74,7 +74,7 @@
   };
 </script>
 
-  <title>Challenge 2 - Sentiment Analysis | Git Page</title>
+  <title>Sentiment Analysis | Git Page</title>
   
 
 
@@ -215,7 +215,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="ko">
-    <link itemprop="mainEntityOfPage" href="http://sokhyg9016.github.io/2020/02/26/2020-02-26-csci343-challenge2/">
+    <link itemprop="mainEntityOfPage" href="http://sokhyg9016.github.io/2020/02/28/2020-02-26-csci343-challenge2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/img/avatar.png">
@@ -228,7 +228,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Challenge 2 - Sentiment Analysis
+          Sentiment Analysis
         </h1>
 
         <div class="post-meta">
@@ -238,8 +238,15 @@
               </span>
               <span class="post-meta-item-text">작성일</span>
 
-              <time title="Post created: 2020-02-26 00:00:00" itemprop="dateCreated datePublished" datetime="2020-02-26T00:00:00-06:00">2020-02-26</time>
+              <time title="Post created: 2020-02-28 00:00:00" itemprop="dateCreated datePublished" datetime="2020-02-28T00:00:00-06:00">2020-02-28</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Updated at: 2020-03-17 00:00:00" itemprop="dateModified" datetime="2020-03-17T00:00:00-05:00">2020-03-17</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -267,8 +274,8 @@
       </span>
       <span class="post-meta-item-text">Disqus: </span>
     
-    <a title="disqus" href="/2020/02/26/2020-02-26-csci343-challenge2/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/02/26/2020-02-26-csci343-challenge2/" itemprop="commentCount"></span>
+    <a title="disqus" href="/2020/02/28/2020-02-26-csci343-challenge2/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/02/28/2020-02-26-csci343-challenge2/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -380,28 +387,53 @@
 <div class="pdf" target="../../../../pdf/Csci343/ch2/Challenge_2.pdf" height=""></div>
 
 <hr>
-<h2 id="Solutions"><a href="#Solutions" class="headerlink" title="Solutions"></a>Solutions</h2><p>I solved the challenge mainly using the <code>pandas</code>.</p>
-<div class="tabs" id="fourth-unique-name"><ul class="nav-tabs"><li class="tab active"><a href="#fourth-unique-name-1">Modules</a></li><li class="tab"><a href="#fourth-unique-name-2">Solution 2</a></li><li class="tab"><a href="#fourth-unique-name-3">Solution 3</a></li></ul><div class="tab-content"><div class="tab-pane active" id="fourth-unique-name-1"><p><strong>Module</strong></p>
+<h2 id="Solutions"><a href="#Solutions" class="headerlink" title="Solutions"></a>Solutions</h2><p>I solved the challenge mainly using the <code>pandas</code>, <code>numpy</code>, <code>re</code>.</p>
+<div class="tabs" id="fourth-unique-name"><ul class="nav-tabs"><li class="tab active"><a href="#fourth-unique-name-1">Modules</a></li><li class="tab"><a href="#fourth-unique-name-2">How to solve Problem?</a></li><li class="tab"><a href="#fourth-unique-name-3">Source Code</a></li></ul><div class="tab-content"><div class="tab-pane active" id="fourth-unique-name-1"><p><strong>Module</strong></p>
 <ul>
-<li><code>collections.Counter</code>: use for make the dicts for word count.</li>
-<li><code>numpy</code>: To visualize the data on a $log_{10}Y$ axis scale.</li>
-<li><code>os.listdir(path)</code>: To get the list of all files and directories in the specified directory.</li>
-</ul>
+<li><p><code>collections.Counter</code>: use for make the dicts for word count.</p>
+ <div class="note ">
+          <p> <strong>class</strong> collections.<strong>Counter</strong>([iterable-or-mapping]) <a href="https://docs.python.org/3/library/collections.html#collections.Counter" target="_blank" rel="noopener">¶</a></p><p>A Counter is a dict subclass for counting hashable objects. It is a collection where elements are stored as dictionary keys and their counts are stored as dictionary values. Counts are allowed to be any integer value including zero or negative counts. The Counter class is similar to bags or multisets in other languages.</p><p>Elements are counted from an iterable or initialized from another mapping (or counter):</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">c = Counter()                           <span class="comment"># a new, empty counter</span></span><br><span class="line">c = Counter(<span class="string">'gallahad'</span>)                 <span class="comment"># a new counter from an iterable</span></span><br><span class="line">c = Counter(&#123;<span class="string">'red'</span>: <span class="number">4</span>, <span class="string">'blue'</span>: <span class="number">2</span>&#125;)      <span class="comment"># a new counter from a mapping</span></span><br><span class="line">c = Counter(cats=<span class="number">4</span>, dogs=<span class="number">8</span>)             <span class="comment"># a new counter from keyword args</span></span><br></pre></td></tr></table></figure>
+        </div></li>
+<li><p><code>numpy</code>: To visualize the data on a $log_{10}Y$ axis scale.</p>
+</li>
+<li><p><code>os.listdir(path)</code><br>os.listdir() method in python is used to get the list of all files and directories in the specified directory. If we don’t specify any directory, then list of files and directories in the current working directory will be returned.</p>
 <div class="note info no-icon">
-            <p>see this,</p><ul><li><a href="https://www.geeksforgeeks.org/python-os-listdir-method/" target="_blank" rel="noopener">Python | os.listdir() method</a></li></ul>
-          </div>
-
-<ul>
-<li><code>os.path</code><br><ins>os.path</ins> module is submodule of OS module in Python used for common pathname manipulation. to get the data’s path, I used the<ol>
+          <p><a href="https://www.geeksforgeeks.org/python-os-listdir-method/" target="_blank" rel="noopener">Python | os.listdir() method</a></p>
+        </div>
+</li>
+<li><p><code>re</code><br>This module provides regular expression matching operations similar to those found in Perl.</p>
+<p>Both patterns and strings to be searched can be Unicode strings (str) as well as 8-bit strings (bytes). However, Unicode strings and 8-bit strings cannot be mixed: that is, you cannot match a Unicode string with a byte pattern or vice-versa; similarly, when asking for a substitution, the replacement string must be of the same type as both the pattern and the search string.</p>
+<div class="note ">
+          <p>re.<strong>findall</strong>(pattern, string, flags=0) <a href="https://docs.python.org/3/library/re.html#re.findall" target="_blank" rel="noopener">¶</a></p><p>Return all non-overlapping matches of pattern in string, as a list of strings. The string is scanned <code>left-to-right</code>, and matches are returned in the order found. If one or more groups are present in the pattern, return a list of groups;</p><p>this will be a list of tuples if the pattern has more than one group. Empty matches are included in the result.</p>
+        </div>
+</li>
+<li><p><code>os.path</code><br><ins>os.path</ins> module is submodule of OS module in Python used for common pathname manipulation. to get the data’s path, I used the</p>
+<ol>
 <li><strong><code>os.path.dirname()</code></strong>: To get the python file’s parent file name.</li>
 <li><strong><code>os.path.join()</code></strong>:  combine the file names to make the absolute path.</li>
 <li><strong><code>os.path.splitext()</code></strong>: To split the path name into a pair <em>root</em> and <em>ext</em>(<code>.py</code>).</li>
 </ol>
-</li>
-</ul>
+<hr>
+<p><strong>Example</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> os.path <span class="keyword">import</span> splitext</span><br><span class="line">path = <span class="string">b'https://docs.python.org/2/library/base64.html'</span></span><br><span class="line"></span><br><span class="line">dir_lst = list(splitext(path.decode()))</span><br><span class="line"><span class="comment"># note that splitext() returns tuple</span></span><br><span class="line"></span><br><span class="line">name, ext = dir_lst[<span class="number">0</span>].replace(<span class="string">'/'</span>, <span class="string">' '</span>).split()[<span class="number">-1</span>], dir_lst[<span class="number">-1</span>]</span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">name = 'base64'</span></span><br><span class="line"><span class="string">ext = '.html'</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line">file_name = name + ext</span><br><span class="line">print(file_name)</span><br><span class="line"><span class="comment"># 'base64.html'</span></span><br></pre></td></tr></table></figure>
 
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> log10</span><br><span class="line"><span class="keyword">from</span> os <span class="keyword">import</span> listdir</span><br><span class="line"><span class="keyword">from</span> os.path <span class="keyword">import</span> dirname, join, splitext</span><br><span class="line"><span class="keyword">from</span> re <span class="keyword">import</span> findall</span><br><span class="line"></span><br><span class="line"><span class="comment"># For the test</span></span><br><span class="line"><span class="keyword">from</span> timeit <span class="keyword">import</span> Timer</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="fourth-unique-name-2"><p><strong>This is Tab 2.</strong></p></div><div class="tab-pane" id="fourth-unique-name-3"><p><strong>This is Tab 3.</strong></p></div></div></div>
+<p><strong>All modules</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> log10</span><br><span class="line"><span class="keyword">from</span> os <span class="keyword">import</span> listdir</span><br><span class="line"><span class="keyword">from</span> os.path <span class="keyword">import</span> dirname, join, splitext</span><br><span class="line"><span class="keyword">from</span> re <span class="keyword">import</span> findall</span><br><span class="line"></span><br><span class="line"><span class="comment"># For the test</span></span><br><span class="line"><span class="keyword">from</span> timeit <span class="keyword">import</span> Timer</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul></div><div class="tab-pane" id="fourth-unique-name-2"><ol>
+<li>Prompt input the series name from user (e.g. a###.script, bg###.script)</li>
+<li>Get the file list from current file using <code>listdir</code>, then make a list about file names about user input<ul>
+<li>If user input <code>a</code>, then need to make a list about <strong>a###.script</strong> files list.</li>
+<li>Else, need to make series B’s list.</li>
+</ul>
+</li>
+<li>Get Lexicon sentiment file to my codes</li>
+<li>Make a word counter list using series file’s list (using regular expression)</li>
+<li>Then, Inner join with lexicon sentiment</li>
+<li>After join, calculate the sentiment score using the result No.5.</li>
+<li>Display the plot using it.</li>
+</ol></div><div class="tab-pane" id="fourth-unique-name-3"><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> log10, sum</span><br><span class="line"><span class="keyword">from</span> os <span class="keyword">import</span> listdir</span><br><span class="line"><span class="keyword">from</span> os.path <span class="keyword">import</span> dirname, join</span><br><span class="line"><span class="keyword">from</span> re <span class="keyword">import</span> findall</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line"><span class="comment"># Prompt input from user</span></span><br><span class="line">series = input(<span class="string">"Enter the series name: "</span>).lower()</span><br><span class="line">series_name = series + chr(ord(<span class="string">'g'</span>) * (<span class="number">1</span> - (ord(series) &amp; <span class="number">1</span>))).rstrip(<span class="string">'\x00'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Get file path</span></span><br><span class="line">dir = dirname(__file__)</span><br><span class="line">path = join(dir, <span class="string">"dataset"</span>, <span class="string">"data_ch2"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Get lexicon sentiment</span></span><br><span class="line">lexicon_sentiment = pd.read_csv(join(dir, <span class="string">"dataset"</span>, <span class="string">"data_sent"</span>, <span class="string">"sentiment_lex.csv"</span>))</span><br><span class="line">lexicon_sentiment.columns = [<span class="string">"word"</span>, <span class="string">"score"</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Get filenames on list</span></span><br><span class="line">filenames = [f <span class="keyword">for</span> f <span class="keyword">in</span> listdir(path) <span class="keyword">if</span> series_name == f.split(<span class="string">"1"</span>)[<span class="number">0</span>]]</span><br><span class="line"></span><br><span class="line">data = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> fname <span class="keyword">in</span> filenames:</span><br><span class="line">    <span class="keyword">with</span> open(join(path, fname), <span class="string">'r'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        data += f.read()</span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">pattern1: lexicon sentiment has '1+2', '1/2', 'r/sfsdf', etc --&gt; '\w+[-|+|/|.]\w+'</span></span><br><span class="line"><span class="string">pattern2: it also has '&lt;URL&gt;'-like format. --&gt; '&lt;\w+&gt;'</span></span><br><span class="line"><span class="string">pattern3: pure alphabet character --&gt; '\w+'</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">combining those patterns --&gt; r'pattern1 | pattern2 | pattern3'</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line">data = findall(<span class="string">r'\w+[-|+|/|.]\w+|&lt;\w+&gt;|\w+'</span>, data.lower())</span><br><span class="line">count = Counter(data)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Convert counter(dicts) to DataFrame</span></span><br><span class="line">cnt_lst = pd.DataFrame.from_dict(count, orient=<span class="string">"index"</span>, ).reset_index()</span><br><span class="line">cnt_lst.columns = [<span class="string">"word"</span>, <span class="string">"count"</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Inner join with lexicon sentiment</span></span><br><span class="line">cnt_lst = cnt_lst.join(lexicon_sentiment.set_index(<span class="string">"word"</span>), on=<span class="string">"word"</span>)</span><br><span class="line">cnt_lst = cnt_lst[cnt_lst[<span class="string">"score"</span>].notna()]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Make new columns for sentiment.</span></span><br><span class="line">sentiment = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> cnt_lst[<span class="string">"score"</span>]:</span><br><span class="line">    <span class="keyword">if</span> x &gt;= <span class="number">-1.0</span> <span class="keyword">and</span> x &lt; <span class="number">-0.6</span>:</span><br><span class="line">        sentiment.append(<span class="string">"Neg"</span>)</span><br><span class="line">    <span class="keyword">elif</span> x &gt;= <span class="number">-0.6</span> <span class="keyword">and</span> x &lt; <span class="number">-0.2</span>:</span><br><span class="line">        sentiment.append(<span class="string">"W.Neg"</span>)</span><br><span class="line">    <span class="keyword">elif</span> x &gt;= <span class="number">-0.2</span> <span class="keyword">and</span> x &lt;= <span class="number">0.2</span>:</span><br><span class="line">        sentiment.append(<span class="string">"Neu"</span>)</span><br><span class="line">    <span class="keyword">elif</span> x &gt; <span class="number">0.2</span> <span class="keyword">and</span> x &lt;= <span class="number">0.6</span>:</span><br><span class="line">        sentiment.append(<span class="string">"W.Pos"</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        sentiment.append(<span class="string">"Pos"</span>)</span><br><span class="line"></span><br><span class="line">cnt_lst[<span class="string">"sentiment"</span>] = sentiment</span><br><span class="line">cnt_lst = cnt_lst.groupby(cnt_lst[<span class="string">"sentiment"</span>], as_index=<span class="literal">True</span>).agg(&#123;<span class="string">"count"</span>: <span class="string">"sum"</span>&#125;).agg(&#123;<span class="string">"count"</span>: <span class="string">"log10"</span>&#125;)</span><br><span class="line">cnt_lst = cnt_lst.reindex(index=[<span class="string">"Neg"</span>, <span class="string">"W.Neg"</span>, <span class="string">"Neu"</span>, <span class="string">"W.Pos"</span>, <span class="string">"Pos"</span>])</span><br><span class="line">print(cnt_lst)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Display the plot</span></span><br><span class="line">plt.title(<span class="string">"Sentiment Analysis for Series "</span> + series.upper())</span><br><span class="line">plt.xlabel(<span class="string">"Sentiment"</span>)</span><br><span class="line">plt.ylabel(<span class="string">"log Word Count"</span>)</span><br><span class="line">plt.bar(cnt_lst.index, cnt_lst[<span class="string">"count"</span>])</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure></div></div></div>
 </div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
         var options = {
             selector: '.gallery-item'
@@ -516,7 +548,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">17</span>
           <span class="site-state-item-name">포스트</span>
         </a>
       </div>
@@ -577,7 +609,7 @@
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.0
+  <div class="theme-info">Theme – <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.7.0
   </div>
 
         
@@ -729,9 +761,9 @@ if (document.querySelectorAll('pre.mermaid').length) {
 </script>
 <script>
   var disqus_config = function() {
-    this.page.url = "http://sokhyg9016.github.io/2020/02/26/2020-02-26-csci343-challenge2/";
-    this.page.identifier = "2020/02/26/2020-02-26-csci343-challenge2/";
-    this.page.title = "Challenge 2 - Sentiment Analysis";
+    this.page.url = "http://sokhyg9016.github.io/2020/02/28/2020-02-26-csci343-challenge2/";
+    this.page.identifier = "2020/02/28/2020-02-26-csci343-challenge2/";
+    this.page.title = "Sentiment Analysis";
     };
   NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
     if (window.DISQUS) {

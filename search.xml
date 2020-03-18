@@ -1,6 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Image Analysis</title>
+    <url>/2020/03/17/2020-03-17-csci343-challenge3/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
+<ul>
+<li><strong>Submission Window Opens</strong>: Thursday, March 19</li>
+<li><strong>Objective</strong>:<ol>
+<li>Perform basic image analysis</li>
+<li>Use <code>NumPy</code> for data conversion</li>
+</ol>
+</li>
+</ul>
+<h2 id="Assignment"><a href="#Assignment" class="headerlink" title="Assignment"></a>Assignment</h2><p>당신은 대학교를 졸업한 이후 이탈리아 보안 감시 회사인 Surveilco에 데이터 과학자로 고용되어 일하고 있습니다. 회사는 기본적인 이미지 분석을 통해 보안 제품 개선을 꾀하고 있는 것 같습니다. 최근에 UM을 졸업한 당신에게 그들은 당신이 그 일에 가장 적합한 데이터 과학자 중 한 명이라는 것을 알고 있는 것 같군요.</p>
+<p>회사의 비디오 시스템은 네트워크 연결을 통해 일련의 JPEG 이미지를 제공하고 있습니다. 회사는 당신에게 일을 시작하기 위한 샘플 데이터 세트를 제공하였습니다. 데이터 세트는 실제 소스에서 캡처한 200개의 JPEG 형식의 이미지로 구성되어 있습니다. 불행히도 카메라를 위해 코드를 작성한 네트워크 프로그래머들은 당신만큼 능숙하지 않은 것 같군요. 그 결과 약 5%의 이미지가 손상되어 사용할 수 없게 되었습니다…</p>
+<p>코드 작성을 시작하기 전에 데이터 세트에서 이러한 손상된 이미지를 제거해야 할 것 같군요. (시작하기 전에 실제로 데이터를 살펴봐야 합니다.)이는 당신이 직접 찾아서 제거하거나 프로그램을 작성하여 제거 할 수 있습니다. 어쨌든, 이런 손상된 이미지들을 제거해야 하는 것은 명백합니다.</p>
+<p>수업시간에 우리는 디지털 이미지는 사실 숫자 배열의 한 종류라는 것을 관찰했습니다. 이를 통해 우리는 이미지에 대해 수학적 연산을 수행할 수 있다고 추론할 수 있겠군요? 사실 우리는 할 수 있습니다! 수업시간에, 우리는 평균 영상과 차이가 나는 영상을 계산하는 예제를 살펴보았습니다.</p>
+<p>이 과제에서, 당신은 평균 영상과 표준 편차 영상을 계산하게 될 것 입니다. 당신의 이미지는 정규적인 수학적 변수와 같이 취급될 수 있으므로, 당신은 당신이 작성한 평균 및 표준 편차 공식에서 그것들을 직접 사용할 수 있어야 함을 명심하십시오.</p>
+<h3 id="What-exactly-should-I-do"><a href="#What-exactly-should-I-do" class="headerlink" title="What exactly should I do?"></a>What exactly should I do?</h3><p>당신의 과제는 일련의 영상을 분석하고, 평균 이미지를 계산하고, 표준 편차 이미지를 계산한 다음, 변화 영역이 빨간색으로 강조 표시된 평균 영상을 표시하는 것입니다 (*예시 이미지 아래 첨부)</p>
+<!-- <a class="gallery-item"><img class="example ..&#x2F;..&#x2F;..&#x2F;..&#x2F;img&#x2F;csci343-ch3&#x2F;example.jpg 500 500"></a> -->
+<p><a href="../../../../img/csci343-ch3/example.jpg" title="example" class="gallery-item"><img src="../../../../img/csci343-ch3/example.jpg" alt="example"></a></p>
+<ul>
+<li><p>프로그램은 사용자에게 0에서 255 사이의 임의의 값을 입력하도록 요청해야 합니다.(입력이 적절한지 확인하기 위해 프로그램이 확인하십시오).</p>
+</li>
+<li><p>이 값은 픽셀을 강조 표시하는 데 필요한 최소 표준 편차를 나타냅니다.</p>
+</li>
+<li><p>강조 표시를 하려면 평균 이미지의 픽셀을 순환하고 해당 픽셀의 색상을 하이라이트 색상으로 변경해야 하지만, <span class="label danger">픽셀의 표준 편차가 임계값보다 높은 경우에만</span> 해당 색상을 변경해야 합니다.</p>
+</li>
+<li><p>예를 들어, 영상에서 픽셀을 빨간색으로 설정하려면 다음과 같이 작성해야 합니다.</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">avg_image[row][column]=[<span class="number">255.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>당신은 당신의 소스 코드와 필터링된 이미지 데이터를 제출해야 합니다.</p>
+</li>
+<li><p>또한 출력 그림의 이미지(MatPlotLib 창에 이 작업을 수행할 버튼이 있음)를 저장하고 코드로 제출하십시오.</p>
+</li>
+</ul>
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>]]></content>
+      <categories>
+        <category>Data Science</category>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>Olemiss</tag>
+        <tag>CSCI 343</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hexo Codeblock Test</title>
     <url>/2020/03/02/2020-03-02-codeblock-test/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
@@ -176,8 +226,8 @@
       </categories>
   </entry>
   <entry>
-    <title>Challenge 2 - Sentiment Analysis</title>
-    <url>/2020/02/26/2020-02-26-csci343-challenge2/</url>
+    <title>Sentiment Analysis</title>
+    <url>/2020/02/28/2020-02-26-csci343-challenge2/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
 <ul>
 <li><strong>Submission Window Opens</strong>: Friday, February 28</li>
@@ -274,28 +324,53 @@
 <div class="pdf" target="../../../../pdf/Csci343/ch2/Challenge_2.pdf" height=""></div>
 
 <hr>
-<h2 id="Solutions"><a href="#Solutions" class="headerlink" title="Solutions"></a>Solutions</h2><p>I solved the challenge mainly using the <code>pandas</code>.</p>
-<div class="tabs" id="fourth-unique-name"><ul class="nav-tabs"><li class="tab active"><a href="#fourth-unique-name-1">Modules</a></li><li class="tab"><a href="#fourth-unique-name-2">Solution 2</a></li><li class="tab"><a href="#fourth-unique-name-3">Solution 3</a></li></ul><div class="tab-content"><div class="tab-pane active" id="fourth-unique-name-1"><p><strong>Module</strong></p>
+<h2 id="Solutions"><a href="#Solutions" class="headerlink" title="Solutions"></a>Solutions</h2><p>I solved the challenge mainly using the <code>pandas</code>, <code>numpy</code>, <code>re</code>.</p>
+<div class="tabs" id="fourth-unique-name"><ul class="nav-tabs"><li class="tab active"><a href="#fourth-unique-name-1">Modules</a></li><li class="tab"><a href="#fourth-unique-name-2">How to solve Problem?</a></li><li class="tab"><a href="#fourth-unique-name-3">Source Code</a></li></ul><div class="tab-content"><div class="tab-pane active" id="fourth-unique-name-1"><p><strong>Module</strong></p>
 <ul>
-<li><code>collections.Counter</code>: use for make the dicts for word count.</li>
-<li><code>numpy</code>: To visualize the data on a $log_{10}Y$ axis scale.</li>
-<li><code>os.listdir(path)</code>: To get the list of all files and directories in the specified directory.</li>
-</ul>
+<li><p><code>collections.Counter</code>: use for make the dicts for word count.</p>
+ <div class="note ">
+          <p> <strong>class</strong> collections.<strong>Counter</strong>([iterable-or-mapping]) <a href="https://docs.python.org/3/library/collections.html#collections.Counter" target="_blank" rel="noopener">¶</a></p><p>A Counter is a dict subclass for counting hashable objects. It is a collection where elements are stored as dictionary keys and their counts are stored as dictionary values. Counts are allowed to be any integer value including zero or negative counts. The Counter class is similar to bags or multisets in other languages.</p><p>Elements are counted from an iterable or initialized from another mapping (or counter):</p><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">c = Counter()                           <span class="comment"># a new, empty counter</span></span><br><span class="line">c = Counter(<span class="string">'gallahad'</span>)                 <span class="comment"># a new counter from an iterable</span></span><br><span class="line">c = Counter(&#123;<span class="string">'red'</span>: <span class="number">4</span>, <span class="string">'blue'</span>: <span class="number">2</span>&#125;)      <span class="comment"># a new counter from a mapping</span></span><br><span class="line">c = Counter(cats=<span class="number">4</span>, dogs=<span class="number">8</span>)             <span class="comment"># a new counter from keyword args</span></span><br></pre></td></tr></table></figure>
+        </div></li>
+<li><p><code>numpy</code>: To visualize the data on a $log_{10}Y$ axis scale.</p>
+</li>
+<li><p><code>os.listdir(path)</code><br>os.listdir() method in python is used to get the list of all files and directories in the specified directory. If we don’t specify any directory, then list of files and directories in the current working directory will be returned.</p>
 <div class="note info no-icon">
-            <p>see this,</p><ul><li><a href="https://www.geeksforgeeks.org/python-os-listdir-method/" target="_blank" rel="noopener">Python | os.listdir() method</a></li></ul>
-          </div>
-
-<ul>
-<li><code>os.path</code><br><ins>os.path</ins> module is submodule of OS module in Python used for common pathname manipulation. to get the data’s path, I used the<ol>
+          <p><a href="https://www.geeksforgeeks.org/python-os-listdir-method/" target="_blank" rel="noopener">Python | os.listdir() method</a></p>
+        </div>
+</li>
+<li><p><code>re</code><br>This module provides regular expression matching operations similar to those found in Perl.</p>
+<p>Both patterns and strings to be searched can be Unicode strings (str) as well as 8-bit strings (bytes). However, Unicode strings and 8-bit strings cannot be mixed: that is, you cannot match a Unicode string with a byte pattern or vice-versa; similarly, when asking for a substitution, the replacement string must be of the same type as both the pattern and the search string.</p>
+<div class="note ">
+          <p>re.<strong>findall</strong>(pattern, string, flags=0) <a href="https://docs.python.org/3/library/re.html#re.findall" target="_blank" rel="noopener">¶</a></p><p>Return all non-overlapping matches of pattern in string, as a list of strings. The string is scanned <code>left-to-right</code>, and matches are returned in the order found. If one or more groups are present in the pattern, return a list of groups;</p><p>this will be a list of tuples if the pattern has more than one group. Empty matches are included in the result.</p>
+        </div>
+</li>
+<li><p><code>os.path</code><br><ins>os.path</ins> module is submodule of OS module in Python used for common pathname manipulation. to get the data’s path, I used the</p>
+<ol>
 <li><strong><code>os.path.dirname()</code></strong>: To get the python file’s parent file name.</li>
 <li><strong><code>os.path.join()</code></strong>:  combine the file names to make the absolute path.</li>
 <li><strong><code>os.path.splitext()</code></strong>: To split the path name into a pair <em>root</em> and <em>ext</em>(<code>.py</code>).</li>
 </ol>
-</li>
-</ul>
+<hr>
+<p><strong>Example</strong></p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> os.path <span class="keyword">import</span> splitext</span><br><span class="line">path = <span class="string">b'https://docs.python.org/2/library/base64.html'</span></span><br><span class="line"></span><br><span class="line">dir_lst = list(splitext(path.decode()))</span><br><span class="line"><span class="comment"># note that splitext() returns tuple</span></span><br><span class="line"></span><br><span class="line">name, ext = dir_lst[<span class="number">0</span>].replace(<span class="string">'/'</span>, <span class="string">' '</span>).split()[<span class="number">-1</span>], dir_lst[<span class="number">-1</span>]</span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">name = 'base64'</span></span><br><span class="line"><span class="string">ext = '.html'</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line">file_name = name + ext</span><br><span class="line">print(file_name)</span><br><span class="line"><span class="comment"># 'base64.html'</span></span><br></pre></td></tr></table></figure>
 
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> log10</span><br><span class="line"><span class="keyword">from</span> os <span class="keyword">import</span> listdir</span><br><span class="line"><span class="keyword">from</span> os.path <span class="keyword">import</span> dirname, join, splitext</span><br><span class="line"><span class="keyword">from</span> re <span class="keyword">import</span> findall</span><br><span class="line"></span><br><span class="line"><span class="comment"># For the test</span></span><br><span class="line"><span class="keyword">from</span> timeit <span class="keyword">import</span> Timer</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="fourth-unique-name-2"><p><strong>This is Tab 2.</strong></p></div><div class="tab-pane" id="fourth-unique-name-3"><p><strong>This is Tab 3.</strong></p></div></div></div>
+<p><strong>All modules</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> log10</span><br><span class="line"><span class="keyword">from</span> os <span class="keyword">import</span> listdir</span><br><span class="line"><span class="keyword">from</span> os.path <span class="keyword">import</span> dirname, join, splitext</span><br><span class="line"><span class="keyword">from</span> re <span class="keyword">import</span> findall</span><br><span class="line"></span><br><span class="line"><span class="comment"># For the test</span></span><br><span class="line"><span class="keyword">from</span> timeit <span class="keyword">import</span> Timer</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul></div><div class="tab-pane" id="fourth-unique-name-2"><ol>
+<li>Prompt input the series name from user (e.g. a###.script, bg###.script)</li>
+<li>Get the file list from current file using <code>listdir</code>, then make a list about file names about user input<ul>
+<li>If user input <code>a</code>, then need to make a list about <strong>a###.script</strong> files list.</li>
+<li>Else, need to make series B’s list.</li>
+</ul>
+</li>
+<li>Get Lexicon sentiment file to my codes</li>
+<li>Make a word counter list using series file’s list (using regular expression)</li>
+<li>Then, Inner join with lexicon sentiment</li>
+<li>After join, calculate the sentiment score using the result No.5.</li>
+<li>Display the plot using it.</li>
+</ol></div><div class="tab-pane" id="fourth-unique-name-3"><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> log10, sum</span><br><span class="line"><span class="keyword">from</span> os <span class="keyword">import</span> listdir</span><br><span class="line"><span class="keyword">from</span> os.path <span class="keyword">import</span> dirname, join</span><br><span class="line"><span class="keyword">from</span> re <span class="keyword">import</span> findall</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line"><span class="comment"># Prompt input from user</span></span><br><span class="line">series = input(<span class="string">"Enter the series name: "</span>).lower()</span><br><span class="line">series_name = series + chr(ord(<span class="string">'g'</span>) * (<span class="number">1</span> - (ord(series) &amp; <span class="number">1</span>))).rstrip(<span class="string">'\x00'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Get file path</span></span><br><span class="line">dir = dirname(__file__)</span><br><span class="line">path = join(dir, <span class="string">"dataset"</span>, <span class="string">"data_ch2"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Get lexicon sentiment</span></span><br><span class="line">lexicon_sentiment = pd.read_csv(join(dir, <span class="string">"dataset"</span>, <span class="string">"data_sent"</span>, <span class="string">"sentiment_lex.csv"</span>))</span><br><span class="line">lexicon_sentiment.columns = [<span class="string">"word"</span>, <span class="string">"score"</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Get filenames on list</span></span><br><span class="line">filenames = [f <span class="keyword">for</span> f <span class="keyword">in</span> listdir(path) <span class="keyword">if</span> series_name == f.split(<span class="string">"1"</span>)[<span class="number">0</span>]]</span><br><span class="line"></span><br><span class="line">data = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> fname <span class="keyword">in</span> filenames:</span><br><span class="line">    <span class="keyword">with</span> open(join(path, fname), <span class="string">'r'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        data += f.read()</span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">pattern1: lexicon sentiment has '1+2', '1/2', 'r/sfsdf', etc --&gt; '\w+[-|+|/|.]\w+'</span></span><br><span class="line"><span class="string">pattern2: it also has '&lt;URL&gt;'-like format. --&gt; '&lt;\w+&gt;'</span></span><br><span class="line"><span class="string">pattern3: pure alphabet character --&gt; '\w+'</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">combining those patterns --&gt; r'pattern1 | pattern2 | pattern3'</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line">data = findall(<span class="string">r'\w+[-|+|/|.]\w+|&lt;\w+&gt;|\w+'</span>, data.lower())</span><br><span class="line">count = Counter(data)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Convert counter(dicts) to DataFrame</span></span><br><span class="line">cnt_lst = pd.DataFrame.from_dict(count, orient=<span class="string">"index"</span>, ).reset_index()</span><br><span class="line">cnt_lst.columns = [<span class="string">"word"</span>, <span class="string">"count"</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Inner join with lexicon sentiment</span></span><br><span class="line">cnt_lst = cnt_lst.join(lexicon_sentiment.set_index(<span class="string">"word"</span>), on=<span class="string">"word"</span>)</span><br><span class="line">cnt_lst = cnt_lst[cnt_lst[<span class="string">"score"</span>].notna()]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Make new columns for sentiment.</span></span><br><span class="line">sentiment = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> cnt_lst[<span class="string">"score"</span>]:</span><br><span class="line">    <span class="keyword">if</span> x &gt;= <span class="number">-1.0</span> <span class="keyword">and</span> x &lt; <span class="number">-0.6</span>:</span><br><span class="line">        sentiment.append(<span class="string">"Neg"</span>)</span><br><span class="line">    <span class="keyword">elif</span> x &gt;= <span class="number">-0.6</span> <span class="keyword">and</span> x &lt; <span class="number">-0.2</span>:</span><br><span class="line">        sentiment.append(<span class="string">"W.Neg"</span>)</span><br><span class="line">    <span class="keyword">elif</span> x &gt;= <span class="number">-0.2</span> <span class="keyword">and</span> x &lt;= <span class="number">0.2</span>:</span><br><span class="line">        sentiment.append(<span class="string">"Neu"</span>)</span><br><span class="line">    <span class="keyword">elif</span> x &gt; <span class="number">0.2</span> <span class="keyword">and</span> x &lt;= <span class="number">0.6</span>:</span><br><span class="line">        sentiment.append(<span class="string">"W.Pos"</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        sentiment.append(<span class="string">"Pos"</span>)</span><br><span class="line"></span><br><span class="line">cnt_lst[<span class="string">"sentiment"</span>] = sentiment</span><br><span class="line">cnt_lst = cnt_lst.groupby(cnt_lst[<span class="string">"sentiment"</span>], as_index=<span class="literal">True</span>).agg(&#123;<span class="string">"count"</span>: <span class="string">"sum"</span>&#125;).agg(&#123;<span class="string">"count"</span>: <span class="string">"log10"</span>&#125;)</span><br><span class="line">cnt_lst = cnt_lst.reindex(index=[<span class="string">"Neg"</span>, <span class="string">"W.Neg"</span>, <span class="string">"Neu"</span>, <span class="string">"W.Pos"</span>, <span class="string">"Pos"</span>])</span><br><span class="line">print(cnt_lst)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Display the plot</span></span><br><span class="line">plt.title(<span class="string">"Sentiment Analysis for Series "</span> + series.upper())</span><br><span class="line">plt.xlabel(<span class="string">"Sentiment"</span>)</span><br><span class="line">plt.ylabel(<span class="string">"log Word Count"</span>)</span><br><span class="line">plt.bar(cnt_lst.index, cnt_lst[<span class="string">"count"</span>])</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure></div></div></div>
 </div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
         var options = {
             selector: '.gallery-item'
@@ -735,7 +810,7 @@ merge newbranch
 <hr>
 <h4 id="Hatena-Blog"><a href="#Hatena-Blog" class="headerlink" title="Hatena Blog"></a>Hatena Blog</h4><figure class="highlight plain"><figcaption><span>Hexo tag</span></figcaption><table><tr><td class="code"><pre><span class="line">&#123;% oembed https:&#x2F;&#x2F;rheb.hatenablog.com&#x2F;entry&#x2F;rhel8-python %&#125;</span><br></pre></td></tr></table></figure>
 
-<div class="oembed-outer oembed-hatena-blog"><div class="oembed-inner"><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Frheb.hatenablog.com%2Fentry%2Frhel8-python" title="Red Hat Enterprise Linux 8 のPython事情 - 赤帽エンジニアブログ" class="embed-card embed-blogcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 190px; max-width: 500px; margin: 10px 0px;"></iframe></div></div>
+<div class="oembed-error" style="color: red;"><span>failed getting oembed item.(url=https://rheb.hatenablog.com/entry/rhel8-python)</span></div>
 
 <hr>
 </div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
