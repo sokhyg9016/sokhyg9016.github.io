@@ -54,6 +54,7 @@
 <meta property="og:description" content="Csci343 Challenge 3 Test">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:image" content="http://sokhyg9016.github.io/img/csci343-ch3/example.jpg">
+<meta property="og:image" content="http://sokhyg9016.github.io/img/img_analysis/green.JPG">
 <meta property="article:published_time" content="2020-03-17T05:00:00.000Z">
 <meta property="article:modified_time" content="2020-03-17T05:00:00.000Z">
 <meta property="article:author" content="LSH">
@@ -316,6 +317,58 @@
 <li><p>또한 출력 그림의 이미지(MatPlotLib 창에 이 작업을 수행할 버튼이 있음)를 저장하고 코드로 제출하십시오.</p>
 </li>
 </ul>
+<hr>
+<h2 id="Composition-of-an-image"><a href="#Composition-of-an-image" class="headerlink" title="Composition of an image"></a>Composition of an image</h2><p>이번 과제에서는 먼저 이미지를 본격적으로 다루기 이전 이미지가 어떻게 이루어져 있는지, 또한 어떻게 다룰 수 있는지를 살펴보자. 먼저 이미지의 구성을 보다 더 쉽게 파악하기 위해 7X7 이미지를 가져 왔다.</p>
+<ul>
+<li>실제 이미지는 매우 작아 확인하기 어렵기에 아래 그림은 확대시킨 캡쳐본이다.</li>
+<li>내모 1칸이 1px이다.</li>
+</ul>
+<p><a href="../../../../img/img_analysis/green.JPG" title="example" class="gallery-item"><img src="../../../../img/img_analysis/green.JPG" alt="example"></a></p>
+<p>이제 이 이미지를 2차원 배열 형태로 변환시켜보자.</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">green = np.array(Image.open(<span class="string">'green.png'</span>))</span><br><span class="line">print(green)</span><br></pre></td></tr></table></figure>
+
+<p>위에서 <code>PIL</code> 모듈 기능을 이용하여 이미지를 열고 <code>numpy</code>를 이용해 이미지를 2차원 배열로 변환시켰다. 2차원 배열의 내용은 아래와 같다.</p>
+<figure class="highlight plain"><figcaption><span>results</span></figcaption><table><tr><td class="code"><pre><span class="line">[  [[  0   0   0   0]</span><br><span class="line">    [  0   0   0   0]</span><br><span class="line">    [  0   0   0   0]</span><br><span class="line">    [  0   0   0   0]   --&gt; □□□□□□□</span><br><span class="line">    [  0   0   0   0]</span><br><span class="line">    [  0   0   0   0]</span><br><span class="line">    [  0   0   0   0]]</span><br><span class="line"></span><br><span class="line">   [[  0   0   0   0]</span><br><span class="line">    [ 17 255 119 255]</span><br><span class="line">    [ 17 255 119 255]</span><br><span class="line">    [ 17 255 119 255]   --&gt; □■■■■■□  </span><br><span class="line">    [ 17 255 119 255]</span><br><span class="line">    [ 17 255 119 255]</span><br><span class="line">    [  0   0   0   0]]</span><br><span class="line"></span><br><span class="line">   [[  0   0   0   0]</span><br><span class="line">    [ 17 255 119 255]</span><br><span class="line">    [  0   0   0   0]</span><br><span class="line">    [ 17 255 119 255]   --&gt; □■□■□■□</span><br><span class="line">    [  0   0   0   0]</span><br><span class="line">    [ 17 255 119 255]</span><br><span class="line">    [  0   0   0   0]]</span><br><span class="line"></span><br><span class="line">   [[  0   0   0   0]</span><br><span class="line">    [ 17 255 119 255]</span><br><span class="line">    [  0   0   0   0]</span><br><span class="line">    [  0   0   0   0]   --&gt; □■□□□■□</span><br><span class="line">    [  0   0   0   0]</span><br><span class="line">    [ 17 255 119 255]</span><br><span class="line">    [  0   0   0   0]]</span><br><span class="line"></span><br><span class="line">   [[  0   0   0   0]</span><br><span class="line">    [ 17 255 119 255]</span><br><span class="line">    [  0   0   0   0]</span><br><span class="line">    [ 17 255 119 255]   --&gt; □■□■□■□</span><br><span class="line">    [  0   0   0   0]</span><br><span class="line">    [ 17 255 119 255]</span><br><span class="line">    [  0   0   0   0]]</span><br><span class="line"></span><br><span class="line">   [[  0   0   0   0]</span><br><span class="line">    [ 17 255 119 255]</span><br><span class="line">    [ 17 255 119 255]</span><br><span class="line">    [ 17 255 119 255]   --&gt; □■■■■■□</span><br><span class="line">    [ 17 255 119 255]</span><br><span class="line">    [ 17 255 119 255]</span><br><span class="line">    [  0   0   0   0]]</span><br><span class="line"></span><br><span class="line">   [[  0   0   0   0]</span><br><span class="line">    [  0   0   0   0]</span><br><span class="line">    [  0   0   0   0]</span><br><span class="line">    [  0   0   0   0]   --&gt; □□□□□□□</span><br><span class="line">    [  0   0   0   0]</span><br><span class="line">    [  0   0   0   0]</span><br><span class="line">    [  0   0   0   0]]]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>result</strong></p>
+<pre style = "line-height: 1">
+[1]: □ □ □ □ □ □ □
+[2]: □ <font style="color:#11ff77;">■ ■ ■ ■ ■</font> □
+[3]: □ <font style="color:#11ff77;">■</font> □ <font style="color:#11ff77;">■</font> □ <font style="color:#11ff77;">■</font> □
+[4]: □ <font style="color:#11ff77;">■</font> □ □ □ <font style="color:#11ff77;">■</font> □
+[5]: □ <font style="color:#11ff77;">■</font> □ <font style="color:#11ff77;">■</font> □ <font style="color:#11ff77;">■</font> □
+[6]: □ <font style="color:#11ff77;">■ ■ ■ ■ ■</font> □
+[7]: □ □ □ □ □ □ □
+
+[□/<font style="color:#11ff77;">■</font> : {w: 1px, h: 1px}]
+</pre>
+
+<pre style = "line-height: 0.5">
+□□□□□□□
+□<font style="color:#11ff77;">■■■■■</font>□
+□<font style="color:#11ff77;">■</font>□<font style="color:#11ff77;">■</font>□<font style="color:#11ff77;">■</font>□
+□<font style="color:#11ff77;">■</font>□□□<font style="color:#11ff77;">■</font>□
+□<font style="color:#11ff77;">■</font>□<font style="color:#11ff77;">■</font>□<font style="color:#11ff77;">■</font>□
+□<font style="color:#11ff77;">■■■■■</font>□
+□□□□□□□
+</pre>
+
+<ul>
+<li>즉, 위의 결과와 같이 행 7, 열 7칸으로 이루어진 2차원 배열로 변환된다.</li>
+<li>이때 각 행과 열은 이미지 7x7 크기에 따라 행과 열로 그대로 변환된 결과이다.</li>
+<li>또한 이를 세부적으로 보자면,</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[  [[  0   0   0   0]</span><br><span class="line">    [  0   0   0   0]</span><br><span class="line">    [  0   0   0   0]</span><br><span class="line">    [  0   0   0   0]   --&gt; □□□□□□□</span><br><span class="line">    [  0   0   0   0]</span><br><span class="line">    [  0   0   0   0]</span><br><span class="line">    [  0   0   0   0]]</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>여기서 제일 안쪽의 리스트들은 □□□□□□□ 에서 □ 한칸, 즉 1개의 픽셀을 가리킨다.</li>
+<li>또한 숫자 <code>[0 0 0 0]</code>과 같은 수치는 <strong>RGBA</strong> 를 가리킨다. 따라서 [0 0 0 0]은 <code>RGBA(0,0,0,0)</code> 이다.</li>
+<li>RGB는 각각 RED, GREEN, BLUE로 삼원색을 가리키며, A는 <code>Alpha Channel</code>로 색상의 투명도를 나타낸다.</li>
+<li>이 속성은 0에 가까워 질수록 점점 투명한 상태로 바뀐다. (min: 0, max: 255)</li>
+<li>따라서 위의 경우 완전히 투명한 색이다.</li>
+</ul>
+<p>따라서 만약 각 픽셀 혹은 한 행, 한 열을 다른 색으로 변경하고 싶다면 이 <strong>RGBA</strong> 를 변경하면 된다. 주의할 점은 <code>.png</code>파일의 경우 RGBA로 나오는 경우도 있지만 jpg나 jpeg 등은 대부분 <strong>RGB</strong> 형식이다.</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">green[<span class="number">0</span>][:len(green[<span class="number">0</span>])<span class="number">-1</span>] = [<span class="number">255.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">255.0</span>] <span class="comment"># Change the one column color's to RED. </span></span><br></pre></td></tr></table></figure>
 </div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
         var options = {
             selector: '.gallery-item'
@@ -411,7 +464,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Assignment"><span class="nav-number">1.</span> <span class="nav-text">Assignment</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#What-exactly-should-I-do"><span class="nav-number">1.1.</span> <span class="nav-text">What exactly should I do?</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Assignment"><span class="nav-number">1.</span> <span class="nav-text">Assignment</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#What-exactly-should-I-do"><span class="nav-number">1.1.</span> <span class="nav-text">What exactly should I do?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Composition-of-an-image"><span class="nav-number">2.</span> <span class="nav-text">Composition of an image</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -577,54 +630,6 @@ if (document.querySelectorAll('pre.mermaid').length) {
   
 
   
-      
-<script type="text/x-mathjax-config">
-
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
-      processEscapes: true,
-      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    },
-    TeX: {
-      equationNumbers: {
-        autoNumber: 'AMS'
-      }
-    }
-  });
-
-  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
-    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
-      if (data.display) {
-        var next = data.script.nextSibling;
-        while (next && next.nodeName.toLowerCase() === '#text') {
-          next = next.nextSibling;
-        }
-        if (next && next.nodeName.toLowerCase() === 'br') {
-          next.parentNode.removeChild(next);
-        }
-      }
-    });
-  });
-
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for (i = 0; i < all.length; i += 1) {
-      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
-      if (element.nodeName.toLowerCase() == 'li') {
-        element = element.parentNode;
-      }
-      element.classList.add('has-jax');
-    }
-  });
-</script>
-<script>
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
-    MathJax.Hub.Typeset();
-  }, window.MathJax);
-</script>
-
-    
 
   
 
