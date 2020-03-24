@@ -368,7 +368,9 @@
 <li>따라서 위의 경우 완전히 투명한 색이다.</li>
 </ul>
 <p>따라서 만약 각 픽셀 혹은 한 행, 한 열을 다른 색으로 변경하고 싶다면 이 <strong>RGBA</strong> 를 변경하면 된다. 주의할 점은 <code>.png</code>파일의 경우 RGBA로 나오는 경우도 있지만 jpg나 jpeg 등은 대부분 <strong>RGB</strong> 형식이다.</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">green[<span class="number">0</span>][:len(green[<span class="number">0</span>])<span class="number">-1</span>] = [<span class="number">255.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">255.0</span>] <span class="comment"># Change the one column color's to RED. </span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><figcaption><span>Change the one column color to RED</span></figcaption><table><tr><td class="code"><pre><span class="line">green[<span class="number">0</span>][:len(green[<span class="number">0</span>])] = [<span class="number">255.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">255.0</span>]</span><br></pre></td></tr></table></figure>
+
+<p><strong>Result</strong><br>green[0]: □□□□□□□ -&gt; <font style="color:red;">■■■■■■■</font></p>
 </div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
         var options = {
             selector: '.gallery-item'
