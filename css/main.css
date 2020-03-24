@@ -1057,7 +1057,6 @@ pre .javascript .function {
 @media (max-width: 767px) {
   .site-meta {
     text-align: center;
-    padding-bottom: 10px;
   }
 }
 .brand {
@@ -1271,7 +1270,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #01ffb9;
+  background: #11d0cc;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
