@@ -274,7 +274,7 @@
   </span>
   
   
-            <div class="post-description">Csci343 Challenge 3 Test</div>
+            <!--<div class="post-description">Csci343 Challenge 3 Test</div>-->
 
         </div>
       </header>
@@ -286,13 +286,9 @@
 
       
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
-<ul>
-<li><strong>Submission Window Opens</strong>: Thursday, March 19</li>
-<li><strong>Objective</strong>:<ol>
+<h2 id="Objectives"><a href="#Objectives" class="headerlink" title="Objectives"></a>Objectives</h2><ul>
 <li>Perform basic image analysis</li>
-<li>Use <code>NumPy</code> for data conversion</li>
-</ol>
-</li>
+<li>Use NumPy for data conversion</li>
 </ul>
 <h2 id="Assignment"><a href="#Assignment" class="headerlink" title="Assignment"></a>Assignment</h2><p>당신은 대학교를 졸업한 이후 이탈리아 보안 감시 회사인 Surveilco에 데이터 과학자로 고용되어 일하고 있습니다. 회사는 기본적인 이미지 분석을 통해 보안 제품 개선을 꾀하고 있는 것 같습니다. 최근에 UM을 졸업한 당신에게 그들은 당신이 그 일에 가장 적합한 데이터 과학자 중 한 명이라는 것을 알고 있는 것 같군요.</p>
 <p>회사의 비디오 시스템은 네트워크 연결을 통해 일련의 JPEG 이미지를 제공하고 있습니다. 회사는 당신에게 일을 시작하기 위한 샘플 데이터 세트를 제공하였습니다. 데이터 세트는 실제 소스에서 캡처한 200개의 JPEG 형식의 이미지로 구성되어 있습니다. 불행히도 카메라를 위해 코드를 작성한 네트워크 프로그래머들은 당신만큼 능숙하지 않은 것 같군요. 그 결과 약 5%의 이미지가 손상되어 사용할 수 없게 되었습니다…</p>
@@ -318,13 +314,11 @@
 </li>
 </ul>
 <hr>
-<h2 id="Composition-of-an-image"><a href="#Composition-of-an-image" class="headerlink" title="Composition of an image"></a>Composition of an image</h2><p>이번 과제에서는 먼저 이미지를 본격적으로 다루기 이전 이미지가 어떻게 이루어져 있는지, 또한 어떻게 다룰 수 있는지를 살펴보자. 먼저 이미지의 구성을 보다 더 쉽게 파악하기 위해 7X7 이미지를 가져 왔다.</p>
+<h2 id="Composition-of-an-image"><a href="#Composition-of-an-image" class="headerlink" title="Composition of an image"></a>Composition of an image</h2><div class="tabs" id="fourth-unique-name"><ul class="nav-tabs"><li class="tab active"><a href="#fourth-unique-name-1">Introduction</a></li><li class="tab"><a href="#fourth-unique-name-2">Picture</a></li><li class="tab"><a href="#fourth-unique-name-3">Practice</a></li></ul><div class="tab-content"><div class="tab-pane active" id="fourth-unique-name-1"><p>이번 과제에서는 먼저 이미지를 본격적으로 다루기 이전 이미지가 어떻게 이루어져 있는지, 또한 어떻게 다룰 수 있는지를 살펴보자. 먼저 이미지의 구성을 보다 더 쉽게 파악하기 위해 7X7 이미지를 가져 왔다.</p>
 <ul>
 <li>실제 이미지는 매우 작아 확인하기 어렵기에 아래 그림은 확대시킨 캡쳐본이다.</li>
 <li>내모 1칸이 1px이다.</li>
-</ul>
-<p><a href="../../../../img/img_analysis/green.JPG" title="example" class="gallery-item"><img src="../../../../img/img_analysis/green.JPG" alt="example"></a></p>
-<p>이제 이 이미지를 2차원 배열 형태로 변환시켜보자.</p>
+</ul></div><div class="tab-pane" id="fourth-unique-name-2"><p><a href="../../../../img/img_analysis/green.JPG" title="example" class="gallery-item"><img src="../../../../img/img_analysis/green.JPG" alt="example"></a></p></div><div class="tab-pane" id="fourth-unique-name-3"><p>이제 이 이미지를 2차원 배열 형태로 변환시켜보자.</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">green = np.array(Image.open(<span class="string">'green.png'</span>))</span><br><span class="line">print(green)</span><br></pre></td></tr></table></figure>
 
 <p>위에서 <code>PIL</code> 모듈 기능을 이용하여 이미지를 열고 <code>numpy</code>를 이용해 이미지를 2차원 배열로 변환시켰다. 2차원 배열의 내용은 아래와 같다.</p>
@@ -368,9 +362,7 @@
 <li>따라서 위의 경우 완전히 투명한 색이다.</li>
 </ul>
 <p>따라서 만약 각 픽셀 혹은 한 행, 한 열을 다른 색으로 변경하고 싶다면 이 <strong>RGBA</strong> 를 변경하면 된다. 주의할 점은 <code>.png</code>파일의 경우 RGBA로 나오는 경우도 있지만 jpg나 jpeg 등은 대부분 <strong>RGB</strong> 형식이다.</p>
-<figure class="highlight python"><figcaption><span>Change the one column color to RED</span></figcaption><table><tr><td class="code"><pre><span class="line">green[<span class="number">0</span>][:len(green[<span class="number">0</span>])] = [<span class="number">255.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">255.0</span>]</span><br></pre></td></tr></table></figure>
-
-<p><strong>Result</strong><br>green[0]: □□□□□□□ -&gt; <font style="color:red;">■■■■■■■</font></p>
+<div class="tabs" id="second-unique-name"><ul class="nav-tabs"><li class="tab active"><a href="#second-unique-name-1">code</a></li><li class="tab"><a href="#second-unique-name-2">result</a></li></ul><div class="tab-content"><div class="tab-pane active" id="second-unique-name-1"><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">green[<span class="number">0</span>][:len(green[<span class="number">0</span>])] = [<span class="number">255.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">255.0</span>] <span class="comment"># Change the one column color to RED</span></span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="second-unique-name-2"><p>□□□□□□□ -&gt; <font style="color:red;">■■■■■■■</font></p></div></div></div></div></div></div>
 </div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
         var options = {
             selector: '.gallery-item'
@@ -466,7 +458,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Assignment"><span class="nav-number">1.</span> <span class="nav-text">Assignment</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#What-exactly-should-I-do"><span class="nav-number">1.1.</span> <span class="nav-text">What exactly should I do?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Composition-of-an-image"><span class="nav-number">2.</span> <span class="nav-text">Composition of an image</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Objectives"><span class="nav-number">1.</span> <span class="nav-text">Objectives</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Assignment"><span class="nav-number">2.</span> <span class="nav-text">Assignment</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#What-exactly-should-I-do"><span class="nav-number">2.1.</span> <span class="nav-text">What exactly should I do?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Composition-of-an-image"><span class="nav-number">3.</span> <span class="nav-text">Composition of an image</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

@@ -1270,7 +1270,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #bd82ff;
+  background: #14a35b;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1455,7 +1455,7 @@ pre .javascript .function {
   color: #0684bd;
 }
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 1em;
 }
 ::-webkit-scrollbar-track {
   background: #f1f1f1;
@@ -2095,8 +2095,7 @@ pre .javascript .function {
 .post-body h4,
 .post-body h5,
 .post-body h6 {
-  padding-top: 70px;
-  margin-top: -50px;
+  margin-top: 32px;
   color: #2b2b2b;
   word-break: break-word;
 }
@@ -2181,7 +2180,7 @@ pre .javascript .function {
 }
 .posts-expand .post-title {
   font-size: 2.475rem;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
   margin: initial;
   overflow-wrap: break-word;
   word-wrap: break-word;
@@ -2219,15 +2218,17 @@ pre .javascript .function {
   color: #999;
   font-family: 'NanumSquare', 'NanumSquare', "PingFang SC", "Microsoft YaHei", sans-serif;
   font-size: 0.75em;
-  margin: 3px 0 60px 0;
+  margin: 3px 0 40px 0;
 }
 .posts-expand .post-meta .post-description {
   font-size: 0.875em;
   margin-top: 2px;
 }
 .posts-expand .post-meta time {
-  border-bottom: 1px dashed #999;
   cursor: pointer;
+}
+.posts-expand .post-meta time:hover {
+  color: #404040;
 }
 @media (max-width: 767px) {
   .posts-expand .post-meta time {
@@ -2247,6 +2248,14 @@ pre .javascript .function {
 }
 .post-meta-divider {
   margin: 0 0.5em;
+}
+.post-meta-item a,
+span.exturl {
+  color: #999;
+}
+.post-meta-item a:hover,
+span.exturl:hover {
+  color: #404040;
 }
 @media (max-width: 767px) {
   .post-meta-item a,
@@ -2892,7 +2901,7 @@ hr {
   margin: 5px 0 20px 0;
 }
 .posts-expand {
-  padding-top: 80px;
+  padding-top: 40px;
 }
 @media (max-width: 767px) {
   .posts-expand {
