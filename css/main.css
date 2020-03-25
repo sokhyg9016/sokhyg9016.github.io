@@ -1270,7 +1270,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #14a35b;
+  background: #4f0b93;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2218,7 +2218,7 @@ pre .javascript .function {
   color: #999;
   font-family: 'NanumSquare', 'NanumSquare', "PingFang SC", "Microsoft YaHei", sans-serif;
   font-size: 0.75em;
-  margin: 3px 0 40px 0;
+  margin: 3px 0 60px 0;
 }
 .posts-expand .post-meta .post-description {
   font-size: 0.875em;
@@ -2901,7 +2901,7 @@ hr {
   margin: 5px 0 20px 0;
 }
 .posts-expand {
-  padding-top: 40px;
+  padding-top: 60px;
 }
 @media (max-width: 767px) {
   .posts-expand {
