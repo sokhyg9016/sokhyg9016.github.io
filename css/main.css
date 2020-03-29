@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&display=swap&subset=korean");
 @import url("https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css");
 @font-face {
   font-family: 'RIDIBatang';
@@ -170,10 +171,9 @@ body {
 }
 body {
   background: #fff;
-  color: #404040;
+  color: rgba(0,0,0,0.84);
   font-family: 'NanumSquare', "PingFang SC", "Microsoft YaHei", sans-serif;
   font-size: 100%;
-  line-height: 1.65;
 }
 @media (max-width: 991px) {
   body {
@@ -767,9 +767,13 @@ pre .javascript .function {
 }
 .post-body .note {
   border-radius: 3px;
-  margin-bottom: 20px;
-  padding: 15px;
+  margin: 0.5em 0;
+  padding: 1.2em 1em;
+  overflow: auto;
   position: relative;
+  border: 1px solid #eee;
+  border-left-width: 5px;
+  font-size: 0.875em;
   border: 1px solid #eee;
   border-left-width: 5px;
 }
@@ -1158,7 +1162,7 @@ pre .javascript .function {
 .menu-item span.exturl {
   border-bottom: 0;
   display: block;
-  font-size: 0.8125em;
+  font-size: 0.875em;
   transition-property: border-color;
   transition-delay: 0s;
   transition-duration: 0.2s;
@@ -1268,7 +1272,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ffd5ff;
+  background: #1f87c4;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1381,7 +1385,7 @@ pre .javascript .function {
 }
 .sidebar-toggle {
   background: #222;
-  bottom: 45px;
+  bottom: 50px;
   cursor: pointer;
   height: 14px;
   left: 30px;
@@ -1597,7 +1601,7 @@ pre .javascript .function {
   font-size: 12px;
   left: 30px;
   opacity: 1;
-  padding: 0 6px;
+  padding: 5px;
   position: fixed;
   text-align: center;
   transition-property: bottom;
@@ -1636,17 +1640,24 @@ pre .javascript .function {
   font-family: 'NanumSquare', 'NanumSquare', "PingFang SC", "Microsoft YaHei", sans-serif;
   margin: 0.5em 0 1em 0;
   font-weight: 400;
-  color: #55585a;
+  color: rgba(0,0,0,0.84);
   overflow-wrap: break-word;
   word-wrap: break-word;
 }
 @media (max-width: 767px) {
   .post-body {
-    color: #222;
+    color: rgba(0,0,0,0.84);
   }
 }
 .post-body p {
   margin: 0 0 20px 0;
+}
+.post-body pre {
+  padding: 1em;
+  margin: 0.5em 0;
+  overflow: auto;
+  border: 0;
+  background-color: #f7f7f7;
 }
 .post-body strong>code {
   font-family: 'Menlo';
@@ -1672,19 +1683,19 @@ pre .javascript .function {
   background-color: #f0f0f0;
 }
 .post-body h2 {
-  font-size: 1.5rem;
+  font-size: 2rem;
 }
 .post-body h3 {
-  font-size: 1.3rem;
+  font-size: 1.75rem;
 }
 .post-body h4 {
-  font-size: 1.1rem;
+  font-size: 1.5rem;
 }
 .post-body h5 {
-  font-size: 0.9rem;
+  font-size: 1.25rem;
 }
 .post-body h6 {
-  font-size: 0.7rem;
+  font-size: 1rem;
 }
 .post-body strong,
 .post-body b {
@@ -1719,11 +1730,12 @@ pre .javascript .function {
   border-bottom: none;
 }
 .post-body blockquote {
-  background: #eee;
-  border: 1px solid #e3e3e3;
-  border-left: 5px solid #ccc;
-  margin: 10px 0px;
-  padding: 0 1em;
+  padding: 1em;
+  margin: 0.5em 0;
+  overflow: auto;
+  border: 0;
+  background-color: #f7f7f7;
+  border-left: 5px solid #d7d7d7;
 }
 .post-body blockquote p {
   margin: 0.6em 0;
@@ -1741,10 +1753,10 @@ pre .javascript .function {
   text-align: left;
 }
 .post-body ul>li {
-  margin-top: 3px;
+  margin-bottom: 0.25rem;
 }
 .post-body ol>li {
-  margin-top: 3px;
+  margin-bottom: 0.25rem;
 }
 .post-body ul>li:not(.tab)>a:not(.category-list-link):before {
   content: "\f0c1"; /* FontAwesome Unicode */
@@ -1816,7 +1828,8 @@ pre .javascript .function {
 }
 @media screen and (min-width: 50em) {
   .post-body {
-    font-size: 1em;
+    font-size: 1.1rem;
+    line-height: 160%;
   }
 }
 .phost-sticky-flag {
@@ -1984,6 +1997,7 @@ pre .javascript .function {
 }
 .posts-expand {
   padding-top: 40px;
+  margin: 0 45px;
 }
 @media (max-width: 767px) {
   .posts-expand {
@@ -2092,8 +2106,8 @@ pre .javascript .function {
 .post-body h4,
 .post-body h5,
 .post-body h6 {
-  margin-top: 32px;
-  color: #2b2b2b;
+  margin-top: 2.5rem;
+  color: rgba(0,0,0,0.84);
   word-break: break-word;
 }
 .post-body h1 .header-anchor,
@@ -2176,7 +2190,7 @@ pre .javascript .function {
   }
 }
 .posts-expand .post-title {
-  font-size: 2.475rem;
+  font-size: 2.5rem;
   padding-bottom: 10px;
   margin: initial;
   overflow-wrap: break-word;
@@ -2962,14 +2976,14 @@ hr {
   background: #666;
 }
 .sidebar {
-  left: -300px;
+  left: -320px;
 }
 .sidebar.sidebar-active {
   left: 0;
 }
 .sidebar {
   transition: all 0.4s;
-  width: 300px;
+  width: 320px;
 }
 .sub-menu {
   margin: 10px 0;
