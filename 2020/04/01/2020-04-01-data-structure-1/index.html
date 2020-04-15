@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap/css?family=NanumSquare:300,300italic,400,400italic,700,700italic|Inconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://sokhyg9016.github.io').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","width":320,"display":"hide","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"flat"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Data Structure - Array, Structure, Pointer">
+<meta property="og:type" content="article">
+<meta property="og:title" content="배열, 구조체, 포인터">
+<meta property="og:url" content="http://sokhyg9016.github.io/2020/04/01/2020-04-01-data-structure-1/index.html">
+<meta property="og:site_name" content="Git Page">
+<meta property="og:description" content="Data Structure - Array, Structure, Pointer">
+<meta property="og:locale" content="ko_KR">
+<meta property="article:published_time" content="2020-04-01T05:00:00.000Z">
+<meta property="article:modified_time" content="2020-04-02T14:22:56.272Z">
+<meta property="article:author" content="LSH">
+<meta property="article:tag" content="Data Structure">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://sokhyg9016.github.io/2020/04/01/2020-04-01-data-structure-1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>배열, 구조체, 포인터 | Git Page</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Git Page</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">AI · Data Structure · Algorithm · Game Development</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>홈</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>태그</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>카테고리</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>아카이브</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-fw fa-calendar"></i>Schedule</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>검색
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="ko">
+    <link itemprop="mainEntityOfPage" href="http://sokhyg9016.github.io/2020/04/01/2020-04-01-data-structure-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/avatar.png">
+      <meta itemprop="name" content="LSH">
+      <meta itemprop="description" content="Github + 뻘글 블로그.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Git Page">
+    </span>
+      <div>
+        
+        <a href="/tags/Data-Structure/" rel="tag" style = "border-bottom: none; background: none; color: orange; font-weight: bold; font-size: 1em; padding: 0;">Data Structure</a>
+      </div>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          배열, 구조체, 포인터
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">작성일</span>
+
+              <time title="Post created: 2020-04-01 00:00:00" itemprop="dateCreated datePublished" datetime="2020-04-01T00:00:00-05:00">2020-04-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Updated at: 2020-04-02 09:22:56" itemprop="dateModified" datetime="2020-04-02T09:22:56-05:00">2020-04-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Data-Structure/" itemprop="url" rel="index">
+                    <span itemprop="name">Data Structure</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2020/04/01/2020-04-01-data-structure-1/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/04/01/2020-04-01-data-structure-1/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <!--<div class="post-description">Data Structure - Array, Structure, Pointer</div>-->
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
+<h2 id="Polynomial-Program"><a href="#Polynomial-Program" class="headerlink" title="Polynomial Program"></a>Polynomial Program</h2><div class="tabs" id="fourth-poly-unique-name"><ul class="nav-tabs"><li class="tab active"><a href="#fourth-poly-unique-name-1">Problem</a></li><li class="tab"><a href="#fourth-poly-unique-name-2">C</a></li><li class="tab"><a href="#fourth-poly-unique-name-3">Python</a></li></ul><div class="tab-content"><div class="tab-pane active" id="fourth-poly-unique-name-1"><p>C와 Python으로 아래 다항식을 구현해보자.</p>
+<div class="note no-icon">
+            <p>$$p1 = 3x^{5} + 6x^{4} + 10$$<br>$$p2 = 7x^{4} + 5x^{2} + 1$$<br>$$p1 + p2 = ?$$</p>
+          </div></div><div class="tab-pane" id="fourth-poly-unique-name-2"><div class="tabs" id="second-c_poly-unique-name"><ul class="nav-tabs"><li class="tab active"><a href="#second-c_poly-unique-name-1">Method1</a></li><li class="tab"><a href="#second-c_poly-unique-name-2">Method2</a></li></ul><div class="tab-content"><div class="tab-pane active" id="second-c_poly-unique-name-1"><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX(a, b) ((a &gt; b) ? (a) : (b))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_DEGREE (101)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">  <span class="keyword">int</span> degree;</span><br><span class="line">  <span class="keyword">float</span> coef[MAX_DEGREE];</span><br><span class="line">&#125; polynomial;</span><br><span class="line"></span><br><span class="line"><span class="function">polynomial <span class="title">add_poly</span><span class="params">(polynomial A, polynomial B)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    polynomial C;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> a_pos = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> b_pos = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> c_pos = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> a_degree = A.degree;</span><br><span class="line">    <span class="keyword">int</span> b_degree = B.degree;</span><br><span class="line">    </span><br><span class="line">    C.degree = MAX(A.degree, B.degree);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> (a_pos &lt;= A.degree &amp;&amp; b_pos &lt;= B.degree) &#123;</span><br><span class="line">        <span class="keyword">if</span> (a_degree &gt; b_degree) &#123;</span><br><span class="line">            C.coef[c_pos++] = A.coef[a_pos++];</span><br><span class="line">            a_degree--;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (a_degree == b_degree) &#123;</span><br><span class="line">            C.coef[c_pos++] = A.coef[a_pos++] + B.coef[b_pos++];</span><br><span class="line">            a_degree--;</span><br><span class="line">            b_degree--;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            C.coef[c_pos++] = B.coef[b_pos++];</span><br><span class="line">            b_degree--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> C;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    polynomial p1 = &#123;<span class="number">5</span>, &#123;<span class="number">3</span>, <span class="number">6</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">10</span>&#125;&#125;;</span><br><span class="line">    polynomial p2 = &#123;<span class="number">4</span>, &#123;<span class="number">7</span>, <span class="number">0</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">1</span>&#125;&#125;;</span><br><span class="line">    polynomial result = add_poly(p1, p2);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Result-Degree: %d\n"</span>, result.degree);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= result.degree; i++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Result-Coef: %.2f\n"</span>, result.coef[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="second-c_poly-unique-name-2"><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;assert.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_TERMS (101)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="keyword">float</span> coef;</span><br><span class="line">    <span class="keyword">int</span> expon;</span><br><span class="line">&#125; polynomial;</span><br><span class="line"></span><br><span class="line">polynomial g_terms[MAX_TERMS] = &#123;</span><br><span class="line">    &#123;<span class="number">3</span>,<span class="number">5</span>&#125;,&#123;<span class="number">6</span>,<span class="number">4</span>&#125;,&#123;<span class="number">10</span>,<span class="number">0</span>&#125;,</span><br><span class="line">    &#123;<span class="number">7</span>,<span class="number">4</span>&#125;,&#123;<span class="number">5</span>,<span class="number">2</span>&#125;,&#123;<span class="number">1</span>,<span class="number">0</span>&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">int</span> g_avail = <span class="number">6</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// compare two integer value</span></span><br><span class="line"><span class="function"><span class="keyword">char</span> <span class="title">compare</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (a &gt; b) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'&gt;'</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (a == b) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'='</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'&lt;'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// append new term in Polynomial.</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">attach</span><span class="params">(<span class="keyword">float</span> coef, <span class="keyword">int</span> expon)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (g_avail &gt; MAX_TERMS) &#123;</span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">"Too many terms\n"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    g_terms[g_avail].coef = coef;</span><br><span class="line">    g_terms[g_avail].expon = expon;</span><br><span class="line">    g_avail++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//C = A + B</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add_poly</span><span class="params">(<span class="keyword">int</span> a_start, <span class="keyword">int</span> a_end, <span class="keyword">int</span> b_start, <span class="keyword">int</span> b_end, <span class="keyword">int</span>* <span class="keyword">const</span> out_c_start, <span class="keyword">int</span>* <span class="keyword">const</span> out_c_end)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    assert(out_c_start != <span class="literal">NULL</span>);</span><br><span class="line">    assert(out_c_end != <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">float</span> tmp_coef;</span><br><span class="line"></span><br><span class="line">    *out_c_start = g_avail;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (a_start &lt;= a_end &amp;&amp; b_start &lt;= b_end) &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">switch</span> (compare(g_terms[a_start].expon, g_terms[b_start].expon)) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'&gt;'</span>:</span><br><span class="line">            <span class="built_in">attach</span>(g_terms[a_start].coef, g_terms[a_start].expon);</span><br><span class="line">            a_start++;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'='</span>:</span><br><span class="line">            tmp_coef = g_terms[a_start].coef + g_terms[b_start].coef;</span><br><span class="line">            <span class="keyword">if</span> (tmp_coef != <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="built_in">attach</span>(tmp_coef, g_terms[a_start].expon);</span><br><span class="line">            &#125;</span><br><span class="line">            a_start++;</span><br><span class="line">            b_start++;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'&lt;'</span>:</span><br><span class="line">            <span class="built_in">attach</span>(g_terms[b_start].coef, g_terms[b_start].expon);</span><br><span class="line">            b_start++;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">"Unexpected Result on compare function."</span>);</span><br><span class="line">            assert(<span class="number">0</span>);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// Move to A's left terms to Polynomial</span></span><br><span class="line">    <span class="keyword">while</span> (a_start &lt;= a_end) &#123;</span><br><span class="line">        <span class="built_in">attach</span>(g_terms[a_start].coef, g_terms[a_start].expon);</span><br><span class="line">        a_start++;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// Move to B's left terms to Polynomial</span></span><br><span class="line">    <span class="keyword">while</span> (b_start &lt;= b_end) &#123;</span><br><span class="line">        <span class="built_in">attach</span>(g_terms[b_start].coef, g_terms[b_start].expon);</span><br><span class="line">        b_start++;</span><br><span class="line">    &#125;</span><br><span class="line">    *out_c_end = g_avail - <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> c_start, c_end;</span><br><span class="line">    add_poly(<span class="number">0</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>, &amp;c_start, &amp;c_end);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = c_start; i &lt;= c_end; i++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%.2fx^%d + "</span>, g_terms[i].coef, g_terms[i].expon);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></div></div></div><div class="tab-pane" id="fourth-poly-unique-name-3"><div class="tabs" id="third-python_poly-unique-name"><ul class="nav-tabs"><li class="tab active"><a href="#third-python_poly-unique-name-1">Method1</a></li><li class="tab"><a href="#third-python_poly-unique-name-2">Method2</a></li><li class="tab"><a href="#third-python_poly-unique-name-3">Method3</a></li></ul><div class="tab-content"><div class="tab-pane active" id="third-python_poly-unique-name-1"><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Polynomial</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, degree = None, coeffs = [])</span>:</span></span><br><span class="line">        self.degree = degree</span><br><span class="line">        self.coeffs = coeffs</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Polynomial degree: &#123;&#125;, coeffs: &#123;&#125;"</span>.format(self.degree, self.coeffs)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__add__</span><span class="params">(self, other)</span>:</span></span><br><span class="line">        self_pos = <span class="number">0</span></span><br><span class="line">        other_pos = <span class="number">0</span></span><br><span class="line">        self_degree = self.degree</span><br><span class="line">        other_degree = other.degree</span><br><span class="line">        </span><br><span class="line">        result_degree = max(self_degree, other_degree)</span><br><span class="line">        result_coeffs = []</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> self_pos &lt;= self.degree <span class="keyword">and</span> other_pos &lt;= other.degree:</span><br><span class="line">            <span class="keyword">if</span> self_degree &gt; other_degree:</span><br><span class="line">                result_coeffs.append(self.coeffs[self_pos])</span><br><span class="line">                self_pos += <span class="number">1</span></span><br><span class="line">                self_degree -= <span class="number">1</span></span><br><span class="line">                    </span><br><span class="line">            <span class="keyword">elif</span> self_degree == other_degree:</span><br><span class="line">                result_coeffs.append(self.coeffs[self_pos] + other.coeffs[other_pos])</span><br><span class="line">                self_pos += <span class="number">1</span></span><br><span class="line">                other_pos += <span class="number">1</span></span><br><span class="line">                self_degree -= <span class="number">1</span></span><br><span class="line">                other_degree -= <span class="number">1</span></span><br><span class="line">                </span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                result_coeffs.append(self.coeffs[other_pos])</span><br><span class="line">                other_pos += <span class="number">1</span></span><br><span class="line">                other_degree -= <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> Polynomial(result_degree, result_coeffs)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Call the Add Method.</span></span><br><span class="line">p1 = Polynomial(<span class="number">5</span>, [<span class="number">3</span>, <span class="number">6</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">10</span>])</span><br><span class="line">p2 = Polynomial(<span class="number">4</span>, [<span class="number">7</span>, <span class="number">0</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">1</span>])</span><br><span class="line">print(p1 + p2)</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="third-python_poly-unique-name-2"><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Term</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, coef, expon)</span>:</span></span><br><span class="line">        self.coef = coef</span><br><span class="line">        self.expon = expon</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Term_List</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, terms=[])</span>:</span></span><br><span class="line">        self.terms = terms</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__len__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> len(self.terms)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">append</span><span class="params">(self, coef, expon)</span>:</span></span><br><span class="line">        self.terms.append(Term(coef, expon))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_term</span><span class="params">(self, index)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.terms[index]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_coef</span><span class="params">(self, index)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.terms[index].coef</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_expon</span><span class="params">(self, index)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.terms[index].expon</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">find_polynomial_size</span><span class="params">(self, start)</span>:</span></span><br><span class="line">        curr = self.terms</span><br><span class="line">        <span class="keyword">while</span> curr[start].expon:</span><br><span class="line">            start += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> start</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_terms</span><span class="params">(self, term1=<span class="number">0</span>, term2=<span class="number">1</span>)</span>:</span></span><br><span class="line">        std_idx = [<span class="number">0</span>]</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> index, term <span class="keyword">in</span> enumerate(self.terms):</span><br><span class="line">            <span class="keyword">if</span> term.expon == <span class="number">0</span>:</span><br><span class="line">                std_idx.append(index+<span class="number">1</span>)</span><br><span class="line">        </span><br><span class="line">        a_start = std_idx[term1]</span><br><span class="line">        b_start = std_idx[term2]</span><br><span class="line">        </span><br><span class="line">        a_end = self.find_polynomial_size(start=a_start)</span><br><span class="line">        b_end = self.find_polynomial_size(start=b_start)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> a_start, a_end, b_start, b_end</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">print_terms</span><span class="params">(self, start=<span class="number">0</span>)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> start:</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(start, len(self.terms)):</span><br><span class="line">                print(<span class="string">"&#123;&#125;x^&#123;&#125;"</span>.format(self.terms[i].coef, self.terms[i].expon), end = <span class="string">" + "</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">for</span> term <span class="keyword">in</span> self.terms:</span><br><span class="line">                print(<span class="string">"&#123;&#125;x^&#123;&#125;"</span>.format(term.coef, term.expon), end = <span class="string">" + "</span>)</span><br><span class="line">                </span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">poly_add</span><span class="params">(self, terms)</span>:</span></span><br><span class="line">        a_start, a_end, b_start, b_end = terms</span><br><span class="line">        c_start = len(self.terms)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> a_start &lt;= a_end <span class="keyword">and</span> b_start &lt;= b_end:</span><br><span class="line">        </span><br><span class="line">            a = self.get_term(a_start)</span><br><span class="line">            b = self.get_term(b_start)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> a.expon &gt; b.expon:</span><br><span class="line">                self.append(a.coef, a.expon)</span><br><span class="line">                a_start += <span class="number">1</span></span><br><span class="line">            <span class="keyword">elif</span> a.expon == b.expon:</span><br><span class="line">                tmp_coef = a.coef + b.coef</span><br><span class="line">                <span class="keyword">if</span> tmp_coef:</span><br><span class="line">                    self.append(tmp_coef, a.expon)</span><br><span class="line">               </span><br><span class="line">                a_start += <span class="number">1</span></span><br><span class="line">                b_start += <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                self.append(b.coef, b.expon)</span><br><span class="line">                b_start += <span class="number">1</span></span><br><span class="line">            </span><br><span class="line">        <span class="keyword">while</span> a_start &lt;= a_end:</span><br><span class="line">            a = self.get_term(a_start)</span><br><span class="line">            self.append(a.coef, a.expon)</span><br><span class="line">            a_start += <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> a_start &lt;= a_end:</span><br><span class="line">            b = self.get_term(b_start)</span><br><span class="line">            self.append(b.coef, b.expon)</span><br><span class="line">            b_start += <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> c_start</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">terms = Term_List()</span><br><span class="line">terms.append(<span class="number">3</span>, <span class="number">5</span>)</span><br><span class="line">terms.append(<span class="number">6</span>, <span class="number">4</span>)</span><br><span class="line">terms.append(<span class="number">10</span>, <span class="number">0</span>)</span><br><span class="line">terms.append(<span class="number">7</span>, <span class="number">4</span>)</span><br><span class="line">terms.append(<span class="number">5</span>, <span class="number">2</span>)</span><br><span class="line">terms.append(<span class="number">1</span>, <span class="number">0</span>)</span><br><span class="line">terms.append(<span class="number">2</span>, <span class="number">5</span>)</span><br><span class="line">terms.append(<span class="number">10</span>, <span class="number">4</span>)</span><br><span class="line">terms.append(<span class="number">5</span>, <span class="number">3</span>)</span><br><span class="line">terms.append(<span class="number">1</span>, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">c_start = terms.poly_add(terms.get_terms(<span class="number">0</span>, <span class="number">2</span>))</span><br><span class="line">terms.print_terms(start = c_start)</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="third-python_poly-unique-name-3"><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Polynomial</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, *coeffs)</span>:</span></span><br><span class="line">    self.coeffs = coeffs</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">"Polynomial (*&#123;!r&#125;)"</span>.format(self.coeffs)</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__add__</span><span class="params">(self, other)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> Polynomial(*(x + y <span class="keyword">for</span> x, y <span class="keyword">in</span> zip(self.coeffs, other.coeffs)))</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__sub__</span><span class="params">(self, other)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> Polynomial(*(x - y <span class="keyword">for</span> x, y <span class="keyword">in</span> zip(self.coeffs, other.coeffs)))</span><br><span class="line"></span><br><span class="line">  <span class="comment"># return the degrees</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__len__</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> len(self.coeffs)</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__call__</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">p1 = Polynomial(<span class="number">3</span>, <span class="number">6</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">10</span>)</span><br><span class="line">p2 = Polynomial(<span class="number">0</span>, <span class="number">7</span>, <span class="number">0</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">print(p1)</span><br><span class="line">print(p2)</span><br><span class="line">print(p1 + p2)</span><br><span class="line">print(p1 - p2)</span><br><span class="line">print(len(p1))</span><br></pre></td></tr></table></figure></div></div></div></div></div></div>
+
+<h2 id="자체-참조-구조체"><a href="#자체-참조-구조체" class="headerlink" title="자체 참조 구조체"></a>자체 참조 구조체</h2><p><code>자체 참조 구조체</code>(self-referential structure)는 특별한 구조체로서 구성 요소 중에 자기 자신을 가리키는 포인터가 1개 이상 존재하는 구조체를 말한다.</p>
+<p>자체 참조 구조체는 연결 리스트나 트리를 구성할 때 많이 등장한다. 일반적으로 항목의 개수를 미리 예측할 수 없는 경우에 자체 참조 구조체를 정의해 놓고 동적으로 기억장소를 할당받아서 이를 포인터로 연결하여 자료구조를 구성한다.</p>
+<p>아래의 ListNode 구조체에서 link 필드가 ListNode를 가리키므로 그 구조체는 자체 참조 구조체이다.</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">char</span> data[<span class="number">10</span>];</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">next</span>;</span></span><br><span class="line">&#125;ListNode;</span><br></pre></td></tr></table></figure>
+
+<h2 id="다양한-포인터"><a href="#다양한-포인터" class="headerlink" title="다양한 포인터"></a>다양한 포인터</h2><p>포인터는 다음과 같이 여러 가지 타입의 대상에 대하여 선언될 수 있다.</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span>* p;    <span class="comment">// p는 아무것도 가리키지 않는 포인터</span></span><br><span class="line"><span class="keyword">int</span>* pi;    <span class="comment">// p는 함수 변수를 가리키는 포인터</span></span><br><span class="line"><span class="keyword">float</span>* pi;  <span class="comment">// p는 실수 변수를 가리키는 포인터</span></span><br><span class="line"><span class="keyword">char</span>* pc;   <span class="comment">// p는 문자 변수를 가리키는 포인터</span></span><br><span class="line"><span class="keyword">int</span>** pp;   <span class="comment">// pp는 포인터를 가리키는 포인터</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">test</span>* <span class="title">ps</span>;</span>    <span class="comment">// ps는 구조체를 가리키는 포인터</span></span><br><span class="line"><span class="keyword">void</span> (*f) <span class="keyword">int</span>;  <span class="comment">// f는 매개변수를 갖고 반환 값을 갖지 않는 함수를 가리키는 포인터</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//Function Pointer Example</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">foo</span><span class="params">(<span class="keyword">int</span> a)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"foo: %d\n"</span>, a);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> (*f)(<span class="keyword">int</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//아래 3 코드는 완전히 동일한 표현이다.</span></span><br><span class="line">    f = foo;</span><br><span class="line">    f(<span class="number">10</span>); <span class="comment">//=foo(10)</span></span><br><span class="line">    (*f)(<span class="number">10</span>); <span class="comment">//=f(10)</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="배열과-포인터"><a href="#배열과-포인터" class="headerlink" title="배열과 포인터"></a>배열과 포인터</h3><p>함수의 매개변수로 배열이 전달되면 함수 안에서 배열의 내용을 변경할 수 있었다. 배열의 이름이 시작 부분을 가리키는 포인터이기 때문이다.</p>
+<div class="note no-icon">
+            <p><strong>배열의 이름은 포인터인가요?</strong><br>배열은 배열이고 포인터는 포인터이다. 배열은 배열 형식으로 선언한 변수이며 일정한 공간을 가지고 있지만 포인터는 단지 메모리의 주소를 담는 변수일 뿐이다.</p><p>단, 배열은 수식에서 사용될 때 포인터로 변환된다. 정확하게는 배열이 포인터로 퇴화(Decay)한다고 표현한다.</p><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> numArr[<span class="number">10</span>] = &#123; <span class="number">0</span>, <span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>, <span class="number">50</span>, <span class="number">60</span>, <span class="number">70</span>, <span class="number">80</span>, <span class="number">90</span> &#125;;</span><br><span class="line"><span class="keyword">int</span> *numPtr;</span><br><span class="line"></span><br><span class="line"><span class="comment">//[]를 사용하면 numArr은 배열의 첫번째 요소를 가리키는 포인터로 변환됨</span></span><br><span class="line">num_arr[<span class="number">3</span>] = <span class="number">0</span>;</span><br></pre></td></tr></table></figure><p>마찬가지로 배열 이름을 포인터에 할당하는 것도 수식이므로 배열 이름이 포인터로 변환됩니다.</p><figure class="highlight c"><table><tr><td class="code"><pre><span class="line">num_arr = numArr;<span class="comment">// 수식에서 numArr은 배열의 첫번째 요소를 가리키는 포인터로 변환됨</span></span><br></pre></td></tr></table></figure><p>또한 C++의 참조의 경우는 같은 메모리의 이름을 하나 더 부여하여 메모리에 접근하는 방식이기 때문에 타입을 그대로 가져올 수 있다고 한다. 배열이 부식(decay)되지 않는다는 뜻이다.</p><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;typeinfo&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> arr[] = &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span> &#125;;</span><br><span class="line">    <span class="keyword">int</span> (&amp;refArr)[<span class="number">4</span>] = arr;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="keyword">typeid</span>(arr).name() &lt;&lt; <span class="built_in">endl</span>;     <span class="comment">// int [4]</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="keyword">typeid</span>(refArr).name() &lt;&lt; <span class="built_in">endl</span>;  <span class="comment">//int [4]</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>배열과 포인터에 관한 자세한 내용의 참조는 아래의 사이트들을 추천한다. 나중에 정리하여 업로드 예정</p><ul><li><a href="http://cinsk.github.io//cfaqs/html/node8.html" target="_blank" rel="noopener">C Programing FAQs - 6. Arrays and Pointers</a></li><li><a href="https://stackoverflow.com/questions/39021998/is-there-a-reason-why-an-array-name-is-not-an-lvalue" target="_blank" rel="noopener">Stack Overflow - Is there a reason why an array name is not an lvalue?</a></li><li><a href="https://stackoverflow.com/questions/1641957/is-an-array-name-a-pointer" target="_blank" rel="noopener">Stack Overflow - Is an array name a pointer?</a></li></ul>
+          </div>
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Data-Structure/" rel="tag"><i class="fa fa-tag"></i> Data Structure</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/31/2020-03-31-csci259-lec5-2/" rel="prev" title="Loops and Files [2/2]">
+      <i class="fa fa-chevron-left"></i> Loops and Files [2/2]
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/04/14/2020-04-14-csci259-lec6/" rel="next" title="Functions">
+      Functions <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          목차
+        </li>
+        <li class="sidebar-nav-overview">
+          프로필
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Polynomial-Program"><span class="nav-number">1.</span> <span class="nav-text">Polynomial Program</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#자체-참조-구조체"><span class="nav-number">2.</span> <span class="nav-text">자체 참조 구조체</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#다양한-포인터"><span class="nav-number">3.</span> <span class="nav-text">다양한 포인터</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#배열과-포인터"><span class="nav-number">3.1.</span> <span class="nav-text">배열과 포인터</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LSH"
+      src="/img/avatar.png">
+  <p class="site-author-name" itemprop="name">LSH</p>
+  <div class="site-description" itemprop="description">Github + 뻘글 블로그.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">포스트</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">카테고리</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">태그</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/sokhyg9016" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;sokhyg9016" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:sokhyg9016@gmail.com" title="E-Mail → mailto:sokhyg9016@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/users/10584779/%ec%9d%b4%ec%8a%b9%ed%9b%88" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;10584779&#x2F;%ec%9d%b4%ec%8a%b9%ed%9b%88" rel="noopener" target="_blank"><i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.youtube.com/channel/UC9bPZO7K_0a6Eh_nbcjD68A?view_as=subscriber" title="YouTube → https:&#x2F;&#x2F;www.youtube.com&#x2F;channel&#x2F;UC9bPZO7K_0a6Eh_nbcjD68A?view_as&#x3D;subscriber" rel="noopener" target="_blank"><i class="fa fa-fw fa-youtube"></i>YouTube</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LSH</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.7.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('div.pdf').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js', () => {
+    document.querySelectorAll('div.pdf').forEach(element => {
+      PDFObject.embed(element.getAttribute('target'), element, {
+        pdfOpenParams: {
+          navpanes: 0,
+          toolbar: 0,
+          statusbar: 0,
+          pagemode: 'thumbs',
+          view: 'FitH'
+        },
+        PDFJS_URL: '/lib/pdf/web/viewer.html',
+        height: element.getAttribute('height') || '500px'
+      });
+    });
+  }, window.PDFObject);
+}
+</script>
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme: 'forest',
+      logLevel: 3,
+      flowchart: { curve: 'linear' },
+      gantt: { axisFormat: '%m/%d/%Y' },
+      sequence: { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://sokhyg9016-github-io.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://sokhyg9016.github.io/2020/04/01/2020-04-01-data-structure-1/";
+    this.page.identifier = "2020/04/01/2020-04-01-data-structure-1/";
+    this.page.title = "배열, 구조체, 포인터";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://sokhyg9016-github-io.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
+
+<!-- Background Animation -->
+<!-- <script type="text/javascript" src="/js/src/particle.js"></script> -->

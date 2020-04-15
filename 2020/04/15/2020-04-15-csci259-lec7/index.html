@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap/css?family=NanumSquare:300,300italic,400,400italic,700,700italic|Inconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://sokhyg9016.github.io').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","width":320,"display":"hide","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"flat"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Csci 259 Programming in C++ Chapter 7">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Single-Dimensional Arrays">
+<meta property="og:url" content="http://sokhyg9016.github.io/2020/04/15/2020-04-15-csci259-lec7/index.html">
+<meta property="og:site_name" content="Git Page">
+<meta property="og:description" content="Csci 259 Programming in C++ Chapter 7">
+<meta property="og:locale" content="ko_KR">
+<meta property="article:published_time" content="2020-04-15T05:00:00.000Z">
+<meta property="article:modified_time" content="2020-04-15T09:02:35.198Z">
+<meta property="article:author" content="LSH">
+<meta property="article:tag" content="CSCI 259">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://sokhyg9016.github.io/2020/04/15/2020-04-15-csci259-lec7/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Single-Dimensional Arrays | Git Page</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Git Page</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">AI · Data Structure · Algorithm · Game Development</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>홈</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>태그</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>카테고리</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>아카이브</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-fw fa-calendar"></i>Schedule</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>검색
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="ko">
+    <link itemprop="mainEntityOfPage" href="http://sokhyg9016.github.io/2020/04/15/2020-04-15-csci259-lec7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/avatar.png">
+      <meta itemprop="name" content="LSH">
+      <meta itemprop="description" content="Github + 뻘글 블로그.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Git Page">
+    </span>
+      <div>
+        
+        <a href="/tags/CSCI-259/" rel="tag" style = "border-bottom: none; background: none; color: orange; font-weight: bold; font-size: 1em; padding: 0;">CSCI 259</a>
+      </div>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Single-Dimensional Arrays
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">작성일</span>
+              
+
+              <time title="Post created: 2020-04-15 00:00:00 / Updated at: 04:02:35" itemprop="dateCreated datePublished" datetime="2020-04-15T00:00:00-05:00">2020-04-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Olemiss/" itemprop="url" rel="index">
+                    <span itemprop="name">Olemiss</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Olemiss/CSCI-259/" itemprop="url" rel="index">
+                    <span itemprop="name">CSCI 259</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2020/04/15/2020-04-15-csci259-lec7/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/04/15/2020-04-15-csci259-lec7/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <!--<div class="post-description">Csci 259 Programming in C++ Chapter 7</div>-->
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
+<h2 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h2><ul>
+<li>Array is a data structure that represents a collection of the same types of data.</li>
+<li>Declared using [] operator.</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> tests[<span class="number">5</span>] = &#123;<span class="number">0</span>,&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Each element in an array is assigned a unique subscript (or index)</li>
+<li>Subscripts start at 0</li>
+<li>The last element’s subscript is <strong>n-1</strong> where n is the number of elements in the array.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>test[0]</th>
+<th>test[1]</th>
+<th>test[2]</th>
+<th>test[3]</th>
+<th>test[4]</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody></table>
+<h2 id="Partial-Array-Initialization"><a href="#Partial-Array-Initialization" class="headerlink" title="Partial Array Initialization"></a>Partial Array Initialization</h2><p>If array is initialized with fewer initial values than the size, the<br>remaining elements will be set to 0:</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> numbers[<span class="number">7</span>] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">8</span>&#125;;</span><br><span class="line"></span><br><span class="line">| [<span class="number">0</span>] | [<span class="number">1</span>] | [<span class="number">2</span>] | [<span class="number">3</span>] | [<span class="number">4</span>] | [<span class="number">5</span>] | [<span class="number">6</span>] |</span><br><span class="line">| --- | --- | --- | --- | --- | --- | --- |</span><br><span class="line">| <span class="number">1</span>   | <span class="number">2</span>   | <span class="number">4</span>   | <span class="number">8</span>   | <span class="number">0</span>   | <span class="number">0</span>   | <span class="number">0</span>   |</span><br></pre></td></tr></table></figure>
+
+<h2 id="Length-of-Array"><a href="#Length-of-Array" class="headerlink" title="Length of Array"></a>Length of Array</h2><ul>
+<li>Once an array is created, its length/size is fixed.</li>
+<li>The sizeof function in C++ is used to find the total number of bytes allocated for the array.</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> quizzes[] = &#123;<span class="number">12</span>,<span class="number">17</span>,<span class="number">15</span>,<span class="number">11</span>&#125;;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"length is "</span> &lt;&lt; <span class="keyword">sizeof</span>(quizzes) /<span class="keyword">sizeof</span>(quizzes[<span class="number">0</span>]);</span><br></pre></td></tr></table></figure>
+
+<h2 id="Enhanced-for-loop"><a href="#Enhanced-for-loop" class="headerlink" title="Enhanced for loop"></a>Enhanced for loop</h2><ul>
+<li>It also called as range-based for loop.</li>
+<li>A new for loop that enables you to traverse the complete array sequentially without using a counter</li>
+</ul>
+<p>In general, the syntax is</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (elementDataType value : arrayName) &#123;</span><br><span class="line">    <span class="comment">// Process the value</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>For example, the following code displays all elements in the array myList:</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">double</span> myList[<span class="number">5</span>] = &#123;<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>, <span class="number">4.0</span>, <span class="number">5.0</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">double</span> value : myList) &#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; value &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Passing-Arrays-to-Functions"><a href="#Passing-Arrays-to-Functions" class="headerlink" title="Passing Arrays to Functions"></a>Passing Arrays to Functions</h2><ul>
+<li>To pass an array to a function, just use the array name</li>
+<li>When passing an array to a function, it is common to pass array size so that function knows how many elements to process:</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">showScores(tests, ARRAY_SIZE); <span class="comment">// function call</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Array size must also be reflected in prototype, header:</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">showScores</span><span class="params">(<span class="keyword">int</span> [], <span class="keyword">int</span>)</span></span>; <span class="comment">// function prototype</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">showScores</span><span class="params">(<span class="keyword">int</span> tests[], <span class="keyword">int</span> size)</span> <span class="comment">// // function header</span></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Arrays-are-Passed-by-Reference"><a href="#Arrays-are-Passed-by-Reference" class="headerlink" title="Arrays are Passed by Reference"></a>Arrays are Passed by Reference</h2><p>C++ uses pass by value to pass arguments to a function. There are important differences between passing a value of variables of primitive data types and passing arrays</p>
+<h3 id="Passing-primitive-data-type"><a href="#Passing-primitive-data-type" class="headerlink" title="Passing primitive data type"></a>Passing primitive data type</h3><ul>
+<li>For a parameter of a primitive type value, the actual value is passed.</li>
+<li>Changing the value of the local parameter inside the function does <ins><strong>not</strong></ins> affect the value of the variable outside the function.</li>
+</ul>
+<h3 id="Passing-array"><a href="#Passing-array" class="headerlink" title="Passing array"></a>Passing array</h3><ul>
+<li>For a parameter of an array type, the value of the parameter contains a <strong>reference</strong> to an array; this reference is passed to the function.</li>
+<li>Any changes to the array that occur inside the function body will  <ins><strong>affect</strong></ins> the original array that was passed as the argument.</li>
+</ul>
+<h4 id="Passing-an-array-by-reference"><a href="#Passing-an-array-by-reference" class="headerlink" title="Passing an array by reference"></a>Passing an array by reference</h4><p>These three are different ways of declaring the same function. They’re all treated as taking an <code>int *</code> parameter, you can pass any size array to them.</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">//These are pointer to an element</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">foo</span><span class="params">(<span class="keyword">int</span> * x)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">foo</span><span class="params">(<span class="keyword">int</span> x[<span class="number">100</span>])</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">foo</span><span class="params">(<span class="keyword">int</span> x[])</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>But, These are not reference-to-array parameter. These are <strong>“decayed”</strong> approach.</p>
+<p>The “decayed” approach should be normally reserved for arrays of run-time size and is normally accompanied by the actual size of the array in a separate parameter</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">foo</span><span class="params">(<span class="keyword">int</span> arr[], <span class="keyword">unsigned</span> n)</span></span>; <span class="comment">// pointer to an element</span></span><br><span class="line"><span class="comment">// Passing a run-time sized array</span></span><br></pre></td></tr></table></figure>
+
+<p>The reference-to-array parameter does not allow array type to decay to pointer type. i.e. the exact array type remains preserved inside the function. (For example, you can use the <code>sizeof arr / sizeof *arr</code> trick on the parameter and get the element count).</p>
+<div class="tabs" id="second-difference_between_pointer_and_reference-unique-names"><ul class="nav-tabs"><li class="tab active"><a href="#second-difference_between_pointer_and_reference-unique-names-1">Code</a></li><li class="tab"><a href="#second-difference_between_pointer_and_reference-unique-names-2">Program Output</a></li></ul><div class="tab-content"><div class="tab-pane active" id="second-difference_between_pointer_and_reference-unique-names-1"><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">constexpr</span> <span class="keyword">int</span> SIZE = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PrintSizeByPointer</span><span class="params">(<span class="keyword">int</span>* arr)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"SIZE: "</span></span><br><span class="line">        &lt;&lt; (<span class="keyword">sizeof</span> arr / <span class="keyword">sizeof</span> *arr) &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PrintSizeByReference</span><span class="params">(<span class="keyword">int</span> (&amp;arr)[SIZE])</span> </span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"SIZE: "</span></span><br><span class="line">        &lt;&lt; (<span class="keyword">sizeof</span> arr / <span class="keyword">sizeof</span> *arr) &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* I write this code on environment</span></span><br><span class="line"><span class="comment">which address size is 8byte. */</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> arr[SIZE] = &#123;<span class="number">0</span>,&#125;;</span><br><span class="line">    PrintSizeByPointer(arr);</span><br><span class="line">    PrintSizeByReference(arr);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="second-difference_between_pointer_and_reference-unique-names-2"><p>TEST: 8<br>SIZE: 2<br>SIZE: 10</p></div></div></div>
+
+<p>This (below) is reference to an array. This only accepts arrays of 100 integers. You can safely use <strong>sizeof</strong> on x.</p>
+<p>And this is the correct way to pass an array of compile-time size to a function</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">foo</span><span class="params">(<span class="keyword">int</span> (&amp;x)[<span class="number">100</span>])</span></span>; <span class="comment">// reference to an array</span></span><br></pre></td></tr></table></figure>
+
+<p>In fact, in situations when the array size is fixed at compile-time, using a reference-to-array (or pointer-to-array) parameter declarations can be preceived as the primary, preferred way to pass an array.</p>
+<p>The other variant (when the array type is allowed to decay to pointer type) are reserved for situations when it is necessary to pass arrays of run-time size.</p>
+<hr>
+<p>This from stackoverflow</p>
+<ul>
+<li><a href="https://stackoverflow.com/a/5724184/10584779" target="_blank" rel="noopener">Passing an array by reference</a></li>
+<li><a href="https://stackoverflow.com/a/2189018/10584779" target="_blank" rel="noopener">what is useful about a reference to array parameter</a></li>
+</ul>
+<h2 id="Dynamic-Memory-Allocation"><a href="#Dynamic-Memory-Allocation" class="headerlink" title="Dynamic Memory Allocation"></a>Dynamic Memory Allocation</h2><ul>
+<li>Can allocate storage for a variable while program is running</li>
+<li>Computer returns address of newly allocated variable</li>
+<li>Uses <strong>new</strong> operator to allocate memory:</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">double</span>* sales = <span class="literal">nullptr</span>;</span><br><span class="line">sales = <span class="keyword">new</span> <span class="keyword">double</span>[numDays];</span><br></pre></td></tr></table></figure>
+
+<p><strong>new</strong> returns address of memory location</p>
+<h2 id="Releasing-Dynamic-Memory"><a href="#Releasing-Dynamic-Memory" class="headerlink" title="Releasing Dynamic Memory"></a>Releasing Dynamic Memory</h2><ul>
+<li>Use delete to free dynamic memory, use [] to free dynamic array.</li>
+<li>Only use delete with dynamic memory!</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">delete</span> [] sales;</span><br><span class="line">sales = <span class="literal">nullptr</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Searching-Arrays"><a href="#Searching-Arrays" class="headerlink" title="Searching Arrays"></a>Searching Arrays</h2><p>Searching is the process of looking for a specific element in an array; for example, discovering whether a certain score is<br>included in a list of scores.</p>
+<ul>
+<li>Searching is a common task in computer programming. There are many algorithms and data structures devoted to searching</li>
+<li>In this section, two commonly used approaches are discussed.<ul>
+<li>linear search</li>
+<li>binary search</li>
+</ul>
+</li>
+</ul>
+<h3 id="Linear-Search"><a href="#Linear-Search" class="headerlink" title="Linear Search"></a>Linear Search</h3><ul>
+<li>The linear search approach compares the key element, key, sequentially with each element in the array list.</li>
+<li>The function continues to do so until the key matches an element in the list or the list is exhausted without a match being found.<ul>
+<li>If a match is made, the linear search returns the index of the element in the array that matches the key.</li>
+<li>If no match is found, the search returns -1.</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">//Linear Search</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">linearSearch</span><span class="params">(<span class="keyword">int</span> <span class="built_in">list</span>[], <span class="keyword">int</span> numElems, <span class="keyword">int</span> key)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; numElems; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (key == <span class="built_in">list</span>[i])</span><br><span class="line">            <span class="keyword">return</span> i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Trace the function:</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> <span class="built_in">list</span>[] = &#123;<span class="number">1</span>, <span class="number">4</span>, <span class="number">2</span>, <span class="number">5</span>, <span class="number">-3</span>, <span class="number">6</span>, <span class="number">2</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> i = linearSearch(<span class="built_in">list</span>, <span class="number">7</span>, <span class="number">4</span>); <span class="comment">// returns 1</span></span><br><span class="line"><span class="keyword">int</span> j = linearSearch(<span class="built_in">list</span>, <span class="number">7</span>, <span class="number">-4</span>); <span class="comment">// returns -1</span></span><br><span class="line"><span class="keyword">int</span> k = linearSearch(<span class="built_in">list</span>, <span class="number">7</span>, <span class="number">-3</span>); <span class="comment">// returns 4</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Binary-Search"><a href="#Binary-Search" class="headerlink" title="Binary Search"></a>Binary Search</h2><p>For binary search to work, the elements in the array must <strong>already be ordered</strong>. Without loss of generality, assume that the array is in ascending order.</p>
+<p>e.g., 2 4 7 10 11 45 50 59 60 66 69 70 79</p>
+<p>The binary search first compares the key with the element in the <strong>middle</strong> of the array.</p>
+<ul>
+<li>The binarySearch function returns the index of the element in the list that matches the search key if it is contained in the list. Otherwise, it returns - 1.</li>
+<li>For the <strong>binarySearch</strong> function to work, the array must be <ins>pre-sorted</ins> in increasing order.</li>
+</ul>
+<p><strong>Consider the following three cases:</strong></p>
+<ol>
+<li>If the key is less than the middle element, you only need to search the key in the first half of the array.</li>
+<li>If the key is equal to the middle element, the search ends with a match.</li>
+<li>If the key is greater than the middle element, you only need to search the key in the second half of the array.</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Use binary search to find the key in the list</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(<span class="keyword">int</span> <span class="built_in">list</span>[], <span class="keyword">int</span> numElems, <span class="keyword">int</span> key)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> low = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> high = numElems - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (high &gt;= low) &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = (low + high) / <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (key &lt; <span class="built_in">list</span>[mid])</span><br><span class="line">            high = mid - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (key == <span class="built_in">list</span>[mid])</span><br><span class="line">            <span class="keyword">return</span> mid;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            low = mid + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>; <span class="comment">//high &lt; low, key not found</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="Opening-Problem"><a href="#Opening-Problem" class="headerlink" title="Opening Problem"></a>Opening Problem</h2><div class="tabs" id="second-nums_of_average_above-unique-names"><ul class="nav-tabs"><li class="tab active"><a href="#second-nums_of_average_above-unique-names-1">Problem</a></li><li class="tab"><a href="#second-nums_of_average_above-unique-names-2">Code</a></li><li class="tab"><a href="#second-nums_of_average_above-unique-names-3">Program Output</a></li></ul><div class="tab-content"><div class="tab-pane active" id="second-nums_of_average_above-unique-names-1"><p>Read 10 positive integers, compute their average, and find out how many integers are above the average.</p></div><div class="tab-pane" id="second-nums_of_average_above-unique-names-2"><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ctime&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">int</span> SIZE = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> arr[SIZE];</span><br><span class="line">    srand(time(<span class="number">0</span>));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; SIZE; i++) &#123;</span><br><span class="line">      arr[i] = <span class="number">1</span> + rand() % SIZE;</span><br><span class="line">      <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"arr["</span> &lt;&lt; i &lt;&lt; <span class="string">"]: "</span> </span><br><span class="line">        &lt;&lt; arr[i] &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">double</span> average;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">const</span> <span class="keyword">int</span> arrVal : arr) &#123;</span><br><span class="line">      sum += arrVal;</span><br><span class="line">    &#125;</span><br><span class="line">    average = sum / <span class="keyword">double</span>(SIZE);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> numsAbove = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">const</span> <span class="keyword">int</span> arrVal: arr) &#123;</span><br><span class="line">      <span class="keyword">if</span> (arrVal &gt; average) &#123;</span><br><span class="line">        numsAbove++;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"The average is "</span> &lt;&lt; average &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"The "</span> &lt;&lt; numsAbove</span><br><span class="line">        &lt;&lt; <span class="string">" students is higher than average.\n"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="second-nums_of_average_above-unique-names-3"><p>arr[0]: 3<br>arr[1]: 9<br>arr[2]: 5<br>arr[3]: 1<br>arr[4]: 1<br>arr[5]: 2<br>arr[6]: 8<br>arr[7]: 1<br>arr[8]: 2<br>arr[9]: 9<br>The average is 4.1<br>The 4 students is higher than average.</p></div></div></div>
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/CSCI-259/" rel="tag"><i class="fa fa-tag"></i> CSCI 259</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/14/2020-04-14-csci259-lec6/" rel="prev" title="Functions">
+      <i class="fa fa-chevron-left"></i> Functions
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          목차
+        </li>
+        <li class="sidebar-nav-overview">
+          프로필
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Array"><span class="nav-number">1.</span> <span class="nav-text">Array</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Partial-Array-Initialization"><span class="nav-number">2.</span> <span class="nav-text">Partial Array Initialization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Length-of-Array"><span class="nav-number">3.</span> <span class="nav-text">Length of Array</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Enhanced-for-loop"><span class="nav-number">4.</span> <span class="nav-text">Enhanced for loop</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Passing-Arrays-to-Functions"><span class="nav-number">5.</span> <span class="nav-text">Passing Arrays to Functions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Arrays-are-Passed-by-Reference"><span class="nav-number">6.</span> <span class="nav-text">Arrays are Passed by Reference</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Passing-primitive-data-type"><span class="nav-number">6.1.</span> <span class="nav-text">Passing primitive data type</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Passing-array"><span class="nav-number">6.2.</span> <span class="nav-text">Passing array</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Passing-an-array-by-reference"><span class="nav-number">6.2.1.</span> <span class="nav-text">Passing an array by reference</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dynamic-Memory-Allocation"><span class="nav-number">7.</span> <span class="nav-text">Dynamic Memory Allocation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Releasing-Dynamic-Memory"><span class="nav-number">8.</span> <span class="nav-text">Releasing Dynamic Memory</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Searching-Arrays"><span class="nav-number">9.</span> <span class="nav-text">Searching Arrays</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Linear-Search"><span class="nav-number">9.1.</span> <span class="nav-text">Linear Search</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Binary-Search"><span class="nav-number">10.</span> <span class="nav-text">Binary Search</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Opening-Problem"><span class="nav-number">11.</span> <span class="nav-text">Opening Problem</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LSH"
+      src="/img/avatar.png">
+  <p class="site-author-name" itemprop="name">LSH</p>
+  <div class="site-description" itemprop="description">Github + 뻘글 블로그.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">포스트</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">카테고리</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">태그</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/sokhyg9016" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;sokhyg9016" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:sokhyg9016@gmail.com" title="E-Mail → mailto:sokhyg9016@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/users/10584779/%ec%9d%b4%ec%8a%b9%ed%9b%88" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;10584779&#x2F;%ec%9d%b4%ec%8a%b9%ed%9b%88" rel="noopener" target="_blank"><i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.youtube.com/channel/UC9bPZO7K_0a6Eh_nbcjD68A?view_as=subscriber" title="YouTube → https:&#x2F;&#x2F;www.youtube.com&#x2F;channel&#x2F;UC9bPZO7K_0a6Eh_nbcjD68A?view_as&#x3D;subscriber" rel="noopener" target="_blank"><i class="fa fa-fw fa-youtube"></i>YouTube</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LSH</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.7.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('div.pdf').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js', () => {
+    document.querySelectorAll('div.pdf').forEach(element => {
+      PDFObject.embed(element.getAttribute('target'), element, {
+        pdfOpenParams: {
+          navpanes: 0,
+          toolbar: 0,
+          statusbar: 0,
+          pagemode: 'thumbs',
+          view: 'FitH'
+        },
+        PDFJS_URL: '/lib/pdf/web/viewer.html',
+        height: element.getAttribute('height') || '500px'
+      });
+    });
+  }, window.PDFObject);
+}
+</script>
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme: 'forest',
+      logLevel: 3,
+      flowchart: { curve: 'linear' },
+      gantt: { axisFormat: '%m/%d/%Y' },
+      sequence: { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://sokhyg9016-github-io.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://sokhyg9016.github.io/2020/04/15/2020-04-15-csci259-lec7/";
+    this.page.identifier = "2020/04/15/2020-04-15-csci259-lec7/";
+    this.page.title = "Single-Dimensional Arrays";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://sokhyg9016-github-io.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
+
+<!-- Background Animation -->
+<!-- <script type="text/javascript" src="/js/src/particle.js"></script> -->

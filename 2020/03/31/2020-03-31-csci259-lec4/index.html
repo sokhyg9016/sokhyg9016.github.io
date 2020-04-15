@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap/css?family=NanumSquare:300,300italic,400,400italic,700,700italic|Inconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://sokhyg9016.github.io').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","width":320,"display":"hide","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"flat"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Csci 259 Programming in C++ Chapter 5">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Making Decisions">
+<meta property="og:url" content="http://sokhyg9016.github.io/2020/03/31/2020-03-31-csci259-lec4/index.html">
+<meta property="og:site_name" content="Git Page">
+<meta property="og:description" content="Csci 259 Programming in C++ Chapter 5">
+<meta property="og:locale" content="ko_KR">
+<meta property="article:published_time" content="2020-03-31T05:00:00.000Z">
+<meta property="article:modified_time" content="2020-03-31T12:29:19.916Z">
+<meta property="article:author" content="LSH">
+<meta property="article:tag" content="CSCI 259">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://sokhyg9016.github.io/2020/03/31/2020-03-31-csci259-lec4/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Making Decisions | Git Page</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Git Page</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">AI · Data Structure · Algorithm · Game Development</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>홈</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>태그</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>카테고리</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>아카이브</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-fw fa-calendar"></i>Schedule</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>검색
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="ko">
+    <link itemprop="mainEntityOfPage" href="http://sokhyg9016.github.io/2020/03/31/2020-03-31-csci259-lec4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/avatar.png">
+      <meta itemprop="name" content="LSH">
+      <meta itemprop="description" content="Github + 뻘글 블로그.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Git Page">
+    </span>
+      <div>
+        
+        <a href="/tags/CSCI-259/" rel="tag" style = "border-bottom: none; background: none; color: orange; font-weight: bold; font-size: 1em; padding: 0;">CSCI 259</a>
+      </div>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Making Decisions
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">작성일</span>
+              
+
+              <time title="Post created: 2020-03-31 00:00:00 / Updated at: 07:29:19" itemprop="dateCreated datePublished" datetime="2020-03-31T00:00:00-05:00">2020-03-31</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Olemiss/" itemprop="url" rel="index">
+                    <span itemprop="name">Olemiss</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Olemiss/CSCI-259/" itemprop="url" rel="index">
+                    <span itemprop="name">CSCI 259</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2020/03/31/2020-03-31-csci259-lec4/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/03/31/2020-03-31-csci259-lec4/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <!--<div class="post-description">Csci 259 Programming in C++ Chapter 5</div>-->
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
+<h2 id="Common-Errors"><a href="#Common-Errors" class="headerlink" title="Common Errors"></a>Common Errors</h2><p>Adding a semicolon at the end of an <code>if</code> clause is a common mistake.</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (radius &gt;= <span class="number">0</span>);</span><br><span class="line">&#123;</span><br><span class="line">    area = radius*radius*PI;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"The area is "</span> &lt;&lt; area;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>This mistake is hard to find, because it is not a compilation error or a runtime error, it is a logic error.</li>
+<li>This error often occurs when you use the next-line block style.</li>
+</ul>
+<h2 id="TIP-for-Coding"><a href="#TIP-for-Coding" class="headerlink" title="TIP for Coding"></a>TIP for Coding</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (number % <span class="number">2</span> == <span class="number">0</span>)</span><br><span class="line">    even = <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    even = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//is equal to</span></span><br><span class="line"><span class="keyword">bool</span> even = number % <span class="number">2</span> == <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (even == <span class="literal">true</span>)</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; “It is even”;</span><br><span class="line"></span><br><span class="line"><span class="comment">//is equal to</span></span><br><span class="line"><span class="keyword">if</span> (even)</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; “It is even”;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Generating-Random-Numbers"><a href="#Generating-Random-Numbers" class="headerlink" title="Generating Random Numbers"></a>Generating Random Numbers</h2><p>In general, to generate an integer from a to b:</p>
+<p>$$ a + rand() \% (b – a + 1) $$</p>
+<ul>
+<li>Requires <code>cstdlib</code> header file</li>
+<li>Generate random numbers within a range <code>rand()</code></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Range</th>
+<th>Expression</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A random integer between 0-9</td>
+<td>$rand() \% 10$</td>
+</tr>
+<tr>
+<td>A random integer between 50-99</td>
+<td>$50 + rand() \% 50$</td>
+</tr>
+<tr>
+<td>A random integer between 5-25</td>
+<td>$5 + rand() \% 21$</td>
+</tr>
+</tbody></table>
+<h2 id="Programs"><a href="#Programs" class="headerlink" title="Programs"></a>Programs</h2><div class="tabs" id="third-problem1-unique-name"><ul class="nav-tabs"><li class="tab active"><a href="#third-problem1-unique-name-1">Problem</a></li><li class="tab"><a href="#third-problem1-unique-name-2">Answer</a></li><li class="tab"><a href="#third-problem1-unique-name-3">Result</a></li></ul><div class="tab-content"><div class="tab-pane active" id="third-problem1-unique-name-1"><h3 id="A-Simple-Math-Learning-Tool"><a href="#A-Simple-Math-Learning-Tool" class="headerlink" title="A Simple Math Learning Tool"></a>A Simple Math Learning Tool</h3><p>This example creates a program to let a first grader practice additions.</p>
+<ul>
+<li>The program randomly generates two single-digit integers number1 and number2 and displays a question such as “What is 7 + 9?” to the student.</li>
+<li>After the student types the answer, the program displays a message to indicate whether the answer is true or false.</li>
+</ul></div><div class="tab-pane" id="third-problem1-unique-name-2"><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    srand(time(<span class="number">0</span>));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> num1, num2;</span><br><span class="line">    <span class="keyword">int</span> guess;</span><br><span class="line"></span><br><span class="line">    num1 = <span class="number">1</span> + rand() % <span class="number">10</span>;</span><br><span class="line">    num2 = <span class="number">1</span> + rand() % <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"What is "</span> &lt;&lt; num1 &lt;&lt; <span class="string">" + "</span> &lt;&lt; num2 &lt;&lt; <span class="string">"?\n"</span>;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; guess;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (guess == num1 + num2)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Correct!"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Incorrect!"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="third-problem1-unique-name-3"><p>What is 3 + 10?<br>13<br>Correct!</p></div></div></div>
+
+<div class="tabs" id="third-problem2-unique-name"><ul class="nav-tabs"><li class="tab active"><a href="#third-problem2-unique-name-1">Problem</a></li><li class="tab"><a href="#third-problem2-unique-name-2">Answer</a></li><li class="tab"><a href="#third-problem2-unique-name-3">Result</a></li></ul><div class="tab-content"><div class="tab-pane active" id="third-problem2-unique-name-1"><h3 id="An-Improved-Math-Learning-Tool"><a href="#An-Improved-Math-Learning-Tool" class="headerlink" title="An Improved Math Learning Tool"></a>An Improved Math Learning Tool</h3><p>This example creates a program to teach a first grade child how to learn subtractions.</p>
+<ul>
+<li>The program randomly generates two single-digit integers number1 and number2 with <strong>number1 &gt;= number2</strong> and displays a<br>question such as “What is 9 – 2?” to the student.</li>
+<li>After the student types the answer, the program displays whether the answer is correct.</li>
+</ul></div><div class="tab-pane" id="third-problem2-unique-name-2"><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    srand(time(<span class="number">0</span>));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> num1, num2;</span><br><span class="line">    <span class="keyword">int</span> guess;</span><br><span class="line"></span><br><span class="line">    num1 = <span class="number">1</span> + rand() % <span class="number">10</span>;</span><br><span class="line">    num2 = <span class="number">1</span> + rand() % <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (num1 &lt; num2)</span><br><span class="line">    &#123;</span><br><span class="line">        num1 = <span class="number">1</span> + rand() % <span class="number">10</span>;</span><br><span class="line">        num2 = <span class="number">1</span> + rand() % <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"What is "</span> &lt;&lt; num1 &lt;&lt; <span class="string">" - "</span> &lt;&lt; num2 &lt;&lt; <span class="string">"?\n"</span>;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; guess;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (guess == num1 - num2)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Correct!"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Incorrect!"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="third-problem2-unique-name-3"><p>What is 9 - 3?<br>6<br>Correct!</p></div></div></div>
+
+<div class="tabs" id="third-problem3-unique-name"><ul class="nav-tabs"><li class="tab active"><a href="#third-problem3-unique-name-1">Problem</a></li><li class="tab"><a href="#third-problem3-unique-name-2">Answer</a></li><li class="tab"><a href="#third-problem3-unique-name-3">Result</a></li></ul><div class="tab-content"><div class="tab-pane active" id="third-problem3-unique-name-1"><h3 id="Body-Mass-Index"><a href="#Body-Mass-Index" class="headerlink" title="Body Mass Index"></a>Body Mass Index</h3><p>Body Mass Index (BMI) is a measure of health on weight.</p>
+<ul>
+<li>It can be calculated by taking your <span class="label warning">weight in kilograms</span> and <strong>dividing by</strong> the square of your <span class="label warning">height in meters</span>.</li>
+<li>The interpretation of BMI for people 16 years or older is as follows.</li>
+<li>Write a program that reads in a person’s <strong>weight in pounds</strong> and <strong>height in inches</strong> and displays the BMI and its interpretation.</li>
+<li>You need to convert to kgs and meters to use the formula above.</li>
+</ul>
+<div class="note no-icon">
+            <p>$$1 pound = 0.454 kgs$$<br>$$1 inch = 0.0254meters$$</p>
+          </div>
+
+<table>
+<thead>
+<tr>
+<th align="left">BMI</th>
+<th align="left">Interpretation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">$BMI \lt 18.5$</td>
+<td align="left">Underweight</td>
+</tr>
+<tr>
+<td align="left">$18.5 \le BMI \lt 25.0$</td>
+<td align="left">Normal</td>
+</tr>
+<tr>
+<td align="left">$25.0 \le BMI \lt 30.0$</td>
+<td align="left">Overweight</td>
+</tr>
+<tr>
+<td align="left">$30.0 \le BMI$</td>
+<td align="left">Obese</td>
+</tr>
+</tbody></table></div><div class="tab-pane" id="third-problem3-unique-name-2"><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">double</span> weight, height;</span><br><span class="line">    <span class="keyword">double</span> bmi;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Enter your weight in pounds: "</span>;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; weight;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Enter your height in inches: "</span>;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; height;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Because we reads weight in pound and height in meters.</span></span><br><span class="line">    weight *= <span class="number">0.454</span>;</span><br><span class="line">    height *= <span class="number">0.0254</span>;</span><br><span class="line"></span><br><span class="line">    bmi = weight / <span class="built_in">pow</span>(height, <span class="number">2</span>);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"BMI: "</span> &lt;&lt; bmi &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (bmi &lt; <span class="number">18.5</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Underweight\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (bmi &gt;= <span class="number">18.5</span> <span class="keyword">and</span> bmi &lt;= <span class="number">25.0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Normal\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (bmi &gt;= <span class="number">25.0</span> <span class="keyword">and</span> bmi &lt;= <span class="number">30.0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Overweight\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Obese\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">            </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="third-problem3-unique-name-3"><p>Enter your weight in pounds: 141<br>Enter your height in inches: 68<br>BMI: 21.458<br>Normal</p></div></div></div>
+
+<div class="tabs" id="third-problem4-unique-name"><ul class="nav-tabs"><li class="tab active"><a href="#third-problem4-unique-name-1">Problem</a></li><li class="tab"><a href="#third-problem4-unique-name-2">Answer</a></li><li class="tab"><a href="#third-problem4-unique-name-3">Result</a></li></ul><div class="tab-content"><div class="tab-pane active" id="third-problem4-unique-name-1"><h3 id="Determining-Leap-Year"><a href="#Determining-Leap-Year" class="headerlink" title="Determining Leap Year"></a>Determining Leap Year</h3><p>This program first prompts the user to enter a year as an int value and checks if it is a leap year. A year is a leap year if it <code>is divisible by 4</code> but <code>not by 100</code>, or it is divisible by 400.</p></div><div class="tab-pane" id="third-problem4-unique-name-2"><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> year;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Enter a year: "</span>;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; year;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ((year % <span class="number">4</span>  == <span class="number">0</span> &amp;&amp; year % <span class="number">100</span> != <span class="number">0</span>) || year % <span class="number">400</span> == <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Leap Year"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Not Leap Year"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="third-problem4-unique-name-3"><p>Enter a year: 2020<br>Leap Year</p></div></div></div>
+
+<h2 id="Relational-Operators-to-Compare-Characters"><a href="#Relational-Operators-to-Compare-Characters" class="headerlink" title="Relational Operators to Compare Characters"></a>Relational Operators to Compare Characters</h2><p>Characters are compared using their ASCII values</p>
+<ul>
+<li><code>&#39;A&#39; &lt; &#39;B&#39;</code>:<ul>
+<li>The ASCII value of ‘A’ (65) is less than the ASCII value of ‘B’(66)</li>
+</ul>
+</li>
+<li><code>&#39;1&#39; &lt; &#39;2&#39;</code>:<ul>
+<li>The ASCII value of ‘1’ (49) is less than the ASCI value of ‘2’ (50)</li>
+</ul>
+</li>
+<li>Lowercase letters have higher ASCII codes than uppercase letters, so ‘z’ &gt; ‘Z’</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">//Get a character from the user</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"Enter  a digit or a letter: "</span>;</span><br><span class="line">ch = <span class="built_in">cin</span>.get();</span><br><span class="line"></span><br><span class="line"><span class="comment">//Determine what the user entered.</span></span><br><span class="line"><span class="keyword">if</span> (ch &gt;= <span class="string">'0'</span> &amp;&amp; ch &lt;= <span class="string">'9'</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"You entered a digit.\n"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (ch &gt;= <span class="string">'A'</span> &amp;&amp; ch &lt;= <span class="string">'Z'</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"You entered a uppercase letter.\n"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (ch &gt;= <span class="string">'a'</span> &amp;&amp; ch &lt;= <span class="string">'z'</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"You entered a lowercase letter.\n"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"That is not a digit or a letter.\n"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Conditional-Expressions"><a href="#Conditional-Expressions" class="headerlink" title="Conditional Expressions"></a>Conditional Expressions</h2><p>General form for conditional expression:</p>
+<p>$$<br>(boolean-expression) ? expression1 : expression2<br>$$</p>
+<p>Also, it’s called “Ternary operator”.</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (x &gt; <span class="number">0</span>)</span><br><span class="line">    y = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    y = <span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// is equal to</span></span><br><span class="line">y = (x &gt; <span class="number">0</span>) ? <span class="number">1</span> : <span class="number">-1</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Conditional-Operator"><a href="#Conditional-Operator" class="headerlink" title="Conditional Operator"></a>Conditional Operator</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (num % <span class="number">2</span> == <span class="number">0</span>)</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; num &lt;&lt; <span class="string">" is even\n"</span>;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; num &lt;&lt; <span class="string">" is odd\n"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// is equal to</span></span><br><span class="line">(num % <span class="number">2</span> == <span class="number">0</span>) ? <span class="built_in">cout</span> &lt;&lt; num &lt;&lt; <span class="string">" is even\n"</span> :</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; num &lt;&lt; <span class="string">" is odd\n"</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="연산자-우선-순위"><a href="#연산자-우선-순위" class="headerlink" title="연산자 우선 순위"></a>연산자 우선 순위</h2><ol>
+<li>var++, var–</li>
+<li>+, - (Unary plus and minus), ++var,–var</li>
+<li>(type) Casting</li>
+<li>! (Not)</li>
+<li>*, /, % (Multiplication, division, and remainder)</li>
+<li>+, - (Binary addition and subtraction)</li>
+<li>&lt;, &lt;=, &gt;, &gt;= (Relational operators)</li>
+<li>==, != (Equality)</li>
+<li>&amp;&amp; (Conditional AND) Short-circuit AND</li>
+<li>|| (Conditional OR) Short-circuit OR</li>
+<li>=, +=, -=, *=, /=, %= (Assignment operators)</li>
+</ol>
+<h2 id="연산자-우선-순위-및-연관성"><a href="#연산자-우선-순위-및-연관성" class="headerlink" title="연산자 우선 순위 및 연관성"></a>연산자 우선 순위 및 연관성</h2><ul>
+<li>괄호 안의 식을 먼저 평가한다. (가령 괄호는 내포할 수 있으며, 이 경우 내부 괄호 안의 식을 먼저 실행한다.)</li>
+<li>괄호가 없는 식을 평가할 때 연산자는 연산자 우선 순위와 연관성 규칙에 따라 적용된다.</li>
+<li>만약 동일한 우선순위를 가진 연산자가 서로 옆에 있다면, 그들의 연관성은 평가 순서를 결정한다.</li>
+<li>할당 연산자를 제외한 모든 이진 연산자는 좌분산(⇒)이다.</li>
+</ul>
+<h3 id="Operator-Associativity"><a href="#Operator-Associativity" class="headerlink" title="Operator Associativity"></a>Operator Associativity</h3><p><code>a – b + c – d</code> is equivalent to<br>$$<br>((a – b) + c) – d<br>$$</p>
+<p>Assignment operators are <code>right-associative</code>. Therefore, the expression<br>$$<br>((a – b) + c) – d \text{ is equivalent to}<br>$$<br>$$<br>a = (b += (c = 5))<br>$$</p>
+<h2 id="Debugging"><a href="#Debugging" class="headerlink" title="Debugging"></a>Debugging</h2><p>Programming errors are called <code>bugs</code>. The process of finding and correcting errors is called <code>debugging</code>.</p>
+<p>A common approach to debugging is to use a combination of methods to narrow down to the part of the program where the bug is located.</p>
+<ul>
+<li>You can <strong><code>hand-trace</code></strong> the program (i.e., catch errors by reading the program)</li>
+<li>Or, you can insert <strong><code>print statements</code></strong> in order to show the values of the variables or the execution flow of the program. This approach might work for a short, simple program.</li>
+<li>But for a large, complex program, the most effective approach for debugging is to use a <strong><code>debugger utility</code></strong>.</li>
+</ul>
+<h2 id="Case-Study"><a href="#Case-Study" class="headerlink" title="Case Study"></a>Case Study</h2><div class="tabs" id="third-case1-unique-name"><ul class="nav-tabs"><li class="tab active"><a href="#third-case1-unique-name-1">Problem</a></li><li class="tab"><a href="#third-case1-unique-name-2">Answer</a></li><li class="tab"><a href="#third-case1-unique-name-3">Result</a></li></ul><div class="tab-content"><div class="tab-pane active" id="third-case1-unique-name-1"><h3 id="Student-Major-and-Status"><a href="#Student-Major-and-Status" class="headerlink" title="Student Major and Status"></a>Student Major and Status</h3><p>Write a program that prompts the user to enter two characters and displays the major and status represented in the characters.</p>
+<ul>
+<li>The first character indicates the major and the second is number character 1, 2, 3, 4, which indicates whether a students is a freshman, sophomore, junior, or senior.</li>
+<li>Suppose the following characters are used to denote the majors:<ul>
+<li>M: Mathematics</li>
+<li>C: Computer Science</li>
+<li>I: Information Technology</li>
+</ul>
+</li>
+</ul>
+<p>Sample Output</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">Enter two characters: M1</span><br><span class="line">Mathematics Freshman</span><br><span class="line">&gt;&gt;</span><br><span class="line">Enter two characters: C3</span><br><span class="line">Computer Science Junior</span><br><span class="line">&gt;&gt;</span><br><span class="line">Enter two characters: T3</span><br><span class="line">Invalid input</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="third-case1-unique-name-2"><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> major;</span><br><span class="line">    <span class="keyword">char</span> number;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Enter two characters: "</span>;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; major &gt;&gt; number;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> ((major == <span class="string">'M'</span> || major == <span class="string">'C'</span> || major == <span class="string">'I'</span>) &amp;&amp; (number &gt;= <span class="string">'1'</span> &amp;&amp; number &lt;= <span class="string">'4'</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">switch</span> (major)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'M'</span>:</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; <span class="string">"Mathematics "</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'C'</span>:</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; <span class="string">"Computer Science "</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'I'</span>:</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; <span class="string">"Information Technology "</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">switch</span> (number)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'1'</span>:</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; <span class="string">"Freshman\n"</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'2'</span>:</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; <span class="string">"Sophomore\n"</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'3'</span>:</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; <span class="string">"Junior\n"</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'4'</span>:</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; <span class="string">"Senior\n"</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Invaild Input\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="third-case1-unique-name-3"><p>Enter two characters: C3<br>Computer Science Junior</p></div></div></div>
+
+<div class="tabs" id="fourth-case2-unique-name"><ul class="nav-tabs"><li class="tab active"><a href="#fourth-case2-unique-name-1">Problem</a></li><li class="tab"><a href="#fourth-case2-unique-name-2">Answer1</a></li><li class="tab"><a href="#fourth-case2-unique-name-3">Answer2</a></li><li class="tab"><a href="#fourth-case2-unique-name-4">Result</a></li></ul><div class="tab-content"><div class="tab-pane active" id="fourth-case2-unique-name-1"><h3 id="Converting-a-Hexadecimal-Digit-to-a-Decimal-Value"><a href="#Converting-a-Hexadecimal-Digit-to-a-Decimal-Value" class="headerlink" title="Converting a Hexadecimal Digit to a Decimal Value"></a>Converting a Hexadecimal Digit to a Decimal Value</h3><p>Write a program that converts a hexadecimal digit into a decimal value.</p></div><div class="tab-pane" id="fourth-case2-unique-name-2"><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cctype&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">string</span> hexa_decimal;</span><br><span class="line">    <span class="keyword">int</span> decimal = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> base = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Enter the Hexadecimal digits: "</span>;</span><br><span class="line">    getline(<span class="built_in">cin</span>, hexa_decimal);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = hexa_decimal.length()<span class="number">-1</span>; i &gt;= <span class="number">0</span> ; i--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">isdigit</span>(hexa_decimal[i]))</span><br><span class="line">        &#123;</span><br><span class="line">            decimal += (hexa_decimal[i] - <span class="number">48</span>)*base;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">islower</span>(hexa_decimal[i]))</span><br><span class="line">        &#123;</span><br><span class="line">            decimal += (hexa_decimal[i] - <span class="number">87</span>)*base;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            decimal += (hexa_decimal[i] - <span class="number">55</span>)*base;</span><br><span class="line">        &#125;</span><br><span class="line">        base *= <span class="number">16</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Result: "</span> &lt;&lt; decimal &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="fourth-case2-unique-name-3"><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> nums;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Enter the Hexadecimal digits: "</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; <span class="built_in">std</span>::hex &gt;&gt; nums;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Result: "</span> &lt;&lt; nums;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="fourth-case2-unique-name-4"><p>Enter the Hexadecimal digits: FF<br>Result: 255</p></div></div></div>
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/CSCI-259/" rel="tag"><i class="fa fa-tag"></i> CSCI 259</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/30/2020-03-30-csci259-lec5/" rel="prev" title="Loop and Files [1/2]">
+      <i class="fa fa-chevron-left"></i> Loop and Files [1/2]
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/31/2020-03-31-csci259-lec5-2/" rel="next" title="Loops and Files [2/2]">
+      Loops and Files [2/2] <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          목차
+        </li>
+        <li class="sidebar-nav-overview">
+          프로필
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Common-Errors"><span class="nav-number">1.</span> <span class="nav-text">Common Errors</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TIP-for-Coding"><span class="nav-number">2.</span> <span class="nav-text">TIP for Coding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Generating-Random-Numbers"><span class="nav-number">3.</span> <span class="nav-text">Generating Random Numbers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Programs"><span class="nav-number">4.</span> <span class="nav-text">Programs</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-Simple-Math-Learning-Tool"><span class="nav-number">4.1.</span> <span class="nav-text">A Simple Math Learning Tool</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#An-Improved-Math-Learning-Tool"><span class="nav-number">4.2.</span> <span class="nav-text">An Improved Math Learning Tool</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Body-Mass-Index"><span class="nav-number">4.3.</span> <span class="nav-text">Body Mass Index</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Determining-Leap-Year"><span class="nav-number">4.4.</span> <span class="nav-text">Determining Leap Year</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Relational-Operators-to-Compare-Characters"><span class="nav-number">5.</span> <span class="nav-text">Relational Operators to Compare Characters</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conditional-Expressions"><span class="nav-number">6.</span> <span class="nav-text">Conditional Expressions</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Conditional-Operator"><span class="nav-number">6.1.</span> <span class="nav-text">Conditional Operator</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#연산자-우선-순위"><span class="nav-number">7.</span> <span class="nav-text">연산자 우선 순위</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#연산자-우선-순위-및-연관성"><span class="nav-number">8.</span> <span class="nav-text">연산자 우선 순위 및 연관성</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Operator-Associativity"><span class="nav-number">8.1.</span> <span class="nav-text">Operator Associativity</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Debugging"><span class="nav-number">9.</span> <span class="nav-text">Debugging</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Case-Study"><span class="nav-number">10.</span> <span class="nav-text">Case Study</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Student-Major-and-Status"><span class="nav-number">10.1.</span> <span class="nav-text">Student Major and Status</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Converting-a-Hexadecimal-Digit-to-a-Decimal-Value"><span class="nav-number">10.2.</span> <span class="nav-text">Converting a Hexadecimal Digit to a Decimal Value</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LSH"
+      src="/img/avatar.png">
+  <p class="site-author-name" itemprop="name">LSH</p>
+  <div class="site-description" itemprop="description">Github + 뻘글 블로그.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">포스트</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">카테고리</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">태그</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/sokhyg9016" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;sokhyg9016" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:sokhyg9016@gmail.com" title="E-Mail → mailto:sokhyg9016@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/users/10584779/%ec%9d%b4%ec%8a%b9%ed%9b%88" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;10584779&#x2F;%ec%9d%b4%ec%8a%b9%ed%9b%88" rel="noopener" target="_blank"><i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.youtube.com/channel/UC9bPZO7K_0a6Eh_nbcjD68A?view_as=subscriber" title="YouTube → https:&#x2F;&#x2F;www.youtube.com&#x2F;channel&#x2F;UC9bPZO7K_0a6Eh_nbcjD68A?view_as&#x3D;subscriber" rel="noopener" target="_blank"><i class="fa fa-fw fa-youtube"></i>YouTube</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LSH</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.7.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('div.pdf').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js', () => {
+    document.querySelectorAll('div.pdf').forEach(element => {
+      PDFObject.embed(element.getAttribute('target'), element, {
+        pdfOpenParams: {
+          navpanes: 0,
+          toolbar: 0,
+          statusbar: 0,
+          pagemode: 'thumbs',
+          view: 'FitH'
+        },
+        PDFJS_URL: '/lib/pdf/web/viewer.html',
+        height: element.getAttribute('height') || '500px'
+      });
+    });
+  }, window.PDFObject);
+}
+</script>
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme: 'forest',
+      logLevel: 3,
+      flowchart: { curve: 'linear' },
+      gantt: { axisFormat: '%m/%d/%Y' },
+      sequence: { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://sokhyg9016-github-io.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://sokhyg9016.github.io/2020/03/31/2020-03-31-csci259-lec4/";
+    this.page.identifier = "2020/03/31/2020-03-31-csci259-lec4/";
+    this.page.title = "Making Decisions";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://sokhyg9016-github-io.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
+
+<!-- Background Animation -->
+<!-- <script type="text/javascript" src="/js/src/particle.js"></script> -->
