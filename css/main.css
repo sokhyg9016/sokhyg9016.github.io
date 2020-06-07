@@ -1291,7 +1291,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #f00e2b;
+  background: #3bffff;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2075,6 +2075,9 @@ pre .javascript .function {
     font-family: Consolas, sans-serif;
     word-break: keep-all;
   }
+  .posts-expand pre {
+    font-size: 1.08em;
+  }
   .posts-expand blockquote {
     quotes: none;
     border: 1px solid #e3e3e3;
@@ -2082,7 +2085,7 @@ pre .javascript .function {
   }
   .posts-expand blockquote p {
     margin: 0.6em 0;
-    font-size: 90%;
+    font-size: 1.1em;
   }
   .posts-expand .note {
     padding: 5px;
