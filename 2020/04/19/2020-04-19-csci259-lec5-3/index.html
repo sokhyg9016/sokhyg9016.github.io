@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap/css?family=NanumSquare:300,300italic,400,400italic,700,700italic|Inconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://sokhyg9016.github.io').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","width":320,"display":"hide","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"flat"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Csci 259 Programming in C++ Chapter 5">
+<meta property="og:type" content="article">
+<meta property="og:title" content="File I&#x2F;O">
+<meta property="og:url" content="http://sokhyg9016.github.io/2020/04/19/2020-04-19-csci259-lec5-3/index.html">
+<meta property="og:site_name" content="Git Page">
+<meta property="og:description" content="Csci 259 Programming in C++ Chapter 5">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="http://www.cplusplus.com/img/iostream.gif">
+<meta property="article:published_time" content="2020-04-18T15:00:00.000Z">
+<meta property="article:modified_time" content="2020-04-20T04:28:09.576Z">
+<meta property="article:author" content="LSH">
+<meta property="article:tag" content="CSCI 259">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.cplusplus.com/img/iostream.gif">
+
+<link rel="canonical" href="http://sokhyg9016.github.io/2020/04/19/2020-04-19-csci259-lec5-3/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>File I/O | Git Page</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Git Page</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">AI · Data Structure · Algorithm · Game Development</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>홈</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>태그</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>카테고리</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>아카이브</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-fw fa-calendar"></i>Schedule</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>검색
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="ko">
+    <link itemprop="mainEntityOfPage" href="http://sokhyg9016.github.io/2020/04/19/2020-04-19-csci259-lec5-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/avatar.png">
+      <meta itemprop="name" content="LSH">
+      <meta itemprop="description" content="Github + 뻘글 블로그.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Git Page">
+    </span>
+      <div>
+        
+        <a href="/tags/CSCI-259/" rel="tag" style = "border-bottom: none; background: none; color: orange; font-weight: bold; font-size: 1em; padding: 0;">CSCI 259</a>
+      </div>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          File I/O
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">작성일</span>
+
+              <time title="Post created: 2020-04-19 00:00:00" itemprop="dateCreated datePublished" datetime="2020-04-19T00:00:00+09:00">2020-04-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Updated at: 2020-04-20 13:28:09" itemprop="dateModified" datetime="2020-04-20T13:28:09+09:00">2020-04-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Olemiss/" itemprop="url" rel="index">
+                    <span itemprop="name">Olemiss</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Olemiss/CSCI-259/" itemprop="url" rel="index">
+                    <span itemprop="name">CSCI 259</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <!--<div class="post-description">Csci 259 Programming in C++ Chapter 5</div>-->
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
+<h2 id="Using-Files-for-Data-Storage"><a href="#Using-Files-for-Data-Storage" class="headerlink" title="Using Files for Data Storage"></a>Using Files for Data Storage</h2><ul>
+<li>Can use files instead of keyboard, monitor, screen for program input, output</li>
+<li>3 Steps:<ul>
+<li>Open the file</li>
+<li>Use the file (read, write, both)</li>
+<li>Close the file</li>
+</ul>
+</li>
+</ul>
+<h2 id="File-What-is-Needed"><a href="#File-What-is-Needed" class="headerlink" title="File: What is Needed"></a>File: What is Needed</h2><ul>
+<li>Use <code>fstream</code> header file for file access</li>
+<li>File stream types:<ul>
+<li><code>ifstream</code> for input from a file</li>
+<li><code>ofstream</code> for output from a file</li>
+</ul>
+</li>
+<li>Define file stream objects:<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">ifstream infile;</span><br><span class="line">ofstream outfile;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="What-a-Stream-Is"><a href="#What-a-Stream-Is" class="headerlink" title="What a Stream Is"></a>What a Stream Is</h3><p>The iostream library is an object-oriented library that provides input and output functionality using streams.</p>
+<a href="http://www.cplusplus.com/img/iostream.gif" target="_blank" rel="noopener" title="iostream" class="gallery-item"><img src="http://www.cplusplus.com/img/iostream.gif" class="" width="705" height="203" title="iostream" alt="iostream"></a>
+
+<blockquote><p>A stream is an abstraction that represents a device on which input and ouput operations are performed. A stream can basically be represented as a source or destination of characters of indefinite length.</p>
+<footer><strong>@cplusplus.com - Input/Output</strong><cite><a href="http://www.cplusplus.com/reference/iolibrary/" target="_blank" rel="noopener">www.cplusplus.com/reference/iolibrary</a></cite></footer></blockquote>
+
+<h2 id="Opening-Files"><a href="#Opening-Files" class="headerlink" title="Opening Files"></a>Opening Files</h2><ul>
+<li>Create a link between file name (outside the program) and file stream object (inside the program)</li>
+<li>Use the <code>open</code> function:<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">infile.open(<span class="string">"Test.txt"</span>); <span class="comment">// must exist for open to work.</span></span><br><span class="line">outfile.open(<span class="string">"Results.txt"</span>);</span><br></pre></td></tr></table></figure></li>
+<li>Filename may include drive, path info.</li>
+<li>Input file must exist for open to work</li>
+<li>Output file will be created if necessary; existing file will be erased first.</li>
+</ul>
+<h3 id="Testing-for-File-Open-Errors"><a href="#Testing-for-File-Open-Errors" class="headerlink" title="Testing for File Open Errors"></a>Testing for File Open Errors</h3><ul>
+<li><strong>strerror</strong> Defined in header &lt;cstring&gt;.<ul>
+<li>Returns a pointer to the textual description of the system error code errnum, identical to the description that would be printed by <code>std::perror()</code>.</li>
+</ul>
+</li>
+<li><strong>errno</strong> is a preprocessor macro used for error indication.</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cerrno&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="built_in">std</span>::ifstream infile;</span><br><span class="line">  infile.open(<span class="string">"Test.txt"</span>);  <span class="comment">// must exist for open to work.</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// Can also use the fail function</span></span><br><span class="line">  <span class="keyword">if</span> (infile.fail()) &#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cerr</span> &lt;&lt; <span class="string">"Error: "</span> &lt;&lt; <span class="built_in">std</span>::strerror(errno);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//Program Output:</span></span><br><span class="line"><span class="comment">// Error: No such file or directory</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Using-Files"><a href="#Using-Files" class="headerlink" title="Using Files"></a>Using Files</h2><ul>
+<li><p>Can use output file object and &lt;&lt; to send data to a file:</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">outfile &lt;&lt; <span class="string">"Inventory report"</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Can use input file object and &gt;&gt; to copy data from file to variables:</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">infile &gt;&gt; partNum;</span><br><span class="line">infile &gt;&gt; qtyInStock &gt;&gt; qtyOnOrder;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="Closing-Files"><a href="#Closing-Files" class="headerlink" title="Closing Files"></a>Closing Files</h2><p>Use the <code>close</code> function:</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">infile.close();</span><br><span class="line">outfile.close();</span><br></pre></td></tr></table></figure>
+
+<p>Don’t wait for operating system to close files at program end:</p>
+<ul>
+<li>may be limit on number of open files</li>
+<li>may be buffered output data waiting to send to file</li>
+</ul>
+<h2 id="Letting-the-User-Specify-a-FileName"><a href="#Letting-the-User-Specify-a-FileName" class="headerlink" title="Letting the User Specify a FileName"></a>Letting the User Specify a FileName</h2><ul>
+<li>In many cases, you will want the user to specify the name of a file for the program to open.</li>
+<li>You can pass a <code>string</code> object as an argument to a file stream object’s <code>open</code> function.</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">std</span>::ifstream inputFile;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">string</span> filename;</span><br><span class="line"><span class="keyword">int</span> number;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Get the filename from the user</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Enter the filename: "</span>;</span><br><span class="line"><span class="built_in">std</span>::getline(<span class="built_in">std</span>::<span class="built_in">cin</span>, filename);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Open the file</span></span><br><span class="line">inputFile.open(filename);</span><br><span class="line"></span><br><span class="line"><span class="comment">//If the file successfully opened, process it.</span></span><br><span class="line"><span class="keyword">if</span> (inputFile) &#123;</span><br><span class="line">    <span class="comment">// Read the numbers from the file and display.</span></span><br><span class="line">    <span class="keyword">while</span> (inputFile &gt;&gt; number) &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; number &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//Close the file.</span></span><br><span class="line">    inputFile.close();</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">//Display an error message.</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Error opening the file\n"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Using-Loops-to-Detect-End-of-File"><a href="#Using-Loops-to-Detect-End-of-File" class="headerlink" title="Using Loops to Detect End of File"></a>Using Loops to Detect End of File</h2><ul>
+<li>The stream extraction operator &gt;&gt; returns true when a value was successfully read, false otherwise</li>
+<li>Can be tested in a while loop to continue execution as long as values are read from the file:</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">while</span> (inputFile &gt;&gt; number)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">std</span>::ifstream inputFile;</span><br><span class="line"><span class="keyword">int</span> number;</span><br><span class="line"></span><br><span class="line">inputFile.open(“ListOfNumbers.txt”); <span class="comment">//open the file</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (inputFile &gt;&gt; number) &#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; number &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// read numbers from file</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Or we can replace,</span></span><br><span class="line"><span class="comment">while (inputFile.peek() != EOF) &#123;</span></span><br><span class="line"><span class="comment">    inputFile &gt;&gt; number;</span></span><br><span class="line"><span class="comment">    cout &lt;&lt; number &lt;&lt; endl; // read numbers from file</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line">inputFile.close(); <span class="comment">// close the file</span></span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Programming-Exercise"><a href="#Programming-Exercise" class="headerlink" title="Programming Exercise"></a>Programming Exercise</h2><div class="tabs" id="third-ex1-unique_names"><ul class="nav-tabs"><li class="tab active"><a href="#third-ex1-unique_names-1">Explain</a></li><li class="tab"><a href="#third-ex1-unique_names-2">Code</a></li><li class="tab"><a href="#third-ex1-unique_names-3">Program Output</a></li></ul><div class="tab-content"><div class="tab-pane active" id="third-ex1-unique_names-1"><p>Add line numbers to an existing text file.</p></div><div class="tab-pane" id="third-ex1-unique_names-2"><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="built_in">std</span>::<span class="function">ifstream <span class="title">infile</span><span class="params">(<span class="string">"Test.txt"</span>)</span></span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="function">ofstream <span class="title">outfile</span><span class="params">(<span class="string">"Results.txt"</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">string</span> lineContent;</span><br><span class="line">  <span class="keyword">int</span> lineNumber = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> (<span class="built_in">std</span>::getline(infile, lineContent)) &#123;</span><br><span class="line">    outfile &lt;&lt; (lineNumber++) &lt;&lt; '. ' &lt;&lt; lineContent &lt;&lt; '\n';</span><br><span class="line">  &#125;</span><br><span class="line">  outfile.close();</span><br><span class="line">  infile.close();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="third-ex1-unique_names-3"><p>Test.txt</p>
+<blockquote><p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.<br>Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.<br>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.<br>It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+</blockquote>
+
+<p>Result.txt</p>
+<blockquote><ol>
+<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>
+<li>Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</li>
+<li>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </li>
+<li>It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</li>
+</ol>
+</blockquote></div></div></div>
+
+<div class="tabs" id="third-ex2-unique_names"><ul class="nav-tabs"><li class="tab active"><a href="#third-ex2-unique_names-1">Explain</a></li><li class="tab"><a href="#third-ex2-unique_names-2">Code</a></li><li class="tab"><a href="#third-ex2-unique_names-3">Program Output</a></li></ul><div class="tab-content"><div class="tab-pane active" id="third-ex2-unique_names-1"><p>Write the program get filename from user and store the contents and display them.</p>
+<ul>
+<li>Get only filenames (not include <code>.txt</code> format.)</li>
+<li>If file content is integer it should be stored the integer type variable</li>
+<li>Character type content should be stored limited size array.</li>
+</ul></div><div class="tab-pane" id="third-ex2-unique_names-2"><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cerrno&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">int</span> STR_SIZE = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">string</span> filename;</span><br><span class="line">  <span class="built_in">std</span>::ifstream infile;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">int</span> partNum;</span><br><span class="line">  <span class="keyword">char</span> partCh[STR_SIZE];</span><br><span class="line"></span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Enter the filename: "</span>;</span><br><span class="line">  <span class="built_in">std</span>::getline(<span class="built_in">std</span>::<span class="built_in">cin</span>, filename);</span><br><span class="line">  </span><br><span class="line">  filename += <span class="string">".txt"</span>;</span><br><span class="line">  infile.open(filename);</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// Check if the file is exist or not.</span></span><br><span class="line">  <span class="keyword">if</span> (infile.fail()) &#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cerr</span> &lt;&lt; <span class="string">"Error: "</span> &lt;&lt; <span class="built_in">std</span>::strerror(errno);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    infile &gt;&gt; partNum;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"partNum: "</span> &lt;&lt; partNum &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (infile &gt;&gt; partCh[i] &amp;&amp; i &lt; STR_SIZE) &#123;</span><br><span class="line">      <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Current Step: "</span> &lt;&lt; partCh[i++] &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    partCh[i] = <span class="string">'\0'</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"partCh: "</span> &lt;&lt; partCh &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    infile.close();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="third-ex2-unique_names-3"><p>Enter the filename: Test<br>partNum: 100<br>Current Step: a<br>Current Step: b<br>Current Step: c<br>Current Step: d<br>Current Step: e<br>Current Step: f<br>Current Step: g<br>Current Step: h<br>Current Step: i<br>Current Step: j<br>partCh: abcdefghij</p></div></div></div>
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/CSCI-259/" rel="tag"><i class="fa fa-tag"></i> CSCI 259</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/15/2020-04-15-csci259-lec7/" rel="prev" title="Single-Dimensional Arrays">
+      <i class="fa fa-chevron-left"></i> Single-Dimensional Arrays
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/04/28/2020-04-28-csci356-lec6/" rel="next" title="Trees">
+      Trees <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          목차
+        </li>
+        <li class="sidebar-nav-overview">
+          프로필
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Using-Files-for-Data-Storage"><span class="nav-number">1.</span> <span class="nav-text">Using Files for Data Storage</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#File-What-is-Needed"><span class="nav-number">2.</span> <span class="nav-text">File: What is Needed</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#What-a-Stream-Is"><span class="nav-number">2.1.</span> <span class="nav-text">What a Stream Is</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Opening-Files"><span class="nav-number">3.</span> <span class="nav-text">Opening Files</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Testing-for-File-Open-Errors"><span class="nav-number">3.1.</span> <span class="nav-text">Testing for File Open Errors</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Using-Files"><span class="nav-number">4.</span> <span class="nav-text">Using Files</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Closing-Files"><span class="nav-number">5.</span> <span class="nav-text">Closing Files</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Letting-the-User-Specify-a-FileName"><span class="nav-number">6.</span> <span class="nav-text">Letting the User Specify a FileName</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Using-Loops-to-Detect-End-of-File"><span class="nav-number">7.</span> <span class="nav-text">Using Loops to Detect End of File</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Example"><span class="nav-number">7.1.</span> <span class="nav-text">Example</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Programming-Exercise"><span class="nav-number">8.</span> <span class="nav-text">Programming Exercise</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LSH"
+      src="/img/avatar.png">
+  <p class="site-author-name" itemprop="name">LSH</p>
+  <div class="site-description" itemprop="description">Github + 뻘글 블로그.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-name">포스트</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">카테고리</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">태그</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/sokhyg9016" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;sokhyg9016" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:sokhyg9016@gmail.com" title="E-Mail → mailto:sokhyg9016@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/users/10584779/%ec%9d%b4%ec%8a%b9%ed%9b%88" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;10584779&#x2F;%ec%9d%b4%ec%8a%b9%ed%9b%88" rel="noopener" target="_blank"><i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.youtube.com/channel/UC9bPZO7K_0a6Eh_nbcjD68A?view_as=subscriber" title="YouTube → https:&#x2F;&#x2F;www.youtube.com&#x2F;channel&#x2F;UC9bPZO7K_0a6Eh_nbcjD68A?view_as&#x3D;subscriber" rel="noopener" target="_blank"><i class="fa fa-fw fa-youtube"></i>YouTube</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LSH</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.7.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('div.pdf').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js', () => {
+    document.querySelectorAll('div.pdf').forEach(element => {
+      PDFObject.embed(element.getAttribute('target'), element, {
+        pdfOpenParams: {
+          navpanes: 0,
+          toolbar: 0,
+          statusbar: 0,
+          pagemode: 'thumbs',
+          view: 'FitH'
+        },
+        PDFJS_URL: '/lib/pdf/web/viewer.html',
+        height: element.getAttribute('height') || '500px'
+      });
+    });
+  }, window.PDFObject);
+}
+</script>
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme: 'forest',
+      logLevel: 3,
+      flowchart: { curve: 'linear' },
+      gantt: { axisFormat: '%m/%d/%Y' },
+      sequence: { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
+
+<!-- Background Animation -->
+<!-- <script type="text/javascript" src="/js/src/particle.js"></script> -->

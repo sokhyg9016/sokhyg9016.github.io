@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap/css?family=NanumSquare:300,300italic,400,400italic,700,700italic|Inconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://sokhyg9016.github.io').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","width":320,"display":"hide","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"flat"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Olemiss Csci 356 Lecture 6">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Trees">
+<meta property="og:url" content="http://sokhyg9016.github.io/2020/04/28/2020-04-28-csci356-lec6/index.html">
+<meta property="og:site_name" content="Git Page">
+<meta property="og:description" content="Olemiss Csci 356 Lecture 6">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://runestone.academy/runestone/books/published/cppds/_images/biology.png">
+<meta property="og:image" content="https://runestone.academy/runestone/books/published/cppds/_images/directory.png">
+<meta property="og:image" content="https://runestone.academy/runestone/books/published/cppds/_images/treedef1.png">
+<meta property="og:image" content="https://runestone.academy/runestone/books/published/cppds/_images/TreeDefRecursive.png">
+<meta property="og:image" content="https://runestone.academy/runestone/books/published/cppds/_images/treerecs.png">
+<meta property="og:image" content="https://runestone.academy/runestone/books/published/cppds/_images/nlParse.png">
+<meta property="og:image" content="https://runestone.academy/runestone/books/published/cppds/_images/meParse.png">
+<meta property="og:image" content="https://runestone.academy/runestone/books/published/cppds/_images/meSimple.png">
+<meta property="article:published_time" content="2020-04-27T15:00:00.000Z">
+<meta property="article:modified_time" content="2020-04-27T15:00:00.000Z">
+<meta property="article:author" content="LSH">
+<meta property="article:tag" content="CSCI 356">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://runestone.academy/runestone/books/published/cppds/_images/biology.png">
+
+<link rel="canonical" href="http://sokhyg9016.github.io/2020/04/28/2020-04-28-csci356-lec6/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Trees | Git Page</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Git Page</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">AI · Data Structure · Algorithm · Game Development</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>홈</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>태그</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>카테고리</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>아카이브</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-fw fa-calendar"></i>Schedule</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>검색
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="ko">
+    <link itemprop="mainEntityOfPage" href="http://sokhyg9016.github.io/2020/04/28/2020-04-28-csci356-lec6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/avatar.png">
+      <meta itemprop="name" content="LSH">
+      <meta itemprop="description" content="Github + 뻘글 블로그.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Git Page">
+    </span>
+      <div>
+        
+        <a href="/tags/CSCI-356/" rel="tag" style = "border-bottom: none; background: none; color: orange; font-weight: bold; font-size: 1em; padding: 0;">CSCI 356</a>
+      </div>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Trees
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">작성일</span>
+
+              <time title="Post created: 2020-04-28 00:00:00" itemprop="dateCreated datePublished" datetime="2020-04-28T00:00:00+09:00">2020-04-28</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Olemiss/" itemprop="url" rel="index">
+                    <span itemprop="name">Olemiss</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Olemiss/CSCI-356/" itemprop="url" rel="index">
+                    <span itemprop="name">CSCI 356</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <!--<div class="post-description">Olemiss Csci 356 Lecture 6</div>-->
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
+<h2 id="Topics"><a href="#Topics" class="headerlink" title="Topics"></a>Topics</h2><ul>
+<li><a href="./#Examples-of-Trees">Examples of Trees</a></li>
+<li><a href="./#Vocabulary-and-Definitions">Vocabulary and Definitions</a></li>
+<li>Implementation</li>
+<li>Binary Tree Applications</li>
+<li>Priority Queue with Binary Heaps</li>
+<li>Binary Search Trees</li>
+</ul>
+<h2 id="Examples-of-Trees"><a href="#Examples-of-Trees" class="headerlink" title="Examples of Trees"></a>Examples of Trees</h2><p>The difference between a tree in computer science and a tree in nature is that a tree data structure has its root at the top and its leaves on the bottom.</p>
+<h3 id="Properties-of-trees"><a href="#Properties-of-trees" class="headerlink" title="Properties of trees"></a>Properties of trees</h3><ul>
+<li>Trees are <strong>hierarchical</strong>, they are structured in layers with the more general things near the top and the more specific things near the bottom.</li>
+<li>The children of one node are independent of the children of another node.</li>
+<li>Each leaf node is unique.</li>
+</ul>
+<h3 id="Examples-of-Trees-Cont’d"><a href="#Examples-of-Trees-Cont’d" class="headerlink" title="Examples of Trees (Cont’d)"></a>Examples of Trees (Cont’d)</h3><p>Taxonomy of some common animals shown as a tree:</p>
+<a href="https://runestone.academy/runestone/books/published/cppds/_images/biology.png" target="_blank" rel="noopener" title="axonomy of Some Common Animals Shown as a Tree" class="gallery-item"><img src="https://runestone.academy/runestone/books/published/cppds/_images/biology.png" class="" width="500" alt="axonomy of Some Common Animals Shown as a Tree"></a>
+
+<p>A small part of the Unix file system hierarchy:</p>
+<a href="https://runestone.academy/runestone/books/published/cppds/_images/directory.png" target="_blank" rel="noopener" title="Small Part of the Unix File System Hierarchy" class="gallery-item"><img src="https://runestone.academy/runestone/books/published/cppds/_images/directory.png" class="" alt="Small Part of the Unix File System Hierarchy"></a>
+
+<h2 id="Vocabulary-and-Definitions"><a href="#Vocabulary-and-Definitions" class="headerlink" title="Vocabulary and Definitions"></a>Vocabulary and Definitions</h2><table>
+<thead>
+<tr>
+<th align="left">Vocabulary</th>
+<th align="left">Definitions</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Node</td>
+<td align="left">fundamental part of a tree, it can have a name, which we call the <strong>“key”</strong>.</td>
+</tr>
+<tr>
+<td align="left">Edge</td>
+<td align="left">connects two nodes to show that there is a relationship between them.</td>
+</tr>
+<tr>
+<td align="left">Root</td>
+<td align="left">the only node in the tree that has no incoming edges.</td>
+</tr>
+<tr>
+<td align="left">Path</td>
+<td align="left">an ordered list of nodes that are connected by edges.</td>
+</tr>
+<tr>
+<td align="left">Children</td>
+<td align="left">the set of nodes that have incoming edges from the same node.</td>
+</tr>
+<tr>
+<td align="left">Parent</td>
+<td align="left">a node is the parent of all the nodes it connects to with outgoing edges.</td>
+</tr>
+<tr>
+<td align="left">Sibling</td>
+<td align="left">nodes in the tree that are children of the same parent.</td>
+</tr>
+<tr>
+<td align="left">Subtree</td>
+<td align="left">a set of nodes and edges comprised of a parent and all the descendants of that parent.</td>
+</tr>
+<tr>
+<td align="left">Leaf node</td>
+<td align="left">a node that has no children.</td>
+</tr>
+<tr>
+<td align="left">Level</td>
+<td align="left">the level of a node n is the number of edges on the path from the root node to n. The level of the root node is 0.</td>
+</tr>
+<tr>
+<td align="left">Height</td>
+<td align="left">the maximum level of any node in the tree.</td>
+</tr>
+</tbody></table>
+<h2 id="Definition-of-a-Tree"><a href="#Definition-of-a-Tree" class="headerlink" title="Definition of a Tree"></a>Definition of a Tree</h2><blockquote><p>A tree consists of a set of nodes and a set of edges that connect pairs of nodes.</p>
+</blockquote>
+
+<ul>
+<li>One node of the tree is designated as the root node.</li>
+<li>Every node $n$, except the root node, is connected by an edge from exactly one other node $p$, where $p$ is the parent of $n$.</li>
+<li>A unique path traverses from the root to each node.</li>
+<li>If each node in the tree has a maximum of <strong>two</strong> children, we say that the tree is a <strong>binary tree</strong>.</li>
+</ul>
+<h3 id="Definition-of-a-Tree-Cont’d"><a href="#Definition-of-a-Tree-Cont’d" class="headerlink" title="Definition of a Tree (Cont’d)"></a>Definition of a Tree (Cont’d)</h3><p>A tree consisting of a set of nodes and edges:</p>
+<a href="https://runestone.academy/runestone/books/published/cppds/_images/treedef1.png" target="_blank" rel="noopener" title="A Tree Consisting of a Set of Nodes and Edges" class="gallery-item"><img src="https://runestone.academy/runestone/books/published/cppds/_images/treedef1.png" class="" alt="A Tree Consisting of a Set of Nodes and Edges"></a>
+
+<p>&nbsp;</p>
+<blockquote><p>A tree is either empty or consists of a root and zero or more subtrees, each of which is also a tree. This is a <strong>recursive</strong> definition of a tree.</p>
+</blockquote>
+
+<a href="https://runestone.academy/runestone/books/published/cppds/_images/TreeDefRecursive.png" target="_blank" rel="noopener" title="A recursive Definition of a tree" class="gallery-item"><img src="https://runestone.academy/runestone/books/published/cppds/_images/TreeDefRecursive.png" class="" alt="A recursive Definition of a tree"></a>
+
+<h2 id="Implementation-of-a-Binary-Tree"><a href="#Implementation-of-a-Binary-Tree" class="headerlink" title="Implementation of a Binary Tree"></a>Implementation of a Binary Tree</h2><table>
+<thead>
+<tr>
+<th align="left">Functions</th>
+<th align="left">Definitions</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>BinaryTree()</code></td>
+<td align="left">creates a new instance of a binary tree.</td>
+</tr>
+<tr>
+<td align="left"><code>getLeftChild()</code></td>
+<td align="left">returns the binary tree corresponding to the left child of the current node.</td>
+</tr>
+<tr>
+<td align="left"><code>getRightChild()</code></td>
+<td align="left">returns the binary tree corresponding to the right child of the current node.</td>
+</tr>
+<tr>
+<td align="left"><code>setRootVal(val)</code></td>
+<td align="left">stores the object in parameter <strong>val</strong> in the current node.</td>
+</tr>
+<tr>
+<td align="left"><code>getRootVal()</code></td>
+<td align="left">returns the object stored in the current node.</td>
+</tr>
+<tr>
+<td align="left"><code>insertLeft(val)</code></td>
+<td align="left">creates a new binary tree and installs it as the left child of the current node.</td>
+</tr>
+<tr>
+<td align="left"><code>insertRight(val)</code></td>
+<td align="left">creates a new binary tree and installs it as the right child of the current node.</td>
+</tr>
+</tbody></table>
+<h3 id="Implementation-Cont’d-1-2"><a href="#Implementation-Cont’d-1-2" class="headerlink" title="Implementation (Cont’d) [1/2]"></a>Implementation (Cont’d) [1/2]</h3><p><strong>List of lists</strong> representation of a tree:</p>
+<ul>
+<li>Store the value of the root node as the 1<sup>st</sup> element of the list;</li>
+<li>The 2<sup>nd</sup> element of the list will itself be a list that represents the left subtree;</li>
+<li>And the 3<sup>rd</sup> element of the list will be another list that represents the right subtree.</li>
+</ul>
+<p>Representing a tree as a list of lists:</p>
+<a href="https://runestone.academy/runestone/books/published/cppds/_images/treerecs.png" target="_blank" rel="noopener" title="A Simple Tree Using a Nodes and References Approach" class="gallery-item"><img src="https://runestone.academy/runestone/books/published/cppds/_images/treerecs.png" class="" alt="A Simple Tree Using a Nodes and References Approach"></a>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">myTree = [</span><br><span class="line">    [<span class="string">'a'</span>,  <span class="comment"># root</span></span><br><span class="line"></span><br><span class="line">     [<span class="string">'b'</span>,  <span class="comment"># left subtree</span></span><br><span class="line">      [<span class="string">'d'</span>, [], []],</span><br><span class="line">      [<span class="string">'e'</span>, [], []]</span><br><span class="line">     ],</span><br><span class="line">     </span><br><span class="line">     [<span class="string">'c'</span>,  <span class="comment"># right subtree</span></span><br><span class="line">      [<span class="string">'f'</span>, [], []],</span><br><span class="line">      []</span><br><span class="line">     ]</span><br><span class="line"></span><br><span class="line">    ]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&gt;&gt; myTree = [[<span class="string">'a'</span>, [<span class="string">'b'</span>, [<span class="string">'d'</span>, [], []],[<span class="string">'e'</span>, [], []]],\</span><br><span class="line">             [<span class="string">'c'</span>, [<span class="string">'f'</span>, [], []],[]] ]]</span><br><span class="line"></span><br><span class="line">&gt;&gt; myTree[<span class="number">0</span>] <span class="comment"># Print the loop</span></span><br><span class="line"><span class="string">'a'</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; myTree[<span class="number">1</span>] <span class="comment"># Print the left subtree</span></span><br><span class="line">[<span class="string">'b'</span>, [<span class="string">'d'</span>, [], []],[<span class="string">'e'</span>, [], []]]</span><br><span class="line"></span><br><span class="line">&gt;&gt; myTree[<span class="number">2</span>] <span class="comment"># Print the right subtree</span></span><br><span class="line">[<span class="string">'c'</span>, [<span class="string">'f'</span>, [], []],[] ]]</span><br></pre></td></tr></table></figure>
+
+<hr>
+<ul>
+<li>To create Binary Tree, return the root and empty left and right sub tree.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="string">'''Create a binary tree'''</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">BinaryTree</span><span class="params">(r)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> [r, [], []]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>To <strong>add a left subtree</strong> to the root of a tree, we need to insert a new list onto the 2<sup>nd</sup> position of the root list:</li>
+<li>If the list already has something in the 2<sup>nd</sup> position, we need to push it down the tree as the left child of the list we are adding.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">insertLeft</span><span class="params">(root, newBrench)</span>:</span></span><br><span class="line">    t = root.pop(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> len(t) &gt; <span class="number">1</span>:</span><br><span class="line">        root.insert(<span class="number">1</span>, [newBrench, t, []])</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        root.insert(<span class="number">1</span>, [newBrench, [], []])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> root</span><br></pre></td></tr></table></figure>
+
+<hr>
+<ul>
+<li>To <strong>add a right subtree</strong> to the root of a tree, we need to insert a new list onto the 3rd position of the root list:</li>
+<li>If the list already has something in the 3<sup>rd</sup> position, we need to push it down the tree as the right child of the list we are adding.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">insertLeft</span><span class="params">(root, newBrench)</span>:</span></span><br><span class="line">    t = root.pop(<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> len(t) &gt; <span class="number">1</span>:</span><br><span class="line">        root.insert(<span class="number">2</span>, [newBrench, [], t])</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        root.insert(<span class="number">2</span>, [newBrench, [], []])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> root</span><br></pre></td></tr></table></figure>
+
+<hr>
+<ul>
+<li>Access functions for parts of the tree:</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getRootVal</span><span class="params">(root)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> root[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">setRootVal</span><span class="params">(root, newVal)</span>:</span></span><br><span class="line">    root[<span class="number">0</span>] = newVal</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getLeftVal</span><span class="params">(root)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> root[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getRightVal</span><span class="params">(root)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> root[<span class="number">2</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="Implementation-Cont’d-2-2"><a href="#Implementation-Cont’d-2-2" class="headerlink" title="Implementation (Cont’d) [2/2]"></a>Implementation (Cont’d) [2/2]</h3><p><strong>Nodes and references</strong> representation of a tree:</p>
+<ul>
+<li>Define a class that has attributes for the root value, as well as the left and right subtrees.</li>
+<li>A simple tree using nodes and references representation:</li>
+</ul>
+<hr>
+<ul>
+<li>A simple class definition:<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BinaryTree</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, rootObj)</span>:</span></span><br><span class="line">        self.key = rootObj</span><br><span class="line">        self.left = <span class="literal">None</span></span><br><span class="line">        self.right = <span class="literal">None</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<hr>
+<ul>
+<li>To <strong>insert a left child</strong> and <strong>a right child</strong>, we push the existing child down one level in the tree:</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">insertLeft</span><span class="params">(self, newNode)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> self.left == <span class="literal">None</span>:</span><br><span class="line">        self.left = BinaryTree(newNode)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        t = BinaryTree(newNode)</span><br><span class="line">        t.left = self.left</span><br><span class="line">        self.left = t</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">insertRight</span><span class="params">(self, newNode)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> self.right == <span class="literal">None</span>:</span><br><span class="line">        self.right = BinaryTree(newNode)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        t = BinaryTree(newNode)</span><br><span class="line">        t.right = self.right</span><br><span class="line">        self.right = t</span><br></pre></td></tr></table></figure>
+
+<hr>
+<ul>
+<li>Access methods for the BinaryTree class:</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getRootVal</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> self.key</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">setRootVal</span><span class="params">(self, obj)</span>:</span></span><br><span class="line">    self.key = obj</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getLeftChild</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> self.left</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getRightChild</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> self.right</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="Binary-Tree-in-Python"><a href="#Binary-Tree-in-Python" class="headerlink" title="Binary Tree in Python"></a>Binary Tree in Python</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BinaryTree</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,rootObj)</span>:</span> <span class="comment"># initializer function expects to get some kind of object to store in the root</span></span><br><span class="line">        self.key = rootObj</span><br><span class="line">        self.leftChild = <span class="literal">None</span>  <span class="comment"># reference other instances of the binary tree the BinaryTree class</span></span><br><span class="line">        self.rightChild = <span class="literal">None</span> <span class="comment"># reference other instances of the binary tree the BinaryTree class</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">insertLeft</span><span class="params">(self,newNode)</span>:</span> <span class="comment"># Handles insertion if there is no left child simply adds a node to the tree.</span></span><br><span class="line">        <span class="keyword">if</span> self.leftChild == <span class="literal">None</span>:</span><br><span class="line">            self.leftChild = BinaryTree(newNode)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            t = BinaryTree(newNode) <span class="comment"># handles insertion if there is a left child pushes the existing child down one level in the tree.</span></span><br><span class="line">            t.leftChild = self.leftChild</span><br><span class="line">            self.leftChild = t</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">insertRight</span><span class="params">(self,newNode)</span>:</span> <span class="comment"># Handles insertion if there is no right child simply adds a node to the tree</span></span><br><span class="line">        <span class="keyword">if</span> self.rightChild == <span class="literal">None</span>:</span><br><span class="line">            self.rightChild = BinaryTree(newNode)</span><br><span class="line">        <span class="keyword">else</span>: <span class="comment"># handles insertion if there is a right child pushes the existing child down one level in the tree.</span></span><br><span class="line">            t = BinaryTree(newNode)</span><br><span class="line">            t.rightChild = self.rightChild</span><br><span class="line">            self.rightChild = t</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getRightChild</span><span class="params">(self)</span>:</span> <span class="comment"># accessor method</span></span><br><span class="line">        <span class="keyword">return</span> self.rightChild</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getLeftChild</span><span class="params">(self)</span>:</span> <span class="comment"># accessor method</span></span><br><span class="line">        <span class="keyword">return</span> self.leftChild</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">setRootVal</span><span class="params">(self,obj)</span>:</span> <span class="comment"># accessor method</span></span><br><span class="line">        self.key = obj</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getRootVal</span><span class="params">(self)</span>:</span> <span class="comment"># accessor method</span></span><br><span class="line">        <span class="keyword">return</span> self.key</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    r = BinaryTree(<span class="string">'a'</span>)</span><br><span class="line">    print(r.getRootVal())</span><br><span class="line">    print(r.getLeftChild())</span><br><span class="line">    r.insertLeft(<span class="string">'b'</span>)</span><br><span class="line">    print(r.getLeftChild())</span><br><span class="line">    print(r.getLeftChild().getRootVal())</span><br><span class="line">    r.insertRight(<span class="string">'c'</span>)</span><br><span class="line">    print(r.getRightChild())</span><br><span class="line">    print(r.getRightChild().getRootVal())</span><br><span class="line">    r.getRightChild().setRootVal(<span class="string">'d'</span>)</span><br><span class="line">    print(r.getRightChild().getRootVal())</span><br><span class="line"></span><br><span class="line">main()</span><br></pre></td></tr></table></figure>
+
+<h2 id="Binary-Tree-Applications"><a href="#Binary-Tree-Applications" class="headerlink" title="Binary Tree Applications"></a>Binary Tree Applications</h2><ul>
+<li><strong>Parse trees</strong> can be used to represent real-world constructions like sentences or mathematical expressions.</li>
+<li>A parse tree for a simple sentence:</li>
+</ul>
+<a href="https://runestone.academy/runestone/books/published/cppds/_images/nlParse.png" target="_blank" rel="noopener" title="A Parse Tree for a Simple Sentence" class="gallery-item"><img src="https://runestone.academy/runestone/books/published/cppds/_images/nlParse.png" class="" alt="A Parse Tree for a Simple Sentence"></a>
+
+<h3 id="Applications-Cont’d-1-2"><a href="#Applications-Cont’d-1-2" class="headerlink" title="Applications (Cont’d) [1/2]"></a>Applications (Cont’d) [1/2]</h3><ul>
+<li>How to build a parse tree from a fully parenthesized mathematical expression and how to evaluate the expression?</li>
+<li>Parse tree for $((7 + 3) * (5 – 2))$:</li>
+</ul>
+<a href="https://runestone.academy/runestone/books/published/cppds/_images/meParse.png" target="_blank" rel="noopener" title="Parse Tree for ((7+3)∗(5−2))" class="gallery-item"><img src="https://runestone.academy/runestone/books/published/cppds/_images/meParse.png" class="" alt="Parse Tree for ((7+3)∗(5−2))"></a>
+
+<ul>
+<li>Applying this replacement procedure gives us the simplified tree shown as below</li>
+</ul>
+<a href="https://runestone.academy/runestone/books/published/cppds/_images/meSimple.png" target="_blank" rel="noopener" title="A Simplified Parse Tree for ((7+3)∗(5−2))" class="gallery-item"><img src="https://runestone.academy/runestone/books/published/cppds/_images/meSimple.png" class="" alt="A Simplified Parse Tree for ((7+3)∗(5−2))"></a>
+
+<h3 id="Applications-Cont’d-2-2"><a href="#Applications-Cont’d-2-2" class="headerlink" title="Applications (Cont’d) [2/2]"></a>Applications (Cont’d) [2/2]</h3><ul>
+<li>There are four different kinds of tokens to consider:<ul>
+<li>left parentheses</li>
+<li>right parentheses</li>
+<li>operators</li>
+<li>operands</li>
+</ul>
+</li>
+<li>Operands will be the leaf nodes and children of their operators.</li>
+<li>Every operator will have two children.</li>
+</ul>
+<hr>
+<p>We define four rules as follows:</p>
+<ol>
+<li>If the current token is a <code>&#39;(&#39;</code>, add a new node as the left child of the current node, and descend to the left child.</li>
+<li>If the current token is in the vector <code>[&#39;+&#39;,&#39;-&#39;,&#39;/&#39;,&#39;*&#39;]</code>, set the root value of the current node to the operator represented by the current token. Add a new node as the right child of the current node and descend to the right child.</li>
+<li>If the current token is a number, set the root value of the current node to the number and return to the parent.</li>
+<li>If the current token is a <code>&#39;)&#39;</code>, go to the parent of the current node.</li>
+</ol>
+<hr>
+<p>Use the expression <code>(3 + (4 * 5))</code> as an example,<br>below is a trace for parse tree construction:</p>
+<div class="note no-icon">
+            <p>Follow the link <a href="https://runestone.academy/runestone/books/published/cppds/Trees/ParseTree.html" target="_blank" rel="noopener">here</a></p>
+          </div>
+
+<ol>
+<li>Create an empty tree.</li>
+<li>Read <code>&#39;(&#39;</code> as the first token. By rule 1, create a new node as the left child of the root. Make the current node this new child.</li>
+<li>Read <code>&#39;3&#39;</code> as the next token. By rule 3, set the root value of the current node to 3 and go back up the tree to the parent.</li>
+<li>Read <code>&#39;+&#39;</code> as the next token. By rule 2, set the root value of the current node to + and add a new node as the right child. The new right child becomes the current node.</li>
+<li>Read <code>&#39;(&#39;</code> as the next token. By rule 1, create a new node as the left child of the current node. The new left child becomes the current node.</li>
+<li>Read <code>&#39;4&#39;</code> as the next token. By rule 3, set the value of the current node to 4. Make the parent of 4 the current node.</li>
+<li>Read <code>&#39;*&#39;</code> as the next token. By rule 2, set the root value of the current node to * and create a new right child. The new right child becomes the current node.</li>
+<li>Read <code>&#39;5&#39;</code> as the next token. By rule 3, set the root value of the current node to 5. Make the parent of 5 the current node.</li>
+<li>Read <code>&#39;)&#39;</code> as the next token. By rule 4 we make the parent of <code>&#39;*&#39;</code> the current node.</li>
+<li>Read <code>&#39;)&#39;</code> as the next token. By rule 4 we make the parent of + the current node. At this point there is no parent for + so we are done.</li>
+</ol>
+<h2 id="Tree-Traversals"><a href="#Tree-Traversals" class="headerlink" title="Tree Traversals"></a>Tree Traversals</h2><ul>
+<li><strong>Tree Traversals:</strong> visiting all the nodes of a tree</li>
+<li>There are three commonly used patterns for a tree traversal.</li>
+<li>The difference between these patterns is the <strong>order</strong> in which each node is visited.</li>
+<li>Three traversals:<ul>
+<li>Preorder</li>
+<li>Inorder</li>
+<li>Postorder</li>
+</ul>
+</li>
+</ul>
+<h3 id="Preorder-ROOT-L-R"><a href="#Preorder-ROOT-L-R" class="headerlink" title="Preorder (ROOT-L-R)"></a>Preorder (ROOT-L-R)</h3><ul>
+<li>In this traversal, we visit the <strong>root</strong> node first, then recursively do a preorder traversal of the <strong>left</strong> subtree, followed by a recursive preorder traversal of the right subtree.</li>
+<li>Below is the code to implement preorder traversal:</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">preorder</span><span class="params">(tree)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> tree:</span><br><span class="line">        print(tree.getRootVal())</span><br><span class="line">        preorder(tree.getLeftChild())</span><br><span class="line">        preorder(tree.getRightChild())</span><br></pre></td></tr></table></figure>
+
+<h3 id="Inorder-L-ROOT-R"><a href="#Inorder-L-ROOT-R" class="headerlink" title="Inorder (L-ROOT-R)"></a>Inorder (L-ROOT-R)</h3><ul>
+<li>In this traversal, we recursively do an inorder traversal on the <strong>left subtree</strong>, visit the <strong>root</strong> node, and finally do a recursive inorder traversal of the <strong>right subtree</strong>.</li>
+</ul>
+<h3 id="Postorder-L-R-ROOT"><a href="#Postorder-L-R-ROOT" class="headerlink" title="Postorder (L-R-ROOT)"></a>Postorder (L-R-ROOT)</h3><ul>
+<li>In this traversal, we recursively do a postorder traversal on the <strong>left subtree</strong> and the <strong>right subtree</strong> followed by a visit to the <strong>root</strong> node.</li>
+</ul>
+<hr>
+<p>Below is the code to implement inorder and postorder traversals:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">inorder</span><span class="params">(tree)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> tree:</span><br><span class="line">        inorder(tree.getLeftChild())</span><br><span class="line">        print(tree.getRootVal())</span><br><span class="line">        inorder(tree.getRightChild())</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">postorder</span><span class="params">(tree)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> tree:</span><br><span class="line">        postorder(tree.getLeftChild())</span><br><span class="line">        postorder(tree.getRightChild())</span><br><span class="line">        print(tree.getRootVal())</span><br></pre></td></tr></table></figure>
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/CSCI-356/" rel="tag"><i class="fa fa-tag"></i> CSCI 356</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/19/2020-04-19-csci259-lec5-3/" rel="prev" title="File I/O">
+      <i class="fa fa-chevron-left"></i> File I/O
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/04/28/2020-04-28-csci356-lec5-1/" rel="next" title="Searching and Sorting [1/2]">
+      Searching and Sorting [1/2] <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          목차
+        </li>
+        <li class="sidebar-nav-overview">
+          프로필
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Topics"><span class="nav-number">1.</span> <span class="nav-text">Topics</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Examples-of-Trees"><span class="nav-number">2.</span> <span class="nav-text">Examples of Trees</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Properties-of-trees"><span class="nav-number">2.1.</span> <span class="nav-text">Properties of trees</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Examples-of-Trees-Cont’d"><span class="nav-number">2.2.</span> <span class="nav-text">Examples of Trees (Cont’d)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vocabulary-and-Definitions"><span class="nav-number">3.</span> <span class="nav-text">Vocabulary and Definitions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Definition-of-a-Tree"><span class="nav-number">4.</span> <span class="nav-text">Definition of a Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Definition-of-a-Tree-Cont’d"><span class="nav-number">4.1.</span> <span class="nav-text">Definition of a Tree (Cont’d)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Implementation-of-a-Binary-Tree"><span class="nav-number">5.</span> <span class="nav-text">Implementation of a Binary Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Implementation-Cont’d-1-2"><span class="nav-number">5.1.</span> <span class="nav-text">Implementation (Cont’d) [1&#x2F;2]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Implementation-Cont’d-2-2"><span class="nav-number">5.2.</span> <span class="nav-text">Implementation (Cont’d) [2&#x2F;2]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Binary-Tree-in-Python"><span class="nav-number">5.3.</span> <span class="nav-text">Binary Tree in Python</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Binary-Tree-Applications"><span class="nav-number">6.</span> <span class="nav-text">Binary Tree Applications</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Applications-Cont’d-1-2"><span class="nav-number">6.1.</span> <span class="nav-text">Applications (Cont’d) [1&#x2F;2]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Applications-Cont’d-2-2"><span class="nav-number">6.2.</span> <span class="nav-text">Applications (Cont’d) [2&#x2F;2]</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tree-Traversals"><span class="nav-number">7.</span> <span class="nav-text">Tree Traversals</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Preorder-ROOT-L-R"><span class="nav-number">7.1.</span> <span class="nav-text">Preorder (ROOT-L-R)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Inorder-L-ROOT-R"><span class="nav-number">7.2.</span> <span class="nav-text">Inorder (L-ROOT-R)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Postorder-L-R-ROOT"><span class="nav-number">7.3.</span> <span class="nav-text">Postorder (L-R-ROOT)</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LSH"
+      src="/img/avatar.png">
+  <p class="site-author-name" itemprop="name">LSH</p>
+  <div class="site-description" itemprop="description">Github + 뻘글 블로그.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-name">포스트</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">카테고리</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">태그</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/sokhyg9016" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;sokhyg9016" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:sokhyg9016@gmail.com" title="E-Mail → mailto:sokhyg9016@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/users/10584779/%ec%9d%b4%ec%8a%b9%ed%9b%88" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;10584779&#x2F;%ec%9d%b4%ec%8a%b9%ed%9b%88" rel="noopener" target="_blank"><i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.youtube.com/channel/UC9bPZO7K_0a6Eh_nbcjD68A?view_as=subscriber" title="YouTube → https:&#x2F;&#x2F;www.youtube.com&#x2F;channel&#x2F;UC9bPZO7K_0a6Eh_nbcjD68A?view_as&#x3D;subscriber" rel="noopener" target="_blank"><i class="fa fa-fw fa-youtube"></i>YouTube</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LSH</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.7.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('div.pdf').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js', () => {
+    document.querySelectorAll('div.pdf').forEach(element => {
+      PDFObject.embed(element.getAttribute('target'), element, {
+        pdfOpenParams: {
+          navpanes: 0,
+          toolbar: 0,
+          statusbar: 0,
+          pagemode: 'thumbs',
+          view: 'FitH'
+        },
+        PDFJS_URL: '/lib/pdf/web/viewer.html',
+        height: element.getAttribute('height') || '500px'
+      });
+    });
+  }, window.PDFObject);
+}
+</script>
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme: 'forest',
+      logLevel: 3,
+      flowchart: { curve: 'linear' },
+      gantt: { axisFormat: '%m/%d/%Y' },
+      sequence: { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+</body>
+</html>
+
+<!-- Background Animation -->
+<!-- <script type="text/javascript" src="/js/src/particle.js"></script> -->

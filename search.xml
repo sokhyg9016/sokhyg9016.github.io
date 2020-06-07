@@ -1,6 +1,864 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Neural Networks</title>
+    <url>/2020/05/02/2020-05-02-csci343-challenge-final/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
+<h2 id="Objective"><a href="#Objective" class="headerlink" title="Objective"></a>Objective</h2><ul>
+<li>Learn the basics of Neural Networks</li>
+<li>Have fun!</li>
+</ul>
+<h2 id="Assignment"><a href="#Assignment" class="headerlink" title="Assignment"></a>Assignment</h2><p>게임을 해봅시다. 저는 종종 기술과 기회가 결합된 보드게임을 즐겨합니다. 이 보드 게임들은 보통 주사위라고 하는 난수 발생기가 존재한다는 공통점이 있습니다.</p>
+<p>당신은 보드 게임 회사인 HasBoard, Inc.에 고용되었습니디. 그들은 이제 로봇의 세계로 뛰어들고 있고 아무도 원하지 않을 때 사람들과 보드 게임을 할 수 있는 로봇을 만들고 있답니다! 하지만, 그들은 주사위 굴림을 보고 어떤 숫자가 나오는지 알 수 있는 로봇이 필요하다고 합니다.</p>
+<p>당신은 회사로부터 주사위 굴림을 해석할 신경망을 작성하라는 일을 받았습니다. 구체적으로는 주사위의 흑백 영상을 분석하게 될 겁니다.</p>
+<p>주사위 이미지는 10 x 10 그리드(grid)에서 1과 0을 사용하여 지정됩니다. 주사위는 이 중 5x5 면적을 차지할 것 입니다. 주사위는 10 x 10 그리드 내의 어디에도 있을 수 있지만, 항상 완전히 보여야 합니다.</p>
+<p>이미지의 배경은 검은색(0s)이고 주사위 표면은 흰색(1s)에 검은 점(0s)입니다. (below)</p>
+<p>당신의 신경망은 주사위의 이미지를 나타내는 100개의 1과 0의 목록을 받아들여야 합니다. 당신의 신경망을 위한 샘플 이미자와 그것을 인코딩하는 방법은 아래와 같습니다.</p>
+<p><a href="../../../../img/csci343-final/sample.JPG" title="example" class="gallery-item"><img src="../../../../img/csci343-final/sample.JPG" alt="example"></a></p>
+<h3 id="About-DATA"><a href="#About-DATA" class="headerlink" title="About DATA"></a>About DATA</h3><ul>
+<li>당신은 10 x 10 그리드 내의 많은 위치에서 주사위의 이미지로 당신의 신경망을 훈련시켜야 합니다.</li>
+<li>신경망에 대한 입력은 100개의 실수 값 리스트가 됩니다. (when casting values for this assignment be sure to use <code>float()</code> instead of <code>np.float32()</code>)</li>
+<li>네트워크가 표면 값을 10으로 나눈 값(1 = 0.1, 2 = 0.2, 3 = 0.3 등)을 반환하도록 출력(및 대상)을 인코딩해야 합니다.</li>
+<li>신경망은 0.1에서 0.6 사이의 예측 값을 반환해야 합니다.</li>
+<li>값은 소수점 첫째 자리보다 작을 수 있으며 반올림되어야 합니다. (예: 0.475는 0.5로 반올림).</li>
+</ul>
+<h3 id="Score-Evaluation"><a href="#Score-Evaluation" class="headerlink" title="Score Evaluation"></a>Score Evaluation</h3><ul>
+<li>저장된 신경 네트워크 파일을 <a href="https://john.cs.olemiss.edu/~jones/343NeuralNetwork.html" target="_blank" rel="noopener">테스트 웹 사이트</a>에 업로드하여 제출된 데이터에 대하여 테스트되고 점수가 매겨집니다.</li>
+<li>당신의 해답은 무작위로 생성된 주사위 1,000개에 대해 시험될 것입니다.</li>
+<li>테스트 케이스의 절반은 “정상” 난이도가 될 것 입니다. 나머지 절반은 까다로운 난이도일 것이며 회전되는 주사위를 포함할 수 있습니다. ( 보통 난이도의 케이스는 항상 위아래로 향하게 될 것입니다.)</li>
+<li>신경망을 얼마나 잘 훈련하느냐에 따라 기능 포인트가 부여됩니다.</li>
+<li>당신의 성적은 “정상적인” 난이도 시험만을 기준으로 부여됩니다. (까다로운 테스트 케이스들은 당신의 놀라운 신경망 기술을 뽐내는 데에 사용될 입니다.)</li>
+</ul>
+<h3 id="Score-Evaluation-Detail"><a href="#Score-Evaluation-Detail" class="headerlink" title="Score Evaluation (Detail)"></a>Score Evaluation (Detail)</h3><ul>
+<li>이 과제에 대한 점수를 받으려면 네트워크가 20% 이상 정확해야 합니다.</li>
+<li>이 임계값 (20%) 을 초과하면 40XP가 주어집니다. 10% 마다 20XP를 추가로 받게 됩니다. 예를 들어, 81.2%의 정확도 점수는 162.4가 됩니다.</li>
+<li>솔루션을 제출할 때 클래스 리더보드(상위 10개 솔루션 표시)에 참여하도록 선택할 수 있습니다.</li>
+<li>리더보드 참여는 엄격히 자발적입니다. 1, 2, 3위 리더보드 솔루션에는 각각 20XP, 10XP, 5XP의 보너스가 지급될 것입니다.</li>
+</ul>
+<h3 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h3><ul>
+<li>데이터 배포 사이트에서 사용 가능한 <code>neuro.py</code> 패키지를 사용해야 합니다.</li>
+<li><code>neuro.writeNetworkToFile (filename)</code>함수를 사용하여 훈련 된 신경망을 파일로 저장해야합니다.</li>
+<li>이 과제의 주요 목적은 좋은 테스트 데이터를 생성하여 신경망을 훈련시키는 방법을 배우는 것입니다.</li>
+<li><ins>이 과제에 대한 크레딧을 받으려면 신경망 파일을 TESTING WEBSITE에 업로드하고 코드와 트레이닝 데이터를 모두 BLACKBOARD에 업로드해야합니다.</ins></li>
+<li>또한 위에 링크 된 테스트 웹 사이트를 사용하여 신경망을 테스트해야합니다.</li>
+<li>웹 사이트를 통해 네트워크를 테스트하지 않으면 이 과제에서 0점을 받습니다.</li>
+</ul>
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>]]></content>
+      <categories>
+        <category>Olemiss</category>
+        <category>CSCI 343</category>
+      </categories>
+      <tags>
+        <tag>CSCI 343</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Searching and Sorting [2/2]</title>
+    <url>/2020/04/28/2020-04-28-csci356-lec5-2/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
+<h2 id="Sorting"><a href="#Sorting" class="headerlink" title="Sorting"></a>Sorting</h2><ul>
+<li><strong>Sorting</strong> is the process of placing elements from a collection in order.</li>
+<li>We’ll discuss several sorting algorithms and compare them with respect to their running time.</li>
+<li>The total number of <strong>comparisons</strong> will be considered to evaluate the overall efficiency of a sorting algorithm.</li>
+</ul>
+<h2 id="Selection-sort"><a href="#Selection-sort" class="headerlink" title="Selection sort"></a>Selection sort</h2><p>looks for the smallest item and places it first, then finds the smallest in the remaining and puts it next, and so on.</p>
+<ul>
+<li>After the 1<sup>st</sup> pass, the smallest item is in the correct place.</li>
+<li>After the 2<sup>nd</sup> pass, the next smallest is in place.</li>
+<li>On each pass the smallest remaining item is selected and then placed in its proper location.</li>
+<li>This process requires (n – 1) passes to sort n items.</li>
+</ul>
+<h3 id="Selection-sort-Cont’d-1-2"><a href="#Selection-sort-Cont’d-1-2" class="headerlink" title="Selection sort (Cont’d) [1/2]"></a>Selection sort (Cont’d) [1/2]</h3><ul>
+<li><p>The exchange operation (“swap”) is slightly different in Python.</p>
+</li>
+<li><p>Most programming languages requires a temp variable to store one of the values.</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">temp = a;</span><br><span class="line">a = b;</span><br><span class="line">b = temp;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>In Python, multiple assignment is allowed.</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a, b = b, a</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Here is the code for selection sort:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">selection_sort</span><span class="params">(alist)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(alist)):</span><br><span class="line">        min_value = alist[i]</span><br><span class="line">        min_index = i</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(i + <span class="number">1</span>, len(alist)):</span><br><span class="line">            <span class="keyword">if</span> min_value &gt; alist[j]:</span><br><span class="line">                min_value = alist[j]</span><br><span class="line">                min_index = j</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> min_index != i:</span><br><span class="line">            alist[min_index], alist[i] = alist[i], alist[min_index]</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="Selection-sort-Cont’d-2-2"><a href="#Selection-sort-Cont’d-2-2" class="headerlink" title="Selection sort (Cont’d) [2/2]"></a>Selection sort (Cont’d) [2/2]</h3><ul>
+<li>To analyze the selection sort:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">Pass</th>
+<th align="left">Comparisions</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left">n - 1</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">n - 2</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">n - 3</td>
+</tr>
+<tr>
+<td align="left">…</td>
+<td align="left">…</td>
+</tr>
+<tr>
+<td align="left">n - 1</td>
+<td align="left">1</td>
+</tr>
+</tbody></table>
+<ul>
+<li>The sum of $ 1 + 2 + 3 + … + (n-1) = \frac{n \cdot (n - 1)}{2}$</li>
+<li>The complexity is $O(n^{2})$</li>
+</ul>
+<h2 id="Bubble-Sort"><a href="#Bubble-Sort" class="headerlink" title="Bubble Sort"></a>Bubble Sort</h2><ul>
+<li>Compares adjacent items and exchanges each pair that are out of order.</li>
+<li>Each pass through the list places the next largest value in its proper place.</li>
+<li>In essence, each item “bubbles” up to the location where it belongs.</li>
+</ul>
+<h3 id="Bubble-Sort-Cont’d-1-2"><a href="#Bubble-Sort-Cont’d-1-2" class="headerlink" title="Bubble Sort (Cont’d) [1/2]"></a>Bubble Sort (Cont’d) [1/2]</h3><ul>
+<li>At the start of the 2<sup>nd</sup> pass, the largest value is now in place.</li>
+<li>There are n – 1 items left to sort.</li>
+<li>The total number of passes necessary will be n – 1.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bubble_sort</span><span class="params">(alist)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(alist)):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span>, len(alist) - i):</span><br><span class="line">            <span class="keyword">if</span> alist[j] &lt; alist[j<span class="number">-1</span>]:</span><br><span class="line">                alist[j<span class="number">-1</span>], alist[j] = alist[j], alist[j<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="Bubble-Sort-Cont’d-2-2"><a href="#Bubble-Sort-Cont’d-2-2" class="headerlink" title="Bubble Sort (Cont’d) [2/2]"></a>Bubble Sort (Cont’d) [2/2]</h3><p>Generally speaking, the bubble sort makes the same number of comparisons as the selection sort and is therefore also $O(n^{2})$</p>
+<h2 id="Insertion-sort"><a href="#Insertion-sort" class="headerlink" title="Insertion sort"></a>Insertion sort</h2><ul>
+<li>each new item is “inserted” into the sub-list to make the sorted sublist is one item larger.</li>
+<li>We begin by assuming that a list with one item (position 0, list[0]) is already sorted.</li>
+<li>On each pass, one for each item 1 through n – 1, the current item is checked against those in the already sorted list. Shift those items that are greater to the right; when we reach a smaller item or the end of the sublist, the current item can be inserted.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bubble_sort</span><span class="params">(alist)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, len(alist)):</span><br><span class="line">        current_value = alist[i]</span><br><span class="line">        pos = i</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> pos &gt; <span class="number">0</span> <span class="keyword">and</span> pos[i<span class="number">-1</span>] &gt; current_value:</span><br><span class="line">            alist[pos] = alist[pos<span class="number">-1</span>]</span><br><span class="line">            pos -= <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        alist[pos] = current_value</span><br></pre></td></tr></table></figure>
+
+<h2 id="Insertion-sort-Cont’d"><a href="#Insertion-sort-Cont’d" class="headerlink" title="Insertion sort (Cont’d)"></a>Insertion sort (Cont’d)</h2><ul>
+<li>The maximum number of comparisons for an insertion sort is the sum of the first n – 1 integers.</li>
+<li>Again, this is $O(n^{2})$</li>
+</ul>
+<h2 id="Merge-sort"><a href="#Merge-sort" class="headerlink" title="Merge sort"></a>Merge sort</h2><ul>
+<li>A recursive algorithm that continually splits a list in half.</li>
+<li>If the list is empty or has one item, it is sorted (the base case).</li>
+<li>If the list has more than one item, we split the list and recursively invoke a merge sort on both halves. Once the two halves are sorted, the fundamental operation, called a merge, is performed.</li>
+<li>Merging is the process of combining two smaller sorted lists into a single sorted list.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">merge_sort</span><span class="params">(alist)</span>:</span></span><br><span class="line">	print(<span class="string">f"Splitting: <span class="subst">&#123;alist&#125;</span>"</span>)</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span> len(alist) &gt; <span class="number">1</span>:</span><br><span class="line">		mid = len(alist) // <span class="number">2</span></span><br><span class="line">		left_half = alist[:mid]</span><br><span class="line">		right_half = alist[mid:]</span><br><span class="line">		</span><br><span class="line">		merge_sort(left_half)</span><br><span class="line">		merge_sort(right_half)</span><br><span class="line">		</span><br><span class="line">		i = <span class="number">0</span></span><br><span class="line">		j = <span class="number">0</span></span><br><span class="line">		k = <span class="number">0</span></span><br><span class="line">		</span><br><span class="line">		<span class="keyword">while</span> i &lt; len(left_half) <span class="keyword">and</span> j &lt; len(right_half):</span><br><span class="line">			<span class="keyword">if</span> left_half[i] &lt; right_half[j]:</span><br><span class="line">				alist[k] = left_half[i]</span><br><span class="line">				i += <span class="number">1</span></span><br><span class="line">				k += <span class="number">1</span></span><br><span class="line">			<span class="keyword">else</span>:</span><br><span class="line">				alist[k] = right_half[j]</span><br><span class="line">				j += <span class="number">1</span></span><br><span class="line">				k += <span class="number">1</span></span><br><span class="line">		</span><br><span class="line">		<span class="keyword">while</span> i &lt; len(left_half):</span><br><span class="line">			alist[k] = left_half[i]</span><br><span class="line">			i += <span class="number">1</span></span><br><span class="line">			k += <span class="number">1</span></span><br><span class="line">		</span><br><span class="line">		<span class="keyword">while</span> j &lt; len(right_half):</span><br><span class="line">			alist[k] = right_half[j]</span><br><span class="line">			j += <span class="number">1</span></span><br><span class="line">			k += <span class="number">1</span></span><br><span class="line">		</span><br><span class="line">	print(<span class="string">f"Merging: <span class="subst">&#123;alist&#125;</span>"</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Merge-sort-Cont’d"><a href="#Merge-sort-Cont’d" class="headerlink" title="Merge sort (Cont’d)"></a>Merge sort (Cont’d)</h3><ul>
+<li>Merge sort has two distinct processes: splitting and merging.</li>
+<li>Splitting a list into halves can be done: $O(\log n)$</li>
+<li>Merging: each item in the list will be processed and placed in the sorted list, this is $O(n)$</li>
+<li>Thus, merge sort is an $O(n\log n)$ algorithm.</li>
+</ul>
+<h2 id="Quick-sort"><a href="#Quick-sort" class="headerlink" title="Quick sort"></a>Quick sort</h2><ul>
+<li>This sort first selects a value (called the <strong>pivot</strong> value, we will use the 1<sup>st</sup> item as the pivot value).</li>
+<li>The role of the pivot value is to assist with <ins>splitting</ins> the list.</li>
+<li>The actual position where the pivot value belongs in the final sorted list (called the split point) will be used to divide the list for subsequent calls to the quick sort.</li>
+<li>The partition process finds the split point and move other items to the appropriate side of the list, either less than or greater than the pivot value.</li>
+<li>Partitioning begins by locating two position markers (leftMark and rightMark) at the beginning and end of the remaining items in the list.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">quick_sort</span><span class="params">(alist)</span>:</span></span><br><span class="line">    quick_sort_helper(alist, <span class="number">0</span>, len(alist)<span class="number">-1</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">quick_sort_helper</span><span class="params">(alist, first, last)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> first &lt; last:</span><br><span class="line">    split_point = partition(alist, first, last)</span><br><span class="line">    quick_sort_helper(alist, first, split_point<span class="number">-1</span>)</span><br><span class="line">    quick_sort_helper(alist, split_point + <span class="number">1</span>, last)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">partition</span><span class="params">(alist, first, last)</span>:</span></span><br><span class="line">    pivot_value = alist[first]</span><br><span class="line"></span><br><span class="line">    left_mark = first + <span class="number">1</span></span><br><span class="line">    right_mark = last</span><br><span class="line">    done = <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">not</span> done:</span><br><span class="line">        <span class="keyword">while</span> left_mark &lt;= right_mark <span class="keyword">and</span> alist[left_mark] &lt;= pivot_value:</span><br><span class="line">            left_mark += <span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> left_mark &lt;= right_mark <span class="keyword">and</span> alist[right_mark] &gt;= pivot_value:</span><br><span class="line">            right_mark -= <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> right_mark &lt; left_mark:</span><br><span class="line">            done = <span class="literal">True</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            alist[left_mark], alist[right_mark] = alist[right_mark], alist[left_mark]</span><br><span class="line"></span><br><span class="line">    alist[first], alist[right_mark] = alist[right_mark], alist[first]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> right_mark</span><br></pre></td></tr></table></figure>
+
+<h3 id="Quick-sort-Cont’d"><a href="#Quick-sort-Cont’d" class="headerlink" title="Quick sort (Cont’d)"></a>Quick sort (Cont’d)</h3><ul>
+<li>For quick sort, if the partition occurs in the middle of the list, there will be $\log n$ divisions.</li>
+<li>In order to find the split point, each of the $n$ items need to be checked against the pivot value.</li>
+<li>Thus, quick sort is an $O(n\log n)$ algorithm.</li>
+</ul>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><ul>
+<li>A sequential search is $O(n)$.</li>
+<li>A binary search of an ordered list is $O(\log n)$.</li>
+<li>Hash tables can provide constant time searching $O(1)$.</li>
+<li>A selection sort, a bubble sort, and an insertion sort are $O(n^{2})$ algorithms.</li>
+<li>A merge sort and a quick sort are $O(n\log n)$ algorithms.</li>
+</ul>
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>]]></content>
+      <categories>
+        <category>Olemiss</category>
+        <category>CSCI 356</category>
+      </categories>
+      <tags>
+        <tag>CSCI 356</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Searching and Sorting [1/2]</title>
+    <url>/2020/04/28/2020-04-28-csci356-lec5-1/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
+<h2 id="Topics"><a href="#Topics" class="headerlink" title="Topics"></a>Topics</h2><ul>
+<li>Searching Algorithms</li>
+<li>Sorting Algorithms</li>
+</ul>
+<h2 id="Searching"><a href="#Searching" class="headerlink" title="Searching"></a>Searching</h2><ul>
+<li><strong>Searching</strong> is the process of finding a particular item in a collection of items.</li>
+<li>A search typically finds out whether the item is present (<ins>membership</ins>).</li>
+<li>In Python, we can use the <code>in</code> operator to check whether an item is in a list of items.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">3</span> <span class="keyword">in</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Sequential-Search"><a href="#Sequential-Search" class="headerlink" title="Sequential Search"></a>Sequential Search</h2><ul>
+<li>When items are stored in an ordered collection such as a list, we say that they have a linear or sequential relationship.</li>
+<li><strong>Sequential search:</strong> start at the 1<sup>st</sup> item, move from item to item, following the sequential order until we either find the item we are looking for (present) or run out of items (not present).</li>
+</ul>
+<a href="https://media.geeksforgeeks.org/wp-content/cdn-uploads/Linear-Search.png" title="Sequential Search" class="gallery-item"><img src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/Linear-Search.png" class="" width="500" title="Sequential Search" alt="Sequential Search"></a>
+
+<h3 id="Sequential-Search-Cont’d"><a href="#Sequential-Search-Cont’d" class="headerlink" title="Sequential Search (Cont’d)"></a>Sequential Search (Cont’d)</h3><p>The search needs the list and the item we are looking for and returns a Boolean value as to whether the item is present in the list.</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sequential_search</span><span class="params">(aList, item)</span>:</span></span><br><span class="line">    found = <span class="literal">False</span></span><br><span class="line">    pos = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> pos &lt; len(aList) <span class="keyword">and</span> <span class="keyword">not</span> found:</span><br><span class="line">        <span class="keyword">if</span> aList[pos] == item:</span><br><span class="line">            found = <span class="literal">True</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            pos += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> found</span><br></pre></td></tr></table></figure>
+
+<h2 id="Binary-Search"><a href="#Binary-Search" class="headerlink" title="Binary Search"></a>Binary Search</h2><ul>
+<li>If the list of items is <strong>ordered</strong>, is there a better way to do the search?</li>
+<li>Instead of searching the list in sequence, a binary search will start by examine the <strong>middle</strong> item.</li>
+<li>If the middle item is <strong>equal to</strong> the item we are searching for, we are done.</li>
+<li>If the item is <strong>less than</strong> the middle element, we only need to search the item in the first half of the list.</li>
+<li>If the item is <strong>greater than</strong> the middle element, we only need to search the item in the second half of the list.</li>
+</ul>
+<h3 id="Binary-Search-Cont’d"><a href="#Binary-Search-Cont’d" class="headerlink" title="Binary Search (Cont’d)"></a>Binary Search (Cont’d)</h3><p>Assume an ordered list of integers as below, we can quickly find 54 in the list using binary search:</p>
+<a href="https://www.geeksforgeeks.org/wp-content/uploads/Binary-Search.png" title="Binary Search" class="gallery-item"><img src="https://www.geeksforgeeks.org/wp-content/uploads/Binary-Search.png" class="" width="500" title="Binary Search" alt="Binary Search"></a>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">binary_search</span><span class="params">(alist, item)</span>:</span></span><br><span class="line">  first = <span class="number">0</span></span><br><span class="line">  last = len(alist) - <span class="number">1</span></span><br><span class="line">  idx = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> first &lt;= last <span class="keyword">and</span> alist[idx] != item:</span><br><span class="line">    mid = (last + first) // <span class="number">2</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> alist[mid] &lt;center item:</span><br><span class="line">      first = mid + <span class="number">1</span></span><br><span class="line">    <span class="keyword">elif</span> alist[mid] == item:</span><br><span class="line">      idx = mid</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">      last = mid - <span class="number">1</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> idx</span><br></pre></td></tr></table></figure>
+
+<h2 id="Analysis-of-Searching-Algorithms"><a href="#Analysis-of-Searching-Algorithms" class="headerlink" title="Analysis of Searching Algorithms"></a>Analysis of Searching Algorithms</h2><p>Big-O efficiency of the searching algorithms:</p>
+<table>
+<thead>
+<tr>
+<th>Searching Algorithms</th>
+<th>Big-O Efficiency</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Sequential Search</td>
+<td>$O(n)$</td>
+</tr>
+<tr>
+<td>Binary Search</td>
+<td>$O(\log n)$</td>
+</tr>
+</tbody></table>
+<h2 id="Hashing"><a href="#Hashing" class="headerlink" title="Hashing"></a>Hashing</h2><ul>
+<li>A <strong>hash table</strong> is used to store a collection of items so that they can be easily found later.</li>
+<li>Each position of the hash table, called a <strong>slot</strong>, can hold an item and is named by an integer value starting at <code>0</code>.</li>
+<li>Initially, the hash table contains no items so every slot is empty (<strong>None</strong>).</li>
+</ul>
+<h3 id="Hashing-Cont’d-1-3"><a href="#Hashing-Cont’d-1-3" class="headerlink" title="Hashing (Cont’d) [1/3]"></a>Hashing (Cont’d) [1/3]</h3><p>Below is a hash table with 11 empty slots:</p>
+<a href="https://runestone.academy/runestone/books/published/pythonds/_images/hashtable.png" title="Hash Table" class="gallery-item"><img src="https://runestone.academy/runestone/books/published/pythonds/_images/hashtable.png" class="" title="Hash Table" alt="Hash Table"></a>
+
+<ul>
+<li><p>The mapping between an item and the slot where that item belongs in the hash table is done by the <strong>hash function</strong>.</p>
+</li>
+<li><p>The hash function will take any item in the collection and return an integer in the range of slot names, between <strong>0</strong> and <strong>m-1</strong> (there are <strong>m</strong> slots in the table).</p>
+</li>
+<li><p>Our first hash function is referred to as the <strong>“remainder method”</strong>.</p>
+</li>
+<li><p>The method takes an item and divides it by the table size, returning the remainder as its hash value: </p>
+</li>
+</ul>
+<p>$$ h(item) = item \bmod 11 $$</p>
+<table>
+<thead>
+<tr>
+<th align="left">Item</th>
+<th align="left">Hash Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">54</td>
+<td align="left">10</td>
+</tr>
+<tr>
+<td align="left">26</td>
+<td align="left">4</td>
+</tr>
+<tr>
+<td align="left">93</td>
+<td align="left">5</td>
+</tr>
+<tr>
+<td align="left">17</td>
+<td align="left">6</td>
+</tr>
+<tr>
+<td align="left">77</td>
+<td align="left">0</td>
+</tr>
+<tr>
+<td align="left">31</td>
+<td align="left">9</td>
+</tr>
+</tbody></table>
+<ul>
+<li>Hash table with six items:</li>
+</ul>
+<a href="https://runestone.academy/runestone/books/published/pythonds/_images/hashtable2.png" title="Hash Table" class="gallery-item"><img src="https://runestone.academy/runestone/books/published/pythonds/_images/hashtable2.png" class="" title="Hash Table" alt="Hash Table"></a>
+
+<ul>
+<li><strong>Load factor</strong> is an indicator of how many keys are mapped to an average bucket on a hashtable.</li>
+<li>In this example, the load factor is $\frac{6}{11}$.</li>
+</ul>
+<center>load factor = #OfItems / tableSize</center>
+
+<h3 id="Hashing-Cont’d-2-3"><a href="#Hashing-Cont’d-2-3" class="headerlink" title="Hashing (Cont’d) [2/3]"></a>Hashing (Cont’d) [2/3]</h3><ul>
+<li>Now when we want to search for an item, we simply use the hash function to compute the slot number for the item, and then check the hash table to see if it is present.</li>
+<li>This searching operation is $O(1)$; if everything is where is should be, we have found a <strong>constant time</strong> search algorithm.</li>
+<li>The problem is: what if two or more items need to be in the same slot? This is referred to as a <strong>collision</strong> (or a clash).</li>
+</ul>
+<h4 id="Perfect-hash-function"><a href="#Perfect-hash-function" class="headerlink" title="Perfect hash function"></a>Perfect hash function</h4><ul>
+<li>A hash function that maps each item into a unique slot is called a <strong>perfect hash function</strong>.</li>
+<li>One solution to the collision problem is to <strong>increase the size</strong> of the hash table so that each possible value in the range can be accommodated (i.e. each item has a unique slot).</li>
+<li>If we have a large number of items, then this solution will require an enormous amount of memory.</li>
+</ul>
+<h3 id="Hashing-Cont’d-3-3"><a href="#Hashing-Cont’d-3-3" class="headerlink" title="Hashing (Cont’d) [3/3]"></a>Hashing (Cont’d) [3/3]</h3><p>Are there other methods to construct hash functions?</p>
+<ul>
+<li><strong>Folding method:</strong> divide the item into equal-size pieces, these pieces are added together to give the resulting hash value.</li>
+</ul>
+<div class="note no-icon">
+            <p>E.g., given a phone number: <strong>662-915-1234</strong>, we would divide them into (66, 29, 15, 12, 34), add them up, we get 156. If the hash table has 11 slots, then <code>156 % 11 = 2</code>, so the phone number hashes to slot 2.</p>
+          </div>
+
+<ul>
+<li><strong>Mid-square method:</strong> first square the item, then extract some portion of the resulting digits.</li>
+</ul>
+<div class="note no-icon">
+            <p>E.g., given a number 44, compute <code>44^2 = 1936</code>. By extracting the middle two digits, <code>93</code>, perform the remainder step, <code>93 % 11 = 5</code>, so the number hashes to slot 5.</p>
+          </div>
+
+<h2 id="Solutions"><a href="#Solutions" class="headerlink" title="Solutions"></a>Solutions</h2><div class="tabs" id="second-hashing_quiz-unique-names"><ul class="nav-tabs"><li class="tab active"><a href="#second-hashing_quiz-unique-names-1">Quiz contents</a></li><li class="tab"><a href="#second-hashing_quiz-unique-names-2">Quiz Solution</a></li></ul><div class="tab-content"><div class="tab-pane active" id="second-hashing_quiz-unique-names-1"><p>The table below shows items under the three methods, assuming our hash table has 11 slots.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Item</th>
+<th align="left">Remainder</th>
+<th align="left">Folding</th>
+<th align="left">Mid-Square</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">54</td>
+<td align="left">10</td>
+<td align="left">9</td>
+<td align="left">3</td>
+</tr>
+<tr>
+<td align="left">26</td>
+<td align="left">4</td>
+<td align="left">8</td>
+<td align="left">7</td>
+</tr>
+<tr>
+<td align="left">93</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">9</td>
+</tr>
+<tr>
+<td align="left">77</td>
+<td align="left">0</td>
+<td align="left">3</td>
+<td align="left">4</td>
+</tr>
+<tr>
+<td align="left">31</td>
+<td align="left">9</td>
+<td align="left">4</td>
+<td align="left">6</td>
+</tr>
+</tbody></table></div><div class="tab-pane" id="second-hashing_quiz-unique-names-2"><p><strong>Item and Remainder:</strong><br>$$54 \bmod 11 = 10$$<br>$$26 \bmod 11 = 4$$<br>$$93 \bmod 11 = 5$$<br>$$…$$<br>$$31 \bmod 11 = 9$$</p>
+<p><strong>Folding Method:</strong><br>$$54 \rightarrow 5 + 4 = 9  \bmod 11 = 9$$<br>$$26 \rightarrow 2 + 6 = 8  \bmod 11 = 8$$<br>$$93 \rightarrow 9 + 3 = 12 \bmod 11 = 1$$<br>$$…$$</p>
+<p><strong>Square Method:</strong></p>
+<p>$$54^{2} = 2,916 \rightarrow 91 \bmod 11 = 3$$<br>$$26^{2} =   676 \rightarrow  7 \bmod 11 = 7$$<br>$$94^{2} = 8,649 \rightarrow 64 \bmod 11 = 9$$<br>$$…$$</p></div></div></div>
+
+<h3 id="Hashing-Cont’d-4-5"><a href="#Hashing-Cont’d-4-5" class="headerlink" title="Hashing (Cont’d) [4/5]"></a>Hashing (Cont’d) [4/5]</h3><ul>
+<li>We can also create hash functions for characterbased items such as strings.</li>
+<li>A string can be thought of as a sequence of ordinal values.</li>
+</ul>
+<div class="note no-icon">
+            <p>E.g. “cat”<br>ord(‘c’) -&gt; 99<br>ord(‘a’) -&gt; 97<br>ord(‘t’) -&gt; 116</p><p>99 + 97 + 116 = 312 % 11 = 4</p>
+          </div>
+
+<h3 id="Hashing-Cont’d-5-5"><a href="#Hashing-Cont’d-5-5" class="headerlink" title="Hashing (Cont’d) [5/5]"></a>Hashing (Cont’d) [5/5]</h3><p>Now write a function called <strong>hashString</strong> that takes a string and a table size, and returns the hash value of the string.</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hash_string</span><span class="params">(string, tableSize)</span>:</span></span><br><span class="line">    s = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> ch <span class="keyword">in</span> string:</span><br><span class="line">        s += ord(ch)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> s % tableSize</span><br></pre></td></tr></table></figure>
+
+<h3 id="Hashing-Cont’d-6-6"><a href="#Hashing-Cont’d-6-6" class="headerlink" title="Hashing (Cont’d) [6/6]"></a>Hashing (Cont’d) [6/6]</h3><ul>
+<li>What about anagrams (words with the same letters)? They will have the same hash value based on the previous function.</li>
+<li>To remedy this, we can use the position of the character as a weighting factor.</li>
+</ul>
+<div class="note no-icon">
+            <table><thead><tr><th align="center">1</th><th align="center">2</th><th align="center">3</th></tr></thead><tbody><tr><td align="center">c</td><td align="center">a</td><td align="center">t</td></tr></tbody></table><p>$$<br>ord(c) \cdot 1 + ord(a) \cdot 2 + ord(t) \cdot 3 = 641 \pmod{11} = 2<br>$$</p><p>-&gt; 99 + 97 + 116 = 312 % 11 = 4</p>
+          </div>
+
+<h3 id="Hashing-Cont’d-7-7"><a href="#Hashing-Cont’d-7-7" class="headerlink" title="Hashing (Cont’d) [7/7]"></a>Hashing (Cont’d) [7/7]</h3><ul>
+<li>There are a number of other methods to construct hash functions for items in a collection.</li>
+<li>The important thing to remember is that the hash function has to be <strong>efficient</strong>.</li>
+<li>If the hash function is too complex, then it becomes more work to compute the slot number than it would be simply do a basic sequential or binary search.</li>
+</ul>
+<h3 id="Hashing-Cont’d-8-8"><a href="#Hashing-Cont’d-8-8" class="headerlink" title="Hashing (Cont’d) [8/8]"></a>Hashing (Cont’d) [8/8]</h3><ul>
+<li>When two items hash to the same slot (collision), we must have a systematic way for placing the 2<sup>nd</sup> item in the hash table. This process is called <strong>collision resolution</strong>.</li>
+<li><strong>Linear probing:</strong> start at the original hash position, move one slot at a time until we find an empty slot.</li>
+</ul>
+<h3 id="Hashing-Cont’d-9-9"><a href="#Hashing-Cont’d-9-9" class="headerlink" title="Hashing (Cont’d) [9/9]"></a>Hashing (Cont’d) [9/9]</h3><ul>
+<li>One problem for linear probing is the tendency of <strong>clustering</strong>: items become clustered in the table.</li>
+<li>If collisions occur at the same hash value, a number of surrounding slots will be filled, this will have an impact on other items that are being added.</li>
+<li>A cluster of items for slot 0 (below pic.)</li>
+<li>This will have an impact on other items that are being inserted, as we saw when we tried to add the item 20 above.</li>
+<li>A cluster of values hashing to 0 had to be skipped to finally find an open position. This cluster is shown below.</li>
+</ul>
+<a href="https://runestone.academy/runestone/books/published/pythonds/_images/clustering.png" title="A Cluster of Items for Slot 0" class="gallery-item"><img src="https://runestone.academy/runestone/books/published/pythonds/_images/clustering.png" class="" title="A Cluster of Items for Slot 0" alt="A Cluster of Items for Slot 0"></a>
+
+<ul>
+<li>One way to deal with clustering is to <ins>extend the linear probing</ins>: instead of checking sequentially, we use a “plus 3” probe (i.e., look at every third slot until we find an empty one). (54, 26, 93, 17, 77, 31, <strong>44, 55, 20</strong>)</li>
+</ul>
+<a href="https://runestone.academy/runestone/books/published/pythonds/_images/hashtable2.png" title="Hash Table with Six Items" class="gallery-item"><img src="https://runestone.academy/runestone/books/published/pythonds/_images/hashtable2.png" class="" title="Hash Table with Six Items" alt="Hash Table with Six Items"></a>
+
+<ul>
+<li>Collision resolution using “plus 3” (below)</li>
+</ul>
+<a href="https://runestone.academy/runestone/books/published/pythonds/_images/linearprobing2.png" title="Collision Resolution Using “Plus 3”" class="gallery-item"><img src="https://runestone.academy/runestone/books/published/pythonds/_images/linearprobing2.png" class="" title="Collision Resolution Using “Plus 3”" alt="Collision Resolution Using “Plus 3”"></a>
+
+<ul>
+<li>This will potentially reduce the clustering that occurs.</li>
+<li>Top image shows the items when collision resolution is done with a “plus 3” probe.</li>
+<li>This means that once a collision occurs, we will look at every third slot until we find one that is empty.</li>
+</ul>
+<h3 id="Hashing-Cont’d-10-10"><a href="#Hashing-Cont’d-10-10" class="headerlink" title="Hashing (Cont’d) [10/10]"></a>Hashing (Cont’d) [10/10]</h3><ul>
+<li>The process of looking for another slot after a collision is generally called <strong>rehashing</strong>.</li>
+<li>With <strong>simple linear probing</strong>, the rehash function is:</li>
+</ul>
+<p>$$newHashValue = rehash(oldHashValue) \text{  where   } rehash(pos)$$<br>$$ = (pos+1) \bmod tableSize$$</p>
+<ul>
+<li>With “plus 3” linear probing, the rehash function is:</li>
+</ul>
+<p>$$<br>rehash(pos) = (pos+3) \bmod tableSize<br>$$</p>
+<h2 id="HashTable-implementation-in-Python"><a href="#HashTable-implementation-in-Python" class="headerlink" title="HashTable implementation in Python"></a>HashTable implementation in Python</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HashTable</span>:</span></span><br><span class="line">      <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, size)</span>:</span></span><br><span class="line">          self.slots = [<span class="literal">None</span>] * size</span><br><span class="line">          self.data = [<span class="literal">None</span>] * size</span><br><span class="line"></span><br><span class="line">      <span class="function"><span class="keyword">def</span> <span class="title">store</span><span class="params">(self, key, data)</span>:</span></span><br><span class="line">          hashValue = self.hashFunction(key, len(self.slots))</span><br><span class="line"></span><br><span class="line">          <span class="keyword">if</span> self.slots[hashValue] == <span class="literal">None</span>:</span><br><span class="line">              self.slots[hashValue] = key</span><br><span class="line">              self.data[hashValue] = data</span><br><span class="line">          <span class="keyword">else</span>:</span><br><span class="line">              nextSlot = self.rehash(hashValue, len(self.slots))</span><br><span class="line"></span><br><span class="line">              <span class="keyword">while</span> self.slots[nextSlot] != <span class="literal">None</span>:</span><br><span class="line">                 nextSlot = self.rehash(nextSlot, len(self.slots))</span><br><span class="line">              </span><br><span class="line">              self.slots[hashValue] = key</span><br><span class="line">              self.data[hashValue] = data</span><br><span class="line"></span><br><span class="line">      <span class="function"><span class="keyword">def</span> <span class="title">hashFunction</span><span class="params">(self, key, size)</span>:</span></span><br><span class="line">          <span class="keyword">return</span> key % size</span><br><span class="line"></span><br><span class="line">      <span class="function"><span class="keyword">def</span> <span class="title">rehash</span><span class="params">(self, oldHash, size)</span>:</span></span><br><span class="line">          <span class="keyword">return</span> (oldHash + <span class="number">1</span>) % size</span><br></pre></td></tr></table></figure>
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>]]></content>
+      <categories>
+        <category>Olemiss</category>
+        <category>CSCI 356</category>
+      </categories>
+      <tags>
+        <tag>CSCI 356</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Trees</title>
+    <url>/2020/04/28/2020-04-28-csci356-lec6/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
+<h2 id="Topics"><a href="#Topics" class="headerlink" title="Topics"></a>Topics</h2><ul>
+<li><a href="./#Examples-of-Trees">Examples of Trees</a></li>
+<li><a href="./#Vocabulary-and-Definitions">Vocabulary and Definitions</a></li>
+<li>Implementation</li>
+<li>Binary Tree Applications</li>
+<li>Priority Queue with Binary Heaps</li>
+<li>Binary Search Trees</li>
+</ul>
+<h2 id="Examples-of-Trees"><a href="#Examples-of-Trees" class="headerlink" title="Examples of Trees"></a>Examples of Trees</h2><p>The difference between a tree in computer science and a tree in nature is that a tree data structure has its root at the top and its leaves on the bottom.</p>
+<h3 id="Properties-of-trees"><a href="#Properties-of-trees" class="headerlink" title="Properties of trees"></a>Properties of trees</h3><ul>
+<li>Trees are <strong>hierarchical</strong>, they are structured in layers with the more general things near the top and the more specific things near the bottom.</li>
+<li>The children of one node are independent of the children of another node.</li>
+<li>Each leaf node is unique.</li>
+</ul>
+<h3 id="Examples-of-Trees-Cont’d"><a href="#Examples-of-Trees-Cont’d" class="headerlink" title="Examples of Trees (Cont’d)"></a>Examples of Trees (Cont’d)</h3><p>Taxonomy of some common animals shown as a tree:</p>
+<a href="https://runestone.academy/runestone/books/published/cppds/_images/biology.png" title="axonomy of Some Common Animals Shown as a Tree" class="gallery-item"><img src="https://runestone.academy/runestone/books/published/cppds/_images/biology.png" class="" width="500" alt="axonomy of Some Common Animals Shown as a Tree"></a>
+
+<p>A small part of the Unix file system hierarchy:</p>
+<a href="https://runestone.academy/runestone/books/published/cppds/_images/directory.png" title="Small Part of the Unix File System Hierarchy" class="gallery-item"><img src="https://runestone.academy/runestone/books/published/cppds/_images/directory.png" class="" alt="Small Part of the Unix File System Hierarchy"></a>
+
+<h2 id="Vocabulary-and-Definitions"><a href="#Vocabulary-and-Definitions" class="headerlink" title="Vocabulary and Definitions"></a>Vocabulary and Definitions</h2><table>
+<thead>
+<tr>
+<th align="left">Vocabulary</th>
+<th align="left">Definitions</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Node</td>
+<td align="left">fundamental part of a tree, it can have a name, which we call the <strong>“key”</strong>.</td>
+</tr>
+<tr>
+<td align="left">Edge</td>
+<td align="left">connects two nodes to show that there is a relationship between them.</td>
+</tr>
+<tr>
+<td align="left">Root</td>
+<td align="left">the only node in the tree that has no incoming edges.</td>
+</tr>
+<tr>
+<td align="left">Path</td>
+<td align="left">an ordered list of nodes that are connected by edges.</td>
+</tr>
+<tr>
+<td align="left">Children</td>
+<td align="left">the set of nodes that have incoming edges from the same node.</td>
+</tr>
+<tr>
+<td align="left">Parent</td>
+<td align="left">a node is the parent of all the nodes it connects to with outgoing edges.</td>
+</tr>
+<tr>
+<td align="left">Sibling</td>
+<td align="left">nodes in the tree that are children of the same parent.</td>
+</tr>
+<tr>
+<td align="left">Subtree</td>
+<td align="left">a set of nodes and edges comprised of a parent and all the descendants of that parent.</td>
+</tr>
+<tr>
+<td align="left">Leaf node</td>
+<td align="left">a node that has no children.</td>
+</tr>
+<tr>
+<td align="left">Level</td>
+<td align="left">the level of a node n is the number of edges on the path from the root node to n. The level of the root node is 0.</td>
+</tr>
+<tr>
+<td align="left">Height</td>
+<td align="left">the maximum level of any node in the tree.</td>
+</tr>
+</tbody></table>
+<h2 id="Definition-of-a-Tree"><a href="#Definition-of-a-Tree" class="headerlink" title="Definition of a Tree"></a>Definition of a Tree</h2><blockquote><p>A tree consists of a set of nodes and a set of edges that connect pairs of nodes.</p>
+</blockquote>
+
+<ul>
+<li>One node of the tree is designated as the root node.</li>
+<li>Every node $n$, except the root node, is connected by an edge from exactly one other node $p$, where $p$ is the parent of $n$.</li>
+<li>A unique path traverses from the root to each node.</li>
+<li>If each node in the tree has a maximum of <strong>two</strong> children, we say that the tree is a <strong>binary tree</strong>.</li>
+</ul>
+<h3 id="Definition-of-a-Tree-Cont’d"><a href="#Definition-of-a-Tree-Cont’d" class="headerlink" title="Definition of a Tree (Cont’d)"></a>Definition of a Tree (Cont’d)</h3><p>A tree consisting of a set of nodes and edges:</p>
+<a href="https://runestone.academy/runestone/books/published/cppds/_images/treedef1.png" title="A Tree Consisting of a Set of Nodes and Edges" class="gallery-item"><img src="https://runestone.academy/runestone/books/published/cppds/_images/treedef1.png" class="" alt="A Tree Consisting of a Set of Nodes and Edges"></a>
+
+<p>&nbsp;</p>
+<blockquote><p>A tree is either empty or consists of a root and zero or more subtrees, each of which is also a tree. This is a <strong>recursive</strong> definition of a tree.</p>
+</blockquote>
+
+<a href="https://runestone.academy/runestone/books/published/cppds/_images/TreeDefRecursive.png" title="A recursive Definition of a tree" class="gallery-item"><img src="https://runestone.academy/runestone/books/published/cppds/_images/TreeDefRecursive.png" class="" alt="A recursive Definition of a tree"></a>
+
+<h2 id="Implementation-of-a-Binary-Tree"><a href="#Implementation-of-a-Binary-Tree" class="headerlink" title="Implementation of a Binary Tree"></a>Implementation of a Binary Tree</h2><table>
+<thead>
+<tr>
+<th align="left">Functions</th>
+<th align="left">Definitions</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>BinaryTree()</code></td>
+<td align="left">creates a new instance of a binary tree.</td>
+</tr>
+<tr>
+<td align="left"><code>getLeftChild()</code></td>
+<td align="left">returns the binary tree corresponding to the left child of the current node.</td>
+</tr>
+<tr>
+<td align="left"><code>getRightChild()</code></td>
+<td align="left">returns the binary tree corresponding to the right child of the current node.</td>
+</tr>
+<tr>
+<td align="left"><code>setRootVal(val)</code></td>
+<td align="left">stores the object in parameter <strong>val</strong> in the current node.</td>
+</tr>
+<tr>
+<td align="left"><code>getRootVal()</code></td>
+<td align="left">returns the object stored in the current node.</td>
+</tr>
+<tr>
+<td align="left"><code>insertLeft(val)</code></td>
+<td align="left">creates a new binary tree and installs it as the left child of the current node.</td>
+</tr>
+<tr>
+<td align="left"><code>insertRight(val)</code></td>
+<td align="left">creates a new binary tree and installs it as the right child of the current node.</td>
+</tr>
+</tbody></table>
+<h3 id="Implementation-Cont’d-1-2"><a href="#Implementation-Cont’d-1-2" class="headerlink" title="Implementation (Cont’d) [1/2]"></a>Implementation (Cont’d) [1/2]</h3><p><strong>List of lists</strong> representation of a tree:</p>
+<ul>
+<li>Store the value of the root node as the 1<sup>st</sup> element of the list;</li>
+<li>The 2<sup>nd</sup> element of the list will itself be a list that represents the left subtree;</li>
+<li>And the 3<sup>rd</sup> element of the list will be another list that represents the right subtree.</li>
+</ul>
+<p>Representing a tree as a list of lists:</p>
+<a href="https://runestone.academy/runestone/books/published/cppds/_images/treerecs.png" title="A Simple Tree Using a Nodes and References Approach" class="gallery-item"><img src="https://runestone.academy/runestone/books/published/cppds/_images/treerecs.png" class="" alt="A Simple Tree Using a Nodes and References Approach"></a>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">myTree = [</span><br><span class="line">    [<span class="string">'a'</span>,  <span class="comment"># root</span></span><br><span class="line"></span><br><span class="line">     [<span class="string">'b'</span>,  <span class="comment"># left subtree</span></span><br><span class="line">      [<span class="string">'d'</span>, [], []],</span><br><span class="line">      [<span class="string">'e'</span>, [], []]</span><br><span class="line">     ],</span><br><span class="line">     </span><br><span class="line">     [<span class="string">'c'</span>,  <span class="comment"># right subtree</span></span><br><span class="line">      [<span class="string">'f'</span>, [], []],</span><br><span class="line">      []</span><br><span class="line">     ]</span><br><span class="line"></span><br><span class="line">    ]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&gt;&gt; myTree = [[<span class="string">'a'</span>, [<span class="string">'b'</span>, [<span class="string">'d'</span>, [], []],[<span class="string">'e'</span>, [], []]],\</span><br><span class="line">             [<span class="string">'c'</span>, [<span class="string">'f'</span>, [], []],[]] ]]</span><br><span class="line"></span><br><span class="line">&gt;&gt; myTree[<span class="number">0</span>] <span class="comment"># Print the loop</span></span><br><span class="line"><span class="string">'a'</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; myTree[<span class="number">1</span>] <span class="comment"># Print the left subtree</span></span><br><span class="line">[<span class="string">'b'</span>, [<span class="string">'d'</span>, [], []],[<span class="string">'e'</span>, [], []]]</span><br><span class="line"></span><br><span class="line">&gt;&gt; myTree[<span class="number">2</span>] <span class="comment"># Print the right subtree</span></span><br><span class="line">[<span class="string">'c'</span>, [<span class="string">'f'</span>, [], []],[] ]]</span><br></pre></td></tr></table></figure>
+
+<hr>
+<ul>
+<li>To create Binary Tree, return the root and empty left and right sub tree.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="string">'''Create a binary tree'''</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">BinaryTree</span><span class="params">(r)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> [r, [], []]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>To <strong>add a left subtree</strong> to the root of a tree, we need to insert a new list onto the 2<sup>nd</sup> position of the root list:</li>
+<li>If the list already has something in the 2<sup>nd</sup> position, we need to push it down the tree as the left child of the list we are adding.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">insertLeft</span><span class="params">(root, newBrench)</span>:</span></span><br><span class="line">    t = root.pop(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> len(t) &gt; <span class="number">1</span>:</span><br><span class="line">        root.insert(<span class="number">1</span>, [newBrench, t, []])</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        root.insert(<span class="number">1</span>, [newBrench, [], []])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> root</span><br></pre></td></tr></table></figure>
+
+<hr>
+<ul>
+<li>To <strong>add a right subtree</strong> to the root of a tree, we need to insert a new list onto the 3rd position of the root list:</li>
+<li>If the list already has something in the 3<sup>rd</sup> position, we need to push it down the tree as the right child of the list we are adding.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">insertLeft</span><span class="params">(root, newBrench)</span>:</span></span><br><span class="line">    t = root.pop(<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> len(t) &gt; <span class="number">1</span>:</span><br><span class="line">        root.insert(<span class="number">2</span>, [newBrench, [], t])</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        root.insert(<span class="number">2</span>, [newBrench, [], []])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> root</span><br></pre></td></tr></table></figure>
+
+<hr>
+<ul>
+<li>Access functions for parts of the tree:</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getRootVal</span><span class="params">(root)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> root[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">setRootVal</span><span class="params">(root, newVal)</span>:</span></span><br><span class="line">    root[<span class="number">0</span>] = newVal</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getLeftVal</span><span class="params">(root)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> root[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getRightVal</span><span class="params">(root)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> root[<span class="number">2</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="Implementation-Cont’d-2-2"><a href="#Implementation-Cont’d-2-2" class="headerlink" title="Implementation (Cont’d) [2/2]"></a>Implementation (Cont’d) [2/2]</h3><p><strong>Nodes and references</strong> representation of a tree:</p>
+<ul>
+<li>Define a class that has attributes for the root value, as well as the left and right subtrees.</li>
+<li>A simple tree using nodes and references representation:</li>
+</ul>
+<hr>
+<ul>
+<li>A simple class definition:<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BinaryTree</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, rootObj)</span>:</span></span><br><span class="line">        self.key = rootObj</span><br><span class="line">        self.left = <span class="literal">None</span></span><br><span class="line">        self.right = <span class="literal">None</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<hr>
+<ul>
+<li>To <strong>insert a left child</strong> and <strong>a right child</strong>, we push the existing child down one level in the tree:</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">insertLeft</span><span class="params">(self, newNode)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> self.left == <span class="literal">None</span>:</span><br><span class="line">        self.left = BinaryTree(newNode)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        t = BinaryTree(newNode)</span><br><span class="line">        t.left = self.left</span><br><span class="line">        self.left = t</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">insertRight</span><span class="params">(self, newNode)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> self.right == <span class="literal">None</span>:</span><br><span class="line">        self.right = BinaryTree(newNode)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        t = BinaryTree(newNode)</span><br><span class="line">        t.right = self.right</span><br><span class="line">        self.right = t</span><br></pre></td></tr></table></figure>
+
+<hr>
+<ul>
+<li>Access methods for the BinaryTree class:</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getRootVal</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> self.key</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">setRootVal</span><span class="params">(self, obj)</span>:</span></span><br><span class="line">    self.key = obj</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getLeftChild</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> self.left</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getRightChild</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> self.right</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="Binary-Tree-in-Python"><a href="#Binary-Tree-in-Python" class="headerlink" title="Binary Tree in Python"></a>Binary Tree in Python</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BinaryTree</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,rootObj)</span>:</span> <span class="comment"># initializer function expects to get some kind of object to store in the root</span></span><br><span class="line">        self.key = rootObj</span><br><span class="line">        self.leftChild = <span class="literal">None</span>  <span class="comment"># reference other instances of the binary tree the BinaryTree class</span></span><br><span class="line">        self.rightChild = <span class="literal">None</span> <span class="comment"># reference other instances of the binary tree the BinaryTree class</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">insertLeft</span><span class="params">(self,newNode)</span>:</span> <span class="comment"># Handles insertion if there is no left child simply adds a node to the tree.</span></span><br><span class="line">        <span class="keyword">if</span> self.leftChild == <span class="literal">None</span>:</span><br><span class="line">            self.leftChild = BinaryTree(newNode)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            t = BinaryTree(newNode) <span class="comment"># handles insertion if there is a left child pushes the existing child down one level in the tree.</span></span><br><span class="line">            t.leftChild = self.leftChild</span><br><span class="line">            self.leftChild = t</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">insertRight</span><span class="params">(self,newNode)</span>:</span> <span class="comment"># Handles insertion if there is no right child simply adds a node to the tree</span></span><br><span class="line">        <span class="keyword">if</span> self.rightChild == <span class="literal">None</span>:</span><br><span class="line">            self.rightChild = BinaryTree(newNode)</span><br><span class="line">        <span class="keyword">else</span>: <span class="comment"># handles insertion if there is a right child pushes the existing child down one level in the tree.</span></span><br><span class="line">            t = BinaryTree(newNode)</span><br><span class="line">            t.rightChild = self.rightChild</span><br><span class="line">            self.rightChild = t</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getRightChild</span><span class="params">(self)</span>:</span> <span class="comment"># accessor method</span></span><br><span class="line">        <span class="keyword">return</span> self.rightChild</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getLeftChild</span><span class="params">(self)</span>:</span> <span class="comment"># accessor method</span></span><br><span class="line">        <span class="keyword">return</span> self.leftChild</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">setRootVal</span><span class="params">(self,obj)</span>:</span> <span class="comment"># accessor method</span></span><br><span class="line">        self.key = obj</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getRootVal</span><span class="params">(self)</span>:</span> <span class="comment"># accessor method</span></span><br><span class="line">        <span class="keyword">return</span> self.key</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    r = BinaryTree(<span class="string">'a'</span>)</span><br><span class="line">    print(r.getRootVal())</span><br><span class="line">    print(r.getLeftChild())</span><br><span class="line">    r.insertLeft(<span class="string">'b'</span>)</span><br><span class="line">    print(r.getLeftChild())</span><br><span class="line">    print(r.getLeftChild().getRootVal())</span><br><span class="line">    r.insertRight(<span class="string">'c'</span>)</span><br><span class="line">    print(r.getRightChild())</span><br><span class="line">    print(r.getRightChild().getRootVal())</span><br><span class="line">    r.getRightChild().setRootVal(<span class="string">'d'</span>)</span><br><span class="line">    print(r.getRightChild().getRootVal())</span><br><span class="line"></span><br><span class="line">main()</span><br></pre></td></tr></table></figure>
+
+<h2 id="Binary-Tree-Applications"><a href="#Binary-Tree-Applications" class="headerlink" title="Binary Tree Applications"></a>Binary Tree Applications</h2><ul>
+<li><strong>Parse trees</strong> can be used to represent real-world constructions like sentences or mathematical expressions.</li>
+<li>A parse tree for a simple sentence:</li>
+</ul>
+<a href="https://runestone.academy/runestone/books/published/cppds/_images/nlParse.png" title="A Parse Tree for a Simple Sentence" class="gallery-item"><img src="https://runestone.academy/runestone/books/published/cppds/_images/nlParse.png" class="" alt="A Parse Tree for a Simple Sentence"></a>
+
+<h3 id="Applications-Cont’d-1-2"><a href="#Applications-Cont’d-1-2" class="headerlink" title="Applications (Cont’d) [1/2]"></a>Applications (Cont’d) [1/2]</h3><ul>
+<li>How to build a parse tree from a fully parenthesized mathematical expression and how to evaluate the expression?</li>
+<li>Parse tree for $((7 + 3) * (5 – 2))$:</li>
+</ul>
+<a href="https://runestone.academy/runestone/books/published/cppds/_images/meParse.png" title="Parse Tree for ((7+3)∗(5−2))" class="gallery-item"><img src="https://runestone.academy/runestone/books/published/cppds/_images/meParse.png" class="" alt="Parse Tree for ((7+3)∗(5−2))"></a>
+
+<ul>
+<li>Applying this replacement procedure gives us the simplified tree shown as below</li>
+</ul>
+<a href="https://runestone.academy/runestone/books/published/cppds/_images/meSimple.png" title="A Simplified Parse Tree for ((7+3)∗(5−2))" class="gallery-item"><img src="https://runestone.academy/runestone/books/published/cppds/_images/meSimple.png" class="" alt="A Simplified Parse Tree for ((7+3)∗(5−2))"></a>
+
+<h3 id="Applications-Cont’d-2-2"><a href="#Applications-Cont’d-2-2" class="headerlink" title="Applications (Cont’d) [2/2]"></a>Applications (Cont’d) [2/2]</h3><ul>
+<li>There are four different kinds of tokens to consider:<ul>
+<li>left parentheses</li>
+<li>right parentheses</li>
+<li>operators</li>
+<li>operands</li>
+</ul>
+</li>
+<li>Operands will be the leaf nodes and children of their operators.</li>
+<li>Every operator will have two children.</li>
+</ul>
+<hr>
+<p>We define four rules as follows:</p>
+<ol>
+<li>If the current token is a <code>&#39;(&#39;</code>, add a new node as the left child of the current node, and descend to the left child.</li>
+<li>If the current token is in the vector <code>[&#39;+&#39;,&#39;-&#39;,&#39;/&#39;,&#39;*&#39;]</code>, set the root value of the current node to the operator represented by the current token. Add a new node as the right child of the current node and descend to the right child.</li>
+<li>If the current token is a number, set the root value of the current node to the number and return to the parent.</li>
+<li>If the current token is a <code>&#39;)&#39;</code>, go to the parent of the current node.</li>
+</ol>
+<hr>
+<p>Use the expression <code>(3 + (4 * 5))</code> as an example,<br>below is a trace for parse tree construction:</p>
+<div class="note no-icon">
+            <p>Follow the link <a href="https://runestone.academy/runestone/books/published/cppds/Trees/ParseTree.html" target="_blank" rel="noopener">here</a></p>
+          </div>
+
+<ol>
+<li>Create an empty tree.</li>
+<li>Read <code>&#39;(&#39;</code> as the first token. By rule 1, create a new node as the left child of the root. Make the current node this new child.</li>
+<li>Read <code>&#39;3&#39;</code> as the next token. By rule 3, set the root value of the current node to 3 and go back up the tree to the parent.</li>
+<li>Read <code>&#39;+&#39;</code> as the next token. By rule 2, set the root value of the current node to + and add a new node as the right child. The new right child becomes the current node.</li>
+<li>Read <code>&#39;(&#39;</code> as the next token. By rule 1, create a new node as the left child of the current node. The new left child becomes the current node.</li>
+<li>Read <code>&#39;4&#39;</code> as the next token. By rule 3, set the value of the current node to 4. Make the parent of 4 the current node.</li>
+<li>Read <code>&#39;*&#39;</code> as the next token. By rule 2, set the root value of the current node to * and create a new right child. The new right child becomes the current node.</li>
+<li>Read <code>&#39;5&#39;</code> as the next token. By rule 3, set the root value of the current node to 5. Make the parent of 5 the current node.</li>
+<li>Read <code>&#39;)&#39;</code> as the next token. By rule 4 we make the parent of <code>&#39;*&#39;</code> the current node.</li>
+<li>Read <code>&#39;)&#39;</code> as the next token. By rule 4 we make the parent of + the current node. At this point there is no parent for + so we are done.</li>
+</ol>
+<h2 id="Tree-Traversals"><a href="#Tree-Traversals" class="headerlink" title="Tree Traversals"></a>Tree Traversals</h2><ul>
+<li><strong>Tree Traversals:</strong> visiting all the nodes of a tree</li>
+<li>There are three commonly used patterns for a tree traversal.</li>
+<li>The difference between these patterns is the <strong>order</strong> in which each node is visited.</li>
+<li>Three traversals:<ul>
+<li>Preorder</li>
+<li>Inorder</li>
+<li>Postorder</li>
+</ul>
+</li>
+</ul>
+<h3 id="Preorder-ROOT-L-R"><a href="#Preorder-ROOT-L-R" class="headerlink" title="Preorder (ROOT-L-R)"></a>Preorder (ROOT-L-R)</h3><ul>
+<li>In this traversal, we visit the <strong>root</strong> node first, then recursively do a preorder traversal of the <strong>left</strong> subtree, followed by a recursive preorder traversal of the right subtree.</li>
+<li>Below is the code to implement preorder traversal:</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">preorder</span><span class="params">(tree)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> tree:</span><br><span class="line">        print(tree.getRootVal())</span><br><span class="line">        preorder(tree.getLeftChild())</span><br><span class="line">        preorder(tree.getRightChild())</span><br></pre></td></tr></table></figure>
+
+<h3 id="Inorder-L-ROOT-R"><a href="#Inorder-L-ROOT-R" class="headerlink" title="Inorder (L-ROOT-R)"></a>Inorder (L-ROOT-R)</h3><ul>
+<li>In this traversal, we recursively do an inorder traversal on the <strong>left subtree</strong>, visit the <strong>root</strong> node, and finally do a recursive inorder traversal of the <strong>right subtree</strong>.</li>
+</ul>
+<h3 id="Postorder-L-R-ROOT"><a href="#Postorder-L-R-ROOT" class="headerlink" title="Postorder (L-R-ROOT)"></a>Postorder (L-R-ROOT)</h3><ul>
+<li>In this traversal, we recursively do a postorder traversal on the <strong>left subtree</strong> and the <strong>right subtree</strong> followed by a visit to the <strong>root</strong> node.</li>
+</ul>
+<hr>
+<p>Below is the code to implement inorder and postorder traversals:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">inorder</span><span class="params">(tree)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> tree:</span><br><span class="line">        inorder(tree.getLeftChild())</span><br><span class="line">        print(tree.getRootVal())</span><br><span class="line">        inorder(tree.getRightChild())</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">postorder</span><span class="params">(tree)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> tree:</span><br><span class="line">        postorder(tree.getLeftChild())</span><br><span class="line">        postorder(tree.getRightChild())</span><br><span class="line">        print(tree.getRootVal())</span><br></pre></td></tr></table></figure>
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>]]></content>
+      <categories>
+        <category>Olemiss</category>
+        <category>CSCI 356</category>
+      </categories>
+      <tags>
+        <tag>CSCI 356</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>File I/O</title>
+    <url>/2020/04/19/2020-04-19-csci259-lec5-3/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
+<h2 id="Using-Files-for-Data-Storage"><a href="#Using-Files-for-Data-Storage" class="headerlink" title="Using Files for Data Storage"></a>Using Files for Data Storage</h2><ul>
+<li>Can use files instead of keyboard, monitor, screen for program input, output</li>
+<li>3 Steps:<ul>
+<li>Open the file</li>
+<li>Use the file (read, write, both)</li>
+<li>Close the file</li>
+</ul>
+</li>
+</ul>
+<h2 id="File-What-is-Needed"><a href="#File-What-is-Needed" class="headerlink" title="File: What is Needed"></a>File: What is Needed</h2><ul>
+<li>Use <code>fstream</code> header file for file access</li>
+<li>File stream types:<ul>
+<li><code>ifstream</code> for input from a file</li>
+<li><code>ofstream</code> for output from a file</li>
+</ul>
+</li>
+<li>Define file stream objects:<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">ifstream infile;</span><br><span class="line">ofstream outfile;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="What-a-Stream-Is"><a href="#What-a-Stream-Is" class="headerlink" title="What a Stream Is"></a>What a Stream Is</h3><p>The iostream library is an object-oriented library that provides input and output functionality using streams.</p>
+<a href="http://www.cplusplus.com/img/iostream.gif" title="iostream" class="gallery-item"><img src="http://www.cplusplus.com/img/iostream.gif" class="" width="705" height="203" title="iostream" alt="iostream"></a>
+
+<blockquote><p>A stream is an abstraction that represents a device on which input and ouput operations are performed. A stream can basically be represented as a source or destination of characters of indefinite length.</p>
+<footer><strong>@cplusplus.com - Input/Output</strong><cite><a href="http://www.cplusplus.com/reference/iolibrary/" target="_blank" rel="noopener">www.cplusplus.com/reference/iolibrary</a></cite></footer></blockquote>
+
+<h2 id="Opening-Files"><a href="#Opening-Files" class="headerlink" title="Opening Files"></a>Opening Files</h2><ul>
+<li>Create a link between file name (outside the program) and file stream object (inside the program)</li>
+<li>Use the <code>open</code> function:<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">infile.open(<span class="string">"Test.txt"</span>); <span class="comment">// must exist for open to work.</span></span><br><span class="line">outfile.open(<span class="string">"Results.txt"</span>);</span><br></pre></td></tr></table></figure></li>
+<li>Filename may include drive, path info.</li>
+<li>Input file must exist for open to work</li>
+<li>Output file will be created if necessary; existing file will be erased first.</li>
+</ul>
+<h3 id="Testing-for-File-Open-Errors"><a href="#Testing-for-File-Open-Errors" class="headerlink" title="Testing for File Open Errors"></a>Testing for File Open Errors</h3><ul>
+<li><strong>strerror</strong> Defined in header &lt;cstring&gt;.<ul>
+<li>Returns a pointer to the textual description of the system error code errnum, identical to the description that would be printed by <code>std::perror()</code>.</li>
+</ul>
+</li>
+<li><strong>errno</strong> is a preprocessor macro used for error indication.</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cerrno&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="built_in">std</span>::ifstream infile;</span><br><span class="line">  infile.open(<span class="string">"Test.txt"</span>);  <span class="comment">// must exist for open to work.</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// Can also use the fail function</span></span><br><span class="line">  <span class="keyword">if</span> (infile.fail()) &#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cerr</span> &lt;&lt; <span class="string">"Error: "</span> &lt;&lt; <span class="built_in">std</span>::strerror(errno);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//Program Output:</span></span><br><span class="line"><span class="comment">// Error: No such file or directory</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Using-Files"><a href="#Using-Files" class="headerlink" title="Using Files"></a>Using Files</h2><ul>
+<li><p>Can use output file object and &lt;&lt; to send data to a file:</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">outfile &lt;&lt; <span class="string">"Inventory report"</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Can use input file object and &gt;&gt; to copy data from file to variables:</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">infile &gt;&gt; partNum;</span><br><span class="line">infile &gt;&gt; qtyInStock &gt;&gt; qtyOnOrder;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="Closing-Files"><a href="#Closing-Files" class="headerlink" title="Closing Files"></a>Closing Files</h2><p>Use the <code>close</code> function:</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">infile.close();</span><br><span class="line">outfile.close();</span><br></pre></td></tr></table></figure>
+
+<p>Don’t wait for operating system to close files at program end:</p>
+<ul>
+<li>may be limit on number of open files</li>
+<li>may be buffered output data waiting to send to file</li>
+</ul>
+<h2 id="Letting-the-User-Specify-a-FileName"><a href="#Letting-the-User-Specify-a-FileName" class="headerlink" title="Letting the User Specify a FileName"></a>Letting the User Specify a FileName</h2><ul>
+<li>In many cases, you will want the user to specify the name of a file for the program to open.</li>
+<li>You can pass a <code>string</code> object as an argument to a file stream object’s <code>open</code> function.</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">std</span>::ifstream inputFile;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">string</span> filename;</span><br><span class="line"><span class="keyword">int</span> number;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Get the filename from the user</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Enter the filename: "</span>;</span><br><span class="line"><span class="built_in">std</span>::getline(<span class="built_in">std</span>::<span class="built_in">cin</span>, filename);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Open the file</span></span><br><span class="line">inputFile.open(filename);</span><br><span class="line"></span><br><span class="line"><span class="comment">//If the file successfully opened, process it.</span></span><br><span class="line"><span class="keyword">if</span> (inputFile) &#123;</span><br><span class="line">    <span class="comment">// Read the numbers from the file and display.</span></span><br><span class="line">    <span class="keyword">while</span> (inputFile &gt;&gt; number) &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; number &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//Close the file.</span></span><br><span class="line">    inputFile.close();</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">//Display an error message.</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Error opening the file\n"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Using-Loops-to-Detect-End-of-File"><a href="#Using-Loops-to-Detect-End-of-File" class="headerlink" title="Using Loops to Detect End of File"></a>Using Loops to Detect End of File</h2><ul>
+<li>The stream extraction operator &gt;&gt; returns true when a value was successfully read, false otherwise</li>
+<li>Can be tested in a while loop to continue execution as long as values are read from the file:</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">while</span> (inputFile &gt;&gt; number)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">std</span>::ifstream inputFile;</span><br><span class="line"><span class="keyword">int</span> number;</span><br><span class="line"></span><br><span class="line">inputFile.open(“ListOfNumbers.txt”); <span class="comment">//open the file</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (inputFile &gt;&gt; number) &#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; number &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// read numbers from file</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Or we can replace,</span></span><br><span class="line"><span class="comment">while (inputFile.peek() != EOF) &#123;</span></span><br><span class="line"><span class="comment">    inputFile &gt;&gt; number;</span></span><br><span class="line"><span class="comment">    cout &lt;&lt; number &lt;&lt; endl; // read numbers from file</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line">inputFile.close(); <span class="comment">// close the file</span></span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Programming-Exercise"><a href="#Programming-Exercise" class="headerlink" title="Programming Exercise"></a>Programming Exercise</h2><div class="tabs" id="third-ex1-unique_names"><ul class="nav-tabs"><li class="tab active"><a href="#third-ex1-unique_names-1">Explain</a></li><li class="tab"><a href="#third-ex1-unique_names-2">Code</a></li><li class="tab"><a href="#third-ex1-unique_names-3">Program Output</a></li></ul><div class="tab-content"><div class="tab-pane active" id="third-ex1-unique_names-1"><p>Add line numbers to an existing text file.</p></div><div class="tab-pane" id="third-ex1-unique_names-2"><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="built_in">std</span>::<span class="function">ifstream <span class="title">infile</span><span class="params">(<span class="string">"Test.txt"</span>)</span></span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="function">ofstream <span class="title">outfile</span><span class="params">(<span class="string">"Results.txt"</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">string</span> lineContent;</span><br><span class="line">  <span class="keyword">int</span> lineNumber = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> (<span class="built_in">std</span>::getline(infile, lineContent)) &#123;</span><br><span class="line">    outfile &lt;&lt; (lineNumber++) &lt;&lt; '. ' &lt;&lt; lineContent &lt;&lt; '\n';</span><br><span class="line">  &#125;</span><br><span class="line">  outfile.close();</span><br><span class="line">  infile.close();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="third-ex1-unique_names-3"><p>Test.txt</p>
+<blockquote><p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.<br>Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.<br>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.<br>It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+</blockquote>
+
+<p>Result.txt</p>
+<blockquote><ol>
+<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>
+<li>Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</li>
+<li>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </li>
+<li>It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</li>
+</ol>
+</blockquote></div></div></div>
+
+<div class="tabs" id="third-ex2-unique_names"><ul class="nav-tabs"><li class="tab active"><a href="#third-ex2-unique_names-1">Explain</a></li><li class="tab"><a href="#third-ex2-unique_names-2">Code</a></li><li class="tab"><a href="#third-ex2-unique_names-3">Program Output</a></li></ul><div class="tab-content"><div class="tab-pane active" id="third-ex2-unique_names-1"><p>Write the program get filename from user and store the contents and display them.</p>
+<ul>
+<li>Get only filenames (not include <code>.txt</code> format.)</li>
+<li>If file content is integer it should be stored the integer type variable</li>
+<li>Character type content should be stored limited size array.</li>
+</ul></div><div class="tab-pane" id="third-ex2-unique_names-2"><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cerrno&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">int</span> STR_SIZE = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">string</span> filename;</span><br><span class="line">  <span class="built_in">std</span>::ifstream infile;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">int</span> partNum;</span><br><span class="line">  <span class="keyword">char</span> partCh[STR_SIZE];</span><br><span class="line"></span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Enter the filename: "</span>;</span><br><span class="line">  <span class="built_in">std</span>::getline(<span class="built_in">std</span>::<span class="built_in">cin</span>, filename);</span><br><span class="line">  </span><br><span class="line">  filename += <span class="string">".txt"</span>;</span><br><span class="line">  infile.open(filename);</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// Check if the file is exist or not.</span></span><br><span class="line">  <span class="keyword">if</span> (infile.fail()) &#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cerr</span> &lt;&lt; <span class="string">"Error: "</span> &lt;&lt; <span class="built_in">std</span>::strerror(errno);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    infile &gt;&gt; partNum;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"partNum: "</span> &lt;&lt; partNum &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (infile &gt;&gt; partCh[i] &amp;&amp; i &lt; STR_SIZE) &#123;</span><br><span class="line">      <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Current Step: "</span> &lt;&lt; partCh[i++] &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    partCh[i] = <span class="string">'\0'</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"partCh: "</span> &lt;&lt; partCh &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    infile.close();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="third-ex2-unique_names-3"><p>Enter the filename: Test<br>partNum: 100<br>Current Step: a<br>Current Step: b<br>Current Step: c<br>Current Step: d<br>Current Step: e<br>Current Step: f<br>Current Step: g<br>Current Step: h<br>Current Step: i<br>Current Step: j<br>partCh: abcdefghij</p></div></div></div>
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>]]></content>
+      <categories>
+        <category>Olemiss</category>
+        <category>CSCI 259</category>
+      </categories>
+      <tags>
+        <tag>CSCI 259</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Single-Dimensional Arrays</title>
     <url>/2020/04/15/2020-04-15-csci259-lec7/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
@@ -1361,9 +2219,7 @@ merge newbranch
 <hr>
 <h4 id="Twitter"><a href="#Twitter" class="headerlink" title="Twitter"></a>Twitter</h4><figure class="highlight plain"><figcaption><span>Hexo tag</span></figcaption><table><tr><td class="code"><pre><span class="line">&#123;% oembed https:&#x2F;&#x2F;twitter.com&#x2F;hinastory999&#x2F;status&#x2F;1089514744174632960 %&#125;</span><br></pre></td></tr></table></figure>
 
-<div class="oembed-outer oembed-twitter"><div class="oembed-inner"><blockquote class="twitter-tweet"><p lang="ja" dir="ltr">Kubernetes Meetup Tokyo　#15 - KubeCon 2018 Recap に初参加 - cats cats cats <a href="https://t.co/O3ScDbSriz" target="_blank" rel="noopener">https://t.co/O3ScDbSriz</a></p>&mdash; hinastory (@hinastory999) <a href="https://twitter.com/hinastory999/status/1089514744174632960?ref_src=twsrc%5Etfw" target="_blank" rel="noopener">January 27, 2019</a></blockquote>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-</div></div>
+<div class="oembed-error" style="color: red;"><span>failed getting oembed item.(url=https://twitter.com/hinastory999/status/1089514744174632960)</span></div>
 
 <hr>
 <h4 id="Speaker-Deck"><a href="#Speaker-Deck" class="headerlink" title="Speaker Deck"></a>Speaker Deck</h4><figure class="highlight plain"><figcaption><span>Hexo tag</span></figcaption><table><tr><td class="code"><pre><span class="line">&#123;% oembed https:&#x2F;&#x2F;speakerdeck.com&#x2F;ladicle&#x2F;recap-kubecon-plus-cloud-nativecon-north-america-2018-overview %&#125;</span><br></pre></td></tr></table></figure>
@@ -1405,6 +2261,161 @@ merge newbranch
       </categories>
       <tags>
         <tag>TAG-PLUGINS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Distributions</title>
+    <url>/2020/02/19/2020-02-20-csci343-lec6/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
+<h2 id="확률-분포-함수"><a href="#확률-분포-함수" class="headerlink" title="확률 분포 함수"></a>확률 분포 함수</h2><p>확률 분포 함수는 확률 변수의 분포 즉, 확률 분포를 수학적으로 정의하기 위한 수식이다.</p>
+<p>확률 밀도 함수 (Probability Density Function, PDF)는 확률 변수의 분포를 나타내는 함수로, 확률 밀도 함수 $f(x)$와 구간 $[a,b]$에 대해서 확률 변수 $X$가 구간에 포함될 확률 $(a \leq X \leq b)$는 아래와 같은 공식이 된다.<br>&nbsp;<br>$$ \int _{a}^{b}f(x)dx $$<br>&nbsp;<br>확률 밀도 함수 $f(x)$는 다음의 두 조건을 만족해야 한다.</p>
+<ol>
+<li>모든 실수값 $X$에 대해 $f(x) \geq 0$</li>
+<li>$\int _{-\infty}^{\infty}f(x)dx = 1$</li>
+</ol>
+<p>확률 밀도 함수와 누적 분포 함수에는 다음과 같은 수식이 성립한다.</p>
+<blockquote>
+<p>$$F(x) = \int _{-\infty}^{x}f(x)dx$$<br>$$f(x) = \frac{d}{dx}F(x)$$</p>
+</blockquote>
+<hr>
+<h2 id="중심-극한-정리"><a href="#중심-극한-정리" class="headerlink" title="중심 극한 정리"></a>중심 극한 정리</h2><p>주어진 간격 내에 어떤 값을 중심으로 임의의 변동을 가지는 임의의 변수는 표본 수가 증가함에 따라 대략 정상적으로 분포될 것이라는 정리이다.</p>
+<p>정규 분포가 중요한 이유 중 하나는 중심극한정리 때문이다. 중심 극한 정리는 동일한 확률분포를 가진 독립 확률 변수 n개의 평균의 분포는 n이 적당히 크다면 정규분포에 가까워진다는 정리이다</p>
+<div class="note no-icon">
+            <p>이때, 정규 분포(혹은 가우스 분포)란 우리 주변에서 일반적으로 발견되는 좌우 대칭의 종 모양으로 생긴 분포를 말한다. 정규분포는 평균값에 가장 많은 데이터가 분포되어 있고 평균과 떨어질수록 데이터에 적게 분포하는 특징을 가지고 있다.</p>
+          </div>
+
+<p><a href="https://upload.wikimedia.org/wikipedia/commons/c/cd/Clt_in_action.gif" title="wiki" class="gallery-item"><img src="https://upload.wikimedia.org/wikipedia/commons/c/cd/Clt_in_action.gif" alt="wiki"></a></p>
+<p>매우 불규칙한 분포도 충분히 많은 수를 더하면 중심극한정리에 따라 결국 정규분포로 수렴한다.<br>&nbsp;</p>
+<h2 id="누적-분포-함수"><a href="#누적-분포-함수" class="headerlink" title="누적 분포 함수"></a>누적 분포 함수</h2><p>누적 분포 함수(cumulative distribution function, cdf)는 주어진 확률 변수가 특정 값보다 작거나 같은 확률을 나타내는 함수이다. 즉, 무작위 값이 정규 분포 모집단 내에서 주어진 값보다 작거나 같을 확률을 제공한다.</p>
+<p>확률 변수  X 에 대한 누적 확률 분포  F(x) 의 수학적 정의는 다음과 같다</p>
+<p>$$<br>F(x) = P({X \lt x}) = P(X \lt x)<br>$$<br>&nbsp;<br>몇가지 누적 확률 분포 표시의 예를 들면 다음과 같다.</p>
+<ul>
+<li>$F(−1)$: 확률 변수가 $−\infty$ 이상 -1 미만인 구간 내에 존재할 확률 즉, $P({-\infty \le X \lt −1})$</li>
+<li>$F(0)$: 확률 변수가 $−\infty$ 이상 0 미만인 구간 내에 존재할 확률 즉,  $P({-\infty \le X \lt 0})$</li>
+<li>$F(1)$: 확률 변수가 $−\infty$ 이상 1 미만인 구간 내에 존재할 확률 즉,  $P({-\infty \le X \lt 1})$<br>…</li>
+<li>$F(10)$: 확률 변수가 $−\infty$ 이상 10 미만인 구간 내에 존재할 확률 즉,  $P({-\infty \le X \lt 10})$<br>…</li>
+</ul>
+<p>시계 바늘 확률 문제의 경우를 예로 들어보자. 이 경우에는 각도가 0도부터 360까지이지만 음의 무한대를 시작점으로 해도 상관없다.</p>
+<a href="https://datascienceschool.net/upfiles/84a2a4193ef545d89e7c4417262942ea.png" class="gallery-item"><img src="https://datascienceschool.net/upfiles/84a2a4193ef545d89e7c4417262942ea.png" class="Example" title="Example 200 200"></a>
+
+<p>$F(0) = P({-\infty^{\circ} \le \theta \lt 0^{\circ} }) = 0$<br>$F(10) = P({-\infty^{\circ} \le \theta \lt 10^{\circ} }) = \frac{1}{36}$<br>$F(20) = P({-\infty^{\circ} \le \theta \lt 20^{\circ} }) = \frac{2}{36}$<br>…<br>$F(350) = P({-\infty^{0} \le \theta \lt 350^{0}}) = \frac{35}{36}$<br>$F(360) = P({-\infty^{0} \le \theta \lt 360^{0}}) = 1$<br>$F(370) = P({-\infty^{0} \le \theta \lt 370^{0}}) = 1$<br>$F(380) = P({-\infty^{0} \le \theta \lt 380^{0}}) = 1$<br>…</p>
+<p>이를 그림으로 표현하면 다음과 같다.</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> mplot</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">t = np.array(range(<span class="number">-100</span>, <span class="number">461</span>))</span><br><span class="line">F = t/<span class="number">360</span></span><br><span class="line"></span><br><span class="line">F[t &lt; <span class="number">0</span>] = <span class="number">0</span></span><br><span class="line">F[t &gt; <span class="number">360</span>] = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">mplot.title(<span class="string">"Cumulative Distribution Function"</span>)</span><br><span class="line">mplot.xlabel(<span class="string">'x $(\deg.)$'</span>)</span><br><span class="line">mplot.ylabel(<span class="string">'$F(x)$'</span>)</span><br><span class="line"></span><br><span class="line">mplot.xlim(t[<span class="number">0</span>], t[<span class="number">-1</span>])</span><br><span class="line">mplot.xticks([<span class="number">0</span>, <span class="number">180</span>, <span class="number">360</span>])</span><br><span class="line">mplot.plot(t, F)</span><br><span class="line">mplot.show()</span><br></pre></td></tr></table></figure>
+
+<p><a href="../../../../img/csci343-lec6/cdf_graph.png" title="example" class="gallery-item"><img src="../../../../img/csci343-lec6/cdf_graph.png" alt="example"></a></p>
+<p>누적 밀도 함수 즉 cdf는 다음과 같은 특징을 가진다.</p>
+<ul>
+<li>$F(-\infty) = 0$</li>
+<li>$F(+\infty) = 1$</li>
+<li>$F(x) \ge F(y)\text{    if    }x &gt; y$</li>
+</ul>
+<p>확률밀도함수(PDF)는 특정 확률 변수 구간의 확률이 다른 구간에 비해 <strong>상대적으로</strong> 얼마나 높은가를 나타내는 것이며 그 값 자체가 확률은 아니다라는 점을 명심해야 한다.</p>
+<hr>
+<h2 id="통계적-가설-검정"><a href="#통계적-가설-검정" class="headerlink" title="통계적 가설 검정"></a>통계적 가설 검정</h2><p>통계적 가설 검정(statistical hypothesis test)은 통계적 추측의 하나로서, 모집단 실제의 값이 얼마가 된다는 주장과 관련해, 표본의 정보를 사용해서 가설의 합당성 여부를 판정하는 과정을 의미한다. 간단히 가설 검정(hypothesis test)이라고 부르는 경우가 많다.</p>
+<ul>
+<li>Our CDF tells us the probability that some value lies below a certain threshold.</li>
+<li>50% of the population should lie on either side of the vertical line.</li>
+<li>This kind of statistical test is called a <strong>one-tailed test.</strong></li>
+</ul>
+<p>통계적으로 가설을 검정하기 위해 먼저 귀무가설과 대립가설을 세워야 한다. 어떤 모수(평균, 분산, 비울, etc.)에 대해 가설을 설정할 때, 일반적을 5 가지 경우가 있다.</p>
+<ol>
+<li>유의수준의 결정, 귀무가설과 대립가설 설정</li>
+<li>검정통계량의 설정</li>
+<li>기각역의 설정</li>
+<li>검정통계량 계산</li>
+<li>통계적인 의사결정</li>
+</ol>
+<hr>
+<h2 id="귀무가설과-대립-가설-설정"><a href="#귀무가설과-대립-가설-설정" class="headerlink" title="귀무가설과 대립 가설 설정"></a>귀무가설과 대립 가설 설정</h2><p><strong>귀무 가설</strong><br>귀무 가설(null hypothesis, $H_{0}$)은 통계학에서 처음부터 버릴 것을 예상하는 가설이다. 차이가 없거나 의미있는 차이가 없는 경우의 가설이며 이것이 맞거나 맞지 않다는 통계학적 증거를 통해 증명하려는 가설이다.</p>
+<p><strong>대립 가설</strong><br>대립 가설(alternative hypothesis, $H_{1}$) 또는 연구 가설 또는 유지 가설은 귀무가설에 대립하는 명제이다. 보통, 모집단에서 독립변수와 결과변수 사이에 어떤 특정한 관련이 있다는 꼴이다. 어떤 가능성에 대해 확률적인 가설검정을 할 때 귀무가설과 함께 사용된다. 이 가설은 귀무가설처럼 검정을 직접 수행하기는 불가능하며 귀무가설을 기각함으로써 받아들여지는 반증의 과정을 거쳐 받아들여질 수 있다. 대립 가설은 <strong>양측 대립 가설</strong> 과 <strong>단측 대립 가설</strong> 이 있다.</p>
+<div class="note info no-icon">
+            <h3 id="단측-양측-대립-가설"><a href="#단측-양측-대립-가설" class="headerlink" title="단측/양측 대립 가설"></a>단측/양측 대립 가설</h3><p><strong>단측 대립 가설</strong><br>독립 변수와 결과 변수와의 관련성을 검정할 때 그 방향이 미리 어느 한쪽으로 결정되어 있는 경우이다. 예를 들어 새로 개발된 심장병 치료 약물이 기존의 약물요법에 비교하여 더 효과가 좋은가?라는 것을 밝혀낼 때에 더 효과가 좋다는 가설이 단측대립가설이다.</p><p><strong>양측 대립 가설</strong><br>독립변수와 종속변수간에 관련성 혹은 차이가 존재하는가?라는 면에서만 관심을 가지는 것이며 그 방향은 따지지 않는 가설이다. 예를 들어 새로 개발된 심장병 치료 약물이 기존의 약물요법에 비교하여 효과에 차이가 있다라고 가정하는 것이다.</p>
+          </div>
+
+<ul>
+<li><p>먼저 연구 가설 내용을 (e.g. 미국 성인여자의 신장은 크다)을 통계적 가설 (e.g. 미국 성인여자의 평균신장은 180cm이다.)로 바꾸어 줌으로써 가설 검정이 시작된다.</p>
+</li>
+<li><p>가령, 미국 성인 여성의 평균 신장이 180cm라는 하나의 가설을 검정할 계획이라면, 귀무 가설의 표기는 다음과 같다.</p>
+</li>
+</ul>
+<p>$$<br>H_{0}: \mu = 180<br>$$</p>
+<p>해당 귀무 가설과 반대되는 대립 가설은 다음과 같은 형태가 있다.</p>
+<ul>
+<li>제1형: $H_{1} : \mu \ne 180$</li>
+<li>제2형: $H_{1} : \mu \le 180$</li>
+<li>제3형: $H_{1} : \mu \ge 180$</li>
+</ul>
+<p>여기서 제 1형은 <strong>양측 검정</strong>(two-sided test, two tailed test), 제 2형, 제 3형은 <strong>단측 검정(one-sided test)</strong> 이라고 지칭한다. 단측검정을 나누자면 제 2형을 <strong>좌측 검정</strong> (lower tailed test)이라고 하며, 제 3형은 <strong>우측 검정</strong> (upper tailed test)이라고 부른다.</p>
+<p>양측검정은 가설 검증에서 <strong>기각 영역</strong>(rejection region)이 양쪽에 있는 것이고, 그러므로 유의수준 $\alpha$ 도 양극단으로 갈라져 한쪽의 면적이 $\frac{\alpha}{2}$가 된다. 기각영역이 어느 한쪽에만 있게 되는 경우를 <strong>단측검정</strong> 이라고 한다.</p>
+<blockquote>
+<p>즉, 단측 검정이란 대립 가설이 어느 특정 모수 이상이거나 이하일 때 검정하는 것이다.</p>
+</blockquote>
+<hr>
+<ul>
+<li>Has limitations due to only testing if something is above or below a certain value</li>
+<li>We can say that values below this level differ from 90% of the population, values below this that cut off could be at most 10% of the population we are measuring. This means they are less likely to be the same population.</li>
+</ul>
+<blockquote>
+<p>이 수준 이하의 값은 모집단의 90 %와 다르다고 말할 수 있습니다.이 차단 ​​값 아래의 값은 측정중인 모집단의 최대 10 % 일 수 있습니다. 이것은 그들이 같은 인구가 될 가능성이 적다는 것을 의미합니다.</p>
+</blockquote>
+<ul>
+<li>For the values that lie <span class="label warning">below</span> the cut off we will incorrectly reject 10% of the time! This is called a <strong>False Negative</strong>.(AKA a Type II Error).</li>
+<li>For the values that lie <span class="label warning">above</span> the cut off that are NOT in our population, we incorrectly accept the values as members. This is called a <strong>False Positive</strong>.(AKA a Type I Error).</li>
+</ul>
+<div class="note info no-icon">
+            <h4 id="거짓-양성과-음성"><a href="#거짓-양성과-음성" class="headerlink" title="거짓 양성과 음성"></a>거짓 양성과 음성</h4><p><strong>거짓 양성(false positive)</strong><br>거짓 양성 또는 1종 오류(<code>type I error</code>)는 통계상 실제로는 음성인데 검사 결과는 양성이라고 나오는 것이다. 예를 들어, 어떤 메일이 스팸 메일인지 검사하는 프로그램이 있다고 하자. 이때 어떤 메일이 실제로는 스팸 메일이 아니지만 프로그램 검사 결과 스팸 메일이라고 판정한다면, 이것이 거짓 양성이다. 위양성, 혹은 거짓 경보(false alarm)라고도 한다.</p><p><strong>거짓 음성(false negative)</strong><br>거짓 음성 또는 2종 오류(<code>type II error</code>)는 통계상 실제로는 양성인데 검사 결과는 음성이라고 나오는 것이다. 예를 들어, 어떤 메일이 스팸 메일인지 검사하는 프로그램이 있다고 하자. 이때 어떤 메일이 실제로는 스팸 메일임에도 불구하고 프로그램 검사 결과 스팸 메일이 아니라고 판정한다면, 이것이 거짓 음성이다. 이러한 현상은 암 진단이나 보안 진단과 같은 분야에서는 거짓 양성에 비해 오 탐지에 대한 비용이 커서 그것을 잘 고려하여 검사 알고리즘을 개발해야 한다.</p>
+          </div>
+
+<p>실제로 검사 알고리즘을 개발한다면, 거짓 양성과 거짓 음성 사이에 <span class="label warning">trade-off</span>(어느 한편을 늘리면 다른 한편은 그 만큼 줄어드는 것)가 필연적으로 생기게 된다.</p>
+<hr>
+<h2 id="summary"><a href="#summary" class="headerlink" title="summary"></a>summary</h2><h3 id="Probability-density-functions-PDF"><a href="#Probability-density-functions-PDF" class="headerlink" title="Probability density functions (PDF)"></a>Probability density functions (PDF)</h3><ol>
+<li>Function representing distribution of probability variables</li>
+<li>Ofthen fits a Normal distribution!</li>
+</ol>
+<h3 id="Central-limit-theorm-CLT"><a href="#Central-limit-theorm-CLT" class="headerlink" title="Central limit theorm (CLT)"></a>Central limit theorm (CLT)</h3><ol>
+<li>It is a theorm that if N is moderaely large, then the distribution of mean of N probability variable (with same probabiliy distribution) is closer to the normal distribution</li>
+</ol>
+<h3 id="Comulative-Distribution-Functions-CDF"><a href="#Comulative-Distribution-Functions-CDF" class="headerlink" title="Comulative Distribution Functions (CDF)"></a>Comulative Distribution Functions (CDF)</h3><ol>
+<li>Provides the probability that a random value is ‘&lt;’ or ‘=’ to a given value within a normally distributed population.</li>
+<li>It means that CDF tells us the probability that some value lies below a certain threshold.</li>
+</ol>
+<h3 id="False-positive-negative"><a href="#False-positive-negative" class="headerlink" title="False positive/negative"></a>False positive/negative</h3><ol>
+<li>False Positive (Type I Error) is a result that indicates a given condition exists, when it does not.</li>
+<li>False negative (Type II Error) is a test result that indicates that a condition does not hold, while in fact it does.</li>
+</ol>
+<h3 id="One-tailed-test"><a href="#One-tailed-test" class="headerlink" title="One-tailed test"></a>One-tailed test</h3><ol>
+<li>A one-tailed test is a (statistical) test (in which the critical area of a distribution is one-sided so that) it is either [greater than or less than] a certain value, but not both.</li>
+</ol>
+<h3 id="Two-tailed-test"><a href="#Two-tailed-test" class="headerlink" title="Two-tailed test"></a>Two-tailed test</h3><ol>
+<li>A two-tailed test is a method (in which the critical area of a distribution is two-sided) and tests whether a sample is [greater than or less than] a certain range of values.</li>
+</ol>
+<hr>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li>WIKI<ul>
+<li><a href="https://ko.wikipedia.org/wiki/1%EC%A2%85_%EC%98%A4%EB%A5%98%EC%99%80_2%EC%A2%85_%EC%98%A4%EB%A5%98" target="_blank" rel="noopener">1종 오류와 2종 오류</a></li>
+<li><a href="https://ko.wikipedia.org/wiki/%EB%88%84%EC%A0%81_%EB%B6%84%ED%8F%AC_%ED%95%A8%EC%88%98" target="_blank" rel="noopener">누적분포함수</a></li>
+<li><a href="https://ko.wikipedia.org/wiki/%EA%B0%80%EC%84%A4_%EA%B2%80%EC%A0%95" target="_blank" rel="noopener">가설검정</a></li>
+</ul>
+</li>
+<li>Others<ul>
+<li><a href="https://ratsgo.github.io/statistics/2017/06/27/normal/" target="_blank" rel="noopener">ratsgo’s blog - 정규분포 누적분포함수와 중심극한정리</a></li>
+<li><a href="https://datascienceschool.net/view-notebook/fa24ed1f520f4691b8bce979860ebc0a/" target="_blank" rel="noopener">데이터 사이언스 스쿨 - 누적분포함수와 확률밀도함수</a></li>
+<li><a href="https://drhongdatanote.tistory.com/50" target="_blank" rel="noopener">필로홍의 데이터 노트 - [개념통계] 정규분포와 표준정규분포 그리고 z-score</a></li>
+</ul>
+</li>
+</ul>
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>]]></content>
+      <categories>
+        <category>Olemiss</category>
+        <category>CSCI 343</category>
+      </categories>
+      <tags>
+        <tag>CSCI 343</tag>
       </tags>
   </entry>
   <entry>
@@ -1774,161 +2785,6 @@ merge newbranch
 <h4 id="Negative-Correlation"><a href="#Negative-Correlation" class="headerlink" title="Negative Correlation"></a>Negative Correlation</h4><p>ohe is high, the other is low, vice versa.</p>
 <h4 id="Get-closer-to-Zero"><a href="#Get-closer-to-Zero" class="headerlink" title="Get closer to Zero"></a>Get closer to Zero</h4><p>No corrleation between two varaibles.</p>
 <h3 id="correlation-and-causation-상관관계와-인과관계"><a href="#correlation-and-causation-상관관계와-인과관계" class="headerlink" title="correlation and causation(상관관계와 인과관계)"></a>correlation and causation(상관관계와 인과관계)</h3><p>Correlation may not mean Causation</p>
-</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
-        var options = {
-            selector: '.gallery-item'
-        };
-        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
-        }</script>]]></content>
-      <categories>
-        <category>Olemiss</category>
-        <category>CSCI 343</category>
-      </categories>
-      <tags>
-        <tag>CSCI 343</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Distributions</title>
-    <url>/2020/02/19/2020-02-20-csci343-lec6/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
-<h2 id="확률-분포-함수"><a href="#확률-분포-함수" class="headerlink" title="확률 분포 함수"></a>확률 분포 함수</h2><p>확률 분포 함수는 확률 변수의 분포 즉, 확률 분포를 수학적으로 정의하기 위한 수식이다.</p>
-<p>확률 밀도 함수 (Probability Density Function, PDF)는 확률 변수의 분포를 나타내는 함수로, 확률 밀도 함수 $f(x)$와 구간 $[a,b]$에 대해서 확률 변수 $X$가 구간에 포함될 확률 $(a \leq X \leq b)$는 아래와 같은 공식이 된다.<br>&nbsp;<br>$$ \int _{a}^{b}f(x)dx $$<br>&nbsp;<br>확률 밀도 함수 $f(x)$는 다음의 두 조건을 만족해야 한다.</p>
-<ol>
-<li>모든 실수값 $X$에 대해 $f(x) \geq 0$</li>
-<li>$\int _{-\infty}^{\infty}f(x)dx = 1$</li>
-</ol>
-<p>확률 밀도 함수와 누적 분포 함수에는 다음과 같은 수식이 성립한다.</p>
-<blockquote>
-<p>$$F(x) = \int _{-\infty}^{x}f(x)dx$$<br>$$f(x) = \frac{d}{dx}F(x)$$</p>
-</blockquote>
-<hr>
-<h2 id="중심-극한-정리"><a href="#중심-극한-정리" class="headerlink" title="중심 극한 정리"></a>중심 극한 정리</h2><p>주어진 간격 내에 어떤 값을 중심으로 임의의 변동을 가지는 임의의 변수는 표본 수가 증가함에 따라 대략 정상적으로 분포될 것이라는 정리이다.</p>
-<p>정규 분포가 중요한 이유 중 하나는 중심극한정리 때문이다. 중심 극한 정리는 동일한 확률분포를 가진 독립 확률 변수 n개의 평균의 분포는 n이 적당히 크다면 정규분포에 가까워진다는 정리이다</p>
-<div class="note no-icon">
-            <p>이때, 정규 분포(혹은 가우스 분포)란 우리 주변에서 일반적으로 발견되는 좌우 대칭의 종 모양으로 생긴 분포를 말한다. 정규분포는 평균값에 가장 많은 데이터가 분포되어 있고 평균과 떨어질수록 데이터에 적게 분포하는 특징을 가지고 있다.</p>
-          </div>
-
-<p><a href="https://upload.wikimedia.org/wikipedia/commons/c/cd/Clt_in_action.gif" title="wiki" class="gallery-item"><img src="https://upload.wikimedia.org/wikipedia/commons/c/cd/Clt_in_action.gif" alt="wiki"></a></p>
-<p>매우 불규칙한 분포도 충분히 많은 수를 더하면 중심극한정리에 따라 결국 정규분포로 수렴한다.<br>&nbsp;</p>
-<h2 id="누적-분포-함수"><a href="#누적-분포-함수" class="headerlink" title="누적 분포 함수"></a>누적 분포 함수</h2><p>누적 분포 함수(cumulative distribution function, cdf)는 주어진 확률 변수가 특정 값보다 작거나 같은 확률을 나타내는 함수이다. 즉, 무작위 값이 정규 분포 모집단 내에서 주어진 값보다 작거나 같을 확률을 제공한다.</p>
-<p>확률 변수  X 에 대한 누적 확률 분포  F(x) 의 수학적 정의는 다음과 같다</p>
-<p>$$<br>F(x) = P({X \lt x}) = P(X \lt x)<br>$$<br>&nbsp;<br>몇가지 누적 확률 분포 표시의 예를 들면 다음과 같다.</p>
-<ul>
-<li>$F(−1)$: 확률 변수가 $−\infty$ 이상 -1 미만인 구간 내에 존재할 확률 즉, $P({-\infty \le X \lt −1})$</li>
-<li>$F(0)$: 확률 변수가 $−\infty$ 이상 0 미만인 구간 내에 존재할 확률 즉,  $P({-\infty \le X \lt 0})$</li>
-<li>$F(1)$: 확률 변수가 $−\infty$ 이상 1 미만인 구간 내에 존재할 확률 즉,  $P({-\infty \le X \lt 1})$<br>…</li>
-<li>$F(10)$: 확률 변수가 $−\infty$ 이상 10 미만인 구간 내에 존재할 확률 즉,  $P({-\infty \le X \lt 10})$<br>…</li>
-</ul>
-<p>시계 바늘 확률 문제의 경우를 예로 들어보자. 이 경우에는 각도가 0도부터 360까지이지만 음의 무한대를 시작점으로 해도 상관없다.</p>
-<a href="https://datascienceschool.net/upfiles/84a2a4193ef545d89e7c4417262942ea.png" class="gallery-item"><img src="https://datascienceschool.net/upfiles/84a2a4193ef545d89e7c4417262942ea.png" class="Example" title="Example 200 200"></a>
-
-<p>$F(0) = P({-\infty^{\circ} \le \theta \lt 0^{\circ} }) = 0$<br>$F(10) = P({-\infty^{\circ} \le \theta \lt 10^{\circ} }) = \frac{1}{36}$<br>$F(20) = P({-\infty^{\circ} \le \theta \lt 20^{\circ} }) = \frac{2}{36}$<br>…<br>$F(350) = P({-\infty^{0} \le \theta \lt 350^{0}}) = \frac{35}{36}$<br>$F(360) = P({-\infty^{0} \le \theta \lt 360^{0}}) = 1$<br>$F(370) = P({-\infty^{0} \le \theta \lt 370^{0}}) = 1$<br>$F(380) = P({-\infty^{0} \le \theta \lt 380^{0}}) = 1$<br>…</p>
-<p>이를 그림으로 표현하면 다음과 같다.</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> mplot</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">t = np.array(range(<span class="number">-100</span>, <span class="number">461</span>))</span><br><span class="line">F = t/<span class="number">360</span></span><br><span class="line"></span><br><span class="line">F[t &lt; <span class="number">0</span>] = <span class="number">0</span></span><br><span class="line">F[t &gt; <span class="number">360</span>] = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">mplot.title(<span class="string">"Cumulative Distribution Function"</span>)</span><br><span class="line">mplot.xlabel(<span class="string">'x $(\deg.)$'</span>)</span><br><span class="line">mplot.ylabel(<span class="string">'$F(x)$'</span>)</span><br><span class="line"></span><br><span class="line">mplot.xlim(t[<span class="number">0</span>], t[<span class="number">-1</span>])</span><br><span class="line">mplot.xticks([<span class="number">0</span>, <span class="number">180</span>, <span class="number">360</span>])</span><br><span class="line">mplot.plot(t, F)</span><br><span class="line">mplot.show()</span><br></pre></td></tr></table></figure>
-
-<p><a href="../../../../img/csci343-lec6/cdf_graph.png" title="example" class="gallery-item"><img src="../../../../img/csci343-lec6/cdf_graph.png" alt="example"></a></p>
-<p>누적 밀도 함수 즉 cdf는 다음과 같은 특징을 가진다.</p>
-<ul>
-<li>$F(-\infty) = 0$</li>
-<li>$F(+\infty) = 1$</li>
-<li>$F(x) \ge F(y)\text{    if    }x &gt; y$</li>
-</ul>
-<p>확률밀도함수(PDF)는 특정 확률 변수 구간의 확률이 다른 구간에 비해 <strong>상대적으로</strong> 얼마나 높은가를 나타내는 것이며 그 값 자체가 확률은 아니다라는 점을 명심해야 한다.</p>
-<hr>
-<h2 id="통계적-가설-검정"><a href="#통계적-가설-검정" class="headerlink" title="통계적 가설 검정"></a>통계적 가설 검정</h2><p>통계적 가설 검정(statistical hypothesis test)은 통계적 추측의 하나로서, 모집단 실제의 값이 얼마가 된다는 주장과 관련해, 표본의 정보를 사용해서 가설의 합당성 여부를 판정하는 과정을 의미한다. 간단히 가설 검정(hypothesis test)이라고 부르는 경우가 많다.</p>
-<ul>
-<li>Our CDF tells us the probability that some value lies below a certain threshold.</li>
-<li>50% of the population should lie on either side of the vertical line.</li>
-<li>This kind of statistical test is called a <strong>one-tailed test.</strong></li>
-</ul>
-<p>통계적으로 가설을 검정하기 위해 먼저 귀무가설과 대립가설을 세워야 한다. 어떤 모수(평균, 분산, 비울, etc.)에 대해 가설을 설정할 때, 일반적을 5 가지 경우가 있다.</p>
-<ol>
-<li>유의수준의 결정, 귀무가설과 대립가설 설정</li>
-<li>검정통계량의 설정</li>
-<li>기각역의 설정</li>
-<li>검정통계량 계산</li>
-<li>통계적인 의사결정</li>
-</ol>
-<hr>
-<h2 id="귀무가설과-대립-가설-설정"><a href="#귀무가설과-대립-가설-설정" class="headerlink" title="귀무가설과 대립 가설 설정"></a>귀무가설과 대립 가설 설정</h2><p><strong>귀무 가설</strong><br>귀무 가설(null hypothesis, $H_{0}$)은 통계학에서 처음부터 버릴 것을 예상하는 가설이다. 차이가 없거나 의미있는 차이가 없는 경우의 가설이며 이것이 맞거나 맞지 않다는 통계학적 증거를 통해 증명하려는 가설이다.</p>
-<p><strong>대립 가설</strong><br>대립 가설(alternative hypothesis, $H_{1}$) 또는 연구 가설 또는 유지 가설은 귀무가설에 대립하는 명제이다. 보통, 모집단에서 독립변수와 결과변수 사이에 어떤 특정한 관련이 있다는 꼴이다. 어떤 가능성에 대해 확률적인 가설검정을 할 때 귀무가설과 함께 사용된다. 이 가설은 귀무가설처럼 검정을 직접 수행하기는 불가능하며 귀무가설을 기각함으로써 받아들여지는 반증의 과정을 거쳐 받아들여질 수 있다. 대립 가설은 <strong>양측 대립 가설</strong> 과 <strong>단측 대립 가설</strong> 이 있다.</p>
-<div class="note info no-icon">
-            <h3 id="단측-양측-대립-가설"><a href="#단측-양측-대립-가설" class="headerlink" title="단측/양측 대립 가설"></a>단측/양측 대립 가설</h3><p><strong>단측 대립 가설</strong><br>독립 변수와 결과 변수와의 관련성을 검정할 때 그 방향이 미리 어느 한쪽으로 결정되어 있는 경우이다. 예를 들어 새로 개발된 심장병 치료 약물이 기존의 약물요법에 비교하여 더 효과가 좋은가?라는 것을 밝혀낼 때에 더 효과가 좋다는 가설이 단측대립가설이다.</p><p><strong>양측 대립 가설</strong><br>독립변수와 종속변수간에 관련성 혹은 차이가 존재하는가?라는 면에서만 관심을 가지는 것이며 그 방향은 따지지 않는 가설이다. 예를 들어 새로 개발된 심장병 치료 약물이 기존의 약물요법에 비교하여 효과에 차이가 있다라고 가정하는 것이다.</p>
-          </div>
-
-<ul>
-<li><p>먼저 연구 가설 내용을 (e.g. 미국 성인여자의 신장은 크다)을 통계적 가설 (e.g. 미국 성인여자의 평균신장은 180cm이다.)로 바꾸어 줌으로써 가설 검정이 시작된다.</p>
-</li>
-<li><p>가령, 미국 성인 여성의 평균 신장이 180cm라는 하나의 가설을 검정할 계획이라면, 귀무 가설의 표기는 다음과 같다.</p>
-</li>
-</ul>
-<p>$$<br>H_{0}: \mu = 180<br>$$</p>
-<p>해당 귀무 가설과 반대되는 대립 가설은 다음과 같은 형태가 있다.</p>
-<ul>
-<li>제1형: $H_{1} : \mu \ne 180$</li>
-<li>제2형: $H_{1} : \mu \le 180$</li>
-<li>제3형: $H_{1} : \mu \ge 180$</li>
-</ul>
-<p>여기서 제 1형은 <strong>양측 검정</strong>(two-sided test, two tailed test), 제 2형, 제 3형은 <strong>단측 검정(one-sided test)</strong> 이라고 지칭한다. 단측검정을 나누자면 제 2형을 <strong>좌측 검정</strong> (lower tailed test)이라고 하며, 제 3형은 <strong>우측 검정</strong> (upper tailed test)이라고 부른다.</p>
-<p>양측검정은 가설 검증에서 <strong>기각 영역</strong>(rejection region)이 양쪽에 있는 것이고, 그러므로 유의수준 $\alpha$ 도 양극단으로 갈라져 한쪽의 면적이 $\frac{\alpha}{2}$가 된다. 기각영역이 어느 한쪽에만 있게 되는 경우를 <strong>단측검정</strong> 이라고 한다.</p>
-<blockquote>
-<p>즉, 단측 검정이란 대립 가설이 어느 특정 모수 이상이거나 이하일 때 검정하는 것이다.</p>
-</blockquote>
-<hr>
-<ul>
-<li>Has limitations due to only testing if something is above or below a certain value</li>
-<li>We can say that values below this level differ from 90% of the population, values below this that cut off could be at most 10% of the population we are measuring. This means they are less likely to be the same population.</li>
-</ul>
-<blockquote>
-<p>이 수준 이하의 값은 모집단의 90 %와 다르다고 말할 수 있습니다.이 차단 ​​값 아래의 값은 측정중인 모집단의 최대 10 % 일 수 있습니다. 이것은 그들이 같은 인구가 될 가능성이 적다는 것을 의미합니다.</p>
-</blockquote>
-<ul>
-<li>For the values that lie <span class="label warning">below</span> the cut off we will incorrectly reject 10% of the time! This is called a <strong>False Negative</strong>.(AKA a Type II Error).</li>
-<li>For the values that lie <span class="label warning">above</span> the cut off that are NOT in our population, we incorrectly accept the values as members. This is called a <strong>False Positive</strong>.(AKA a Type I Error).</li>
-</ul>
-<div class="note info no-icon">
-            <h4 id="거짓-양성과-음성"><a href="#거짓-양성과-음성" class="headerlink" title="거짓 양성과 음성"></a>거짓 양성과 음성</h4><p><strong>거짓 양성(false positive)</strong><br>거짓 양성 또는 1종 오류(<code>type I error</code>)는 통계상 실제로는 음성인데 검사 결과는 양성이라고 나오는 것이다. 예를 들어, 어떤 메일이 스팸 메일인지 검사하는 프로그램이 있다고 하자. 이때 어떤 메일이 실제로는 스팸 메일이 아니지만 프로그램 검사 결과 스팸 메일이라고 판정한다면, 이것이 거짓 양성이다. 위양성, 혹은 거짓 경보(false alarm)라고도 한다.</p><p><strong>거짓 음성(false negative)</strong><br>거짓 음성 또는 2종 오류(<code>type II error</code>)는 통계상 실제로는 양성인데 검사 결과는 음성이라고 나오는 것이다. 예를 들어, 어떤 메일이 스팸 메일인지 검사하는 프로그램이 있다고 하자. 이때 어떤 메일이 실제로는 스팸 메일임에도 불구하고 프로그램 검사 결과 스팸 메일이 아니라고 판정한다면, 이것이 거짓 음성이다. 이러한 현상은 암 진단이나 보안 진단과 같은 분야에서는 거짓 양성에 비해 오 탐지에 대한 비용이 커서 그것을 잘 고려하여 검사 알고리즘을 개발해야 한다.</p>
-          </div>
-
-<p>실제로 검사 알고리즘을 개발한다면, 거짓 양성과 거짓 음성 사이에 <span class="label warning">trade-off</span>(어느 한편을 늘리면 다른 한편은 그 만큼 줄어드는 것)가 필연적으로 생기게 된다.</p>
-<hr>
-<h2 id="summary"><a href="#summary" class="headerlink" title="summary"></a>summary</h2><h3 id="Probability-density-functions-PDF"><a href="#Probability-density-functions-PDF" class="headerlink" title="Probability density functions (PDF)"></a>Probability density functions (PDF)</h3><ol>
-<li>Function representing distribution of probability variables</li>
-<li>Ofthen fits a Normal distribution!</li>
-</ol>
-<h3 id="Central-limit-theorm-CLT"><a href="#Central-limit-theorm-CLT" class="headerlink" title="Central limit theorm (CLT)"></a>Central limit theorm (CLT)</h3><ol>
-<li>It is a theorm that if N is moderaely large, then the distribution of mean of N probability variable (with same probabiliy distribution) is closer to the normal distribution</li>
-</ol>
-<h3 id="Comulative-Distribution-Functions-CDF"><a href="#Comulative-Distribution-Functions-CDF" class="headerlink" title="Comulative Distribution Functions (CDF)"></a>Comulative Distribution Functions (CDF)</h3><ol>
-<li>Provides the probability that a random value is ‘&lt;’ or ‘=’ to a given value within a normally distributed population.</li>
-<li>It means that CDF tells us the probability that some value lies below a certain threshold.</li>
-</ol>
-<h3 id="False-positive-negative"><a href="#False-positive-negative" class="headerlink" title="False positive/negative"></a>False positive/negative</h3><ol>
-<li>False Positive (Type I Error) is a result that indicates a given condition exists, when it does not.</li>
-<li>False negative (Type II Error) is a test result that indicates that a condition does not hold, while in fact it does.</li>
-</ol>
-<h3 id="One-tailed-test"><a href="#One-tailed-test" class="headerlink" title="One-tailed test"></a>One-tailed test</h3><ol>
-<li>A one-tailed test is a (statistical) test (in which the critical area of a distribution is one-sided so that) it is either [greater than or less than] a certain value, but not both.</li>
-</ol>
-<h3 id="Two-tailed-test"><a href="#Two-tailed-test" class="headerlink" title="Two-tailed test"></a>Two-tailed test</h3><ol>
-<li>A two-tailed test is a method (in which the critical area of a distribution is two-sided) and tests whether a sample is [greater than or less than] a certain range of values.</li>
-</ol>
-<hr>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
-<li>WIKI<ul>
-<li><a href="https://ko.wikipedia.org/wiki/1%EC%A2%85_%EC%98%A4%EB%A5%98%EC%99%80_2%EC%A2%85_%EC%98%A4%EB%A5%98" target="_blank" rel="noopener">1종 오류와 2종 오류</a></li>
-<li><a href="https://ko.wikipedia.org/wiki/%EB%88%84%EC%A0%81_%EB%B6%84%ED%8F%AC_%ED%95%A8%EC%88%98" target="_blank" rel="noopener">누적분포함수</a></li>
-<li><a href="https://ko.wikipedia.org/wiki/%EA%B0%80%EC%84%A4_%EA%B2%80%EC%A0%95" target="_blank" rel="noopener">가설검정</a></li>
-</ul>
-</li>
-<li>Others<ul>
-<li><a href="https://ratsgo.github.io/statistics/2017/06/27/normal/" target="_blank" rel="noopener">ratsgo’s blog - 정규분포 누적분포함수와 중심극한정리</a></li>
-<li><a href="https://datascienceschool.net/view-notebook/fa24ed1f520f4691b8bce979860ebc0a/" target="_blank" rel="noopener">데이터 사이언스 스쿨 - 누적분포함수와 확률밀도함수</a></li>
-<li><a href="https://drhongdatanote.tistory.com/50" target="_blank" rel="noopener">필로홍의 데이터 노트 - [개념통계] 정규분포와 표준정규분포 그리고 z-score</a></li>
-</ul>
-</li>
-</ul>
 </div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
         var options = {
             selector: '.gallery-item'
@@ -2739,46 +3595,6 @@ merge newbranch
       </tags>
   </entry>
   <entry>
-    <title>10989 수 정렬하기 3</title>
-    <url>/2020/02/15/2020-02-15-Baekjoon-10989/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<h2 id="Setting"><a href="#Setting" class="headerlink" title="Setting"></a>Setting</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> CNT_INFO[<span class="number">151</span>]; <span class="comment">// count of numbers</span></span><br><span class="line"><span class="keyword">char</span> buf[<span class="number">30</span>];      <span class="comment">// store &amp; output area</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>buf[30] (10 * 4 + 4 = 44) [if all data is stored once.]</p>
-</blockquote>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">+-----+</span><br><span class="line">| 10  |   Size</span><br><span class="line">+-----+----------+</span><br><span class="line">| 10  |          |</span><br><span class="line">+-----+          |</span><br><span class="line">| 20  |          |</span><br><span class="line">+-----+          |</span><br><span class="line">| 30  |          |</span><br><span class="line">+-----+          |</span><br><span class="line">| 40  |          |</span><br><span class="line">+-----+          -</span><br><span class="line">| 100 |          D</span><br><span class="line">+-----+          A</span><br><span class="line">| 100 |          T</span><br><span class="line">+-----+          A</span><br><span class="line">| 100 |          -</span><br><span class="line">+-----+          |</span><br><span class="line">| 120 |          |</span><br><span class="line">+-----+          |</span><br><span class="line">| 130 |          |</span><br><span class="line">+-----+          |</span><br><span class="line">| 140 |          |</span><br><span class="line">+-----+----------+</span><br></pre></td></tr></table></figure>
-
-<h2 id="If-statement"><a href="#If-statement" class="headerlink" title="If-statement"></a>If-statement</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (buf + sz - p - <span class="number">1</span> &lt; j)</span><br><span class="line">&#123;</span><br><span class="line">    fwrite(buf, <span class="keyword">sizeof</span>(<span class="keyword">char</span>), p - buf, <span class="built_in">stdout</span>);</span><br><span class="line">    p = buf;</span><br><span class="line">    <span class="keyword">goto</span> check_1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>만약 현재의 저장소 <code>buf</code>보다 더 많은 입력을 했다면 이 경우 예외 처리가 필요하다.</li>
-<li>따라서 현재까지 정렬된 저장소를 현재 문제가 발생된 부분을 제외하고 출력한다.</li>
-<li>또한 현재 포인터 p를 다시 저장소의 처음 주소로 이동한다.</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">check_1:</span><br><span class="line">    <span class="built_in">memcpy</span>(p, STR_INFO[num], j);</span><br><span class="line">    s = p;</span><br><span class="line">    p += j;</span><br><span class="line">    CNT_INFO[num]--;</span><br><span class="line">    f = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>이때 현재 값<code>STR_INFO[num]</code>을 처음 주소로 옮긴다.</li>
-<li>그리고 현재 포인터 p를 다음 주소로 옮긴다.</li>
-</ul>
-<h2 id="Source-Code"><a href="#Source-Code" class="headerlink" title="Source Code"></a>Source Code</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;memory.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// include user-defind memory</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"dataset.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//number: 1 ~ 150</span></span><br><span class="line"><span class="comment">//store area: 30</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _BUFSIZ 30</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _LENG 151</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> CNT_INFO[_LENG];</span><br><span class="line"><span class="keyword">char</span> buf[_BUFSIZ];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span>* p;</span><br><span class="line">    <span class="keyword">int</span> sz, remain;</span><br><span class="line">    <span class="keyword">int</span> num;</span><br><span class="line"></span><br><span class="line">    fread(buf, <span class="keyword">sizeof</span>(<span class="keyword">char</span>), _BUFSIZ, <span class="built_in">stdin</span>);</span><br><span class="line">    p = buf;</span><br><span class="line">    sz = <span class="keyword">sizeof</span>(buf);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Read size</span></span><br><span class="line">    <span class="keyword">for</span> (C = <span class="number">0</span>; *p++ &gt;= <span class="number">48</span>;)</span><br><span class="line">    &#123;</span><br><span class="line">        C = C * <span class="number">10</span> + (p[<span class="number">-1</span>] - <span class="number">48</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// store the values in array</span></span><br><span class="line">    <span class="keyword">while</span> (C--)</span><br><span class="line">    &#123;</span><br><span class="line">        remain = buf + sz - p;</span><br><span class="line">        <span class="keyword">if</span> (remain &lt; <span class="number">6</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">memcpy</span>(buf, p, remain);</span><br><span class="line">            fread(buf + remain, <span class="keyword">sizeof</span>(<span class="keyword">char</span>), sz - remain, <span class="built_in">stdin</span>);</span><br><span class="line">            p = buf;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (num = <span class="number">0</span>; *p++ &gt;= <span class="number">48</span>;)</span><br><span class="line">        &#123;</span><br><span class="line">            num = num * <span class="number">10</span> + (p[<span class="number">-1</span>] - <span class="number">48</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        CNT_INFO[num]++;</span><br><span class="line">    &#125;</span><br><span class="line">    p = buf;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (num = <span class="number">1</span>; num &lt; _LENG; num++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> f, c, k, j;</span><br><span class="line">        <span class="keyword">char</span>* s;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// To get the length of number</span></span><br><span class="line">        <span class="keyword">for</span> (k = num, j = <span class="number">1</span>; k &gt; <span class="number">0</span>; k /= <span class="number">10</span>, j++);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (CNT_INFO[num])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//if current remain size is not enough to store the current number</span></span><br><span class="line">            <span class="keyword">if</span> (buf + sz - p - <span class="number">1</span> &lt; j)</span><br><span class="line">            &#123;</span><br><span class="line">                fwrite(buf, <span class="keyword">sizeof</span>(<span class="keyword">char</span>), p - buf, <span class="built_in">stdout</span>);</span><br><span class="line">                p = buf;</span><br><span class="line">                <span class="keyword">goto</span> check_1;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        check_1:</span><br><span class="line">            <span class="built_in">memcpy</span>(p, STR_INFO[num], j);</span><br><span class="line">            s = p;</span><br><span class="line">            p += j;</span><br><span class="line">            CNT_INFO[num]--;</span><br><span class="line">            f = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// If still remain the count of number (it means, number &gt; 1).</span></span><br><span class="line">            <span class="keyword">while</span> (CNT_INFO[num] &gt; <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (CNT_INFO[num] &gt;= f)</span><br><span class="line">                &#123;</span><br><span class="line">                    c = f;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    c = CNT_INFO[num];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// if current remain size is not enough to store current sample numbers..</span></span><br><span class="line">                <span class="keyword">if</span> (buf + sz - p - <span class="number">1</span> &lt; j * c)</span><br><span class="line">                &#123;</span><br><span class="line">                    fwrite(buf, <span class="keyword">sizeof</span>(<span class="keyword">char</span>), p - buf, <span class="built_in">stdout</span>);</span><br><span class="line">                    p = buf;</span><br><span class="line">                    <span class="keyword">goto</span> check_1;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="built_in">memcpy</span>(p, s, j * c);</span><br><span class="line">                p += j * c;</span><br><span class="line">                CNT_INFO[num] -= c;</span><br><span class="line">                f += c;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    fwrite(buf, <span class="keyword">sizeof</span>(<span class="keyword">char</span>), p - buf, <span class="built_in">stdout</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://www.acmicpc.net/source/17694817" target="_blank" rel="noopener">My source #1</a><br><a href="https://www.acmicpc.net/source/17694757" target="_blank" rel="noopener">My source #2</a></p>
-</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
-        var options = {
-            selector: '.gallery-item'
-        };
-        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
-        }</script>]]></content>
-      <categories>
-        <category>Algorithm</category>
-        <category>Baekjoon</category>
-      </categories>
-      <tags>
-        <tag>Baekjoon</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Kakao clone coding</title>
     <url>/2020/02/15/2020-02-15-Kakao-clone-coding/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<p>Preview: <a href="https://sokhyg9016.github.io/Nomad-kakao-clone-2.0/">Link</a></p>
@@ -2879,6 +3695,98 @@ merge newbranch
       </categories>
       <tags>
         <tag>Project</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>10989 수 정렬하기 3</title>
+    <url>/2020/02/15/2020-02-15-Baekjoon-10989/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<h2 id="Setting"><a href="#Setting" class="headerlink" title="Setting"></a>Setting</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> CNT_INFO[<span class="number">151</span>]; <span class="comment">// count of numbers</span></span><br><span class="line"><span class="keyword">char</span> buf[<span class="number">30</span>];      <span class="comment">// store &amp; output area</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>buf[30] (10 * 4 + 4 = 44) [if all data is stored once.]</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">+-----+</span><br><span class="line">| 10  |   Size</span><br><span class="line">+-----+----------+</span><br><span class="line">| 10  |          |</span><br><span class="line">+-----+          |</span><br><span class="line">| 20  |          |</span><br><span class="line">+-----+          |</span><br><span class="line">| 30  |          |</span><br><span class="line">+-----+          |</span><br><span class="line">| 40  |          |</span><br><span class="line">+-----+          -</span><br><span class="line">| 100 |          D</span><br><span class="line">+-----+          A</span><br><span class="line">| 100 |          T</span><br><span class="line">+-----+          A</span><br><span class="line">| 100 |          -</span><br><span class="line">+-----+          |</span><br><span class="line">| 120 |          |</span><br><span class="line">+-----+          |</span><br><span class="line">| 130 |          |</span><br><span class="line">+-----+          |</span><br><span class="line">| 140 |          |</span><br><span class="line">+-----+----------+</span><br></pre></td></tr></table></figure>
+
+<h2 id="If-statement"><a href="#If-statement" class="headerlink" title="If-statement"></a>If-statement</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (buf + sz - p - <span class="number">1</span> &lt; j)</span><br><span class="line">&#123;</span><br><span class="line">    fwrite(buf, <span class="keyword">sizeof</span>(<span class="keyword">char</span>), p - buf, <span class="built_in">stdout</span>);</span><br><span class="line">    p = buf;</span><br><span class="line">    <span class="keyword">goto</span> check_1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>만약 현재의 저장소 <code>buf</code>보다 더 많은 입력을 했다면 이 경우 예외 처리가 필요하다.</li>
+<li>따라서 현재까지 정렬된 저장소를 현재 문제가 발생된 부분을 제외하고 출력한다.</li>
+<li>또한 현재 포인터 p를 다시 저장소의 처음 주소로 이동한다.</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">check_1:</span><br><span class="line">    <span class="built_in">memcpy</span>(p, STR_INFO[num], j);</span><br><span class="line">    s = p;</span><br><span class="line">    p += j;</span><br><span class="line">    CNT_INFO[num]--;</span><br><span class="line">    f = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>이때 현재 값<code>STR_INFO[num]</code>을 처음 주소로 옮긴다.</li>
+<li>그리고 현재 포인터 p를 다음 주소로 옮긴다.</li>
+</ul>
+<h2 id="Source-Code"><a href="#Source-Code" class="headerlink" title="Source Code"></a>Source Code</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;memory.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// include user-defind memory</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"dataset.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//number: 1 ~ 150</span></span><br><span class="line"><span class="comment">//store area: 30</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _BUFSIZ 30</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _LENG 151</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> CNT_INFO[_LENG];</span><br><span class="line"><span class="keyword">char</span> buf[_BUFSIZ];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span>* p;</span><br><span class="line">    <span class="keyword">int</span> sz, remain;</span><br><span class="line">    <span class="keyword">int</span> num;</span><br><span class="line"></span><br><span class="line">    fread(buf, <span class="keyword">sizeof</span>(<span class="keyword">char</span>), _BUFSIZ, <span class="built_in">stdin</span>);</span><br><span class="line">    p = buf;</span><br><span class="line">    sz = <span class="keyword">sizeof</span>(buf);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Read size</span></span><br><span class="line">    <span class="keyword">for</span> (C = <span class="number">0</span>; *p++ &gt;= <span class="number">48</span>;)</span><br><span class="line">    &#123;</span><br><span class="line">        C = C * <span class="number">10</span> + (p[<span class="number">-1</span>] - <span class="number">48</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// store the values in array</span></span><br><span class="line">    <span class="keyword">while</span> (C--)</span><br><span class="line">    &#123;</span><br><span class="line">        remain = buf + sz - p;</span><br><span class="line">        <span class="keyword">if</span> (remain &lt; <span class="number">6</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">memcpy</span>(buf, p, remain);</span><br><span class="line">            fread(buf + remain, <span class="keyword">sizeof</span>(<span class="keyword">char</span>), sz - remain, <span class="built_in">stdin</span>);</span><br><span class="line">            p = buf;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (num = <span class="number">0</span>; *p++ &gt;= <span class="number">48</span>;)</span><br><span class="line">        &#123;</span><br><span class="line">            num = num * <span class="number">10</span> + (p[<span class="number">-1</span>] - <span class="number">48</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        CNT_INFO[num]++;</span><br><span class="line">    &#125;</span><br><span class="line">    p = buf;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (num = <span class="number">1</span>; num &lt; _LENG; num++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> f, c, k, j;</span><br><span class="line">        <span class="keyword">char</span>* s;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// To get the length of number</span></span><br><span class="line">        <span class="keyword">for</span> (k = num, j = <span class="number">1</span>; k &gt; <span class="number">0</span>; k /= <span class="number">10</span>, j++);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (CNT_INFO[num])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//if current remain size is not enough to store the current number</span></span><br><span class="line">            <span class="keyword">if</span> (buf + sz - p - <span class="number">1</span> &lt; j)</span><br><span class="line">            &#123;</span><br><span class="line">                fwrite(buf, <span class="keyword">sizeof</span>(<span class="keyword">char</span>), p - buf, <span class="built_in">stdout</span>);</span><br><span class="line">                p = buf;</span><br><span class="line">                <span class="keyword">goto</span> check_1;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        check_1:</span><br><span class="line">            <span class="built_in">memcpy</span>(p, STR_INFO[num], j);</span><br><span class="line">            s = p;</span><br><span class="line">            p += j;</span><br><span class="line">            CNT_INFO[num]--;</span><br><span class="line">            f = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// If still remain the count of number (it means, number &gt; 1).</span></span><br><span class="line">            <span class="keyword">while</span> (CNT_INFO[num] &gt; <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (CNT_INFO[num] &gt;= f)</span><br><span class="line">                &#123;</span><br><span class="line">                    c = f;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    c = CNT_INFO[num];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// if current remain size is not enough to store current sample numbers..</span></span><br><span class="line">                <span class="keyword">if</span> (buf + sz - p - <span class="number">1</span> &lt; j * c)</span><br><span class="line">                &#123;</span><br><span class="line">                    fwrite(buf, <span class="keyword">sizeof</span>(<span class="keyword">char</span>), p - buf, <span class="built_in">stdout</span>);</span><br><span class="line">                    p = buf;</span><br><span class="line">                    <span class="keyword">goto</span> check_1;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="built_in">memcpy</span>(p, s, j * c);</span><br><span class="line">                p += j * c;</span><br><span class="line">                CNT_INFO[num] -= c;</span><br><span class="line">                f += c;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    fwrite(buf, <span class="keyword">sizeof</span>(<span class="keyword">char</span>), p - buf, <span class="built_in">stdout</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://www.acmicpc.net/source/17694817" target="_blank" rel="noopener">My source #1</a><br><a href="https://www.acmicpc.net/source/17694757" target="_blank" rel="noopener">My source #2</a></p>
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>]]></content>
+      <categories>
+        <category>Algorithm</category>
+        <category>Baekjoon</category>
+      </categories>
+      <tags>
+        <tag>Baekjoon</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Position property</title>
+    <url>/2020/01/14/2020-01-14-position%20property%20note/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
+<h2 id="static"><a href="#static" class="headerlink" title="static"></a>static</h2><blockquote>
+<p>Default position value</p>
+</blockquote>
+<p><code>Default</code>로 모든 박스는 포지션이 static이다. 이 뜻은<br>그 element를 거기 놓으면 거기 있을 것이다~라는 뜻이다.</p>
+<hr>
+<h2 id="fixed"><a href="#fixed" class="headerlink" title="fixed"></a>fixed</h2><blockquote>
+<p>Fixed stays with me while I scroll.</p>
+</blockquote>
+<p>포지션이 fixed 라면 화면 상에 표시되는 위치에 고정되어 스크롤해도 사라지지 않는다.<br>즉, element가 그 위치에 overwrap해서 고정된다.</p>
+<hr>
+<h2 id="absolute"><a href="#absolute" class="headerlink" title="absolute"></a>absolute</h2><ul>
+<li>absolute는 fixed와 비슷하다. 어디에든 붙일 수 있지만 스크롤한다고 보이지는 않는다.</li>
+<li>포지션을 absolute로 설정하고 설정 값을 주면 html 상에서 부모(father)에 해당하는 박스를 찾지 못할 수도 있다.</li>
+<li>따라서 <code>relative</code> 포지션이 없는 경우, absolute는 문서의 본무 body에 맞춰서 포지션을 잡게 된다.</li>
+</ul>
+<blockquote>
+<p>즉, <code>position: absolute;</code>가 설정되면 html 상에서 해당 element와 관계가 있는 (relative - 부모박스) element를 살펴보고 이에 상응해서 포지션이 결정된다. 이 경우 부모 박스가 상응하는 관계가 없어서 그냥 우리가 설정한 값대로 움직이게 됨으로 부모에 해당하는 박스를 찾지 못한다는 뜻이다.</p>
+</blockquote>
+<p>그렇기 때문에 만약 부모 박스가 없으면 child box는 문서 본문 body에 맞춰서 position을 잡을 것이다. 반대로 부모 박스에 <strong>position: relative;</strong> 를 설정하면 child box는 그에 상대해서 <code>absolute</code> 포지션을 잡을 것이다.</p>
+<blockquote>
+<ol>
+<li>Not stays with me while I scroll.</li>
+<li>Positioning relative to relative.</li>
+</ol>
+</blockquote>
+<hr>
+<h3 id="NOTE"><a href="#NOTE" class="headerlink" title="NOTE"></a>NOTE</h3><ol>
+<li>주의해야 할 점은 <code>absolute</code> 포지션을 부모 element에 상대적으로 사용하려면 부모 element에서 <code>relative</code> 포지션을 먼저 설정해줘야 한다.</li>
+<li>그게 설정되어야 차일즈 element는 부모 element 안에 위치할 수 있다.</li>
+</ol>
+<hr>
+<h2 id="position-html"><a href="#position-html" class="headerlink" title="position.html"></a>position.html</h2><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"ie=edge"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Position property<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">      /*</span><br><span class="line">            각 브라우저 마다 가지고 있는 Default 값을 상쇄하기 위해서</span><br><span class="line">            아래와 같은 설정을 해준다. </span><br><span class="line">        */</span><br><span class="line">      body,</span><br><span class="line">      html &#123;</span><br><span class="line">        height: 100%;</span><br><span class="line">        margin: 0;</span><br><span class="line">        padding: 0;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      body &#123;</span><br><span class="line">        height: 100%;</span><br><span class="line">        background-color: gray;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">      <span class="selector-class">.abs-box</span> &#123;</span></span><br><span class="line">        width: 400px;</span><br><span class="line">        height: 400px;</span><br><span class="line">        background-color: yellow;</span><br><span class="line">        position: relative;</span><br><span class="line">        top: 300px;</span><br><span class="line">        left: 50%;</span><br><span class="line">        transform: translate(-50%, -50%);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">      <span class="selector-class">.abs-child</span> &#123;</span></span><br><span class="line">        width: 100px;</span><br><span class="line">        height: 100px;</span><br><span class="line">        background-color: green;</span><br><span class="line">        position: absolute;</span><br><span class="line">        top: 10px;</span><br><span class="line">        left: 10px;</span><br><span class="line">      &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"abs-box"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"abs-child"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><a href="../../../../img/position_property.png" title="Image description" class="gallery-item"><img src="../../../../img/position_property.png" alt="Image description"></a></p>
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>]]></content>
+      <categories>
+        <category>HTML5</category>
+        <category>CSS3</category>
+      </categories>
+      <tags>
+        <tag>CSS3</tag>
       </tags>
   </entry>
   <entry>
@@ -3043,58 +3951,6 @@ merge newbranch
       </categories>
       <tags>
         <tag>Programming</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Position property</title>
-    <url>/2020/01/14/2020-01-14-position%20property%20note/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
-<h2 id="static"><a href="#static" class="headerlink" title="static"></a>static</h2><blockquote>
-<p>Default position value</p>
-</blockquote>
-<p><code>Default</code>로 모든 박스는 포지션이 static이다. 이 뜻은<br>그 element를 거기 놓으면 거기 있을 것이다~라는 뜻이다.</p>
-<hr>
-<h2 id="fixed"><a href="#fixed" class="headerlink" title="fixed"></a>fixed</h2><blockquote>
-<p>Fixed stays with me while I scroll.</p>
-</blockquote>
-<p>포지션이 fixed 라면 화면 상에 표시되는 위치에 고정되어 스크롤해도 사라지지 않는다.<br>즉, element가 그 위치에 overwrap해서 고정된다.</p>
-<hr>
-<h2 id="absolute"><a href="#absolute" class="headerlink" title="absolute"></a>absolute</h2><ul>
-<li>absolute는 fixed와 비슷하다. 어디에든 붙일 수 있지만 스크롤한다고 보이지는 않는다.</li>
-<li>포지션을 absolute로 설정하고 설정 값을 주면 html 상에서 부모(father)에 해당하는 박스를 찾지 못할 수도 있다.</li>
-<li>따라서 <code>relative</code> 포지션이 없는 경우, absolute는 문서의 본무 body에 맞춰서 포지션을 잡게 된다.</li>
-</ul>
-<blockquote>
-<p>즉, <code>position: absolute;</code>가 설정되면 html 상에서 해당 element와 관계가 있는 (relative - 부모박스) element를 살펴보고 이에 상응해서 포지션이 결정된다. 이 경우 부모 박스가 상응하는 관계가 없어서 그냥 우리가 설정한 값대로 움직이게 됨으로 부모에 해당하는 박스를 찾지 못한다는 뜻이다.</p>
-</blockquote>
-<p>그렇기 때문에 만약 부모 박스가 없으면 child box는 문서 본문 body에 맞춰서 position을 잡을 것이다. 반대로 부모 박스에 <strong>position: relative;</strong> 를 설정하면 child box는 그에 상대해서 <code>absolute</code> 포지션을 잡을 것이다.</p>
-<blockquote>
-<ol>
-<li>Not stays with me while I scroll.</li>
-<li>Positioning relative to relative.</li>
-</ol>
-</blockquote>
-<hr>
-<h3 id="NOTE"><a href="#NOTE" class="headerlink" title="NOTE"></a>NOTE</h3><ol>
-<li>주의해야 할 점은 <code>absolute</code> 포지션을 부모 element에 상대적으로 사용하려면 부모 element에서 <code>relative</code> 포지션을 먼저 설정해줘야 한다.</li>
-<li>그게 설정되어야 차일즈 element는 부모 element 안에 위치할 수 있다.</li>
-</ol>
-<hr>
-<h2 id="position-html"><a href="#position-html" class="headerlink" title="position.html"></a>position.html</h2><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"ie=edge"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Position property<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">      /*</span><br><span class="line">            각 브라우저 마다 가지고 있는 Default 값을 상쇄하기 위해서</span><br><span class="line">            아래와 같은 설정을 해준다. </span><br><span class="line">        */</span><br><span class="line">      body,</span><br><span class="line">      html &#123;</span><br><span class="line">        height: 100%;</span><br><span class="line">        margin: 0;</span><br><span class="line">        padding: 0;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      body &#123;</span><br><span class="line">        height: 100%;</span><br><span class="line">        background-color: gray;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">      <span class="selector-class">.abs-box</span> &#123;</span></span><br><span class="line">        width: 400px;</span><br><span class="line">        height: 400px;</span><br><span class="line">        background-color: yellow;</span><br><span class="line">        position: relative;</span><br><span class="line">        top: 300px;</span><br><span class="line">        left: 50%;</span><br><span class="line">        transform: translate(-50%, -50%);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">      <span class="selector-class">.abs-child</span> &#123;</span></span><br><span class="line">        width: 100px;</span><br><span class="line">        height: 100px;</span><br><span class="line">        background-color: green;</span><br><span class="line">        position: absolute;</span><br><span class="line">        top: 10px;</span><br><span class="line">        left: 10px;</span><br><span class="line">      &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"abs-box"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"abs-child"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><a href="../../../../img/position_property.png" title="Image description" class="gallery-item"><img src="../../../../img/position_property.png" alt="Image description"></a></p>
-</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
-        var options = {
-            selector: '.gallery-item'
-        };
-        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
-        }</script>]]></content>
-      <categories>
-        <category>HTML5</category>
-        <category>CSS3</category>
-      </categories>
-      <tags>
-        <tag>CSS3</tag>
       </tags>
   </entry>
   <entry>
