@@ -58,279 +58,133 @@
       </tags>
   </entry>
   <entry>
-    <title>Trees</title>
-    <url>/2020/04/28/2020-04-28-csci356-lec6/</url>
+    <title>Searching and Sorting [2/2]</title>
+    <url>/2020/04/28/2020-04-28-csci356-lec5-2/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
-<h2 id="Topics"><a href="#Topics" class="headerlink" title="Topics"></a>Topics</h2><ul>
-<li><a href="./#Examples-of-Trees">Examples of Trees</a></li>
-<li><a href="./#Vocabulary-and-Definitions">Vocabulary and Definitions</a></li>
-<li>Implementation</li>
-<li>Binary Tree Applications</li>
-<li>Priority Queue with Binary Heaps</li>
-<li>Binary Search Trees</li>
+<h2 id="Sorting"><a href="#Sorting" class="headerlink" title="Sorting"></a>Sorting</h2><ul>
+<li><strong>Sorting</strong> is the process of placing elements from a collection in order.</li>
+<li>We’ll discuss several sorting algorithms and compare them with respect to their running time.</li>
+<li>The total number of <strong>comparisons</strong> will be considered to evaluate the overall efficiency of a sorting algorithm.</li>
 </ul>
-<h2 id="Examples-of-Trees"><a href="#Examples-of-Trees" class="headerlink" title="Examples of Trees"></a>Examples of Trees</h2><p>The difference between a tree in computer science and a tree in nature is that a tree data structure has its root at the top and its leaves on the bottom.</p>
-<h3 id="Properties-of-trees"><a href="#Properties-of-trees" class="headerlink" title="Properties of trees"></a>Properties of trees</h3><ul>
-<li>Trees are <strong>hierarchical</strong>, they are structured in layers with the more general things near the top and the more specific things near the bottom.</li>
-<li>The children of one node are independent of the children of another node.</li>
-<li>Each leaf node is unique.</li>
+<h2 id="Selection-sort"><a href="#Selection-sort" class="headerlink" title="Selection sort"></a>Selection sort</h2><p>looks for the smallest item and places it first, then finds the smallest in the remaining and puts it next, and so on.</p>
+<ul>
+<li>After the 1<sup>st</sup> pass, the smallest item is in the correct place.</li>
+<li>After the 2<sup>nd</sup> pass, the next smallest is in place.</li>
+<li>On each pass the smallest remaining item is selected and then placed in its proper location.</li>
+<li>This process requires (n – 1) passes to sort n items.</li>
 </ul>
-<h3 id="Examples-of-Trees-Cont’d"><a href="#Examples-of-Trees-Cont’d" class="headerlink" title="Examples of Trees (Cont’d)"></a>Examples of Trees (Cont’d)</h3><p>Taxonomy of some common animals shown as a tree:</p>
-<a href="https://runestone.academy/runestone/books/published/cppds/_images/biology.png" title="axonomy of Some Common Animals Shown as a Tree" class="gallery-item"><img src="https://runestone.academy/runestone/books/published/cppds/_images/biology.png" class="" width="500" alt="axonomy of Some Common Animals Shown as a Tree"></a>
+<h3 id="Selection-sort-Cont’d-1-2"><a href="#Selection-sort-Cont’d-1-2" class="headerlink" title="Selection sort (Cont’d) [1/2]"></a>Selection sort (Cont’d) [1/2]</h3><ul>
+<li><p>The exchange operation (“swap”) is slightly different in Python.</p>
+</li>
+<li><p>Most programming languages requires a temp variable to store one of the values.</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">temp = a;</span><br><span class="line">a = b;</span><br><span class="line">b = temp;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>In Python, multiple assignment is allowed.</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a, b = b, a</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Here is the code for selection sort:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">selection_sort</span><span class="params">(alist)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(alist)):</span><br><span class="line">        min_value = alist[i]</span><br><span class="line">        min_index = i</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(i + <span class="number">1</span>, len(alist)):</span><br><span class="line">            <span class="keyword">if</span> min_value &gt; alist[j]:</span><br><span class="line">                min_value = alist[j]</span><br><span class="line">                min_index = j</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> min_index != i:</span><br><span class="line">            alist[min_index], alist[i] = alist[i], alist[min_index]</span><br></pre></td></tr></table></figure>
 
-<p>A small part of the Unix file system hierarchy:</p>
-<a href="https://runestone.academy/runestone/books/published/cppds/_images/directory.png" title="Small Part of the Unix File System Hierarchy" class="gallery-item"><img src="https://runestone.academy/runestone/books/published/cppds/_images/directory.png" class="" alt="Small Part of the Unix File System Hierarchy"></a>
-
-<h2 id="Vocabulary-and-Definitions"><a href="#Vocabulary-and-Definitions" class="headerlink" title="Vocabulary and Definitions"></a>Vocabulary and Definitions</h2><table>
+</li>
+</ul>
+<h3 id="Selection-sort-Cont’d-2-2"><a href="#Selection-sort-Cont’d-2-2" class="headerlink" title="Selection sort (Cont’d) [2/2]"></a>Selection sort (Cont’d) [2/2]</h3><ul>
+<li>To analyze the selection sort:</li>
+</ul>
+<table>
 <thead>
 <tr>
-<th align="left">Vocabulary</th>
-<th align="left">Definitions</th>
+<th align="left">Pass</th>
+<th align="left">Comparisions</th>
 </tr>
 </thead>
 <tbody><tr>
-<td align="left">Node</td>
-<td align="left">fundamental part of a tree, it can have a name, which we call the <strong>“key”</strong>.</td>
+<td align="left">1</td>
+<td align="left">n - 1</td>
 </tr>
 <tr>
-<td align="left">Edge</td>
-<td align="left">connects two nodes to show that there is a relationship between them.</td>
+<td align="left">2</td>
+<td align="left">n - 2</td>
 </tr>
 <tr>
-<td align="left">Root</td>
-<td align="left">the only node in the tree that has no incoming edges.</td>
+<td align="left">3</td>
+<td align="left">n - 3</td>
 </tr>
 <tr>
-<td align="left">Path</td>
-<td align="left">an ordered list of nodes that are connected by edges.</td>
+<td align="left">…</td>
+<td align="left">…</td>
 </tr>
 <tr>
-<td align="left">Children</td>
-<td align="left">the set of nodes that have incoming edges from the same node.</td>
-</tr>
-<tr>
-<td align="left">Parent</td>
-<td align="left">a node is the parent of all the nodes it connects to with outgoing edges.</td>
-</tr>
-<tr>
-<td align="left">Sibling</td>
-<td align="left">nodes in the tree that are children of the same parent.</td>
-</tr>
-<tr>
-<td align="left">Subtree</td>
-<td align="left">a set of nodes and edges comprised of a parent and all the descendants of that parent.</td>
-</tr>
-<tr>
-<td align="left">Leaf node</td>
-<td align="left">a node that has no children.</td>
-</tr>
-<tr>
-<td align="left">Level</td>
-<td align="left">the level of a node n is the number of edges on the path from the root node to n. The level of the root node is 0.</td>
-</tr>
-<tr>
-<td align="left">Height</td>
-<td align="left">the maximum level of any node in the tree.</td>
+<td align="left">n - 1</td>
+<td align="left">1</td>
 </tr>
 </tbody></table>
-<h2 id="Definition-of-a-Tree"><a href="#Definition-of-a-Tree" class="headerlink" title="Definition of a Tree"></a>Definition of a Tree</h2><blockquote><p>A tree consists of a set of nodes and a set of edges that connect pairs of nodes.</p>
-</blockquote>
-
 <ul>
-<li>One node of the tree is designated as the root node.</li>
-<li>Every node $n$, except the root node, is connected by an edge from exactly one other node $p$, where $p$ is the parent of $n$.</li>
-<li>A unique path traverses from the root to each node.</li>
-<li>If each node in the tree has a maximum of <strong>two</strong> children, we say that the tree is a <strong>binary tree</strong>.</li>
+<li>The sum of $ 1 + 2 + 3 + … + (n-1) = \frac{n \cdot (n - 1)}{2}$</li>
+<li>The complexity is $O(n^{2})$</li>
 </ul>
-<h3 id="Definition-of-a-Tree-Cont’d"><a href="#Definition-of-a-Tree-Cont’d" class="headerlink" title="Definition of a Tree (Cont’d)"></a>Definition of a Tree (Cont’d)</h3><p>A tree consisting of a set of nodes and edges:</p>
-<a href="https://runestone.academy/runestone/books/published/cppds/_images/treedef1.png" title="A Tree Consisting of a Set of Nodes and Edges" class="gallery-item"><img src="https://runestone.academy/runestone/books/published/cppds/_images/treedef1.png" class="" alt="A Tree Consisting of a Set of Nodes and Edges"></a>
+<h2 id="Bubble-Sort"><a href="#Bubble-Sort" class="headerlink" title="Bubble Sort"></a>Bubble Sort</h2><ul>
+<li>Compares adjacent items and exchanges each pair that are out of order.</li>
+<li>Each pass through the list places the next largest value in its proper place.</li>
+<li>In essence, each item “bubbles” up to the location where it belongs.</li>
+</ul>
+<h3 id="Bubble-Sort-Cont’d-1-2"><a href="#Bubble-Sort-Cont’d-1-2" class="headerlink" title="Bubble Sort (Cont’d) [1/2]"></a>Bubble Sort (Cont’d) [1/2]</h3><ul>
+<li>At the start of the 2<sup>nd</sup> pass, the largest value is now in place.</li>
+<li>There are n – 1 items left to sort.</li>
+<li>The total number of passes necessary will be n – 1.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bubble_sort</span><span class="params">(alist)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(alist)):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span>, len(alist) - i):</span><br><span class="line">            <span class="keyword">if</span> alist[j] &lt; alist[j<span class="number">-1</span>]:</span><br><span class="line">                alist[j<span class="number">-1</span>], alist[j] = alist[j], alist[j<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
 
-<p>&nbsp;</p>
-<blockquote><p>A tree is either empty or consists of a root and zero or more subtrees, each of which is also a tree. This is a <strong>recursive</strong> definition of a tree.</p>
-</blockquote>
+<h3 id="Bubble-Sort-Cont’d-2-2"><a href="#Bubble-Sort-Cont’d-2-2" class="headerlink" title="Bubble Sort (Cont’d) [2/2]"></a>Bubble Sort (Cont’d) [2/2]</h3><p>Generally speaking, the bubble sort makes the same number of comparisons as the selection sort and is therefore also $O(n^{2})$</p>
+<h2 id="Insertion-sort"><a href="#Insertion-sort" class="headerlink" title="Insertion sort"></a>Insertion sort</h2><ul>
+<li>each new item is “inserted” into the sub-list to make the sorted sublist is one item larger.</li>
+<li>We begin by assuming that a list with one item (position 0, list[0]) is already sorted.</li>
+<li>On each pass, one for each item 1 through n – 1, the current item is checked against those in the already sorted list. Shift those items that are greater to the right; when we reach a smaller item or the end of the sublist, the current item can be inserted.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bubble_sort</span><span class="params">(alist)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, len(alist)):</span><br><span class="line">        current_value = alist[i]</span><br><span class="line">        pos = i</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> pos &gt; <span class="number">0</span> <span class="keyword">and</span> pos[i<span class="number">-1</span>] &gt; current_value:</span><br><span class="line">            alist[pos] = alist[pos<span class="number">-1</span>]</span><br><span class="line">            pos -= <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        alist[pos] = current_value</span><br></pre></td></tr></table></figure>
 
-<a href="https://runestone.academy/runestone/books/published/cppds/_images/TreeDefRecursive.png" title="A recursive Definition of a tree" class="gallery-item"><img src="https://runestone.academy/runestone/books/published/cppds/_images/TreeDefRecursive.png" class="" alt="A recursive Definition of a tree"></a>
+<h2 id="Insertion-sort-Cont’d"><a href="#Insertion-sort-Cont’d" class="headerlink" title="Insertion sort (Cont’d)"></a>Insertion sort (Cont’d)</h2><ul>
+<li>The maximum number of comparisons for an insertion sort is the sum of the first n – 1 integers.</li>
+<li>Again, this is $O(n^{2})$</li>
+</ul>
+<h2 id="Merge-sort"><a href="#Merge-sort" class="headerlink" title="Merge sort"></a>Merge sort</h2><ul>
+<li>A recursive algorithm that continually splits a list in half.</li>
+<li>If the list is empty or has one item, it is sorted (the base case).</li>
+<li>If the list has more than one item, we split the list and recursively invoke a merge sort on both halves. Once the two halves are sorted, the fundamental operation, called a merge, is performed.</li>
+<li>Merging is the process of combining two smaller sorted lists into a single sorted list.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">merge_sort</span><span class="params">(alist)</span>:</span></span><br><span class="line">	print(<span class="string">f"Splitting: <span class="subst">&#123;alist&#125;</span>"</span>)</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span> len(alist) &gt; <span class="number">1</span>:</span><br><span class="line">		mid = len(alist) // <span class="number">2</span></span><br><span class="line">		left_half = alist[:mid]</span><br><span class="line">		right_half = alist[mid:]</span><br><span class="line">		</span><br><span class="line">		merge_sort(left_half)</span><br><span class="line">		merge_sort(right_half)</span><br><span class="line">		</span><br><span class="line">		i = <span class="number">0</span></span><br><span class="line">		j = <span class="number">0</span></span><br><span class="line">		k = <span class="number">0</span></span><br><span class="line">		</span><br><span class="line">		<span class="keyword">while</span> i &lt; len(left_half) <span class="keyword">and</span> j &lt; len(right_half):</span><br><span class="line">			<span class="keyword">if</span> left_half[i] &lt; right_half[j]:</span><br><span class="line">				alist[k] = left_half[i]</span><br><span class="line">				i += <span class="number">1</span></span><br><span class="line">				k += <span class="number">1</span></span><br><span class="line">			<span class="keyword">else</span>:</span><br><span class="line">				alist[k] = right_half[j]</span><br><span class="line">				j += <span class="number">1</span></span><br><span class="line">				k += <span class="number">1</span></span><br><span class="line">		</span><br><span class="line">		<span class="keyword">while</span> i &lt; len(left_half):</span><br><span class="line">			alist[k] = left_half[i]</span><br><span class="line">			i += <span class="number">1</span></span><br><span class="line">			k += <span class="number">1</span></span><br><span class="line">		</span><br><span class="line">		<span class="keyword">while</span> j &lt; len(right_half):</span><br><span class="line">			alist[k] = right_half[j]</span><br><span class="line">			j += <span class="number">1</span></span><br><span class="line">			k += <span class="number">1</span></span><br><span class="line">		</span><br><span class="line">	print(<span class="string">f"Merging: <span class="subst">&#123;alist&#125;</span>"</span>)</span><br></pre></td></tr></table></figure>
 
-<h2 id="Implementation-of-a-Binary-Tree"><a href="#Implementation-of-a-Binary-Tree" class="headerlink" title="Implementation of a Binary Tree"></a>Implementation of a Binary Tree</h2><table>
-<thead>
-<tr>
-<th align="left">Functions</th>
-<th align="left">Definitions</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left"><code>BinaryTree()</code></td>
-<td align="left">creates a new instance of a binary tree.</td>
-</tr>
-<tr>
-<td align="left"><code>getLeftChild()</code></td>
-<td align="left">returns the binary tree corresponding to the left child of the current node.</td>
-</tr>
-<tr>
-<td align="left"><code>getRightChild()</code></td>
-<td align="left">returns the binary tree corresponding to the right child of the current node.</td>
-</tr>
-<tr>
-<td align="left"><code>setRootVal(val)</code></td>
-<td align="left">stores the object in parameter <strong>val</strong> in the current node.</td>
-</tr>
-<tr>
-<td align="left"><code>getRootVal()</code></td>
-<td align="left">returns the object stored in the current node.</td>
-</tr>
-<tr>
-<td align="left"><code>insertLeft(val)</code></td>
-<td align="left">creates a new binary tree and installs it as the left child of the current node.</td>
-</tr>
-<tr>
-<td align="left"><code>insertRight(val)</code></td>
-<td align="left">creates a new binary tree and installs it as the right child of the current node.</td>
-</tr>
-</tbody></table>
-<h3 id="Implementation-Cont’d-1-2"><a href="#Implementation-Cont’d-1-2" class="headerlink" title="Implementation (Cont’d) [1/2]"></a>Implementation (Cont’d) [1/2]</h3><p><strong>List of lists</strong> representation of a tree:</p>
-<ul>
-<li>Store the value of the root node as the 1<sup>st</sup> element of the list;</li>
-<li>The 2<sup>nd</sup> element of the list will itself be a list that represents the left subtree;</li>
-<li>And the 3<sup>rd</sup> element of the list will be another list that represents the right subtree.</li>
+<h3 id="Merge-sort-Cont’d"><a href="#Merge-sort-Cont’d" class="headerlink" title="Merge sort (Cont’d)"></a>Merge sort (Cont’d)</h3><ul>
+<li>Merge sort has two distinct processes: splitting and merging.</li>
+<li>Splitting a list into halves can be done: $O(\log n)$</li>
+<li>Merging: each item in the list will be processed and placed in the sorted list, this is $O(n)$</li>
+<li>Thus, merge sort is an $O(n\log n)$ algorithm.</li>
 </ul>
-<p>Representing a tree as a list of lists:</p>
-<a href="https://runestone.academy/runestone/books/published/cppds/_images/treerecs.png" title="A Simple Tree Using a Nodes and References Approach" class="gallery-item"><img src="https://runestone.academy/runestone/books/published/cppds/_images/treerecs.png" class="" alt="A Simple Tree Using a Nodes and References Approach"></a>
+<h2 id="Quick-sort"><a href="#Quick-sort" class="headerlink" title="Quick sort"></a>Quick sort</h2><ul>
+<li>This sort first selects a value (called the <strong>pivot</strong> value, we will use the 1<sup>st</sup> item as the pivot value).</li>
+<li>The role of the pivot value is to assist with <ins>splitting</ins> the list.</li>
+<li>The actual position where the pivot value belongs in the final sorted list (called the split point) will be used to divide the list for subsequent calls to the quick sort.</li>
+<li>The partition process finds the split point and move other items to the appropriate side of the list, either less than or greater than the pivot value.</li>
+<li>Partitioning begins by locating two position markers (leftMark and rightMark) at the beginning and end of the remaining items in the list.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">quick_sort</span><span class="params">(alist)</span>:</span></span><br><span class="line">    quick_sort_helper(alist, <span class="number">0</span>, len(alist)<span class="number">-1</span>)</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">myTree = [</span><br><span class="line">    [<span class="string">'a'</span>,  <span class="comment"># root</span></span><br><span class="line"></span><br><span class="line">     [<span class="string">'b'</span>,  <span class="comment"># left subtree</span></span><br><span class="line">      [<span class="string">'d'</span>, [], []],</span><br><span class="line">      [<span class="string">'e'</span>, [], []]</span><br><span class="line">     ],</span><br><span class="line">     </span><br><span class="line">     [<span class="string">'c'</span>,  <span class="comment"># right subtree</span></span><br><span class="line">      [<span class="string">'f'</span>, [], []],</span><br><span class="line">      []</span><br><span class="line">     ]</span><br><span class="line"></span><br><span class="line">    ]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">quick_sort_helper</span><span class="params">(alist, first, last)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> first &lt; last:</span><br><span class="line">    split_point = partition(alist, first, last)</span><br><span class="line">    quick_sort_helper(alist, first, split_point<span class="number">-1</span>)</span><br><span class="line">    quick_sort_helper(alist, split_point + <span class="number">1</span>, last)</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&gt;&gt; myTree = [[<span class="string">'a'</span>, [<span class="string">'b'</span>, [<span class="string">'d'</span>, [], []],[<span class="string">'e'</span>, [], []]],\</span><br><span class="line">             [<span class="string">'c'</span>, [<span class="string">'f'</span>, [], []],[]] ]]</span><br><span class="line"></span><br><span class="line">&gt;&gt; myTree[<span class="number">0</span>] <span class="comment"># Print the loop</span></span><br><span class="line"><span class="string">'a'</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; myTree[<span class="number">1</span>] <span class="comment"># Print the left subtree</span></span><br><span class="line">[<span class="string">'b'</span>, [<span class="string">'d'</span>, [], []],[<span class="string">'e'</span>, [], []]]</span><br><span class="line"></span><br><span class="line">&gt;&gt; myTree[<span class="number">2</span>] <span class="comment"># Print the right subtree</span></span><br><span class="line">[<span class="string">'c'</span>, [<span class="string">'f'</span>, [], []],[] ]]</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">partition</span><span class="params">(alist, first, last)</span>:</span></span><br><span class="line">    pivot_value = alist[first]</span><br><span class="line"></span><br><span class="line">    left_mark = first + <span class="number">1</span></span><br><span class="line">    right_mark = last</span><br><span class="line">    done = <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">not</span> done:</span><br><span class="line">        <span class="keyword">while</span> left_mark &lt;= right_mark <span class="keyword">and</span> alist[left_mark] &lt;= pivot_value:</span><br><span class="line">            left_mark += <span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> left_mark &lt;= right_mark <span class="keyword">and</span> alist[right_mark] &gt;= pivot_value:</span><br><span class="line">            right_mark -= <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> right_mark &lt; left_mark:</span><br><span class="line">            done = <span class="literal">True</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            alist[left_mark], alist[right_mark] = alist[right_mark], alist[left_mark]</span><br><span class="line"></span><br><span class="line">    alist[first], alist[right_mark] = alist[right_mark], alist[first]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> right_mark</span><br></pre></td></tr></table></figure>
 
-<hr>
-<ul>
-<li>To create Binary Tree, return the root and empty left and right sub tree.</li>
+<h3 id="Quick-sort-Cont’d"><a href="#Quick-sort-Cont’d" class="headerlink" title="Quick sort (Cont’d)"></a>Quick sort (Cont’d)</h3><ul>
+<li>For quick sort, if the partition occurs in the middle of the list, there will be $\log n$ divisions.</li>
+<li>In order to find the split point, each of the $n$ items need to be checked against the pivot value.</li>
+<li>Thus, quick sort is an $O(n\log n)$ algorithm.</li>
 </ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="string">'''Create a binary tree'''</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">BinaryTree</span><span class="params">(r)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> [r, [], []]</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>To <strong>add a left subtree</strong> to the root of a tree, we need to insert a new list onto the 2<sup>nd</sup> position of the root list:</li>
-<li>If the list already has something in the 2<sup>nd</sup> position, we need to push it down the tree as the left child of the list we are adding.</li>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><ul>
+<li>A sequential search is $O(n)$.</li>
+<li>A binary search of an ordered list is $O(\log n)$.</li>
+<li>Hash tables can provide constant time searching $O(1)$.</li>
+<li>A selection sort, a bubble sort, and an insertion sort are $O(n^{2})$ algorithms.</li>
+<li>A merge sort and a quick sort are $O(n\log n)$ algorithms.</li>
 </ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">insertLeft</span><span class="params">(root, newBrench)</span>:</span></span><br><span class="line">    t = root.pop(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> len(t) &gt; <span class="number">1</span>:</span><br><span class="line">        root.insert(<span class="number">1</span>, [newBrench, t, []])</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        root.insert(<span class="number">1</span>, [newBrench, [], []])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> root</span><br></pre></td></tr></table></figure>
-
-<hr>
-<ul>
-<li>To <strong>add a right subtree</strong> to the root of a tree, we need to insert a new list onto the 3rd position of the root list:</li>
-<li>If the list already has something in the 3<sup>rd</sup> position, we need to push it down the tree as the right child of the list we are adding.</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">insertLeft</span><span class="params">(root, newBrench)</span>:</span></span><br><span class="line">    t = root.pop(<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> len(t) &gt; <span class="number">1</span>:</span><br><span class="line">        root.insert(<span class="number">2</span>, [newBrench, [], t])</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        root.insert(<span class="number">2</span>, [newBrench, [], []])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> root</span><br></pre></td></tr></table></figure>
-
-<hr>
-<ul>
-<li>Access functions for parts of the tree:</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getRootVal</span><span class="params">(root)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> root[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">setRootVal</span><span class="params">(root, newVal)</span>:</span></span><br><span class="line">    root[<span class="number">0</span>] = newVal</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getLeftVal</span><span class="params">(root)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> root[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getRightVal</span><span class="params">(root)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> root[<span class="number">2</span>]</span><br></pre></td></tr></table></figure>
-
-<h3 id="Implementation-Cont’d-2-2"><a href="#Implementation-Cont’d-2-2" class="headerlink" title="Implementation (Cont’d) [2/2]"></a>Implementation (Cont’d) [2/2]</h3><p><strong>Nodes and references</strong> representation of a tree:</p>
-<ul>
-<li>Define a class that has attributes for the root value, as well as the left and right subtrees.</li>
-<li>A simple tree using nodes and references representation:</li>
-</ul>
-<hr>
-<ul>
-<li>A simple class definition:<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BinaryTree</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, rootObj)</span>:</span></span><br><span class="line">        self.key = rootObj</span><br><span class="line">        self.left = <span class="literal">None</span></span><br><span class="line">        self.right = <span class="literal">None</span></span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<hr>
-<ul>
-<li>To <strong>insert a left child</strong> and <strong>a right child</strong>, we push the existing child down one level in the tree:</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">insertLeft</span><span class="params">(self, newNode)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> self.left == <span class="literal">None</span>:</span><br><span class="line">        self.left = BinaryTree(newNode)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        t = BinaryTree(newNode)</span><br><span class="line">        t.left = self.left</span><br><span class="line">        self.left = t</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">insertRight</span><span class="params">(self, newNode)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> self.right == <span class="literal">None</span>:</span><br><span class="line">        self.right = BinaryTree(newNode)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        t = BinaryTree(newNode)</span><br><span class="line">        t.right = self.right</span><br><span class="line">        self.right = t</span><br></pre></td></tr></table></figure>
-
-<hr>
-<ul>
-<li>Access methods for the BinaryTree class:</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getRootVal</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> self.key</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">setRootVal</span><span class="params">(self, obj)</span>:</span></span><br><span class="line">    self.key = obj</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getLeftChild</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> self.left</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getRightChild</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> self.right</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="Binary-Tree-in-Python"><a href="#Binary-Tree-in-Python" class="headerlink" title="Binary Tree in Python"></a>Binary Tree in Python</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BinaryTree</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,rootObj)</span>:</span> <span class="comment"># initializer function expects to get some kind of object to store in the root</span></span><br><span class="line">        self.key = rootObj</span><br><span class="line">        self.leftChild = <span class="literal">None</span>  <span class="comment"># reference other instances of the binary tree the BinaryTree class</span></span><br><span class="line">        self.rightChild = <span class="literal">None</span> <span class="comment"># reference other instances of the binary tree the BinaryTree class</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">insertLeft</span><span class="params">(self,newNode)</span>:</span> <span class="comment"># Handles insertion if there is no left child simply adds a node to the tree.</span></span><br><span class="line">        <span class="keyword">if</span> self.leftChild == <span class="literal">None</span>:</span><br><span class="line">            self.leftChild = BinaryTree(newNode)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            t = BinaryTree(newNode) <span class="comment"># handles insertion if there is a left child pushes the existing child down one level in the tree.</span></span><br><span class="line">            t.leftChild = self.leftChild</span><br><span class="line">            self.leftChild = t</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">insertRight</span><span class="params">(self,newNode)</span>:</span> <span class="comment"># Handles insertion if there is no right child simply adds a node to the tree</span></span><br><span class="line">        <span class="keyword">if</span> self.rightChild == <span class="literal">None</span>:</span><br><span class="line">            self.rightChild = BinaryTree(newNode)</span><br><span class="line">        <span class="keyword">else</span>: <span class="comment"># handles insertion if there is a right child pushes the existing child down one level in the tree.</span></span><br><span class="line">            t = BinaryTree(newNode)</span><br><span class="line">            t.rightChild = self.rightChild</span><br><span class="line">            self.rightChild = t</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getRightChild</span><span class="params">(self)</span>:</span> <span class="comment"># accessor method</span></span><br><span class="line">        <span class="keyword">return</span> self.rightChild</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getLeftChild</span><span class="params">(self)</span>:</span> <span class="comment"># accessor method</span></span><br><span class="line">        <span class="keyword">return</span> self.leftChild</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">setRootVal</span><span class="params">(self,obj)</span>:</span> <span class="comment"># accessor method</span></span><br><span class="line">        self.key = obj</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getRootVal</span><span class="params">(self)</span>:</span> <span class="comment"># accessor method</span></span><br><span class="line">        <span class="keyword">return</span> self.key</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    r = BinaryTree(<span class="string">'a'</span>)</span><br><span class="line">    print(r.getRootVal())</span><br><span class="line">    print(r.getLeftChild())</span><br><span class="line">    r.insertLeft(<span class="string">'b'</span>)</span><br><span class="line">    print(r.getLeftChild())</span><br><span class="line">    print(r.getLeftChild().getRootVal())</span><br><span class="line">    r.insertRight(<span class="string">'c'</span>)</span><br><span class="line">    print(r.getRightChild())</span><br><span class="line">    print(r.getRightChild().getRootVal())</span><br><span class="line">    r.getRightChild().setRootVal(<span class="string">'d'</span>)</span><br><span class="line">    print(r.getRightChild().getRootVal())</span><br><span class="line"></span><br><span class="line">main()</span><br></pre></td></tr></table></figure>
-
-<h2 id="Binary-Tree-Applications"><a href="#Binary-Tree-Applications" class="headerlink" title="Binary Tree Applications"></a>Binary Tree Applications</h2><ul>
-<li><strong>Parse trees</strong> can be used to represent real-world constructions like sentences or mathematical expressions.</li>
-<li>A parse tree for a simple sentence:</li>
-</ul>
-<a href="https://runestone.academy/runestone/books/published/cppds/_images/nlParse.png" title="A Parse Tree for a Simple Sentence" class="gallery-item"><img src="https://runestone.academy/runestone/books/published/cppds/_images/nlParse.png" class="" alt="A Parse Tree for a Simple Sentence"></a>
-
-<h3 id="Applications-Cont’d-1-2"><a href="#Applications-Cont’d-1-2" class="headerlink" title="Applications (Cont’d) [1/2]"></a>Applications (Cont’d) [1/2]</h3><ul>
-<li>How to build a parse tree from a fully parenthesized mathematical expression and how to evaluate the expression?</li>
-<li>Parse tree for $((7 + 3) * (5 – 2))$:</li>
-</ul>
-<a href="https://runestone.academy/runestone/books/published/cppds/_images/meParse.png" title="Parse Tree for ((7+3)∗(5−2))" class="gallery-item"><img src="https://runestone.academy/runestone/books/published/cppds/_images/meParse.png" class="" alt="Parse Tree for ((7+3)∗(5−2))"></a>
-
-<ul>
-<li>Applying this replacement procedure gives us the simplified tree shown as below</li>
-</ul>
-<a href="https://runestone.academy/runestone/books/published/cppds/_images/meSimple.png" title="A Simplified Parse Tree for ((7+3)∗(5−2))" class="gallery-item"><img src="https://runestone.academy/runestone/books/published/cppds/_images/meSimple.png" class="" alt="A Simplified Parse Tree for ((7+3)∗(5−2))"></a>
-
-<h3 id="Applications-Cont’d-2-2"><a href="#Applications-Cont’d-2-2" class="headerlink" title="Applications (Cont’d) [2/2]"></a>Applications (Cont’d) [2/2]</h3><ul>
-<li>There are four different kinds of tokens to consider:<ul>
-<li>left parentheses</li>
-<li>right parentheses</li>
-<li>operators</li>
-<li>operands</li>
-</ul>
-</li>
-<li>Operands will be the leaf nodes and children of their operators.</li>
-<li>Every operator will have two children.</li>
-</ul>
-<hr>
-<p>We define four rules as follows:</p>
-<ol>
-<li>If the current token is a <code>&#39;(&#39;</code>, add a new node as the left child of the current node, and descend to the left child.</li>
-<li>If the current token is in the vector <code>[&#39;+&#39;,&#39;-&#39;,&#39;/&#39;,&#39;*&#39;]</code>, set the root value of the current node to the operator represented by the current token. Add a new node as the right child of the current node and descend to the right child.</li>
-<li>If the current token is a number, set the root value of the current node to the number and return to the parent.</li>
-<li>If the current token is a <code>&#39;)&#39;</code>, go to the parent of the current node.</li>
-</ol>
-<hr>
-<p>Use the expression <code>(3 + (4 * 5))</code> as an example,<br>below is a trace for parse tree construction:</p>
-<div class="note no-icon">
-            <p>Follow the link <a href="https://runestone.academy/runestone/books/published/cppds/Trees/ParseTree.html" target="_blank" rel="noopener">here</a></p>
-          </div>
-
-<ol>
-<li>Create an empty tree.</li>
-<li>Read <code>&#39;(&#39;</code> as the first token. By rule 1, create a new node as the left child of the root. Make the current node this new child.</li>
-<li>Read <code>&#39;3&#39;</code> as the next token. By rule 3, set the root value of the current node to 3 and go back up the tree to the parent.</li>
-<li>Read <code>&#39;+&#39;</code> as the next token. By rule 2, set the root value of the current node to + and add a new node as the right child. The new right child becomes the current node.</li>
-<li>Read <code>&#39;(&#39;</code> as the next token. By rule 1, create a new node as the left child of the current node. The new left child becomes the current node.</li>
-<li>Read <code>&#39;4&#39;</code> as the next token. By rule 3, set the value of the current node to 4. Make the parent of 4 the current node.</li>
-<li>Read <code>&#39;*&#39;</code> as the next token. By rule 2, set the root value of the current node to * and create a new right child. The new right child becomes the current node.</li>
-<li>Read <code>&#39;5&#39;</code> as the next token. By rule 3, set the root value of the current node to 5. Make the parent of 5 the current node.</li>
-<li>Read <code>&#39;)&#39;</code> as the next token. By rule 4 we make the parent of <code>&#39;*&#39;</code> the current node.</li>
-<li>Read <code>&#39;)&#39;</code> as the next token. By rule 4 we make the parent of + the current node. At this point there is no parent for + so we are done.</li>
-</ol>
-<h2 id="Tree-Traversals"><a href="#Tree-Traversals" class="headerlink" title="Tree Traversals"></a>Tree Traversals</h2><ul>
-<li><strong>Tree Traversals:</strong> visiting all the nodes of a tree</li>
-<li>There are three commonly used patterns for a tree traversal.</li>
-<li>The difference between these patterns is the <strong>order</strong> in which each node is visited.</li>
-<li>Three traversals:<ul>
-<li>Preorder</li>
-<li>Inorder</li>
-<li>Postorder</li>
-</ul>
-</li>
-</ul>
-<h3 id="Preorder-ROOT-L-R"><a href="#Preorder-ROOT-L-R" class="headerlink" title="Preorder (ROOT-L-R)"></a>Preorder (ROOT-L-R)</h3><ul>
-<li>In this traversal, we visit the <strong>root</strong> node first, then recursively do a preorder traversal of the <strong>left</strong> subtree, followed by a recursive preorder traversal of the right subtree.</li>
-<li>Below is the code to implement preorder traversal:</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">preorder</span><span class="params">(tree)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> tree:</span><br><span class="line">        print(tree.getRootVal())</span><br><span class="line">        preorder(tree.getLeftChild())</span><br><span class="line">        preorder(tree.getRightChild())</span><br></pre></td></tr></table></figure>
-
-<h3 id="Inorder-L-ROOT-R"><a href="#Inorder-L-ROOT-R" class="headerlink" title="Inorder (L-ROOT-R)"></a>Inorder (L-ROOT-R)</h3><ul>
-<li>In this traversal, we recursively do an inorder traversal on the <strong>left subtree</strong>, visit the <strong>root</strong> node, and finally do a recursive inorder traversal of the <strong>right subtree</strong>.</li>
-</ul>
-<h3 id="Postorder-L-R-ROOT"><a href="#Postorder-L-R-ROOT" class="headerlink" title="Postorder (L-R-ROOT)"></a>Postorder (L-R-ROOT)</h3><ul>
-<li>In this traversal, we recursively do a postorder traversal on the <strong>left subtree</strong> and the <strong>right subtree</strong> followed by a visit to the <strong>root</strong> node.</li>
-</ul>
-<hr>
-<p>Below is the code to implement inorder and postorder traversals:</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">inorder</span><span class="params">(tree)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> tree:</span><br><span class="line">        inorder(tree.getLeftChild())</span><br><span class="line">        print(tree.getRootVal())</span><br><span class="line">        inorder(tree.getRightChild())</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">postorder</span><span class="params">(tree)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> tree:</span><br><span class="line">        postorder(tree.getLeftChild())</span><br><span class="line">        postorder(tree.getRightChild())</span><br><span class="line">        print(tree.getRootVal())</span><br></pre></td></tr></table></figure>
 </div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
         var options = {
             selector: '.gallery-item'
@@ -607,133 +461,279 @@
       </tags>
   </entry>
   <entry>
-    <title>Searching and Sorting [2/2]</title>
-    <url>/2020/04/28/2020-04-28-csci356-lec5-2/</url>
+    <title>Trees</title>
+    <url>/2020/04/28/2020-04-28-csci356-lec6/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
-<h2 id="Sorting"><a href="#Sorting" class="headerlink" title="Sorting"></a>Sorting</h2><ul>
-<li><strong>Sorting</strong> is the process of placing elements from a collection in order.</li>
-<li>We’ll discuss several sorting algorithms and compare them with respect to their running time.</li>
-<li>The total number of <strong>comparisons</strong> will be considered to evaluate the overall efficiency of a sorting algorithm.</li>
+<h2 id="Topics"><a href="#Topics" class="headerlink" title="Topics"></a>Topics</h2><ul>
+<li><a href="./#Examples-of-Trees">Examples of Trees</a></li>
+<li><a href="./#Vocabulary-and-Definitions">Vocabulary and Definitions</a></li>
+<li>Implementation</li>
+<li>Binary Tree Applications</li>
+<li>Priority Queue with Binary Heaps</li>
+<li>Binary Search Trees</li>
 </ul>
-<h2 id="Selection-sort"><a href="#Selection-sort" class="headerlink" title="Selection sort"></a>Selection sort</h2><p>looks for the smallest item and places it first, then finds the smallest in the remaining and puts it next, and so on.</p>
-<ul>
-<li>After the 1<sup>st</sup> pass, the smallest item is in the correct place.</li>
-<li>After the 2<sup>nd</sup> pass, the next smallest is in place.</li>
-<li>On each pass the smallest remaining item is selected and then placed in its proper location.</li>
-<li>This process requires (n – 1) passes to sort n items.</li>
+<h2 id="Examples-of-Trees"><a href="#Examples-of-Trees" class="headerlink" title="Examples of Trees"></a>Examples of Trees</h2><p>The difference between a tree in computer science and a tree in nature is that a tree data structure has its root at the top and its leaves on the bottom.</p>
+<h3 id="Properties-of-trees"><a href="#Properties-of-trees" class="headerlink" title="Properties of trees"></a>Properties of trees</h3><ul>
+<li>Trees are <strong>hierarchical</strong>, they are structured in layers with the more general things near the top and the more specific things near the bottom.</li>
+<li>The children of one node are independent of the children of another node.</li>
+<li>Each leaf node is unique.</li>
 </ul>
-<h3 id="Selection-sort-Cont’d-1-2"><a href="#Selection-sort-Cont’d-1-2" class="headerlink" title="Selection sort (Cont’d) [1/2]"></a>Selection sort (Cont’d) [1/2]</h3><ul>
-<li><p>The exchange operation (“swap”) is slightly different in Python.</p>
-</li>
-<li><p>Most programming languages requires a temp variable to store one of the values.</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">temp = a;</span><br><span class="line">a = b;</span><br><span class="line">b = temp;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>In Python, multiple assignment is allowed.</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a, b = b, a</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Here is the code for selection sort:</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">selection_sort</span><span class="params">(alist)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(alist)):</span><br><span class="line">        min_value = alist[i]</span><br><span class="line">        min_index = i</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(i + <span class="number">1</span>, len(alist)):</span><br><span class="line">            <span class="keyword">if</span> min_value &gt; alist[j]:</span><br><span class="line">                min_value = alist[j]</span><br><span class="line">                min_index = j</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> min_index != i:</span><br><span class="line">            alist[min_index], alist[i] = alist[i], alist[min_index]</span><br></pre></td></tr></table></figure>
+<h3 id="Examples-of-Trees-Cont’d"><a href="#Examples-of-Trees-Cont’d" class="headerlink" title="Examples of Trees (Cont’d)"></a>Examples of Trees (Cont’d)</h3><p>Taxonomy of some common animals shown as a tree:</p>
+<a href="https://runestone.academy/runestone/books/published/cppds/_images/biology.png" title="axonomy of Some Common Animals Shown as a Tree" class="gallery-item"><img src="https://runestone.academy/runestone/books/published/cppds/_images/biology.png" class="" width="500" alt="axonomy of Some Common Animals Shown as a Tree"></a>
 
-</li>
-</ul>
-<h3 id="Selection-sort-Cont’d-2-2"><a href="#Selection-sort-Cont’d-2-2" class="headerlink" title="Selection sort (Cont’d) [2/2]"></a>Selection sort (Cont’d) [2/2]</h3><ul>
-<li>To analyze the selection sort:</li>
-</ul>
-<table>
+<p>A small part of the Unix file system hierarchy:</p>
+<a href="https://runestone.academy/runestone/books/published/cppds/_images/directory.png" title="Small Part of the Unix File System Hierarchy" class="gallery-item"><img src="https://runestone.academy/runestone/books/published/cppds/_images/directory.png" class="" alt="Small Part of the Unix File System Hierarchy"></a>
+
+<h2 id="Vocabulary-and-Definitions"><a href="#Vocabulary-and-Definitions" class="headerlink" title="Vocabulary and Definitions"></a>Vocabulary and Definitions</h2><table>
 <thead>
 <tr>
-<th align="left">Pass</th>
-<th align="left">Comparisions</th>
+<th align="left">Vocabulary</th>
+<th align="left">Definitions</th>
 </tr>
 </thead>
 <tbody><tr>
-<td align="left">1</td>
-<td align="left">n - 1</td>
+<td align="left">Node</td>
+<td align="left">fundamental part of a tree, it can have a name, which we call the <strong>“key”</strong>.</td>
 </tr>
 <tr>
-<td align="left">2</td>
-<td align="left">n - 2</td>
+<td align="left">Edge</td>
+<td align="left">connects two nodes to show that there is a relationship between them.</td>
 </tr>
 <tr>
-<td align="left">3</td>
-<td align="left">n - 3</td>
+<td align="left">Root</td>
+<td align="left">the only node in the tree that has no incoming edges.</td>
 </tr>
 <tr>
-<td align="left">…</td>
-<td align="left">…</td>
+<td align="left">Path</td>
+<td align="left">an ordered list of nodes that are connected by edges.</td>
 </tr>
 <tr>
-<td align="left">n - 1</td>
-<td align="left">1</td>
+<td align="left">Children</td>
+<td align="left">the set of nodes that have incoming edges from the same node.</td>
+</tr>
+<tr>
+<td align="left">Parent</td>
+<td align="left">a node is the parent of all the nodes it connects to with outgoing edges.</td>
+</tr>
+<tr>
+<td align="left">Sibling</td>
+<td align="left">nodes in the tree that are children of the same parent.</td>
+</tr>
+<tr>
+<td align="left">Subtree</td>
+<td align="left">a set of nodes and edges comprised of a parent and all the descendants of that parent.</td>
+</tr>
+<tr>
+<td align="left">Leaf node</td>
+<td align="left">a node that has no children.</td>
+</tr>
+<tr>
+<td align="left">Level</td>
+<td align="left">the level of a node n is the number of edges on the path from the root node to n. The level of the root node is 0.</td>
+</tr>
+<tr>
+<td align="left">Height</td>
+<td align="left">the maximum level of any node in the tree.</td>
 </tr>
 </tbody></table>
+<h2 id="Definition-of-a-Tree"><a href="#Definition-of-a-Tree" class="headerlink" title="Definition of a Tree"></a>Definition of a Tree</h2><blockquote><p>A tree consists of a set of nodes and a set of edges that connect pairs of nodes.</p>
+</blockquote>
+
 <ul>
-<li>The sum of $ 1 + 2 + 3 + … + (n-1) = \frac{n \cdot (n - 1)}{2}$</li>
-<li>The complexity is $O(n^{2})$</li>
+<li>One node of the tree is designated as the root node.</li>
+<li>Every node $n$, except the root node, is connected by an edge from exactly one other node $p$, where $p$ is the parent of $n$.</li>
+<li>A unique path traverses from the root to each node.</li>
+<li>If each node in the tree has a maximum of <strong>two</strong> children, we say that the tree is a <strong>binary tree</strong>.</li>
 </ul>
-<h2 id="Bubble-Sort"><a href="#Bubble-Sort" class="headerlink" title="Bubble Sort"></a>Bubble Sort</h2><ul>
-<li>Compares adjacent items and exchanges each pair that are out of order.</li>
-<li>Each pass through the list places the next largest value in its proper place.</li>
-<li>In essence, each item “bubbles” up to the location where it belongs.</li>
-</ul>
-<h3 id="Bubble-Sort-Cont’d-1-2"><a href="#Bubble-Sort-Cont’d-1-2" class="headerlink" title="Bubble Sort (Cont’d) [1/2]"></a>Bubble Sort (Cont’d) [1/2]</h3><ul>
-<li>At the start of the 2<sup>nd</sup> pass, the largest value is now in place.</li>
-<li>There are n – 1 items left to sort.</li>
-<li>The total number of passes necessary will be n – 1.</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bubble_sort</span><span class="params">(alist)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(alist)):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span>, len(alist) - i):</span><br><span class="line">            <span class="keyword">if</span> alist[j] &lt; alist[j<span class="number">-1</span>]:</span><br><span class="line">                alist[j<span class="number">-1</span>], alist[j] = alist[j], alist[j<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
+<h3 id="Definition-of-a-Tree-Cont’d"><a href="#Definition-of-a-Tree-Cont’d" class="headerlink" title="Definition of a Tree (Cont’d)"></a>Definition of a Tree (Cont’d)</h3><p>A tree consisting of a set of nodes and edges:</p>
+<a href="https://runestone.academy/runestone/books/published/cppds/_images/treedef1.png" title="A Tree Consisting of a Set of Nodes and Edges" class="gallery-item"><img src="https://runestone.academy/runestone/books/published/cppds/_images/treedef1.png" class="" alt="A Tree Consisting of a Set of Nodes and Edges"></a>
 
-<h3 id="Bubble-Sort-Cont’d-2-2"><a href="#Bubble-Sort-Cont’d-2-2" class="headerlink" title="Bubble Sort (Cont’d) [2/2]"></a>Bubble Sort (Cont’d) [2/2]</h3><p>Generally speaking, the bubble sort makes the same number of comparisons as the selection sort and is therefore also $O(n^{2})$</p>
-<h2 id="Insertion-sort"><a href="#Insertion-sort" class="headerlink" title="Insertion sort"></a>Insertion sort</h2><ul>
-<li>each new item is “inserted” into the sub-list to make the sorted sublist is one item larger.</li>
-<li>We begin by assuming that a list with one item (position 0, list[0]) is already sorted.</li>
-<li>On each pass, one for each item 1 through n – 1, the current item is checked against those in the already sorted list. Shift those items that are greater to the right; when we reach a smaller item or the end of the sublist, the current item can be inserted.</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bubble_sort</span><span class="params">(alist)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, len(alist)):</span><br><span class="line">        current_value = alist[i]</span><br><span class="line">        pos = i</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> pos &gt; <span class="number">0</span> <span class="keyword">and</span> pos[i<span class="number">-1</span>] &gt; current_value:</span><br><span class="line">            alist[pos] = alist[pos<span class="number">-1</span>]</span><br><span class="line">            pos -= <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        alist[pos] = current_value</span><br></pre></td></tr></table></figure>
+<p>&nbsp;</p>
+<blockquote><p>A tree is either empty or consists of a root and zero or more subtrees, each of which is also a tree. This is a <strong>recursive</strong> definition of a tree.</p>
+</blockquote>
 
-<h2 id="Insertion-sort-Cont’d"><a href="#Insertion-sort-Cont’d" class="headerlink" title="Insertion sort (Cont’d)"></a>Insertion sort (Cont’d)</h2><ul>
-<li>The maximum number of comparisons for an insertion sort is the sum of the first n – 1 integers.</li>
-<li>Again, this is $O(n^{2})$</li>
-</ul>
-<h2 id="Merge-sort"><a href="#Merge-sort" class="headerlink" title="Merge sort"></a>Merge sort</h2><ul>
-<li>A recursive algorithm that continually splits a list in half.</li>
-<li>If the list is empty or has one item, it is sorted (the base case).</li>
-<li>If the list has more than one item, we split the list and recursively invoke a merge sort on both halves. Once the two halves are sorted, the fundamental operation, called a merge, is performed.</li>
-<li>Merging is the process of combining two smaller sorted lists into a single sorted list.</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">merge_sort</span><span class="params">(alist)</span>:</span></span><br><span class="line">	print(<span class="string">f"Splitting: <span class="subst">&#123;alist&#125;</span>"</span>)</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span> len(alist) &gt; <span class="number">1</span>:</span><br><span class="line">		mid = len(alist) // <span class="number">2</span></span><br><span class="line">		left_half = alist[:mid]</span><br><span class="line">		right_half = alist[mid:]</span><br><span class="line">		</span><br><span class="line">		merge_sort(left_half)</span><br><span class="line">		merge_sort(right_half)</span><br><span class="line">		</span><br><span class="line">		i = <span class="number">0</span></span><br><span class="line">		j = <span class="number">0</span></span><br><span class="line">		k = <span class="number">0</span></span><br><span class="line">		</span><br><span class="line">		<span class="keyword">while</span> i &lt; len(left_half) <span class="keyword">and</span> j &lt; len(right_half):</span><br><span class="line">			<span class="keyword">if</span> left_half[i] &lt; right_half[j]:</span><br><span class="line">				alist[k] = left_half[i]</span><br><span class="line">				i += <span class="number">1</span></span><br><span class="line">				k += <span class="number">1</span></span><br><span class="line">			<span class="keyword">else</span>:</span><br><span class="line">				alist[k] = right_half[j]</span><br><span class="line">				j += <span class="number">1</span></span><br><span class="line">				k += <span class="number">1</span></span><br><span class="line">		</span><br><span class="line">		<span class="keyword">while</span> i &lt; len(left_half):</span><br><span class="line">			alist[k] = left_half[i]</span><br><span class="line">			i += <span class="number">1</span></span><br><span class="line">			k += <span class="number">1</span></span><br><span class="line">		</span><br><span class="line">		<span class="keyword">while</span> j &lt; len(right_half):</span><br><span class="line">			alist[k] = right_half[j]</span><br><span class="line">			j += <span class="number">1</span></span><br><span class="line">			k += <span class="number">1</span></span><br><span class="line">		</span><br><span class="line">	print(<span class="string">f"Merging: <span class="subst">&#123;alist&#125;</span>"</span>)</span><br></pre></td></tr></table></figure>
+<a href="https://runestone.academy/runestone/books/published/cppds/_images/TreeDefRecursive.png" title="A recursive Definition of a tree" class="gallery-item"><img src="https://runestone.academy/runestone/books/published/cppds/_images/TreeDefRecursive.png" class="" alt="A recursive Definition of a tree"></a>
 
-<h3 id="Merge-sort-Cont’d"><a href="#Merge-sort-Cont’d" class="headerlink" title="Merge sort (Cont’d)"></a>Merge sort (Cont’d)</h3><ul>
-<li>Merge sort has two distinct processes: splitting and merging.</li>
-<li>Splitting a list into halves can be done: $O(\log n)$</li>
-<li>Merging: each item in the list will be processed and placed in the sorted list, this is $O(n)$</li>
-<li>Thus, merge sort is an $O(n\log n)$ algorithm.</li>
+<h2 id="Implementation-of-a-Binary-Tree"><a href="#Implementation-of-a-Binary-Tree" class="headerlink" title="Implementation of a Binary Tree"></a>Implementation of a Binary Tree</h2><table>
+<thead>
+<tr>
+<th align="left">Functions</th>
+<th align="left">Definitions</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>BinaryTree()</code></td>
+<td align="left">creates a new instance of a binary tree.</td>
+</tr>
+<tr>
+<td align="left"><code>getLeftChild()</code></td>
+<td align="left">returns the binary tree corresponding to the left child of the current node.</td>
+</tr>
+<tr>
+<td align="left"><code>getRightChild()</code></td>
+<td align="left">returns the binary tree corresponding to the right child of the current node.</td>
+</tr>
+<tr>
+<td align="left"><code>setRootVal(val)</code></td>
+<td align="left">stores the object in parameter <strong>val</strong> in the current node.</td>
+</tr>
+<tr>
+<td align="left"><code>getRootVal()</code></td>
+<td align="left">returns the object stored in the current node.</td>
+</tr>
+<tr>
+<td align="left"><code>insertLeft(val)</code></td>
+<td align="left">creates a new binary tree and installs it as the left child of the current node.</td>
+</tr>
+<tr>
+<td align="left"><code>insertRight(val)</code></td>
+<td align="left">creates a new binary tree and installs it as the right child of the current node.</td>
+</tr>
+</tbody></table>
+<h3 id="Implementation-Cont’d-1-2"><a href="#Implementation-Cont’d-1-2" class="headerlink" title="Implementation (Cont’d) [1/2]"></a>Implementation (Cont’d) [1/2]</h3><p><strong>List of lists</strong> representation of a tree:</p>
+<ul>
+<li>Store the value of the root node as the 1<sup>st</sup> element of the list;</li>
+<li>The 2<sup>nd</sup> element of the list will itself be a list that represents the left subtree;</li>
+<li>And the 3<sup>rd</sup> element of the list will be another list that represents the right subtree.</li>
 </ul>
-<h2 id="Quick-sort"><a href="#Quick-sort" class="headerlink" title="Quick sort"></a>Quick sort</h2><ul>
-<li>This sort first selects a value (called the <strong>pivot</strong> value, we will use the 1<sup>st</sup> item as the pivot value).</li>
-<li>The role of the pivot value is to assist with <ins>splitting</ins> the list.</li>
-<li>The actual position where the pivot value belongs in the final sorted list (called the split point) will be used to divide the list for subsequent calls to the quick sort.</li>
-<li>The partition process finds the split point and move other items to the appropriate side of the list, either less than or greater than the pivot value.</li>
-<li>Partitioning begins by locating two position markers (leftMark and rightMark) at the beginning and end of the remaining items in the list.</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">quick_sort</span><span class="params">(alist)</span>:</span></span><br><span class="line">    quick_sort_helper(alist, <span class="number">0</span>, len(alist)<span class="number">-1</span>)</span><br></pre></td></tr></table></figure>
+<p>Representing a tree as a list of lists:</p>
+<a href="https://runestone.academy/runestone/books/published/cppds/_images/treerecs.png" title="A Simple Tree Using a Nodes and References Approach" class="gallery-item"><img src="https://runestone.academy/runestone/books/published/cppds/_images/treerecs.png" class="" alt="A Simple Tree Using a Nodes and References Approach"></a>
 
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">quick_sort_helper</span><span class="params">(alist, first, last)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> first &lt; last:</span><br><span class="line">    split_point = partition(alist, first, last)</span><br><span class="line">    quick_sort_helper(alist, first, split_point<span class="number">-1</span>)</span><br><span class="line">    quick_sort_helper(alist, split_point + <span class="number">1</span>, last)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">myTree = [</span><br><span class="line">    [<span class="string">'a'</span>,  <span class="comment"># root</span></span><br><span class="line"></span><br><span class="line">     [<span class="string">'b'</span>,  <span class="comment"># left subtree</span></span><br><span class="line">      [<span class="string">'d'</span>, [], []],</span><br><span class="line">      [<span class="string">'e'</span>, [], []]</span><br><span class="line">     ],</span><br><span class="line">     </span><br><span class="line">     [<span class="string">'c'</span>,  <span class="comment"># right subtree</span></span><br><span class="line">      [<span class="string">'f'</span>, [], []],</span><br><span class="line">      []</span><br><span class="line">     ]</span><br><span class="line"></span><br><span class="line">    ]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">partition</span><span class="params">(alist, first, last)</span>:</span></span><br><span class="line">    pivot_value = alist[first]</span><br><span class="line"></span><br><span class="line">    left_mark = first + <span class="number">1</span></span><br><span class="line">    right_mark = last</span><br><span class="line">    done = <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">not</span> done:</span><br><span class="line">        <span class="keyword">while</span> left_mark &lt;= right_mark <span class="keyword">and</span> alist[left_mark] &lt;= pivot_value:</span><br><span class="line">            left_mark += <span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> left_mark &lt;= right_mark <span class="keyword">and</span> alist[right_mark] &gt;= pivot_value:</span><br><span class="line">            right_mark -= <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> right_mark &lt; left_mark:</span><br><span class="line">            done = <span class="literal">True</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            alist[left_mark], alist[right_mark] = alist[right_mark], alist[left_mark]</span><br><span class="line"></span><br><span class="line">    alist[first], alist[right_mark] = alist[right_mark], alist[first]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> right_mark</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&gt;&gt; myTree = [[<span class="string">'a'</span>, [<span class="string">'b'</span>, [<span class="string">'d'</span>, [], []],[<span class="string">'e'</span>, [], []]],\</span><br><span class="line">             [<span class="string">'c'</span>, [<span class="string">'f'</span>, [], []],[]] ]]</span><br><span class="line"></span><br><span class="line">&gt;&gt; myTree[<span class="number">0</span>] <span class="comment"># Print the loop</span></span><br><span class="line"><span class="string">'a'</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; myTree[<span class="number">1</span>] <span class="comment"># Print the left subtree</span></span><br><span class="line">[<span class="string">'b'</span>, [<span class="string">'d'</span>, [], []],[<span class="string">'e'</span>, [], []]]</span><br><span class="line"></span><br><span class="line">&gt;&gt; myTree[<span class="number">2</span>] <span class="comment"># Print the right subtree</span></span><br><span class="line">[<span class="string">'c'</span>, [<span class="string">'f'</span>, [], []],[] ]]</span><br></pre></td></tr></table></figure>
 
-<h3 id="Quick-sort-Cont’d"><a href="#Quick-sort-Cont’d" class="headerlink" title="Quick sort (Cont’d)"></a>Quick sort (Cont’d)</h3><ul>
-<li>For quick sort, if the partition occurs in the middle of the list, there will be $\log n$ divisions.</li>
-<li>In order to find the split point, each of the $n$ items need to be checked against the pivot value.</li>
-<li>Thus, quick sort is an $O(n\log n)$ algorithm.</li>
+<hr>
+<ul>
+<li>To create Binary Tree, return the root and empty left and right sub tree.</li>
 </ul>
-<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><ul>
-<li>A sequential search is $O(n)$.</li>
-<li>A binary search of an ordered list is $O(\log n)$.</li>
-<li>Hash tables can provide constant time searching $O(1)$.</li>
-<li>A selection sort, a bubble sort, and an insertion sort are $O(n^{2})$ algorithms.</li>
-<li>A merge sort and a quick sort are $O(n\log n)$ algorithms.</li>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="string">'''Create a binary tree'''</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">BinaryTree</span><span class="params">(r)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> [r, [], []]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>To <strong>add a left subtree</strong> to the root of a tree, we need to insert a new list onto the 2<sup>nd</sup> position of the root list:</li>
+<li>If the list already has something in the 2<sup>nd</sup> position, we need to push it down the tree as the left child of the list we are adding.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">insertLeft</span><span class="params">(root, newBrench)</span>:</span></span><br><span class="line">    t = root.pop(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> len(t) &gt; <span class="number">1</span>:</span><br><span class="line">        root.insert(<span class="number">1</span>, [newBrench, t, []])</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        root.insert(<span class="number">1</span>, [newBrench, [], []])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> root</span><br></pre></td></tr></table></figure>
+
+<hr>
+<ul>
+<li>To <strong>add a right subtree</strong> to the root of a tree, we need to insert a new list onto the 3rd position of the root list:</li>
+<li>If the list already has something in the 3<sup>rd</sup> position, we need to push it down the tree as the right child of the list we are adding.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">insertLeft</span><span class="params">(root, newBrench)</span>:</span></span><br><span class="line">    t = root.pop(<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> len(t) &gt; <span class="number">1</span>:</span><br><span class="line">        root.insert(<span class="number">2</span>, [newBrench, [], t])</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        root.insert(<span class="number">2</span>, [newBrench, [], []])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> root</span><br></pre></td></tr></table></figure>
+
+<hr>
+<ul>
+<li>Access functions for parts of the tree:</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getRootVal</span><span class="params">(root)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> root[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">setRootVal</span><span class="params">(root, newVal)</span>:</span></span><br><span class="line">    root[<span class="number">0</span>] = newVal</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getLeftVal</span><span class="params">(root)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> root[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getRightVal</span><span class="params">(root)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> root[<span class="number">2</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="Implementation-Cont’d-2-2"><a href="#Implementation-Cont’d-2-2" class="headerlink" title="Implementation (Cont’d) [2/2]"></a>Implementation (Cont’d) [2/2]</h3><p><strong>Nodes and references</strong> representation of a tree:</p>
+<ul>
+<li>Define a class that has attributes for the root value, as well as the left and right subtrees.</li>
+<li>A simple tree using nodes and references representation:</li>
+</ul>
+<hr>
+<ul>
+<li>A simple class definition:<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BinaryTree</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, rootObj)</span>:</span></span><br><span class="line">        self.key = rootObj</span><br><span class="line">        self.left = <span class="literal">None</span></span><br><span class="line">        self.right = <span class="literal">None</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<hr>
+<ul>
+<li>To <strong>insert a left child</strong> and <strong>a right child</strong>, we push the existing child down one level in the tree:</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">insertLeft</span><span class="params">(self, newNode)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> self.left == <span class="literal">None</span>:</span><br><span class="line">        self.left = BinaryTree(newNode)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        t = BinaryTree(newNode)</span><br><span class="line">        t.left = self.left</span><br><span class="line">        self.left = t</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">insertRight</span><span class="params">(self, newNode)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> self.right == <span class="literal">None</span>:</span><br><span class="line">        self.right = BinaryTree(newNode)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        t = BinaryTree(newNode)</span><br><span class="line">        t.right = self.right</span><br><span class="line">        self.right = t</span><br></pre></td></tr></table></figure>
+
+<hr>
+<ul>
+<li>Access methods for the BinaryTree class:</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getRootVal</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> self.key</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">setRootVal</span><span class="params">(self, obj)</span>:</span></span><br><span class="line">    self.key = obj</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getLeftChild</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> self.left</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getRightChild</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> self.right</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="Binary-Tree-in-Python"><a href="#Binary-Tree-in-Python" class="headerlink" title="Binary Tree in Python"></a>Binary Tree in Python</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BinaryTree</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,rootObj)</span>:</span> <span class="comment"># initializer function expects to get some kind of object to store in the root</span></span><br><span class="line">        self.key = rootObj</span><br><span class="line">        self.leftChild = <span class="literal">None</span>  <span class="comment"># reference other instances of the binary tree the BinaryTree class</span></span><br><span class="line">        self.rightChild = <span class="literal">None</span> <span class="comment"># reference other instances of the binary tree the BinaryTree class</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">insertLeft</span><span class="params">(self,newNode)</span>:</span> <span class="comment"># Handles insertion if there is no left child simply adds a node to the tree.</span></span><br><span class="line">        <span class="keyword">if</span> self.leftChild == <span class="literal">None</span>:</span><br><span class="line">            self.leftChild = BinaryTree(newNode)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            t = BinaryTree(newNode) <span class="comment"># handles insertion if there is a left child pushes the existing child down one level in the tree.</span></span><br><span class="line">            t.leftChild = self.leftChild</span><br><span class="line">            self.leftChild = t</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">insertRight</span><span class="params">(self,newNode)</span>:</span> <span class="comment"># Handles insertion if there is no right child simply adds a node to the tree</span></span><br><span class="line">        <span class="keyword">if</span> self.rightChild == <span class="literal">None</span>:</span><br><span class="line">            self.rightChild = BinaryTree(newNode)</span><br><span class="line">        <span class="keyword">else</span>: <span class="comment"># handles insertion if there is a right child pushes the existing child down one level in the tree.</span></span><br><span class="line">            t = BinaryTree(newNode)</span><br><span class="line">            t.rightChild = self.rightChild</span><br><span class="line">            self.rightChild = t</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getRightChild</span><span class="params">(self)</span>:</span> <span class="comment"># accessor method</span></span><br><span class="line">        <span class="keyword">return</span> self.rightChild</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getLeftChild</span><span class="params">(self)</span>:</span> <span class="comment"># accessor method</span></span><br><span class="line">        <span class="keyword">return</span> self.leftChild</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">setRootVal</span><span class="params">(self,obj)</span>:</span> <span class="comment"># accessor method</span></span><br><span class="line">        self.key = obj</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getRootVal</span><span class="params">(self)</span>:</span> <span class="comment"># accessor method</span></span><br><span class="line">        <span class="keyword">return</span> self.key</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    r = BinaryTree(<span class="string">'a'</span>)</span><br><span class="line">    print(r.getRootVal())</span><br><span class="line">    print(r.getLeftChild())</span><br><span class="line">    r.insertLeft(<span class="string">'b'</span>)</span><br><span class="line">    print(r.getLeftChild())</span><br><span class="line">    print(r.getLeftChild().getRootVal())</span><br><span class="line">    r.insertRight(<span class="string">'c'</span>)</span><br><span class="line">    print(r.getRightChild())</span><br><span class="line">    print(r.getRightChild().getRootVal())</span><br><span class="line">    r.getRightChild().setRootVal(<span class="string">'d'</span>)</span><br><span class="line">    print(r.getRightChild().getRootVal())</span><br><span class="line"></span><br><span class="line">main()</span><br></pre></td></tr></table></figure>
+
+<h2 id="Binary-Tree-Applications"><a href="#Binary-Tree-Applications" class="headerlink" title="Binary Tree Applications"></a>Binary Tree Applications</h2><ul>
+<li><strong>Parse trees</strong> can be used to represent real-world constructions like sentences or mathematical expressions.</li>
+<li>A parse tree for a simple sentence:</li>
+</ul>
+<a href="https://runestone.academy/runestone/books/published/cppds/_images/nlParse.png" title="A Parse Tree for a Simple Sentence" class="gallery-item"><img src="https://runestone.academy/runestone/books/published/cppds/_images/nlParse.png" class="" alt="A Parse Tree for a Simple Sentence"></a>
+
+<h3 id="Applications-Cont’d-1-2"><a href="#Applications-Cont’d-1-2" class="headerlink" title="Applications (Cont’d) [1/2]"></a>Applications (Cont’d) [1/2]</h3><ul>
+<li>How to build a parse tree from a fully parenthesized mathematical expression and how to evaluate the expression?</li>
+<li>Parse tree for $((7 + 3) * (5 – 2))$:</li>
+</ul>
+<a href="https://runestone.academy/runestone/books/published/cppds/_images/meParse.png" title="Parse Tree for ((7+3)∗(5−2))" class="gallery-item"><img src="https://runestone.academy/runestone/books/published/cppds/_images/meParse.png" class="" alt="Parse Tree for ((7+3)∗(5−2))"></a>
+
+<ul>
+<li>Applying this replacement procedure gives us the simplified tree shown as below</li>
+</ul>
+<a href="https://runestone.academy/runestone/books/published/cppds/_images/meSimple.png" title="A Simplified Parse Tree for ((7+3)∗(5−2))" class="gallery-item"><img src="https://runestone.academy/runestone/books/published/cppds/_images/meSimple.png" class="" alt="A Simplified Parse Tree for ((7+3)∗(5−2))"></a>
+
+<h3 id="Applications-Cont’d-2-2"><a href="#Applications-Cont’d-2-2" class="headerlink" title="Applications (Cont’d) [2/2]"></a>Applications (Cont’d) [2/2]</h3><ul>
+<li>There are four different kinds of tokens to consider:<ul>
+<li>left parentheses</li>
+<li>right parentheses</li>
+<li>operators</li>
+<li>operands</li>
+</ul>
+</li>
+<li>Operands will be the leaf nodes and children of their operators.</li>
+<li>Every operator will have two children.</li>
+</ul>
+<hr>
+<p>We define four rules as follows:</p>
+<ol>
+<li>If the current token is a <code>&#39;(&#39;</code>, add a new node as the left child of the current node, and descend to the left child.</li>
+<li>If the current token is in the vector <code>[&#39;+&#39;,&#39;-&#39;,&#39;/&#39;,&#39;*&#39;]</code>, set the root value of the current node to the operator represented by the current token. Add a new node as the right child of the current node and descend to the right child.</li>
+<li>If the current token is a number, set the root value of the current node to the number and return to the parent.</li>
+<li>If the current token is a <code>&#39;)&#39;</code>, go to the parent of the current node.</li>
+</ol>
+<hr>
+<p>Use the expression <code>(3 + (4 * 5))</code> as an example,<br>below is a trace for parse tree construction:</p>
+<div class="note no-icon">
+            <p>Follow the link <a href="https://runestone.academy/runestone/books/published/cppds/Trees/ParseTree.html" target="_blank" rel="noopener">here</a></p>
+          </div>
+
+<ol>
+<li>Create an empty tree.</li>
+<li>Read <code>&#39;(&#39;</code> as the first token. By rule 1, create a new node as the left child of the root. Make the current node this new child.</li>
+<li>Read <code>&#39;3&#39;</code> as the next token. By rule 3, set the root value of the current node to 3 and go back up the tree to the parent.</li>
+<li>Read <code>&#39;+&#39;</code> as the next token. By rule 2, set the root value of the current node to + and add a new node as the right child. The new right child becomes the current node.</li>
+<li>Read <code>&#39;(&#39;</code> as the next token. By rule 1, create a new node as the left child of the current node. The new left child becomes the current node.</li>
+<li>Read <code>&#39;4&#39;</code> as the next token. By rule 3, set the value of the current node to 4. Make the parent of 4 the current node.</li>
+<li>Read <code>&#39;*&#39;</code> as the next token. By rule 2, set the root value of the current node to * and create a new right child. The new right child becomes the current node.</li>
+<li>Read <code>&#39;5&#39;</code> as the next token. By rule 3, set the root value of the current node to 5. Make the parent of 5 the current node.</li>
+<li>Read <code>&#39;)&#39;</code> as the next token. By rule 4 we make the parent of <code>&#39;*&#39;</code> the current node.</li>
+<li>Read <code>&#39;)&#39;</code> as the next token. By rule 4 we make the parent of + the current node. At this point there is no parent for + so we are done.</li>
+</ol>
+<h2 id="Tree-Traversals"><a href="#Tree-Traversals" class="headerlink" title="Tree Traversals"></a>Tree Traversals</h2><ul>
+<li><strong>Tree Traversals:</strong> visiting all the nodes of a tree</li>
+<li>There are three commonly used patterns for a tree traversal.</li>
+<li>The difference between these patterns is the <strong>order</strong> in which each node is visited.</li>
+<li>Three traversals:<ul>
+<li>Preorder</li>
+<li>Inorder</li>
+<li>Postorder</li>
+</ul>
+</li>
+</ul>
+<h3 id="Preorder-ROOT-L-R"><a href="#Preorder-ROOT-L-R" class="headerlink" title="Preorder (ROOT-L-R)"></a>Preorder (ROOT-L-R)</h3><ul>
+<li>In this traversal, we visit the <strong>root</strong> node first, then recursively do a preorder traversal of the <strong>left</strong> subtree, followed by a recursive preorder traversal of the right subtree.</li>
+<li>Below is the code to implement preorder traversal:</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">preorder</span><span class="params">(tree)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> tree:</span><br><span class="line">        print(tree.getRootVal())</span><br><span class="line">        preorder(tree.getLeftChild())</span><br><span class="line">        preorder(tree.getRightChild())</span><br></pre></td></tr></table></figure>
+
+<h3 id="Inorder-L-ROOT-R"><a href="#Inorder-L-ROOT-R" class="headerlink" title="Inorder (L-ROOT-R)"></a>Inorder (L-ROOT-R)</h3><ul>
+<li>In this traversal, we recursively do an inorder traversal on the <strong>left subtree</strong>, visit the <strong>root</strong> node, and finally do a recursive inorder traversal of the <strong>right subtree</strong>.</li>
+</ul>
+<h3 id="Postorder-L-R-ROOT"><a href="#Postorder-L-R-ROOT" class="headerlink" title="Postorder (L-R-ROOT)"></a>Postorder (L-R-ROOT)</h3><ul>
+<li>In this traversal, we recursively do a postorder traversal on the <strong>left subtree</strong> and the <strong>right subtree</strong> followed by a visit to the <strong>root</strong> node.</li>
+</ul>
+<hr>
+<p>Below is the code to implement inorder and postorder traversals:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">inorder</span><span class="params">(tree)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> tree:</span><br><span class="line">        inorder(tree.getLeftChild())</span><br><span class="line">        print(tree.getRootVal())</span><br><span class="line">        inorder(tree.getRightChild())</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">postorder</span><span class="params">(tree)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> tree:</span><br><span class="line">        postorder(tree.getLeftChild())</span><br><span class="line">        postorder(tree.getRightChild())</span><br><span class="line">        print(tree.getRootVal())</span><br></pre></td></tr></table></figure>
 </div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
         var options = {
             selector: '.gallery-item'
@@ -2264,161 +2264,6 @@ merge newbranch
       </tags>
   </entry>
   <entry>
-    <title>Distributions</title>
-    <url>/2020/02/19/2020-02-20-csci343-lec6/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
-<h2 id="확률-분포-함수"><a href="#확률-분포-함수" class="headerlink" title="확률 분포 함수"></a>확률 분포 함수</h2><p>확률 분포 함수는 확률 변수의 분포 즉, 확률 분포를 수학적으로 정의하기 위한 수식이다.</p>
-<p>확률 밀도 함수 (Probability Density Function, PDF)는 확률 변수의 분포를 나타내는 함수로, 확률 밀도 함수 $f(x)$와 구간 $[a,b]$에 대해서 확률 변수 $X$가 구간에 포함될 확률 $(a \leq X \leq b)$는 아래와 같은 공식이 된다.<br>&nbsp;<br>$$ \int _{a}^{b}f(x)dx $$<br>&nbsp;<br>확률 밀도 함수 $f(x)$는 다음의 두 조건을 만족해야 한다.</p>
-<ol>
-<li>모든 실수값 $X$에 대해 $f(x) \geq 0$</li>
-<li>$\int _{-\infty}^{\infty}f(x)dx = 1$</li>
-</ol>
-<p>확률 밀도 함수와 누적 분포 함수에는 다음과 같은 수식이 성립한다.</p>
-<blockquote>
-<p>$$F(x) = \int _{-\infty}^{x}f(x)dx$$<br>$$f(x) = \frac{d}{dx}F(x)$$</p>
-</blockquote>
-<hr>
-<h2 id="중심-극한-정리"><a href="#중심-극한-정리" class="headerlink" title="중심 극한 정리"></a>중심 극한 정리</h2><p>주어진 간격 내에 어떤 값을 중심으로 임의의 변동을 가지는 임의의 변수는 표본 수가 증가함에 따라 대략 정상적으로 분포될 것이라는 정리이다.</p>
-<p>정규 분포가 중요한 이유 중 하나는 중심극한정리 때문이다. 중심 극한 정리는 동일한 확률분포를 가진 독립 확률 변수 n개의 평균의 분포는 n이 적당히 크다면 정규분포에 가까워진다는 정리이다</p>
-<div class="note no-icon">
-            <p>이때, 정규 분포(혹은 가우스 분포)란 우리 주변에서 일반적으로 발견되는 좌우 대칭의 종 모양으로 생긴 분포를 말한다. 정규분포는 평균값에 가장 많은 데이터가 분포되어 있고 평균과 떨어질수록 데이터에 적게 분포하는 특징을 가지고 있다.</p>
-          </div>
-
-<p><a href="https://upload.wikimedia.org/wikipedia/commons/c/cd/Clt_in_action.gif" title="wiki" class="gallery-item"><img src="https://upload.wikimedia.org/wikipedia/commons/c/cd/Clt_in_action.gif" alt="wiki"></a></p>
-<p>매우 불규칙한 분포도 충분히 많은 수를 더하면 중심극한정리에 따라 결국 정규분포로 수렴한다.<br>&nbsp;</p>
-<h2 id="누적-분포-함수"><a href="#누적-분포-함수" class="headerlink" title="누적 분포 함수"></a>누적 분포 함수</h2><p>누적 분포 함수(cumulative distribution function, cdf)는 주어진 확률 변수가 특정 값보다 작거나 같은 확률을 나타내는 함수이다. 즉, 무작위 값이 정규 분포 모집단 내에서 주어진 값보다 작거나 같을 확률을 제공한다.</p>
-<p>확률 변수  X 에 대한 누적 확률 분포  F(x) 의 수학적 정의는 다음과 같다</p>
-<p>$$<br>F(x) = P({X \lt x}) = P(X \lt x)<br>$$<br>&nbsp;<br>몇가지 누적 확률 분포 표시의 예를 들면 다음과 같다.</p>
-<ul>
-<li>$F(−1)$: 확률 변수가 $−\infty$ 이상 -1 미만인 구간 내에 존재할 확률 즉, $P({-\infty \le X \lt −1})$</li>
-<li>$F(0)$: 확률 변수가 $−\infty$ 이상 0 미만인 구간 내에 존재할 확률 즉,  $P({-\infty \le X \lt 0})$</li>
-<li>$F(1)$: 확률 변수가 $−\infty$ 이상 1 미만인 구간 내에 존재할 확률 즉,  $P({-\infty \le X \lt 1})$<br>…</li>
-<li>$F(10)$: 확률 변수가 $−\infty$ 이상 10 미만인 구간 내에 존재할 확률 즉,  $P({-\infty \le X \lt 10})$<br>…</li>
-</ul>
-<p>시계 바늘 확률 문제의 경우를 예로 들어보자. 이 경우에는 각도가 0도부터 360까지이지만 음의 무한대를 시작점으로 해도 상관없다.</p>
-<a href="https://datascienceschool.net/upfiles/84a2a4193ef545d89e7c4417262942ea.png" class="gallery-item"><img src="https://datascienceschool.net/upfiles/84a2a4193ef545d89e7c4417262942ea.png" class="Example" title="Example 200 200"></a>
-
-<p>$F(0) = P({-\infty^{\circ} \le \theta \lt 0^{\circ} }) = 0$<br>$F(10) = P({-\infty^{\circ} \le \theta \lt 10^{\circ} }) = \frac{1}{36}$<br>$F(20) = P({-\infty^{\circ} \le \theta \lt 20^{\circ} }) = \frac{2}{36}$<br>…<br>$F(350) = P({-\infty^{0} \le \theta \lt 350^{0}}) = \frac{35}{36}$<br>$F(360) = P({-\infty^{0} \le \theta \lt 360^{0}}) = 1$<br>$F(370) = P({-\infty^{0} \le \theta \lt 370^{0}}) = 1$<br>$F(380) = P({-\infty^{0} \le \theta \lt 380^{0}}) = 1$<br>…</p>
-<p>이를 그림으로 표현하면 다음과 같다.</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> mplot</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">t = np.array(range(<span class="number">-100</span>, <span class="number">461</span>))</span><br><span class="line">F = t/<span class="number">360</span></span><br><span class="line"></span><br><span class="line">F[t &lt; <span class="number">0</span>] = <span class="number">0</span></span><br><span class="line">F[t &gt; <span class="number">360</span>] = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">mplot.title(<span class="string">"Cumulative Distribution Function"</span>)</span><br><span class="line">mplot.xlabel(<span class="string">'x $(\deg.)$'</span>)</span><br><span class="line">mplot.ylabel(<span class="string">'$F(x)$'</span>)</span><br><span class="line"></span><br><span class="line">mplot.xlim(t[<span class="number">0</span>], t[<span class="number">-1</span>])</span><br><span class="line">mplot.xticks([<span class="number">0</span>, <span class="number">180</span>, <span class="number">360</span>])</span><br><span class="line">mplot.plot(t, F)</span><br><span class="line">mplot.show()</span><br></pre></td></tr></table></figure>
-
-<p><a href="../../../../img/csci343-lec6/cdf_graph.png" title="example" class="gallery-item"><img src="../../../../img/csci343-lec6/cdf_graph.png" alt="example"></a></p>
-<p>누적 밀도 함수 즉 cdf는 다음과 같은 특징을 가진다.</p>
-<ul>
-<li>$F(-\infty) = 0$</li>
-<li>$F(+\infty) = 1$</li>
-<li>$F(x) \ge F(y)\text{    if    }x &gt; y$</li>
-</ul>
-<p>확률밀도함수(PDF)는 특정 확률 변수 구간의 확률이 다른 구간에 비해 <strong>상대적으로</strong> 얼마나 높은가를 나타내는 것이며 그 값 자체가 확률은 아니다라는 점을 명심해야 한다.</p>
-<hr>
-<h2 id="통계적-가설-검정"><a href="#통계적-가설-검정" class="headerlink" title="통계적 가설 검정"></a>통계적 가설 검정</h2><p>통계적 가설 검정(statistical hypothesis test)은 통계적 추측의 하나로서, 모집단 실제의 값이 얼마가 된다는 주장과 관련해, 표본의 정보를 사용해서 가설의 합당성 여부를 판정하는 과정을 의미한다. 간단히 가설 검정(hypothesis test)이라고 부르는 경우가 많다.</p>
-<ul>
-<li>Our CDF tells us the probability that some value lies below a certain threshold.</li>
-<li>50% of the population should lie on either side of the vertical line.</li>
-<li>This kind of statistical test is called a <strong>one-tailed test.</strong></li>
-</ul>
-<p>통계적으로 가설을 검정하기 위해 먼저 귀무가설과 대립가설을 세워야 한다. 어떤 모수(평균, 분산, 비울, etc.)에 대해 가설을 설정할 때, 일반적을 5 가지 경우가 있다.</p>
-<ol>
-<li>유의수준의 결정, 귀무가설과 대립가설 설정</li>
-<li>검정통계량의 설정</li>
-<li>기각역의 설정</li>
-<li>검정통계량 계산</li>
-<li>통계적인 의사결정</li>
-</ol>
-<hr>
-<h2 id="귀무가설과-대립-가설-설정"><a href="#귀무가설과-대립-가설-설정" class="headerlink" title="귀무가설과 대립 가설 설정"></a>귀무가설과 대립 가설 설정</h2><p><strong>귀무 가설</strong><br>귀무 가설(null hypothesis, $H_{0}$)은 통계학에서 처음부터 버릴 것을 예상하는 가설이다. 차이가 없거나 의미있는 차이가 없는 경우의 가설이며 이것이 맞거나 맞지 않다는 통계학적 증거를 통해 증명하려는 가설이다.</p>
-<p><strong>대립 가설</strong><br>대립 가설(alternative hypothesis, $H_{1}$) 또는 연구 가설 또는 유지 가설은 귀무가설에 대립하는 명제이다. 보통, 모집단에서 독립변수와 결과변수 사이에 어떤 특정한 관련이 있다는 꼴이다. 어떤 가능성에 대해 확률적인 가설검정을 할 때 귀무가설과 함께 사용된다. 이 가설은 귀무가설처럼 검정을 직접 수행하기는 불가능하며 귀무가설을 기각함으로써 받아들여지는 반증의 과정을 거쳐 받아들여질 수 있다. 대립 가설은 <strong>양측 대립 가설</strong> 과 <strong>단측 대립 가설</strong> 이 있다.</p>
-<div class="note info no-icon">
-            <h3 id="단측-양측-대립-가설"><a href="#단측-양측-대립-가설" class="headerlink" title="단측/양측 대립 가설"></a>단측/양측 대립 가설</h3><p><strong>단측 대립 가설</strong><br>독립 변수와 결과 변수와의 관련성을 검정할 때 그 방향이 미리 어느 한쪽으로 결정되어 있는 경우이다. 예를 들어 새로 개발된 심장병 치료 약물이 기존의 약물요법에 비교하여 더 효과가 좋은가?라는 것을 밝혀낼 때에 더 효과가 좋다는 가설이 단측대립가설이다.</p><p><strong>양측 대립 가설</strong><br>독립변수와 종속변수간에 관련성 혹은 차이가 존재하는가?라는 면에서만 관심을 가지는 것이며 그 방향은 따지지 않는 가설이다. 예를 들어 새로 개발된 심장병 치료 약물이 기존의 약물요법에 비교하여 효과에 차이가 있다라고 가정하는 것이다.</p>
-          </div>
-
-<ul>
-<li><p>먼저 연구 가설 내용을 (e.g. 미국 성인여자의 신장은 크다)을 통계적 가설 (e.g. 미국 성인여자의 평균신장은 180cm이다.)로 바꾸어 줌으로써 가설 검정이 시작된다.</p>
-</li>
-<li><p>가령, 미국 성인 여성의 평균 신장이 180cm라는 하나의 가설을 검정할 계획이라면, 귀무 가설의 표기는 다음과 같다.</p>
-</li>
-</ul>
-<p>$$<br>H_{0}: \mu = 180<br>$$</p>
-<p>해당 귀무 가설과 반대되는 대립 가설은 다음과 같은 형태가 있다.</p>
-<ul>
-<li>제1형: $H_{1} : \mu \ne 180$</li>
-<li>제2형: $H_{1} : \mu \le 180$</li>
-<li>제3형: $H_{1} : \mu \ge 180$</li>
-</ul>
-<p>여기서 제 1형은 <strong>양측 검정</strong>(two-sided test, two tailed test), 제 2형, 제 3형은 <strong>단측 검정(one-sided test)</strong> 이라고 지칭한다. 단측검정을 나누자면 제 2형을 <strong>좌측 검정</strong> (lower tailed test)이라고 하며, 제 3형은 <strong>우측 검정</strong> (upper tailed test)이라고 부른다.</p>
-<p>양측검정은 가설 검증에서 <strong>기각 영역</strong>(rejection region)이 양쪽에 있는 것이고, 그러므로 유의수준 $\alpha$ 도 양극단으로 갈라져 한쪽의 면적이 $\frac{\alpha}{2}$가 된다. 기각영역이 어느 한쪽에만 있게 되는 경우를 <strong>단측검정</strong> 이라고 한다.</p>
-<blockquote>
-<p>즉, 단측 검정이란 대립 가설이 어느 특정 모수 이상이거나 이하일 때 검정하는 것이다.</p>
-</blockquote>
-<hr>
-<ul>
-<li>Has limitations due to only testing if something is above or below a certain value</li>
-<li>We can say that values below this level differ from 90% of the population, values below this that cut off could be at most 10% of the population we are measuring. This means they are less likely to be the same population.</li>
-</ul>
-<blockquote>
-<p>이 수준 이하의 값은 모집단의 90 %와 다르다고 말할 수 있습니다.이 차단 ​​값 아래의 값은 측정중인 모집단의 최대 10 % 일 수 있습니다. 이것은 그들이 같은 인구가 될 가능성이 적다는 것을 의미합니다.</p>
-</blockquote>
-<ul>
-<li>For the values that lie <span class="label warning">below</span> the cut off we will incorrectly reject 10% of the time! This is called a <strong>False Negative</strong>.(AKA a Type II Error).</li>
-<li>For the values that lie <span class="label warning">above</span> the cut off that are NOT in our population, we incorrectly accept the values as members. This is called a <strong>False Positive</strong>.(AKA a Type I Error).</li>
-</ul>
-<div class="note info no-icon">
-            <h4 id="거짓-양성과-음성"><a href="#거짓-양성과-음성" class="headerlink" title="거짓 양성과 음성"></a>거짓 양성과 음성</h4><p><strong>거짓 양성(false positive)</strong><br>거짓 양성 또는 1종 오류(<code>type I error</code>)는 통계상 실제로는 음성인데 검사 결과는 양성이라고 나오는 것이다. 예를 들어, 어떤 메일이 스팸 메일인지 검사하는 프로그램이 있다고 하자. 이때 어떤 메일이 실제로는 스팸 메일이 아니지만 프로그램 검사 결과 스팸 메일이라고 판정한다면, 이것이 거짓 양성이다. 위양성, 혹은 거짓 경보(false alarm)라고도 한다.</p><p><strong>거짓 음성(false negative)</strong><br>거짓 음성 또는 2종 오류(<code>type II error</code>)는 통계상 실제로는 양성인데 검사 결과는 음성이라고 나오는 것이다. 예를 들어, 어떤 메일이 스팸 메일인지 검사하는 프로그램이 있다고 하자. 이때 어떤 메일이 실제로는 스팸 메일임에도 불구하고 프로그램 검사 결과 스팸 메일이 아니라고 판정한다면, 이것이 거짓 음성이다. 이러한 현상은 암 진단이나 보안 진단과 같은 분야에서는 거짓 양성에 비해 오 탐지에 대한 비용이 커서 그것을 잘 고려하여 검사 알고리즘을 개발해야 한다.</p>
-          </div>
-
-<p>실제로 검사 알고리즘을 개발한다면, 거짓 양성과 거짓 음성 사이에 <span class="label warning">trade-off</span>(어느 한편을 늘리면 다른 한편은 그 만큼 줄어드는 것)가 필연적으로 생기게 된다.</p>
-<hr>
-<h2 id="summary"><a href="#summary" class="headerlink" title="summary"></a>summary</h2><h3 id="Probability-density-functions-PDF"><a href="#Probability-density-functions-PDF" class="headerlink" title="Probability density functions (PDF)"></a>Probability density functions (PDF)</h3><ol>
-<li>Function representing distribution of probability variables</li>
-<li>Ofthen fits a Normal distribution!</li>
-</ol>
-<h3 id="Central-limit-theorm-CLT"><a href="#Central-limit-theorm-CLT" class="headerlink" title="Central limit theorm (CLT)"></a>Central limit theorm (CLT)</h3><ol>
-<li>It is a theorm that if N is moderaely large, then the distribution of mean of N probability variable (with same probabiliy distribution) is closer to the normal distribution</li>
-</ol>
-<h3 id="Comulative-Distribution-Functions-CDF"><a href="#Comulative-Distribution-Functions-CDF" class="headerlink" title="Comulative Distribution Functions (CDF)"></a>Comulative Distribution Functions (CDF)</h3><ol>
-<li>Provides the probability that a random value is ‘&lt;’ or ‘=’ to a given value within a normally distributed population.</li>
-<li>It means that CDF tells us the probability that some value lies below a certain threshold.</li>
-</ol>
-<h3 id="False-positive-negative"><a href="#False-positive-negative" class="headerlink" title="False positive/negative"></a>False positive/negative</h3><ol>
-<li>False Positive (Type I Error) is a result that indicates a given condition exists, when it does not.</li>
-<li>False negative (Type II Error) is a test result that indicates that a condition does not hold, while in fact it does.</li>
-</ol>
-<h3 id="One-tailed-test"><a href="#One-tailed-test" class="headerlink" title="One-tailed test"></a>One-tailed test</h3><ol>
-<li>A one-tailed test is a (statistical) test (in which the critical area of a distribution is one-sided so that) it is either [greater than or less than] a certain value, but not both.</li>
-</ol>
-<h3 id="Two-tailed-test"><a href="#Two-tailed-test" class="headerlink" title="Two-tailed test"></a>Two-tailed test</h3><ol>
-<li>A two-tailed test is a method (in which the critical area of a distribution is two-sided) and tests whether a sample is [greater than or less than] a certain range of values.</li>
-</ol>
-<hr>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
-<li>WIKI<ul>
-<li><a href="https://ko.wikipedia.org/wiki/1%EC%A2%85_%EC%98%A4%EB%A5%98%EC%99%80_2%EC%A2%85_%EC%98%A4%EB%A5%98" target="_blank" rel="noopener">1종 오류와 2종 오류</a></li>
-<li><a href="https://ko.wikipedia.org/wiki/%EB%88%84%EC%A0%81_%EB%B6%84%ED%8F%AC_%ED%95%A8%EC%88%98" target="_blank" rel="noopener">누적분포함수</a></li>
-<li><a href="https://ko.wikipedia.org/wiki/%EA%B0%80%EC%84%A4_%EA%B2%80%EC%A0%95" target="_blank" rel="noopener">가설검정</a></li>
-</ul>
-</li>
-<li>Others<ul>
-<li><a href="https://ratsgo.github.io/statistics/2017/06/27/normal/" target="_blank" rel="noopener">ratsgo’s blog - 정규분포 누적분포함수와 중심극한정리</a></li>
-<li><a href="https://datascienceschool.net/view-notebook/fa24ed1f520f4691b8bce979860ebc0a/" target="_blank" rel="noopener">데이터 사이언스 스쿨 - 누적분포함수와 확률밀도함수</a></li>
-<li><a href="https://drhongdatanote.tistory.com/50" target="_blank" rel="noopener">필로홍의 데이터 노트 - [개념통계] 정규분포와 표준정규분포 그리고 z-score</a></li>
-</ul>
-</li>
-</ul>
-</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
-        var options = {
-            selector: '.gallery-item'
-        };
-        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
-        }</script>]]></content>
-      <categories>
-        <category>Olemiss</category>
-        <category>CSCI 343</category>
-      </categories>
-      <tags>
-        <tag>CSCI 343</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Descriptive Statistics</title>
     <url>/2020/02/19/2020-02-19-csci343-lec5/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
@@ -2785,6 +2630,161 @@ merge newbranch
 <h4 id="Negative-Correlation"><a href="#Negative-Correlation" class="headerlink" title="Negative Correlation"></a>Negative Correlation</h4><p>ohe is high, the other is low, vice versa.</p>
 <h4 id="Get-closer-to-Zero"><a href="#Get-closer-to-Zero" class="headerlink" title="Get closer to Zero"></a>Get closer to Zero</h4><p>No corrleation between two varaibles.</p>
 <h3 id="correlation-and-causation-상관관계와-인과관계"><a href="#correlation-and-causation-상관관계와-인과관계" class="headerlink" title="correlation and causation(상관관계와 인과관계)"></a>correlation and causation(상관관계와 인과관계)</h3><p>Correlation may not mean Causation</p>
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>]]></content>
+      <categories>
+        <category>Olemiss</category>
+        <category>CSCI 343</category>
+      </categories>
+      <tags>
+        <tag>CSCI 343</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Distributions</title>
+    <url>/2020/02/19/2020-02-20-csci343-lec6/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
+<h2 id="확률-분포-함수"><a href="#확률-분포-함수" class="headerlink" title="확률 분포 함수"></a>확률 분포 함수</h2><p>확률 분포 함수는 확률 변수의 분포 즉, 확률 분포를 수학적으로 정의하기 위한 수식이다.</p>
+<p>확률 밀도 함수 (Probability Density Function, PDF)는 확률 변수의 분포를 나타내는 함수로, 확률 밀도 함수 $f(x)$와 구간 $[a,b]$에 대해서 확률 변수 $X$가 구간에 포함될 확률 $(a \leq X \leq b)$는 아래와 같은 공식이 된다.<br>&nbsp;<br>$$ \int _{a}^{b}f(x)dx $$<br>&nbsp;<br>확률 밀도 함수 $f(x)$는 다음의 두 조건을 만족해야 한다.</p>
+<ol>
+<li>모든 실수값 $X$에 대해 $f(x) \geq 0$</li>
+<li>$\int _{-\infty}^{\infty}f(x)dx = 1$</li>
+</ol>
+<p>확률 밀도 함수와 누적 분포 함수에는 다음과 같은 수식이 성립한다.</p>
+<blockquote>
+<p>$$F(x) = \int _{-\infty}^{x}f(x)dx$$<br>$$f(x) = \frac{d}{dx}F(x)$$</p>
+</blockquote>
+<hr>
+<h2 id="중심-극한-정리"><a href="#중심-극한-정리" class="headerlink" title="중심 극한 정리"></a>중심 극한 정리</h2><p>주어진 간격 내에 어떤 값을 중심으로 임의의 변동을 가지는 임의의 변수는 표본 수가 증가함에 따라 대략 정상적으로 분포될 것이라는 정리이다.</p>
+<p>정규 분포가 중요한 이유 중 하나는 중심극한정리 때문이다. 중심 극한 정리는 동일한 확률분포를 가진 독립 확률 변수 n개의 평균의 분포는 n이 적당히 크다면 정규분포에 가까워진다는 정리이다</p>
+<div class="note no-icon">
+            <p>이때, 정규 분포(혹은 가우스 분포)란 우리 주변에서 일반적으로 발견되는 좌우 대칭의 종 모양으로 생긴 분포를 말한다. 정규분포는 평균값에 가장 많은 데이터가 분포되어 있고 평균과 떨어질수록 데이터에 적게 분포하는 특징을 가지고 있다.</p>
+          </div>
+
+<p><a href="https://upload.wikimedia.org/wikipedia/commons/c/cd/Clt_in_action.gif" title="wiki" class="gallery-item"><img src="https://upload.wikimedia.org/wikipedia/commons/c/cd/Clt_in_action.gif" alt="wiki"></a></p>
+<p>매우 불규칙한 분포도 충분히 많은 수를 더하면 중심극한정리에 따라 결국 정규분포로 수렴한다.<br>&nbsp;</p>
+<h2 id="누적-분포-함수"><a href="#누적-분포-함수" class="headerlink" title="누적 분포 함수"></a>누적 분포 함수</h2><p>누적 분포 함수(cumulative distribution function, cdf)는 주어진 확률 변수가 특정 값보다 작거나 같은 확률을 나타내는 함수이다. 즉, 무작위 값이 정규 분포 모집단 내에서 주어진 값보다 작거나 같을 확률을 제공한다.</p>
+<p>확률 변수  X 에 대한 누적 확률 분포  F(x) 의 수학적 정의는 다음과 같다</p>
+<p>$$<br>F(x) = P({X \lt x}) = P(X \lt x)<br>$$<br>&nbsp;<br>몇가지 누적 확률 분포 표시의 예를 들면 다음과 같다.</p>
+<ul>
+<li>$F(−1)$: 확률 변수가 $−\infty$ 이상 -1 미만인 구간 내에 존재할 확률 즉, $P({-\infty \le X \lt −1})$</li>
+<li>$F(0)$: 확률 변수가 $−\infty$ 이상 0 미만인 구간 내에 존재할 확률 즉,  $P({-\infty \le X \lt 0})$</li>
+<li>$F(1)$: 확률 변수가 $−\infty$ 이상 1 미만인 구간 내에 존재할 확률 즉,  $P({-\infty \le X \lt 1})$<br>…</li>
+<li>$F(10)$: 확률 변수가 $−\infty$ 이상 10 미만인 구간 내에 존재할 확률 즉,  $P({-\infty \le X \lt 10})$<br>…</li>
+</ul>
+<p>시계 바늘 확률 문제의 경우를 예로 들어보자. 이 경우에는 각도가 0도부터 360까지이지만 음의 무한대를 시작점으로 해도 상관없다.</p>
+<a href="https://datascienceschool.net/upfiles/84a2a4193ef545d89e7c4417262942ea.png" class="gallery-item"><img src="https://datascienceschool.net/upfiles/84a2a4193ef545d89e7c4417262942ea.png" class="Example" title="Example 200 200"></a>
+
+<p>$F(0) = P({-\infty^{\circ} \le \theta \lt 0^{\circ} }) = 0$<br>$F(10) = P({-\infty^{\circ} \le \theta \lt 10^{\circ} }) = \frac{1}{36}$<br>$F(20) = P({-\infty^{\circ} \le \theta \lt 20^{\circ} }) = \frac{2}{36}$<br>…<br>$F(350) = P({-\infty^{0} \le \theta \lt 350^{0}}) = \frac{35}{36}$<br>$F(360) = P({-\infty^{0} \le \theta \lt 360^{0}}) = 1$<br>$F(370) = P({-\infty^{0} \le \theta \lt 370^{0}}) = 1$<br>$F(380) = P({-\infty^{0} \le \theta \lt 380^{0}}) = 1$<br>…</p>
+<p>이를 그림으로 표현하면 다음과 같다.</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> mplot</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">t = np.array(range(<span class="number">-100</span>, <span class="number">461</span>))</span><br><span class="line">F = t/<span class="number">360</span></span><br><span class="line"></span><br><span class="line">F[t &lt; <span class="number">0</span>] = <span class="number">0</span></span><br><span class="line">F[t &gt; <span class="number">360</span>] = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">mplot.title(<span class="string">"Cumulative Distribution Function"</span>)</span><br><span class="line">mplot.xlabel(<span class="string">'x $(\deg.)$'</span>)</span><br><span class="line">mplot.ylabel(<span class="string">'$F(x)$'</span>)</span><br><span class="line"></span><br><span class="line">mplot.xlim(t[<span class="number">0</span>], t[<span class="number">-1</span>])</span><br><span class="line">mplot.xticks([<span class="number">0</span>, <span class="number">180</span>, <span class="number">360</span>])</span><br><span class="line">mplot.plot(t, F)</span><br><span class="line">mplot.show()</span><br></pre></td></tr></table></figure>
+
+<p><a href="../../../../img/csci343-lec6/cdf_graph.png" title="example" class="gallery-item"><img src="../../../../img/csci343-lec6/cdf_graph.png" alt="example"></a></p>
+<p>누적 밀도 함수 즉 cdf는 다음과 같은 특징을 가진다.</p>
+<ul>
+<li>$F(-\infty) = 0$</li>
+<li>$F(+\infty) = 1$</li>
+<li>$F(x) \ge F(y)\text{    if    }x &gt; y$</li>
+</ul>
+<p>확률밀도함수(PDF)는 특정 확률 변수 구간의 확률이 다른 구간에 비해 <strong>상대적으로</strong> 얼마나 높은가를 나타내는 것이며 그 값 자체가 확률은 아니다라는 점을 명심해야 한다.</p>
+<hr>
+<h2 id="통계적-가설-검정"><a href="#통계적-가설-검정" class="headerlink" title="통계적 가설 검정"></a>통계적 가설 검정</h2><p>통계적 가설 검정(statistical hypothesis test)은 통계적 추측의 하나로서, 모집단 실제의 값이 얼마가 된다는 주장과 관련해, 표본의 정보를 사용해서 가설의 합당성 여부를 판정하는 과정을 의미한다. 간단히 가설 검정(hypothesis test)이라고 부르는 경우가 많다.</p>
+<ul>
+<li>Our CDF tells us the probability that some value lies below a certain threshold.</li>
+<li>50% of the population should lie on either side of the vertical line.</li>
+<li>This kind of statistical test is called a <strong>one-tailed test.</strong></li>
+</ul>
+<p>통계적으로 가설을 검정하기 위해 먼저 귀무가설과 대립가설을 세워야 한다. 어떤 모수(평균, 분산, 비울, etc.)에 대해 가설을 설정할 때, 일반적을 5 가지 경우가 있다.</p>
+<ol>
+<li>유의수준의 결정, 귀무가설과 대립가설 설정</li>
+<li>검정통계량의 설정</li>
+<li>기각역의 설정</li>
+<li>검정통계량 계산</li>
+<li>통계적인 의사결정</li>
+</ol>
+<hr>
+<h2 id="귀무가설과-대립-가설-설정"><a href="#귀무가설과-대립-가설-설정" class="headerlink" title="귀무가설과 대립 가설 설정"></a>귀무가설과 대립 가설 설정</h2><p><strong>귀무 가설</strong><br>귀무 가설(null hypothesis, $H_{0}$)은 통계학에서 처음부터 버릴 것을 예상하는 가설이다. 차이가 없거나 의미있는 차이가 없는 경우의 가설이며 이것이 맞거나 맞지 않다는 통계학적 증거를 통해 증명하려는 가설이다.</p>
+<p><strong>대립 가설</strong><br>대립 가설(alternative hypothesis, $H_{1}$) 또는 연구 가설 또는 유지 가설은 귀무가설에 대립하는 명제이다. 보통, 모집단에서 독립변수와 결과변수 사이에 어떤 특정한 관련이 있다는 꼴이다. 어떤 가능성에 대해 확률적인 가설검정을 할 때 귀무가설과 함께 사용된다. 이 가설은 귀무가설처럼 검정을 직접 수행하기는 불가능하며 귀무가설을 기각함으로써 받아들여지는 반증의 과정을 거쳐 받아들여질 수 있다. 대립 가설은 <strong>양측 대립 가설</strong> 과 <strong>단측 대립 가설</strong> 이 있다.</p>
+<div class="note info no-icon">
+            <h3 id="단측-양측-대립-가설"><a href="#단측-양측-대립-가설" class="headerlink" title="단측/양측 대립 가설"></a>단측/양측 대립 가설</h3><p><strong>단측 대립 가설</strong><br>독립 변수와 결과 변수와의 관련성을 검정할 때 그 방향이 미리 어느 한쪽으로 결정되어 있는 경우이다. 예를 들어 새로 개발된 심장병 치료 약물이 기존의 약물요법에 비교하여 더 효과가 좋은가?라는 것을 밝혀낼 때에 더 효과가 좋다는 가설이 단측대립가설이다.</p><p><strong>양측 대립 가설</strong><br>독립변수와 종속변수간에 관련성 혹은 차이가 존재하는가?라는 면에서만 관심을 가지는 것이며 그 방향은 따지지 않는 가설이다. 예를 들어 새로 개발된 심장병 치료 약물이 기존의 약물요법에 비교하여 효과에 차이가 있다라고 가정하는 것이다.</p>
+          </div>
+
+<ul>
+<li><p>먼저 연구 가설 내용을 (e.g. 미국 성인여자의 신장은 크다)을 통계적 가설 (e.g. 미국 성인여자의 평균신장은 180cm이다.)로 바꾸어 줌으로써 가설 검정이 시작된다.</p>
+</li>
+<li><p>가령, 미국 성인 여성의 평균 신장이 180cm라는 하나의 가설을 검정할 계획이라면, 귀무 가설의 표기는 다음과 같다.</p>
+</li>
+</ul>
+<p>$$<br>H_{0}: \mu = 180<br>$$</p>
+<p>해당 귀무 가설과 반대되는 대립 가설은 다음과 같은 형태가 있다.</p>
+<ul>
+<li>제1형: $H_{1} : \mu \ne 180$</li>
+<li>제2형: $H_{1} : \mu \le 180$</li>
+<li>제3형: $H_{1} : \mu \ge 180$</li>
+</ul>
+<p>여기서 제 1형은 <strong>양측 검정</strong>(two-sided test, two tailed test), 제 2형, 제 3형은 <strong>단측 검정(one-sided test)</strong> 이라고 지칭한다. 단측검정을 나누자면 제 2형을 <strong>좌측 검정</strong> (lower tailed test)이라고 하며, 제 3형은 <strong>우측 검정</strong> (upper tailed test)이라고 부른다.</p>
+<p>양측검정은 가설 검증에서 <strong>기각 영역</strong>(rejection region)이 양쪽에 있는 것이고, 그러므로 유의수준 $\alpha$ 도 양극단으로 갈라져 한쪽의 면적이 $\frac{\alpha}{2}$가 된다. 기각영역이 어느 한쪽에만 있게 되는 경우를 <strong>단측검정</strong> 이라고 한다.</p>
+<blockquote>
+<p>즉, 단측 검정이란 대립 가설이 어느 특정 모수 이상이거나 이하일 때 검정하는 것이다.</p>
+</blockquote>
+<hr>
+<ul>
+<li>Has limitations due to only testing if something is above or below a certain value</li>
+<li>We can say that values below this level differ from 90% of the population, values below this that cut off could be at most 10% of the population we are measuring. This means they are less likely to be the same population.</li>
+</ul>
+<blockquote>
+<p>이 수준 이하의 값은 모집단의 90 %와 다르다고 말할 수 있습니다.이 차단 ​​값 아래의 값은 측정중인 모집단의 최대 10 % 일 수 있습니다. 이것은 그들이 같은 인구가 될 가능성이 적다는 것을 의미합니다.</p>
+</blockquote>
+<ul>
+<li>For the values that lie <span class="label warning">below</span> the cut off we will incorrectly reject 10% of the time! This is called a <strong>False Negative</strong>.(AKA a Type II Error).</li>
+<li>For the values that lie <span class="label warning">above</span> the cut off that are NOT in our population, we incorrectly accept the values as members. This is called a <strong>False Positive</strong>.(AKA a Type I Error).</li>
+</ul>
+<div class="note info no-icon">
+            <h4 id="거짓-양성과-음성"><a href="#거짓-양성과-음성" class="headerlink" title="거짓 양성과 음성"></a>거짓 양성과 음성</h4><p><strong>거짓 양성(false positive)</strong><br>거짓 양성 또는 1종 오류(<code>type I error</code>)는 통계상 실제로는 음성인데 검사 결과는 양성이라고 나오는 것이다. 예를 들어, 어떤 메일이 스팸 메일인지 검사하는 프로그램이 있다고 하자. 이때 어떤 메일이 실제로는 스팸 메일이 아니지만 프로그램 검사 결과 스팸 메일이라고 판정한다면, 이것이 거짓 양성이다. 위양성, 혹은 거짓 경보(false alarm)라고도 한다.</p><p><strong>거짓 음성(false negative)</strong><br>거짓 음성 또는 2종 오류(<code>type II error</code>)는 통계상 실제로는 양성인데 검사 결과는 음성이라고 나오는 것이다. 예를 들어, 어떤 메일이 스팸 메일인지 검사하는 프로그램이 있다고 하자. 이때 어떤 메일이 실제로는 스팸 메일임에도 불구하고 프로그램 검사 결과 스팸 메일이 아니라고 판정한다면, 이것이 거짓 음성이다. 이러한 현상은 암 진단이나 보안 진단과 같은 분야에서는 거짓 양성에 비해 오 탐지에 대한 비용이 커서 그것을 잘 고려하여 검사 알고리즘을 개발해야 한다.</p>
+          </div>
+
+<p>실제로 검사 알고리즘을 개발한다면, 거짓 양성과 거짓 음성 사이에 <span class="label warning">trade-off</span>(어느 한편을 늘리면 다른 한편은 그 만큼 줄어드는 것)가 필연적으로 생기게 된다.</p>
+<hr>
+<h2 id="summary"><a href="#summary" class="headerlink" title="summary"></a>summary</h2><h3 id="Probability-density-functions-PDF"><a href="#Probability-density-functions-PDF" class="headerlink" title="Probability density functions (PDF)"></a>Probability density functions (PDF)</h3><ol>
+<li>Function representing distribution of probability variables</li>
+<li>Ofthen fits a Normal distribution!</li>
+</ol>
+<h3 id="Central-limit-theorm-CLT"><a href="#Central-limit-theorm-CLT" class="headerlink" title="Central limit theorm (CLT)"></a>Central limit theorm (CLT)</h3><ol>
+<li>It is a theorm that if N is moderaely large, then the distribution of mean of N probability variable (with same probabiliy distribution) is closer to the normal distribution</li>
+</ol>
+<h3 id="Comulative-Distribution-Functions-CDF"><a href="#Comulative-Distribution-Functions-CDF" class="headerlink" title="Comulative Distribution Functions (CDF)"></a>Comulative Distribution Functions (CDF)</h3><ol>
+<li>Provides the probability that a random value is ‘&lt;’ or ‘=’ to a given value within a normally distributed population.</li>
+<li>It means that CDF tells us the probability that some value lies below a certain threshold.</li>
+</ol>
+<h3 id="False-positive-negative"><a href="#False-positive-negative" class="headerlink" title="False positive/negative"></a>False positive/negative</h3><ol>
+<li>False Positive (Type I Error) is a result that indicates a given condition exists, when it does not.</li>
+<li>False negative (Type II Error) is a test result that indicates that a condition does not hold, while in fact it does.</li>
+</ol>
+<h3 id="One-tailed-test"><a href="#One-tailed-test" class="headerlink" title="One-tailed test"></a>One-tailed test</h3><ol>
+<li>A one-tailed test is a (statistical) test (in which the critical area of a distribution is one-sided so that) it is either [greater than or less than] a certain value, but not both.</li>
+</ol>
+<h3 id="Two-tailed-test"><a href="#Two-tailed-test" class="headerlink" title="Two-tailed test"></a>Two-tailed test</h3><ol>
+<li>A two-tailed test is a method (in which the critical area of a distribution is two-sided) and tests whether a sample is [greater than or less than] a certain range of values.</li>
+</ol>
+<hr>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li>WIKI<ul>
+<li><a href="https://ko.wikipedia.org/wiki/1%EC%A2%85_%EC%98%A4%EB%A5%98%EC%99%80_2%EC%A2%85_%EC%98%A4%EB%A5%98" target="_blank" rel="noopener">1종 오류와 2종 오류</a></li>
+<li><a href="https://ko.wikipedia.org/wiki/%EB%88%84%EC%A0%81_%EB%B6%84%ED%8F%AC_%ED%95%A8%EC%88%98" target="_blank" rel="noopener">누적분포함수</a></li>
+<li><a href="https://ko.wikipedia.org/wiki/%EA%B0%80%EC%84%A4_%EA%B2%80%EC%A0%95" target="_blank" rel="noopener">가설검정</a></li>
+</ul>
+</li>
+<li>Others<ul>
+<li><a href="https://ratsgo.github.io/statistics/2017/06/27/normal/" target="_blank" rel="noopener">ratsgo’s blog - 정규분포 누적분포함수와 중심극한정리</a></li>
+<li><a href="https://datascienceschool.net/view-notebook/fa24ed1f520f4691b8bce979860ebc0a/" target="_blank" rel="noopener">데이터 사이언스 스쿨 - 누적분포함수와 확률밀도함수</a></li>
+<li><a href="https://drhongdatanote.tistory.com/50" target="_blank" rel="noopener">필로홍의 데이터 노트 - [개념통계] 정규분포와 표준정규분포 그리고 z-score</a></li>
+</ul>
+</li>
+</ul>
 </div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
         var options = {
             selector: '.gallery-item'
@@ -3738,84 +3738,6 @@ merge newbranch
       </tags>
   </entry>
   <entry>
-    <title>Advanced CSS</title>
-    <url>/2020/01/14/2020-01-14-Advanced%20CSS/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
-<h2 id="What-is-Transitions"><a href="#What-is-Transitions" class="headerlink" title="What is Transitions?"></a>What is Transitions?</h2><ol>
-<li>트랜지션(Transitions)이란 element의 이동 및 변경을 멋지게 보여주는 효과들이다.</li>
-<li>트랜지션은 focus, active, hover에서 효과적으로 사용된다.</li>
-<li>즉 <strong>transition</strong> 이란 element가 하나의 state에서 다른 state로 넘어갈 때의 효과를 말한다.</li>
-</ol>
-<h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span>Text<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight css"><figcaption><span>CSS</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: green;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">  <span class="attribute">transition</span>: background-color <span class="number">5s</span> ease-in-out;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>여기서,</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">transition</span>: <span class="selector-tag">background-color</span> 5<span class="selector-tag">s</span> <span class="selector-tag">ease-in-out</span>;</span><br></pre></td></tr></table></figure>
-
-<ol>
-<li>위 코드의 의미는 배경색(background-color)를 <code>5s</code> 안에 <strong>ease-in-out</strong> 애니메이션 효과를 적용하여 바꾸라는 의미이다.</li>
-<li>또한 이렇게 <strong>transition</strong> 앞에 바꾸고 싶은 property 값을 명시해주면 그 속성 값만 특정 효과를 적용하여 바꾸는 것이며, 만약 1개 이상의 설정값을 바꾸고 싶다면 transition 앞에 <code>all</code>이라고 적으면 된다.</li>
-</ol>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">transition</span>: <span class="selector-tag">all</span> 5<span class="selector-tag">s</span> <span class="selector-tag">ease-in-out</span>;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a href="https://developer.mozilla.org/en/docs/Web/CSS/transition" target="_blank" rel="noopener">Official Transition Documentation</a></p>
-<hr>
-<h2 id="What-is-Transformation"><a href="#What-is-Transformation" class="headerlink" title="What is Transformation?"></a>What is Transformation?</h2><ol>
-<li>트랜스포매이션(Transformation)은 html문서의 element들을 변경, 모습이 변하는 효과를 뜻한다.</li>
-<li>즉 transform이란 element의 모양새(shape)를 바꾸는 것이다.</li>
-<li><code>Transition</code>과 같이 합쳐서 사용할 수 있다. (즉 하나의 state에서 다른 state로 변할 때의 그 state에서의 모양새를 변경할 수 있다.)</li>
-</ol>
-<h3 id="Example-1"><a href="#Example-1" class="headerlink" title="Example"></a>Example</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">500px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">500px</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: red;</span><br><span class="line">  <span class="attribute">transition</span>: transform <span class="number">0.5s</span> ease-in-out;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.box</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">skew</span>(<span class="number">30deg</span>, <span class="number">20deg</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>이렇게 되면 <code>.box</code>에 해당하는 element에 마우스를 올려놓았을 때 0.5s 초 안에 해당 element가<br>설정한 [<code>skew(...)</code>] 모습으로 변화한다.</p>
-<p>또한 <code>transform</code> 설정을 복수로 결합하여 사용할 수 있다.</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">transform</span>: <span class="selector-tag">rotate</span>(1<span class="selector-tag">turn</span>) <span class="selector-tag">scale</span>(0<span class="selector-class">.5</span>, 0<span class="selector-class">.5</span>);</span><br></pre></td></tr></table></figure>
-
-<h3 id="Reference-1"><a href="#Reference-1" class="headerlink" title="Reference"></a>Reference</h3><ul>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transform" target="_blank" rel="noopener">CSS Transform Documentation</a></li>
-</ul>
-<hr>
-<h2 id="What-is-Animation"><a href="#What-is-Animation" class="headerlink" title="What is Animation?"></a>What is Animation?</h2><ul>
-<li><strong>Keyframe</strong> 은 CSS로 하여금 사용자가 animation을 생성했다는 것을 알려준다.</li>
-</ul>
-<blockquote>
-<p><strong>First step</strong>: Default status<br><strong>Second step</strong>: The element that Something changes</p>
-</blockquote>
-<ul>
-<li>Animation status가 2개만 필요할 때는 <code>from</code> ~ <code>to</code>만 작성하면 된다.</li>
-<li>더 세부적인 각 단계별 status step를 작성하고 싶을 때는 <strong>0% ~ 100%</strong> 까지 작성하면 된다.</li>
-</ul>
-<h3 id="Example-2"><a href="#Example-2" class="headerlink" title="Example"></a>Example</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span>Text<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">70px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">70px</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: red;</span><br><span class="line">  <span class="attribute">animation</span>: <span class="number">1.5s</span> ScaleAndRotateSquare infinite ease-in-out;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@keyframes</span> ScaleAndRotateSquare &#123;</span><br><span class="line">  0% &#123;</span><br><span class="line">    <span class="attribute">transform</span>: none;</span><br><span class="line">  &#125;</span><br><span class="line">  50% &#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">rotate</span>(<span class="number">1turn</span>) <span class="built_in">scale</span>(<span class="number">0.5</span>, <span class="number">0.5</span>);</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  100% &#123;</span><br><span class="line">    <span class="attribute">transform</span>: none;</span><br><span class="line">    <span class="attribute">color</span>: blue;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="What-is-media-query"><a href="#What-is-media-query" class="headerlink" title="What is media query?"></a>What is media query?</h2><blockquote>
-<p>Media queries are conditions that let me change the CSS based on the size of the browser</p>
-</blockquote>
-<ol>
-<li><code>media query</code>는 사용자의 디스플레이 환경에 따른 CSS 설정을 바꾸어 줄 수 있는 기능이다.</li>
-<li>mobile - desktop 환경에 따른 디자인 변경을 가능하게 해준다.</li>
-<li>반응형 웹 디자인에 유용</li>
-</ol>
-<h3 id="Example-3"><a href="#Example-3" class="headerlink" title="Example"></a>Example</h3><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: green;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">min-width:</span> <span class="number">320px</span>) <span class="keyword">and</span> (<span class="attribute">max-width:</span> <span class="number">640px</span>) &#123;</span><br><span class="line">  <span class="selector-tag">body</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: blue;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
-        var options = {
-            selector: '.gallery-item'
-        };
-        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
-        }</script>]]></content>
-      <categories>
-        <category>HTML5</category>
-        <category>CSS3</category>
-      </categories>
-      <tags>
-        <tag>CSS3</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>What is Go language?</title>
     <url>/2020/01/14/2020-01-14-What%20is%20Go%20language/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
@@ -3939,6 +3861,84 @@ merge newbranch
 <h2 id="position-html"><a href="#position-html" class="headerlink" title="position.html"></a>position.html</h2><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"ie=edge"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Position property<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">      /*</span><br><span class="line">            각 브라우저 마다 가지고 있는 Default 값을 상쇄하기 위해서</span><br><span class="line">            아래와 같은 설정을 해준다. </span><br><span class="line">        */</span><br><span class="line">      body,</span><br><span class="line">      html &#123;</span><br><span class="line">        height: 100%;</span><br><span class="line">        margin: 0;</span><br><span class="line">        padding: 0;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      body &#123;</span><br><span class="line">        height: 100%;</span><br><span class="line">        background-color: gray;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">      <span class="selector-class">.abs-box</span> &#123;</span></span><br><span class="line">        width: 400px;</span><br><span class="line">        height: 400px;</span><br><span class="line">        background-color: yellow;</span><br><span class="line">        position: relative;</span><br><span class="line">        top: 300px;</span><br><span class="line">        left: 50%;</span><br><span class="line">        transform: translate(-50%, -50%);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">      <span class="selector-class">.abs-child</span> &#123;</span></span><br><span class="line">        width: 100px;</span><br><span class="line">        height: 100px;</span><br><span class="line">        background-color: green;</span><br><span class="line">        position: absolute;</span><br><span class="line">        top: 10px;</span><br><span class="line">        left: 10px;</span><br><span class="line">      &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"abs-box"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"abs-child"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p><a href="../../../../img/position_property.png" title="Image description" class="gallery-item"><img src="../../../../img/position_property.png" alt="Image description"></a></p>
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>]]></content>
+      <categories>
+        <category>HTML5</category>
+        <category>CSS3</category>
+      </categories>
+      <tags>
+        <tag>CSS3</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Advanced CSS</title>
+    <url>/2020/01/14/2020-01-14-Advanced%20CSS/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
+<h2 id="What-is-Transitions"><a href="#What-is-Transitions" class="headerlink" title="What is Transitions?"></a>What is Transitions?</h2><ol>
+<li>트랜지션(Transitions)이란 element의 이동 및 변경을 멋지게 보여주는 효과들이다.</li>
+<li>트랜지션은 focus, active, hover에서 효과적으로 사용된다.</li>
+<li>즉 <strong>transition</strong> 이란 element가 하나의 state에서 다른 state로 넘어갈 때의 효과를 말한다.</li>
+</ol>
+<h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span>Text<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><figcaption><span>CSS</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: green;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">  <span class="attribute">transition</span>: background-color <span class="number">5s</span> ease-in-out;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>여기서,</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">transition</span>: <span class="selector-tag">background-color</span> 5<span class="selector-tag">s</span> <span class="selector-tag">ease-in-out</span>;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>위 코드의 의미는 배경색(background-color)를 <code>5s</code> 안에 <strong>ease-in-out</strong> 애니메이션 효과를 적용하여 바꾸라는 의미이다.</li>
+<li>또한 이렇게 <strong>transition</strong> 앞에 바꾸고 싶은 property 값을 명시해주면 그 속성 값만 특정 효과를 적용하여 바꾸는 것이며, 만약 1개 이상의 설정값을 바꾸고 싶다면 transition 앞에 <code>all</code>이라고 적으면 된다.</li>
+</ol>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">transition</span>: <span class="selector-tag">all</span> 5<span class="selector-tag">s</span> <span class="selector-tag">ease-in-out</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a href="https://developer.mozilla.org/en/docs/Web/CSS/transition" target="_blank" rel="noopener">Official Transition Documentation</a></p>
+<hr>
+<h2 id="What-is-Transformation"><a href="#What-is-Transformation" class="headerlink" title="What is Transformation?"></a>What is Transformation?</h2><ol>
+<li>트랜스포매이션(Transformation)은 html문서의 element들을 변경, 모습이 변하는 효과를 뜻한다.</li>
+<li>즉 transform이란 element의 모양새(shape)를 바꾸는 것이다.</li>
+<li><code>Transition</code>과 같이 합쳐서 사용할 수 있다. (즉 하나의 state에서 다른 state로 변할 때의 그 state에서의 모양새를 변경할 수 있다.)</li>
+</ol>
+<h3 id="Example-1"><a href="#Example-1" class="headerlink" title="Example"></a>Example</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">500px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">500px</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: red;</span><br><span class="line">  <span class="attribute">transition</span>: transform <span class="number">0.5s</span> ease-in-out;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.box</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">skew</span>(<span class="number">30deg</span>, <span class="number">20deg</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>이렇게 되면 <code>.box</code>에 해당하는 element에 마우스를 올려놓았을 때 0.5s 초 안에 해당 element가<br>설정한 [<code>skew(...)</code>] 모습으로 변화한다.</p>
+<p>또한 <code>transform</code> 설정을 복수로 결합하여 사용할 수 있다.</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">transform</span>: <span class="selector-tag">rotate</span>(1<span class="selector-tag">turn</span>) <span class="selector-tag">scale</span>(0<span class="selector-class">.5</span>, 0<span class="selector-class">.5</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="Reference-1"><a href="#Reference-1" class="headerlink" title="Reference"></a>Reference</h3><ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transform" target="_blank" rel="noopener">CSS Transform Documentation</a></li>
+</ul>
+<hr>
+<h2 id="What-is-Animation"><a href="#What-is-Animation" class="headerlink" title="What is Animation?"></a>What is Animation?</h2><ul>
+<li><strong>Keyframe</strong> 은 CSS로 하여금 사용자가 animation을 생성했다는 것을 알려준다.</li>
+</ul>
+<blockquote>
+<p><strong>First step</strong>: Default status<br><strong>Second step</strong>: The element that Something changes</p>
+</blockquote>
+<ul>
+<li>Animation status가 2개만 필요할 때는 <code>from</code> ~ <code>to</code>만 작성하면 된다.</li>
+<li>더 세부적인 각 단계별 status step를 작성하고 싶을 때는 <strong>0% ~ 100%</strong> 까지 작성하면 된다.</li>
+</ul>
+<h3 id="Example-2"><a href="#Example-2" class="headerlink" title="Example"></a>Example</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span>Text<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">70px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">70px</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: red;</span><br><span class="line">  <span class="attribute">animation</span>: <span class="number">1.5s</span> ScaleAndRotateSquare infinite ease-in-out;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@keyframes</span> ScaleAndRotateSquare &#123;</span><br><span class="line">  0% &#123;</span><br><span class="line">    <span class="attribute">transform</span>: none;</span><br><span class="line">  &#125;</span><br><span class="line">  50% &#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">rotate</span>(<span class="number">1turn</span>) <span class="built_in">scale</span>(<span class="number">0.5</span>, <span class="number">0.5</span>);</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  100% &#123;</span><br><span class="line">    <span class="attribute">transform</span>: none;</span><br><span class="line">    <span class="attribute">color</span>: blue;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="What-is-media-query"><a href="#What-is-media-query" class="headerlink" title="What is media query?"></a>What is media query?</h2><blockquote>
+<p>Media queries are conditions that let me change the CSS based on the size of the browser</p>
+</blockquote>
+<ol>
+<li><code>media query</code>는 사용자의 디스플레이 환경에 따른 CSS 설정을 바꾸어 줄 수 있는 기능이다.</li>
+<li>mobile - desktop 환경에 따른 디자인 변경을 가능하게 해준다.</li>
+<li>반응형 웹 디자인에 유용</li>
+</ol>
+<h3 id="Example-3"><a href="#Example-3" class="headerlink" title="Example"></a>Example</h3><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: green;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">min-width:</span> <span class="number">320px</span>) <span class="keyword">and</span> (<span class="attribute">max-width:</span> <span class="number">640px</span>) &#123;</span><br><span class="line">  <span class="selector-tag">body</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: blue;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
         var options = {
             selector: '.gallery-item'

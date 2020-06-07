@@ -1291,7 +1291,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #d9d482;
+  background: #08ff62;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2117,7 +2117,7 @@ pre .javascript .function {
     padding: 0px;
   }
   .posts-expand table {
-    margin-top: 10px;
+    margin: 5px 0px;
   }
   .posts-expand thead,
   .posts-expand td {
