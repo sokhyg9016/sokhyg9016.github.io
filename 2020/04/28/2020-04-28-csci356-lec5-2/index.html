@@ -225,7 +225,7 @@
     </span>
       <div>
         
-        <a href="/tags/CSCI-356/" rel="tag" style = "border-bottom: none; background: none; color: orange; font-weight: bold; font-size: 1em; padding: 0;">CSCI 356</a>
+        <a href="/tags/CSCI-356/" rel="tag" style = "border-bottom: none; background: none; color: orange; font-weight: bold; font-size: 1.1em; padding: 0;">CSCI 356</a>
       </div>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -285,22 +285,22 @@
 <li>This process requires (n – 1) passes to sort n items.</li>
 </ul>
 <h3 id="Selection-sort-Cont’d-1-2"><a href="#Selection-sort-Cont’d-1-2" class="headerlink" title="Selection sort (Cont’d) [1/2]"></a>Selection sort (Cont’d) [1/2]</h3><ul>
-<li><p>The exchange operation (“swap”) is slightly different in Python.</p>
-</li>
-<li><p>Most programming languages requires a temp variable to store one of the values.</p>
+<li>The exchange operation (<code>swap</code>) is slightly different in Python.</li>
+<li>Most programming languages requires a temp variable to store one of the values.</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">temp = a;</span><br><span class="line">a = b;</span><br><span class="line">b = temp;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>In Python, multiple assignment is allowed.</p>
+
+<ul>
+<li>In Python, multiple assignment is allowed.</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a, b = b, a</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Here is the code for selection sort:</p>
+
+<ul>
+<li>Here is the code for selection sort:</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">selection_sort</span><span class="params">(alist)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(alist)):</span><br><span class="line">        min_value = alist[i]</span><br><span class="line">        min_index = i</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(i + <span class="number">1</span>, len(alist)):</span><br><span class="line">            <span class="keyword">if</span> min_value &gt; alist[j]:</span><br><span class="line">                min_value = alist[j]</span><br><span class="line">                min_index = j</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> min_index != i:</span><br><span class="line">            alist[min_index], alist[i] = alist[i], alist[min_index]</span><br></pre></td></tr></table></figure>
 
-</li>
-</ul>
-<h3 id="Selection-sort-Cont’d-2-2"><a href="#Selection-sort-Cont’d-2-2" class="headerlink" title="Selection sort (Cont’d) [2/2]"></a>Selection sort (Cont’d) [2/2]</h3><ul>
-<li>To analyze the selection sort:</li>
-</ul>
+<h3 id="Selection-sort-Cont’d-2-2"><a href="#Selection-sort-Cont’d-2-2" class="headerlink" title="Selection sort (Cont’d) [2/2]"></a>Selection sort (Cont’d) [2/2]</h3><p>To analyze the selection sort:</p>
 <table>
 <thead>
 <tr>
@@ -347,7 +347,7 @@
 
 <h3 id="Bubble-Sort-Cont’d-2-2"><a href="#Bubble-Sort-Cont’d-2-2" class="headerlink" title="Bubble Sort (Cont’d) [2/2]"></a>Bubble Sort (Cont’d) [2/2]</h3><p>Generally speaking, the bubble sort makes the same number of comparisons as the selection sort and is therefore also $O(n^{2})$</p>
 <h2 id="Insertion-sort"><a href="#Insertion-sort" class="headerlink" title="Insertion sort"></a>Insertion sort</h2><ul>
-<li>each new item is “inserted” into the sub-list to make the sorted sublist is one item larger.</li>
+<li>Each new item is “inserted” into the sub-list to make the sorted sublist is one item larger.</li>
 <li>We begin by assuming that a list with one item (position 0, list[0]) is already sorted.</li>
 <li>On each pass, one for each item 1 through n – 1, the current item is checked against those in the already sorted list. Shift those items that are greater to the right; when we reach a smaller item or the end of the sublist, the current item can be inserted.</li>
 </ul>
@@ -424,8 +424,8 @@
       <i class="fa fa-chevron-left"></i> Searching and Sorting [1/2]
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/05/02/2020-05-02-csci343-challenge-final/" rel="next" title="Neural Networks">
-      Neural Networks <i class="fa fa-chevron-right"></i>
+    <a href="/2020/04/28/2020-04-28-csci356-lec6/" rel="next" title="Trees">
+      Trees <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
