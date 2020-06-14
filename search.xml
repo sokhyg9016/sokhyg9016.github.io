@@ -64,12 +64,13 @@
             <p>That is, whenever an array appears in an expression, the compiler implicitly generates a pointer to the array’s first element, just as if the programmer had written &amp;a[0].</p>
           </div>
 
-<p>단, 3가지 예외의 경우가 있습니다.</p>
+<p>따라서 배열의 식별자는 배열의 주소나 첫번째 요소 뿐만 아니라 배열 자체를 식별하는데도 사용됩니다. 아래 3가지 예외의 경우에서 확인할 수 있습니다.</p>
 <ul>
 <li>배열이 sizeof의 피연산자로 쓰일 때</li>
 <li>배열이 &amp; 연산자의 피연산자로 쓰일때</li>
 <li>문자 배열에서 초기값인 문자열로 쓰일 때</li>
 </ul>
+<p>위의 경우 먼저 <code>sizeof(arr)</code> 와 같이 쓰일 경우, (arr: 배열 이름) 배열 이름이 포인터로 변경되는 것이 아닌 해당 배열의 크기로 변경되어 계산됩니다. 또한 단항 연산자 <code>&amp;</code>의 경우 피연산자의 주소를 산출하며 이때 또한 포인터로 변경되지 않습니다.</p>
 <div class="note no-icon">
             <p>3 Except when it is the operand of the <strong>sizeof</strong> operator or the unary <strong>&amp;</strong> operator, or is a string literal used to initialize an array, an expression that has type “array of type” is converted to an expression with type ‘‘pointer to type’’ that points to the initial element of the array object and is not an lvalue. If the array object has register storage class, the behavior is undefined.</p><p>참고: <a href="http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1548.pdf" target="_blank" rel="noopener">C Standard (6.3.2 Other operands) - p.72</a></p>
           </div>
@@ -154,6 +155,148 @@
       </categories>
       <tags>
         <tag>CSCI 343</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Searching and Sorting [2/2]</title>
+    <url>/2020/04/28/2020-04-28-csci356-lec5-2/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
+<h2 id="Sorting"><a href="#Sorting" class="headerlink" title="Sorting"></a>Sorting</h2><ul>
+<li><strong>Sorting</strong> is the process of placing elements from a collection in order.</li>
+<li>We’ll discuss several sorting algorithms and compare them with respect to their running time.</li>
+<li>The total number of <strong>comparisons</strong> will be considered to evaluate the overall efficiency of a sorting algorithm.</li>
+</ul>
+<h2 id="Selection-sort"><a href="#Selection-sort" class="headerlink" title="Selection sort"></a>Selection sort</h2><p>looks for the smallest item and places it first, then finds the smallest in the remaining and puts it next, and so on.</p>
+<ul>
+<li>After the 1<sup>st</sup> pass, the smallest item is in the correct place.</li>
+<li>After the 2<sup>nd</sup> pass, the next smallest is in place.</li>
+<li>On each pass the smallest remaining item is selected and then placed in its proper location.</li>
+<li>This process requires (n – 1) passes to sort n items.</li>
+</ul>
+<h3 id="Selection-sort-Cont’d-1-2"><a href="#Selection-sort-Cont’d-1-2" class="headerlink" title="Selection sort (Cont’d) [1/2]"></a>Selection sort (Cont’d) [1/2]</h3><ul>
+<li>The exchange operation (<code>swap</code>) is slightly different in Python.</li>
+<li>Most programming languages requires a temp variable to store one of the values.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">temp = a;</span><br><span class="line">a = b;</span><br><span class="line">b = temp;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>In Python, multiple assignment is allowed.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a, b = b, a</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Here is the code for selection sort:</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">selection_sort</span><span class="params">(alist)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(alist)):</span><br><span class="line">        min_value = alist[i]</span><br><span class="line">        min_index = i</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(i + <span class="number">1</span>, len(alist)):</span><br><span class="line">            <span class="keyword">if</span> min_value &gt; alist[j]:</span><br><span class="line">                min_value = alist[j]</span><br><span class="line">                min_index = j</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> min_index != i:</span><br><span class="line">            alist[min_index], alist[i] = alist[i], alist[min_index]</span><br></pre></td></tr></table></figure>
+
+<h3 id="Selection-sort-Cont’d-2-2"><a href="#Selection-sort-Cont’d-2-2" class="headerlink" title="Selection sort (Cont’d) [2/2]"></a>Selection sort (Cont’d) [2/2]</h3><p>To analyze the selection sort:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Pass</th>
+<th align="left">Comparisions</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left">n - 1</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">n - 2</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">n - 3</td>
+</tr>
+<tr>
+<td align="left">…</td>
+<td align="left">…</td>
+</tr>
+<tr>
+<td align="left">n - 1</td>
+<td align="left">1</td>
+</tr>
+</tbody></table>
+<ul>
+<li>The sum of $ 1 + 2 + 3 + … + (n-1) = \frac{n \cdot (n - 1)}{2}$</li>
+<li>The complexity is $O(n^{2})$</li>
+</ul>
+<h2 id="Bubble-Sort"><a href="#Bubble-Sort" class="headerlink" title="Bubble Sort"></a>Bubble Sort</h2><ul>
+<li>Compares adjacent items and exchanges each pair that are out of order.</li>
+<li>Each pass through the list places the next largest value in its proper place.</li>
+<li>In essence, each item “bubbles” up to the location where it belongs.</li>
+</ul>
+<h3 id="Bubble-Sort-Cont’d-1-2"><a href="#Bubble-Sort-Cont’d-1-2" class="headerlink" title="Bubble Sort (Cont’d) [1/2]"></a>Bubble Sort (Cont’d) [1/2]</h3><ul>
+<li>At the start of the 2<sup>nd</sup> pass, the largest value is now in place.</li>
+<li>There are n – 1 items left to sort.</li>
+<li>The total number of passes necessary will be n – 1.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bubble_sort</span><span class="params">(alist)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(alist)):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span>, len(alist) - i):</span><br><span class="line">            <span class="keyword">if</span> alist[j] &lt; alist[j<span class="number">-1</span>]:</span><br><span class="line">                alist[j<span class="number">-1</span>], alist[j] = alist[j], alist[j<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="Bubble-Sort-Cont’d-2-2"><a href="#Bubble-Sort-Cont’d-2-2" class="headerlink" title="Bubble Sort (Cont’d) [2/2]"></a>Bubble Sort (Cont’d) [2/2]</h3><p>Generally speaking, the bubble sort makes the same number of comparisons as the selection sort and is therefore also $O(n^{2})$</p>
+<h2 id="Insertion-sort"><a href="#Insertion-sort" class="headerlink" title="Insertion sort"></a>Insertion sort</h2><ul>
+<li>Each new item is “inserted” into the sub-list to make the sorted sublist is one item larger.</li>
+<li>We begin by assuming that a list with one item (position 0, list[0]) is already sorted.</li>
+<li>On each pass, one for each item 1 through n – 1, the current item is checked against those in the already sorted list. Shift those items that are greater to the right; when we reach a smaller item or the end of the sublist, the current item can be inserted.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bubble_sort</span><span class="params">(alist)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, len(alist)):</span><br><span class="line">        current_value = alist[i]</span><br><span class="line">        pos = i</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> pos &gt; <span class="number">0</span> <span class="keyword">and</span> pos[i<span class="number">-1</span>] &gt; current_value:</span><br><span class="line">            alist[pos] = alist[pos<span class="number">-1</span>]</span><br><span class="line">            pos -= <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        alist[pos] = current_value</span><br></pre></td></tr></table></figure>
+
+<h2 id="Insertion-sort-Cont’d"><a href="#Insertion-sort-Cont’d" class="headerlink" title="Insertion sort (Cont’d)"></a>Insertion sort (Cont’d)</h2><ul>
+<li>The maximum number of comparisons for an insertion sort is the sum of the first n – 1 integers.</li>
+<li>Again, this is $O(n^{2})$</li>
+</ul>
+<h2 id="Merge-sort"><a href="#Merge-sort" class="headerlink" title="Merge sort"></a>Merge sort</h2><ul>
+<li>A recursive algorithm that continually splits a list in half.</li>
+<li>If the list is empty or has one item, it is sorted (the base case).</li>
+<li>If the list has more than one item, we split the list and recursively invoke a merge sort on both halves. Once the two halves are sorted, the fundamental operation, called a merge, is performed.</li>
+<li>Merging is the process of combining two smaller sorted lists into a single sorted list.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">merge_sort</span><span class="params">(alist)</span>:</span></span><br><span class="line">	print(<span class="string">f"Splitting: <span class="subst">&#123;alist&#125;</span>"</span>)</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span> len(alist) &gt; <span class="number">1</span>:</span><br><span class="line">		mid = len(alist) // <span class="number">2</span></span><br><span class="line">		left_half = alist[:mid]</span><br><span class="line">		right_half = alist[mid:]</span><br><span class="line">		</span><br><span class="line">		merge_sort(left_half)</span><br><span class="line">		merge_sort(right_half)</span><br><span class="line">		</span><br><span class="line">		i = <span class="number">0</span></span><br><span class="line">		j = <span class="number">0</span></span><br><span class="line">		k = <span class="number">0</span></span><br><span class="line">		</span><br><span class="line">		<span class="keyword">while</span> i &lt; len(left_half) <span class="keyword">and</span> j &lt; len(right_half):</span><br><span class="line">			<span class="keyword">if</span> left_half[i] &lt; right_half[j]:</span><br><span class="line">				alist[k] = left_half[i]</span><br><span class="line">				i += <span class="number">1</span></span><br><span class="line">				k += <span class="number">1</span></span><br><span class="line">			<span class="keyword">else</span>:</span><br><span class="line">				alist[k] = right_half[j]</span><br><span class="line">				j += <span class="number">1</span></span><br><span class="line">				k += <span class="number">1</span></span><br><span class="line">		</span><br><span class="line">		<span class="keyword">while</span> i &lt; len(left_half):</span><br><span class="line">			alist[k] = left_half[i]</span><br><span class="line">			i += <span class="number">1</span></span><br><span class="line">			k += <span class="number">1</span></span><br><span class="line">		</span><br><span class="line">		<span class="keyword">while</span> j &lt; len(right_half):</span><br><span class="line">			alist[k] = right_half[j]</span><br><span class="line">			j += <span class="number">1</span></span><br><span class="line">			k += <span class="number">1</span></span><br><span class="line">		</span><br><span class="line">	print(<span class="string">f"Merging: <span class="subst">&#123;alist&#125;</span>"</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Merge-sort-Cont’d"><a href="#Merge-sort-Cont’d" class="headerlink" title="Merge sort (Cont’d)"></a>Merge sort (Cont’d)</h3><ul>
+<li>Merge sort has two distinct processes: splitting and merging.</li>
+<li>Splitting a list into halves can be done: $O(\log n)$</li>
+<li>Merging: each item in the list will be processed and placed in the sorted list, this is $O(n)$</li>
+<li>Thus, merge sort is an $O(n\log n)$ algorithm.</li>
+</ul>
+<h2 id="Quick-sort"><a href="#Quick-sort" class="headerlink" title="Quick sort"></a>Quick sort</h2><ul>
+<li>This sort first selects a value (called the <strong>pivot</strong> value, we will use the 1<sup>st</sup> item as the pivot value).</li>
+<li>The role of the pivot value is to assist with <ins>splitting</ins> the list.</li>
+<li>The actual position where the pivot value belongs in the final sorted list (called the split point) will be used to divide the list for subsequent calls to the quick sort.</li>
+<li>The partition process finds the split point and move other items to the appropriate side of the list, either less than or greater than the pivot value.</li>
+<li>Partitioning begins by locating two position markers (leftMark and rightMark) at the beginning and end of the remaining items in the list.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">quick_sort</span><span class="params">(alist)</span>:</span></span><br><span class="line">    quick_sort_helper(alist, <span class="number">0</span>, len(alist)<span class="number">-1</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">quick_sort_helper</span><span class="params">(alist, first, last)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> first &lt; last:</span><br><span class="line">    split_point = partition(alist, first, last)</span><br><span class="line">    quick_sort_helper(alist, first, split_point<span class="number">-1</span>)</span><br><span class="line">    quick_sort_helper(alist, split_point + <span class="number">1</span>, last)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">partition</span><span class="params">(alist, first, last)</span>:</span></span><br><span class="line">    pivot_value = alist[first]</span><br><span class="line"></span><br><span class="line">    left_mark = first + <span class="number">1</span></span><br><span class="line">    right_mark = last</span><br><span class="line">    done = <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">not</span> done:</span><br><span class="line">        <span class="keyword">while</span> left_mark &lt;= right_mark <span class="keyword">and</span> alist[left_mark] &lt;= pivot_value:</span><br><span class="line">            left_mark += <span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> left_mark &lt;= right_mark <span class="keyword">and</span> alist[right_mark] &gt;= pivot_value:</span><br><span class="line">            right_mark -= <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> right_mark &lt; left_mark:</span><br><span class="line">            done = <span class="literal">True</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            alist[left_mark], alist[right_mark] = alist[right_mark], alist[left_mark]</span><br><span class="line"></span><br><span class="line">    alist[first], alist[right_mark] = alist[right_mark], alist[first]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> right_mark</span><br></pre></td></tr></table></figure>
+
+<h3 id="Quick-sort-Cont’d"><a href="#Quick-sort-Cont’d" class="headerlink" title="Quick sort (Cont’d)"></a>Quick sort (Cont’d)</h3><ul>
+<li>For quick sort, if the partition occurs in the middle of the list, there will be $\log n$ divisions.</li>
+<li>In order to find the split point, each of the $n$ items need to be checked against the pivot value.</li>
+<li>Thus, quick sort is an $O(n\log n)$ algorithm.</li>
+</ul>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><ul>
+<li>A sequential search is $O(n)$.</li>
+<li>A binary search of an ordered list is $O(\log n)$.</li>
+<li>Hash tables can provide constant time searching $O(1)$.</li>
+<li>A selection sort, a bubble sort, and an insertion sort are $O(n^{2})$ algorithms.</li>
+<li>A merge sort and a quick sort are $O(n\log n)$ algorithms.</li>
+</ul>
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>]]></content>
+      <categories>
+        <category>Olemiss</category>
+        <category>CSCI 356</category>
+      </categories>
+      <tags>
+        <tag>CSCI 356</tag>
       </tags>
   </entry>
   <entry>
@@ -428,148 +571,6 @@
 <hr>
 <p>Below is the code to implement inorder and postorder traversals:</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">inorder</span><span class="params">(tree)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> tree:</span><br><span class="line">        inorder(tree.getLeftChild())</span><br><span class="line">        print(tree.getRootVal())</span><br><span class="line">        inorder(tree.getRightChild())</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">postorder</span><span class="params">(tree)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> tree:</span><br><span class="line">        postorder(tree.getLeftChild())</span><br><span class="line">        postorder(tree.getRightChild())</span><br><span class="line">        print(tree.getRootVal())</span><br></pre></td></tr></table></figure>
-</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
-        var options = {
-            selector: '.gallery-item'
-        };
-        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
-        }</script>]]></content>
-      <categories>
-        <category>Olemiss</category>
-        <category>CSCI 356</category>
-      </categories>
-      <tags>
-        <tag>CSCI 356</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Searching and Sorting [2/2]</title>
-    <url>/2020/04/28/2020-04-28-csci356-lec5-2/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
-<h2 id="Sorting"><a href="#Sorting" class="headerlink" title="Sorting"></a>Sorting</h2><ul>
-<li><strong>Sorting</strong> is the process of placing elements from a collection in order.</li>
-<li>We’ll discuss several sorting algorithms and compare them with respect to their running time.</li>
-<li>The total number of <strong>comparisons</strong> will be considered to evaluate the overall efficiency of a sorting algorithm.</li>
-</ul>
-<h2 id="Selection-sort"><a href="#Selection-sort" class="headerlink" title="Selection sort"></a>Selection sort</h2><p>looks for the smallest item and places it first, then finds the smallest in the remaining and puts it next, and so on.</p>
-<ul>
-<li>After the 1<sup>st</sup> pass, the smallest item is in the correct place.</li>
-<li>After the 2<sup>nd</sup> pass, the next smallest is in place.</li>
-<li>On each pass the smallest remaining item is selected and then placed in its proper location.</li>
-<li>This process requires (n – 1) passes to sort n items.</li>
-</ul>
-<h3 id="Selection-sort-Cont’d-1-2"><a href="#Selection-sort-Cont’d-1-2" class="headerlink" title="Selection sort (Cont’d) [1/2]"></a>Selection sort (Cont’d) [1/2]</h3><ul>
-<li>The exchange operation (<code>swap</code>) is slightly different in Python.</li>
-<li>Most programming languages requires a temp variable to store one of the values.</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">temp = a;</span><br><span class="line">a = b;</span><br><span class="line">b = temp;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>In Python, multiple assignment is allowed.</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a, b = b, a</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>Here is the code for selection sort:</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">selection_sort</span><span class="params">(alist)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(alist)):</span><br><span class="line">        min_value = alist[i]</span><br><span class="line">        min_index = i</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(i + <span class="number">1</span>, len(alist)):</span><br><span class="line">            <span class="keyword">if</span> min_value &gt; alist[j]:</span><br><span class="line">                min_value = alist[j]</span><br><span class="line">                min_index = j</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> min_index != i:</span><br><span class="line">            alist[min_index], alist[i] = alist[i], alist[min_index]</span><br></pre></td></tr></table></figure>
-
-<h3 id="Selection-sort-Cont’d-2-2"><a href="#Selection-sort-Cont’d-2-2" class="headerlink" title="Selection sort (Cont’d) [2/2]"></a>Selection sort (Cont’d) [2/2]</h3><p>To analyze the selection sort:</p>
-<table>
-<thead>
-<tr>
-<th align="left">Pass</th>
-<th align="left">Comparisions</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">1</td>
-<td align="left">n - 1</td>
-</tr>
-<tr>
-<td align="left">2</td>
-<td align="left">n - 2</td>
-</tr>
-<tr>
-<td align="left">3</td>
-<td align="left">n - 3</td>
-</tr>
-<tr>
-<td align="left">…</td>
-<td align="left">…</td>
-</tr>
-<tr>
-<td align="left">n - 1</td>
-<td align="left">1</td>
-</tr>
-</tbody></table>
-<ul>
-<li>The sum of $ 1 + 2 + 3 + … + (n-1) = \frac{n \cdot (n - 1)}{2}$</li>
-<li>The complexity is $O(n^{2})$</li>
-</ul>
-<h2 id="Bubble-Sort"><a href="#Bubble-Sort" class="headerlink" title="Bubble Sort"></a>Bubble Sort</h2><ul>
-<li>Compares adjacent items and exchanges each pair that are out of order.</li>
-<li>Each pass through the list places the next largest value in its proper place.</li>
-<li>In essence, each item “bubbles” up to the location where it belongs.</li>
-</ul>
-<h3 id="Bubble-Sort-Cont’d-1-2"><a href="#Bubble-Sort-Cont’d-1-2" class="headerlink" title="Bubble Sort (Cont’d) [1/2]"></a>Bubble Sort (Cont’d) [1/2]</h3><ul>
-<li>At the start of the 2<sup>nd</sup> pass, the largest value is now in place.</li>
-<li>There are n – 1 items left to sort.</li>
-<li>The total number of passes necessary will be n – 1.</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bubble_sort</span><span class="params">(alist)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(alist)):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span>, len(alist) - i):</span><br><span class="line">            <span class="keyword">if</span> alist[j] &lt; alist[j<span class="number">-1</span>]:</span><br><span class="line">                alist[j<span class="number">-1</span>], alist[j] = alist[j], alist[j<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
-
-<h3 id="Bubble-Sort-Cont’d-2-2"><a href="#Bubble-Sort-Cont’d-2-2" class="headerlink" title="Bubble Sort (Cont’d) [2/2]"></a>Bubble Sort (Cont’d) [2/2]</h3><p>Generally speaking, the bubble sort makes the same number of comparisons as the selection sort and is therefore also $O(n^{2})$</p>
-<h2 id="Insertion-sort"><a href="#Insertion-sort" class="headerlink" title="Insertion sort"></a>Insertion sort</h2><ul>
-<li>Each new item is “inserted” into the sub-list to make the sorted sublist is one item larger.</li>
-<li>We begin by assuming that a list with one item (position 0, list[0]) is already sorted.</li>
-<li>On each pass, one for each item 1 through n – 1, the current item is checked against those in the already sorted list. Shift those items that are greater to the right; when we reach a smaller item or the end of the sublist, the current item can be inserted.</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bubble_sort</span><span class="params">(alist)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, len(alist)):</span><br><span class="line">        current_value = alist[i]</span><br><span class="line">        pos = i</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> pos &gt; <span class="number">0</span> <span class="keyword">and</span> pos[i<span class="number">-1</span>] &gt; current_value:</span><br><span class="line">            alist[pos] = alist[pos<span class="number">-1</span>]</span><br><span class="line">            pos -= <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        alist[pos] = current_value</span><br></pre></td></tr></table></figure>
-
-<h2 id="Insertion-sort-Cont’d"><a href="#Insertion-sort-Cont’d" class="headerlink" title="Insertion sort (Cont’d)"></a>Insertion sort (Cont’d)</h2><ul>
-<li>The maximum number of comparisons for an insertion sort is the sum of the first n – 1 integers.</li>
-<li>Again, this is $O(n^{2})$</li>
-</ul>
-<h2 id="Merge-sort"><a href="#Merge-sort" class="headerlink" title="Merge sort"></a>Merge sort</h2><ul>
-<li>A recursive algorithm that continually splits a list in half.</li>
-<li>If the list is empty or has one item, it is sorted (the base case).</li>
-<li>If the list has more than one item, we split the list and recursively invoke a merge sort on both halves. Once the two halves are sorted, the fundamental operation, called a merge, is performed.</li>
-<li>Merging is the process of combining two smaller sorted lists into a single sorted list.</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">merge_sort</span><span class="params">(alist)</span>:</span></span><br><span class="line">	print(<span class="string">f"Splitting: <span class="subst">&#123;alist&#125;</span>"</span>)</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span> len(alist) &gt; <span class="number">1</span>:</span><br><span class="line">		mid = len(alist) // <span class="number">2</span></span><br><span class="line">		left_half = alist[:mid]</span><br><span class="line">		right_half = alist[mid:]</span><br><span class="line">		</span><br><span class="line">		merge_sort(left_half)</span><br><span class="line">		merge_sort(right_half)</span><br><span class="line">		</span><br><span class="line">		i = <span class="number">0</span></span><br><span class="line">		j = <span class="number">0</span></span><br><span class="line">		k = <span class="number">0</span></span><br><span class="line">		</span><br><span class="line">		<span class="keyword">while</span> i &lt; len(left_half) <span class="keyword">and</span> j &lt; len(right_half):</span><br><span class="line">			<span class="keyword">if</span> left_half[i] &lt; right_half[j]:</span><br><span class="line">				alist[k] = left_half[i]</span><br><span class="line">				i += <span class="number">1</span></span><br><span class="line">				k += <span class="number">1</span></span><br><span class="line">			<span class="keyword">else</span>:</span><br><span class="line">				alist[k] = right_half[j]</span><br><span class="line">				j += <span class="number">1</span></span><br><span class="line">				k += <span class="number">1</span></span><br><span class="line">		</span><br><span class="line">		<span class="keyword">while</span> i &lt; len(left_half):</span><br><span class="line">			alist[k] = left_half[i]</span><br><span class="line">			i += <span class="number">1</span></span><br><span class="line">			k += <span class="number">1</span></span><br><span class="line">		</span><br><span class="line">		<span class="keyword">while</span> j &lt; len(right_half):</span><br><span class="line">			alist[k] = right_half[j]</span><br><span class="line">			j += <span class="number">1</span></span><br><span class="line">			k += <span class="number">1</span></span><br><span class="line">		</span><br><span class="line">	print(<span class="string">f"Merging: <span class="subst">&#123;alist&#125;</span>"</span>)</span><br></pre></td></tr></table></figure>
-
-<h3 id="Merge-sort-Cont’d"><a href="#Merge-sort-Cont’d" class="headerlink" title="Merge sort (Cont’d)"></a>Merge sort (Cont’d)</h3><ul>
-<li>Merge sort has two distinct processes: splitting and merging.</li>
-<li>Splitting a list into halves can be done: $O(\log n)$</li>
-<li>Merging: each item in the list will be processed and placed in the sorted list, this is $O(n)$</li>
-<li>Thus, merge sort is an $O(n\log n)$ algorithm.</li>
-</ul>
-<h2 id="Quick-sort"><a href="#Quick-sort" class="headerlink" title="Quick sort"></a>Quick sort</h2><ul>
-<li>This sort first selects a value (called the <strong>pivot</strong> value, we will use the 1<sup>st</sup> item as the pivot value).</li>
-<li>The role of the pivot value is to assist with <ins>splitting</ins> the list.</li>
-<li>The actual position where the pivot value belongs in the final sorted list (called the split point) will be used to divide the list for subsequent calls to the quick sort.</li>
-<li>The partition process finds the split point and move other items to the appropriate side of the list, either less than or greater than the pivot value.</li>
-<li>Partitioning begins by locating two position markers (leftMark and rightMark) at the beginning and end of the remaining items in the list.</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">quick_sort</span><span class="params">(alist)</span>:</span></span><br><span class="line">    quick_sort_helper(alist, <span class="number">0</span>, len(alist)<span class="number">-1</span>)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">quick_sort_helper</span><span class="params">(alist, first, last)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> first &lt; last:</span><br><span class="line">    split_point = partition(alist, first, last)</span><br><span class="line">    quick_sort_helper(alist, first, split_point<span class="number">-1</span>)</span><br><span class="line">    quick_sort_helper(alist, split_point + <span class="number">1</span>, last)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">partition</span><span class="params">(alist, first, last)</span>:</span></span><br><span class="line">    pivot_value = alist[first]</span><br><span class="line"></span><br><span class="line">    left_mark = first + <span class="number">1</span></span><br><span class="line">    right_mark = last</span><br><span class="line">    done = <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">not</span> done:</span><br><span class="line">        <span class="keyword">while</span> left_mark &lt;= right_mark <span class="keyword">and</span> alist[left_mark] &lt;= pivot_value:</span><br><span class="line">            left_mark += <span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> left_mark &lt;= right_mark <span class="keyword">and</span> alist[right_mark] &gt;= pivot_value:</span><br><span class="line">            right_mark -= <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> right_mark &lt; left_mark:</span><br><span class="line">            done = <span class="literal">True</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            alist[left_mark], alist[right_mark] = alist[right_mark], alist[left_mark]</span><br><span class="line"></span><br><span class="line">    alist[first], alist[right_mark] = alist[right_mark], alist[first]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> right_mark</span><br></pre></td></tr></table></figure>
-
-<h3 id="Quick-sort-Cont’d"><a href="#Quick-sort-Cont’d" class="headerlink" title="Quick sort (Cont’d)"></a>Quick sort (Cont’d)</h3><ul>
-<li>For quick sort, if the partition occurs in the middle of the list, there will be $\log n$ divisions.</li>
-<li>In order to find the split point, each of the $n$ items need to be checked against the pivot value.</li>
-<li>Thus, quick sort is an $O(n\log n)$ algorithm.</li>
-</ul>
-<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><ul>
-<li>A sequential search is $O(n)$.</li>
-<li>A binary search of an ordered list is $O(\log n)$.</li>
-<li>Hash tables can provide constant time searching $O(1)$.</li>
-<li>A selection sort, a bubble sort, and an insertion sort are $O(n^{2})$ algorithms.</li>
-<li>A merge sort and a quick sort are $O(n\log n)$ algorithms.</li>
-</ul>
 </div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
         var options = {
             selector: '.gallery-item'
@@ -2333,7 +2334,7 @@ merge newbranch
 <h3 id="About"><a href="#About" class="headerlink" title="About"></a>About</h3><p>This is hexo-oembed plugin demo page.<br><a href="https://github.com/hinastory/hexo-oembed" target="_blank" rel="noopener">https://github.com/hinastory/hexo-oembed</a></p>
 <h3 id="oEmbed-derivery-compatible-site-demo"><a href="#oEmbed-derivery-compatible-site-demo" class="headerlink" title="oEmbed derivery compatible site demo"></a>oEmbed derivery compatible site demo</h3><h4 id="YouTube"><a href="#YouTube" class="headerlink" title="YouTube"></a>YouTube</h4><figure class="highlight plain"><figcaption><span>Hexo tag</span></figcaption><table><tr><td class="code"><pre><span class="line">&#123;% oembed https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v&#x3D;SX_ViT4Ra7k %&#125;</span><br></pre></td></tr></table></figure>
 
-<div class="oembed-error" style="color: red;"><span>failed getting oembed item.(url=https://www.youtube.com/watch?v=SX_ViT4Ra7k)</span></div>
+<div class="oembed-outer oembed-youtube"><div class="oembed-inner"><iframe width="480" height="270" src="https://www.youtube.com/embed/SX_ViT4Ra7k?feature=oembed" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div></div>
 
 <hr>
 <h4 id="Twitter"><a href="#Twitter" class="headerlink" title="Twitter"></a>Twitter</h4><figure class="highlight plain"><figcaption><span>Hexo tag</span></figcaption><table><tr><td class="code"><pre><span class="line">&#123;% oembed https:&#x2F;&#x2F;twitter.com&#x2F;hinastory999&#x2F;status&#x2F;1089514744174632960 %&#125;</span><br></pre></td></tr></table></figure>
@@ -2343,27 +2344,30 @@ merge newbranch
 <hr>
 <h4 id="Speaker-Deck"><a href="#Speaker-Deck" class="headerlink" title="Speaker Deck"></a>Speaker Deck</h4><figure class="highlight plain"><figcaption><span>Hexo tag</span></figcaption><table><tr><td class="code"><pre><span class="line">&#123;% oembed https:&#x2F;&#x2F;speakerdeck.com&#x2F;ladicle&#x2F;recap-kubecon-plus-cloud-nativecon-north-america-2018-overview %&#125;</span><br></pre></td></tr></table></figure>
 
-<div class="oembed-error" style="color: red;"><span>failed getting oembed item.(url=https://speakerdeck.com/ladicle/recap-kubecon-plus-cloud-nativecon-north-america-2018-overview)</span></div>
+<div class="oembed-outer oembed-speaker-deck"><div class="oembed-inner"><iframe id="talk_frame_485070" src="//speakerdeck.com/player/4a061694787a4febac0e96845d58b961" width="710" height="399" style="border:0; padding:0; margin:0; background:transparent;" frameborder="0" allowtransparency="true" allowfullscreen="allowfullscreen" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+</div></div>
 
 <hr>
 <h4 id="SlideShare"><a href="#SlideShare" class="headerlink" title="SlideShare"></a>SlideShare</h4><figure class="highlight plain"><figcaption><span>Hexo tag</span></figcaption><table><tr><td class="code"><pre><span class="line">&#123;% oembed https:&#x2F;&#x2F;www.slideshare.net&#x2F;Odersky&#x2F;preparing-for-scala-3 %&#125;</span><br></pre></td></tr></table></figure>
 
-<div class="oembed-error" style="color: red;"><span>failed getting oembed item.(url=https://www.slideshare.net/Odersky/preparing-for-scala-3)</span></div>
+<div class="oembed-outer oembed-slideshare"><div class="oembed-inner"><iframe src="https://www.slideshare.net/slideshow/embed_code/key/EM76C9qMh454Bl" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="https://www.slideshare.net/Odersky/preparing-for-scala-3" title="Preparing for Scala 3" target="_blank">Preparing for Scala 3</a> </strong> from <strong><a href="https://www.slideshare.net/Odersky" target="_blank">Martin Odersky</a></strong> </div>
+
+</div></div>
 
 <hr>
 <h4 id="Vimeo"><a href="#Vimeo" class="headerlink" title="Vimeo"></a>Vimeo</h4><figure class="highlight plain"><figcaption><span>Hexo tag</span></figcaption><table><tr><td class="code"><pre><span class="line">&#123;% oembed https:&#x2F;&#x2F;vimeo.com&#x2F;311121738 %&#125;</span><br></pre></td></tr></table></figure>
 
-<div class="oembed-error" style="color: red;"><span>failed getting oembed item.(url=https://vimeo.com/311121738)</span></div>
+<div class="oembed-outer oembed-vimeo"><div class="oembed-inner"><iframe src="https://player.vimeo.com/video/311121738?app_id=122963" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen title="Seeking Nirvana 3.3 - Strange Adventures"></iframe></div></div>
 
 <hr>
 <h4 id="TED"><a href="#TED" class="headerlink" title="TED"></a>TED</h4><figure class="highlight plain"><figcaption><span>Hexo tag</span></figcaption><table><tr><td class="code"><pre><span class="line">&#123;% oembed  https:&#x2F;&#x2F;www.ted.com&#x2F;talks&#x2F;susan_etlinger_what_do_we_do_with_all_this_big_data %&#125;</span><br></pre></td></tr></table></figure>
 
-<div class="oembed-error" style="color: red;"><span>failed getting oembed item.(url=https://www.ted.com/talks/susan_etlinger_what_do_we_do_with_all_this_big_data)</span></div>
+<div class="oembed-outer oembed-ted"><div class="oembed-inner"><iframe src="https://embed.ted.com/talks/susan_etlinger_what_do_we_do_with_all_this_big_data" width="560" height="316" frameborder="0" scrolling="no" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></div></div>
 
 <hr>
 <h4 id="Hatena-Blog"><a href="#Hatena-Blog" class="headerlink" title="Hatena Blog"></a>Hatena Blog</h4><figure class="highlight plain"><figcaption><span>Hexo tag</span></figcaption><table><tr><td class="code"><pre><span class="line">&#123;% oembed https:&#x2F;&#x2F;rheb.hatenablog.com&#x2F;entry&#x2F;rhel8-python %&#125;</span><br></pre></td></tr></table></figure>
 
-<div class="oembed-error" style="color: red;"><span>failed getting oembed item.(url=https://rheb.hatenablog.com/entry/rhel8-python)</span></div>
+<div class="oembed-outer oembed-hatena-blog"><div class="oembed-inner"><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Frheb.hatenablog.com%2Fentry%2Frhel8-python" title="Red Hat Enterprise Linux 8 のPython事情 - 赤帽エンジニアブログ" class="embed-card embed-blogcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 190px; max-width: 500px; margin: 10px 0px;"></iframe></div></div>
 
 <hr>
 </div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
@@ -3711,6 +3715,46 @@ merge newbranch
       </tags>
   </entry>
   <entry>
+    <title>10989 수 정렬하기 3</title>
+    <url>/2020/02/15/2020-02-15-Baekjoon-10989/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<h2 id="Setting"><a href="#Setting" class="headerlink" title="Setting"></a>Setting</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> CNT_INFO[<span class="number">151</span>]; <span class="comment">// count of numbers</span></span><br><span class="line"><span class="keyword">char</span> buf[<span class="number">30</span>];      <span class="comment">// store &amp; output area</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>buf[30] (10 * 4 + 4 = 44) [if all data is stored once.]</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">+-----+</span><br><span class="line">| 10  |   Size</span><br><span class="line">+-----+----------+</span><br><span class="line">| 10  |          |</span><br><span class="line">+-----+          |</span><br><span class="line">| 20  |          |</span><br><span class="line">+-----+          |</span><br><span class="line">| 30  |          |</span><br><span class="line">+-----+          |</span><br><span class="line">| 40  |          |</span><br><span class="line">+-----+          -</span><br><span class="line">| 100 |          D</span><br><span class="line">+-----+          A</span><br><span class="line">| 100 |          T</span><br><span class="line">+-----+          A</span><br><span class="line">| 100 |          -</span><br><span class="line">+-----+          |</span><br><span class="line">| 120 |          |</span><br><span class="line">+-----+          |</span><br><span class="line">| 130 |          |</span><br><span class="line">+-----+          |</span><br><span class="line">| 140 |          |</span><br><span class="line">+-----+----------+</span><br></pre></td></tr></table></figure>
+
+<h2 id="If-statement"><a href="#If-statement" class="headerlink" title="If-statement"></a>If-statement</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (buf + sz - p - <span class="number">1</span> &lt; j)</span><br><span class="line">&#123;</span><br><span class="line">    fwrite(buf, <span class="keyword">sizeof</span>(<span class="keyword">char</span>), p - buf, <span class="built_in">stdout</span>);</span><br><span class="line">    p = buf;</span><br><span class="line">    <span class="keyword">goto</span> check_1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>만약 현재의 저장소 <code>buf</code>보다 더 많은 입력을 했다면 이 경우 예외 처리가 필요하다.</li>
+<li>따라서 현재까지 정렬된 저장소를 현재 문제가 발생된 부분을 제외하고 출력한다.</li>
+<li>또한 현재 포인터 p를 다시 저장소의 처음 주소로 이동한다.</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">check_1:</span><br><span class="line">    <span class="built_in">memcpy</span>(p, STR_INFO[num], j);</span><br><span class="line">    s = p;</span><br><span class="line">    p += j;</span><br><span class="line">    CNT_INFO[num]--;</span><br><span class="line">    f = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>이때 현재 값<code>STR_INFO[num]</code>을 처음 주소로 옮긴다.</li>
+<li>그리고 현재 포인터 p를 다음 주소로 옮긴다.</li>
+</ul>
+<h2 id="Source-Code"><a href="#Source-Code" class="headerlink" title="Source Code"></a>Source Code</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;memory.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// include user-defind memory</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"dataset.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//number: 1 ~ 150</span></span><br><span class="line"><span class="comment">//store area: 30</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _BUFSIZ 30</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _LENG 151</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> CNT_INFO[_LENG];</span><br><span class="line"><span class="keyword">char</span> buf[_BUFSIZ];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span>* p;</span><br><span class="line">    <span class="keyword">int</span> sz, remain;</span><br><span class="line">    <span class="keyword">int</span> num;</span><br><span class="line"></span><br><span class="line">    fread(buf, <span class="keyword">sizeof</span>(<span class="keyword">char</span>), _BUFSIZ, <span class="built_in">stdin</span>);</span><br><span class="line">    p = buf;</span><br><span class="line">    sz = <span class="keyword">sizeof</span>(buf);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Read size</span></span><br><span class="line">    <span class="keyword">for</span> (C = <span class="number">0</span>; *p++ &gt;= <span class="number">48</span>;)</span><br><span class="line">    &#123;</span><br><span class="line">        C = C * <span class="number">10</span> + (p[<span class="number">-1</span>] - <span class="number">48</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// store the values in array</span></span><br><span class="line">    <span class="keyword">while</span> (C--)</span><br><span class="line">    &#123;</span><br><span class="line">        remain = buf + sz - p;</span><br><span class="line">        <span class="keyword">if</span> (remain &lt; <span class="number">6</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">memcpy</span>(buf, p, remain);</span><br><span class="line">            fread(buf + remain, <span class="keyword">sizeof</span>(<span class="keyword">char</span>), sz - remain, <span class="built_in">stdin</span>);</span><br><span class="line">            p = buf;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (num = <span class="number">0</span>; *p++ &gt;= <span class="number">48</span>;)</span><br><span class="line">        &#123;</span><br><span class="line">            num = num * <span class="number">10</span> + (p[<span class="number">-1</span>] - <span class="number">48</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        CNT_INFO[num]++;</span><br><span class="line">    &#125;</span><br><span class="line">    p = buf;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (num = <span class="number">1</span>; num &lt; _LENG; num++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> f, c, k, j;</span><br><span class="line">        <span class="keyword">char</span>* s;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// To get the length of number</span></span><br><span class="line">        <span class="keyword">for</span> (k = num, j = <span class="number">1</span>; k &gt; <span class="number">0</span>; k /= <span class="number">10</span>, j++);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (CNT_INFO[num])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//if current remain size is not enough to store the current number</span></span><br><span class="line">            <span class="keyword">if</span> (buf + sz - p - <span class="number">1</span> &lt; j)</span><br><span class="line">            &#123;</span><br><span class="line">                fwrite(buf, <span class="keyword">sizeof</span>(<span class="keyword">char</span>), p - buf, <span class="built_in">stdout</span>);</span><br><span class="line">                p = buf;</span><br><span class="line">                <span class="keyword">goto</span> check_1;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        check_1:</span><br><span class="line">            <span class="built_in">memcpy</span>(p, STR_INFO[num], j);</span><br><span class="line">            s = p;</span><br><span class="line">            p += j;</span><br><span class="line">            CNT_INFO[num]--;</span><br><span class="line">            f = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// If still remain the count of number (it means, number &gt; 1).</span></span><br><span class="line">            <span class="keyword">while</span> (CNT_INFO[num] &gt; <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (CNT_INFO[num] &gt;= f)</span><br><span class="line">                &#123;</span><br><span class="line">                    c = f;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    c = CNT_INFO[num];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// if current remain size is not enough to store current sample numbers..</span></span><br><span class="line">                <span class="keyword">if</span> (buf + sz - p - <span class="number">1</span> &lt; j * c)</span><br><span class="line">                &#123;</span><br><span class="line">                    fwrite(buf, <span class="keyword">sizeof</span>(<span class="keyword">char</span>), p - buf, <span class="built_in">stdout</span>);</span><br><span class="line">                    p = buf;</span><br><span class="line">                    <span class="keyword">goto</span> check_1;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="built_in">memcpy</span>(p, s, j * c);</span><br><span class="line">                p += j * c;</span><br><span class="line">                CNT_INFO[num] -= c;</span><br><span class="line">                f += c;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    fwrite(buf, <span class="keyword">sizeof</span>(<span class="keyword">char</span>), p - buf, <span class="built_in">stdout</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://www.acmicpc.net/source/17694817" target="_blank" rel="noopener">My source #1</a><br><a href="https://www.acmicpc.net/source/17694757" target="_blank" rel="noopener">My source #2</a></p>
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>]]></content>
+      <categories>
+        <category>Algorithm</category>
+        <category>Baekjoon</category>
+      </categories>
+      <tags>
+        <tag>Baekjoon</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Kakao clone coding</title>
     <url>/2020/02/15/2020-02-15-Kakao-clone-coding/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<p>Preview: <a href="https://sokhyg9016.github.io/Nomad-kakao-clone-2.0/">Link</a></p>
@@ -3814,46 +3858,6 @@ merge newbranch
       </tags>
   </entry>
   <entry>
-    <title>10989 수 정렬하기 3</title>
-    <url>/2020/02/15/2020-02-15-Baekjoon-10989/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<h2 id="Setting"><a href="#Setting" class="headerlink" title="Setting"></a>Setting</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> CNT_INFO[<span class="number">151</span>]; <span class="comment">// count of numbers</span></span><br><span class="line"><span class="keyword">char</span> buf[<span class="number">30</span>];      <span class="comment">// store &amp; output area</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>buf[30] (10 * 4 + 4 = 44) [if all data is stored once.]</p>
-</blockquote>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">+-----+</span><br><span class="line">| 10  |   Size</span><br><span class="line">+-----+----------+</span><br><span class="line">| 10  |          |</span><br><span class="line">+-----+          |</span><br><span class="line">| 20  |          |</span><br><span class="line">+-----+          |</span><br><span class="line">| 30  |          |</span><br><span class="line">+-----+          |</span><br><span class="line">| 40  |          |</span><br><span class="line">+-----+          -</span><br><span class="line">| 100 |          D</span><br><span class="line">+-----+          A</span><br><span class="line">| 100 |          T</span><br><span class="line">+-----+          A</span><br><span class="line">| 100 |          -</span><br><span class="line">+-----+          |</span><br><span class="line">| 120 |          |</span><br><span class="line">+-----+          |</span><br><span class="line">| 130 |          |</span><br><span class="line">+-----+          |</span><br><span class="line">| 140 |          |</span><br><span class="line">+-----+----------+</span><br></pre></td></tr></table></figure>
-
-<h2 id="If-statement"><a href="#If-statement" class="headerlink" title="If-statement"></a>If-statement</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (buf + sz - p - <span class="number">1</span> &lt; j)</span><br><span class="line">&#123;</span><br><span class="line">    fwrite(buf, <span class="keyword">sizeof</span>(<span class="keyword">char</span>), p - buf, <span class="built_in">stdout</span>);</span><br><span class="line">    p = buf;</span><br><span class="line">    <span class="keyword">goto</span> check_1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>만약 현재의 저장소 <code>buf</code>보다 더 많은 입력을 했다면 이 경우 예외 처리가 필요하다.</li>
-<li>따라서 현재까지 정렬된 저장소를 현재 문제가 발생된 부분을 제외하고 출력한다.</li>
-<li>또한 현재 포인터 p를 다시 저장소의 처음 주소로 이동한다.</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">check_1:</span><br><span class="line">    <span class="built_in">memcpy</span>(p, STR_INFO[num], j);</span><br><span class="line">    s = p;</span><br><span class="line">    p += j;</span><br><span class="line">    CNT_INFO[num]--;</span><br><span class="line">    f = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>이때 현재 값<code>STR_INFO[num]</code>을 처음 주소로 옮긴다.</li>
-<li>그리고 현재 포인터 p를 다음 주소로 옮긴다.</li>
-</ul>
-<h2 id="Source-Code"><a href="#Source-Code" class="headerlink" title="Source Code"></a>Source Code</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;memory.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// include user-defind memory</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"dataset.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//number: 1 ~ 150</span></span><br><span class="line"><span class="comment">//store area: 30</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _BUFSIZ 30</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _LENG 151</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> CNT_INFO[_LENG];</span><br><span class="line"><span class="keyword">char</span> buf[_BUFSIZ];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span>* p;</span><br><span class="line">    <span class="keyword">int</span> sz, remain;</span><br><span class="line">    <span class="keyword">int</span> num;</span><br><span class="line"></span><br><span class="line">    fread(buf, <span class="keyword">sizeof</span>(<span class="keyword">char</span>), _BUFSIZ, <span class="built_in">stdin</span>);</span><br><span class="line">    p = buf;</span><br><span class="line">    sz = <span class="keyword">sizeof</span>(buf);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Read size</span></span><br><span class="line">    <span class="keyword">for</span> (C = <span class="number">0</span>; *p++ &gt;= <span class="number">48</span>;)</span><br><span class="line">    &#123;</span><br><span class="line">        C = C * <span class="number">10</span> + (p[<span class="number">-1</span>] - <span class="number">48</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// store the values in array</span></span><br><span class="line">    <span class="keyword">while</span> (C--)</span><br><span class="line">    &#123;</span><br><span class="line">        remain = buf + sz - p;</span><br><span class="line">        <span class="keyword">if</span> (remain &lt; <span class="number">6</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">memcpy</span>(buf, p, remain);</span><br><span class="line">            fread(buf + remain, <span class="keyword">sizeof</span>(<span class="keyword">char</span>), sz - remain, <span class="built_in">stdin</span>);</span><br><span class="line">            p = buf;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (num = <span class="number">0</span>; *p++ &gt;= <span class="number">48</span>;)</span><br><span class="line">        &#123;</span><br><span class="line">            num = num * <span class="number">10</span> + (p[<span class="number">-1</span>] - <span class="number">48</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        CNT_INFO[num]++;</span><br><span class="line">    &#125;</span><br><span class="line">    p = buf;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (num = <span class="number">1</span>; num &lt; _LENG; num++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> f, c, k, j;</span><br><span class="line">        <span class="keyword">char</span>* s;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// To get the length of number</span></span><br><span class="line">        <span class="keyword">for</span> (k = num, j = <span class="number">1</span>; k &gt; <span class="number">0</span>; k /= <span class="number">10</span>, j++);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (CNT_INFO[num])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//if current remain size is not enough to store the current number</span></span><br><span class="line">            <span class="keyword">if</span> (buf + sz - p - <span class="number">1</span> &lt; j)</span><br><span class="line">            &#123;</span><br><span class="line">                fwrite(buf, <span class="keyword">sizeof</span>(<span class="keyword">char</span>), p - buf, <span class="built_in">stdout</span>);</span><br><span class="line">                p = buf;</span><br><span class="line">                <span class="keyword">goto</span> check_1;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        check_1:</span><br><span class="line">            <span class="built_in">memcpy</span>(p, STR_INFO[num], j);</span><br><span class="line">            s = p;</span><br><span class="line">            p += j;</span><br><span class="line">            CNT_INFO[num]--;</span><br><span class="line">            f = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// If still remain the count of number (it means, number &gt; 1).</span></span><br><span class="line">            <span class="keyword">while</span> (CNT_INFO[num] &gt; <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (CNT_INFO[num] &gt;= f)</span><br><span class="line">                &#123;</span><br><span class="line">                    c = f;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    c = CNT_INFO[num];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// if current remain size is not enough to store current sample numbers..</span></span><br><span class="line">                <span class="keyword">if</span> (buf + sz - p - <span class="number">1</span> &lt; j * c)</span><br><span class="line">                &#123;</span><br><span class="line">                    fwrite(buf, <span class="keyword">sizeof</span>(<span class="keyword">char</span>), p - buf, <span class="built_in">stdout</span>);</span><br><span class="line">                    p = buf;</span><br><span class="line">                    <span class="keyword">goto</span> check_1;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="built_in">memcpy</span>(p, s, j * c);</span><br><span class="line">                p += j * c;</span><br><span class="line">                CNT_INFO[num] -= c;</span><br><span class="line">                f += c;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    fwrite(buf, <span class="keyword">sizeof</span>(<span class="keyword">char</span>), p - buf, <span class="built_in">stdout</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://www.acmicpc.net/source/17694817" target="_blank" rel="noopener">My source #1</a><br><a href="https://www.acmicpc.net/source/17694757" target="_blank" rel="noopener">My source #2</a></p>
-</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
-        var options = {
-            selector: '.gallery-item'
-        };
-        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
-        }</script>]]></content>
-      <categories>
-        <category>Algorithm</category>
-        <category>Baekjoon</category>
-      </categories>
-      <tags>
-        <tag>Baekjoon</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Position property</title>
     <url>/2020/01/14/2020-01-14-position%20property%20note/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
@@ -3891,6 +3895,84 @@ merge newbranch
 <h2 id="position-html"><a href="#position-html" class="headerlink" title="position.html"></a>position.html</h2><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"ie=edge"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Position property<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">      /*</span><br><span class="line">            각 브라우저 마다 가지고 있는 Default 값을 상쇄하기 위해서</span><br><span class="line">            아래와 같은 설정을 해준다. </span><br><span class="line">        */</span><br><span class="line">      body,</span><br><span class="line">      html &#123;</span><br><span class="line">        height: 100%;</span><br><span class="line">        margin: 0;</span><br><span class="line">        padding: 0;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      body &#123;</span><br><span class="line">        height: 100%;</span><br><span class="line">        background-color: gray;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">      <span class="selector-class">.abs-box</span> &#123;</span></span><br><span class="line">        width: 400px;</span><br><span class="line">        height: 400px;</span><br><span class="line">        background-color: yellow;</span><br><span class="line">        position: relative;</span><br><span class="line">        top: 300px;</span><br><span class="line">        left: 50%;</span><br><span class="line">        transform: translate(-50%, -50%);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">      <span class="selector-class">.abs-child</span> &#123;</span></span><br><span class="line">        width: 100px;</span><br><span class="line">        height: 100px;</span><br><span class="line">        background-color: green;</span><br><span class="line">        position: absolute;</span><br><span class="line">        top: 10px;</span><br><span class="line">        left: 10px;</span><br><span class="line">      &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"abs-box"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"abs-child"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p><a href="../../../../img/position_property.png" title="Image description" class="gallery-item"><img src="../../../../img/position_property.png" alt="Image description"></a></p>
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>]]></content>
+      <categories>
+        <category>HTML5</category>
+        <category>CSS3</category>
+      </categories>
+      <tags>
+        <tag>CSS3</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Advanced CSS</title>
+    <url>/2020/01/14/2020-01-14-Advanced%20CSS/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
+<h2 id="What-is-Transitions"><a href="#What-is-Transitions" class="headerlink" title="What is Transitions?"></a>What is Transitions?</h2><ol>
+<li>트랜지션(Transitions)이란 element의 이동 및 변경을 멋지게 보여주는 효과들이다.</li>
+<li>트랜지션은 focus, active, hover에서 효과적으로 사용된다.</li>
+<li>즉 <strong>transition</strong> 이란 element가 하나의 state에서 다른 state로 넘어갈 때의 효과를 말한다.</li>
+</ol>
+<h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span>Text<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><figcaption><span>CSS</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: green;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">  <span class="attribute">transition</span>: background-color <span class="number">5s</span> ease-in-out;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>여기서,</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">transition</span>: <span class="selector-tag">background-color</span> 5<span class="selector-tag">s</span> <span class="selector-tag">ease-in-out</span>;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>위 코드의 의미는 배경색(background-color)를 <code>5s</code> 안에 <strong>ease-in-out</strong> 애니메이션 효과를 적용하여 바꾸라는 의미이다.</li>
+<li>또한 이렇게 <strong>transition</strong> 앞에 바꾸고 싶은 property 값을 명시해주면 그 속성 값만 특정 효과를 적용하여 바꾸는 것이며, 만약 1개 이상의 설정값을 바꾸고 싶다면 transition 앞에 <code>all</code>이라고 적으면 된다.</li>
+</ol>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">transition</span>: <span class="selector-tag">all</span> 5<span class="selector-tag">s</span> <span class="selector-tag">ease-in-out</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a href="https://developer.mozilla.org/en/docs/Web/CSS/transition" target="_blank" rel="noopener">Official Transition Documentation</a></p>
+<hr>
+<h2 id="What-is-Transformation"><a href="#What-is-Transformation" class="headerlink" title="What is Transformation?"></a>What is Transformation?</h2><ol>
+<li>트랜스포매이션(Transformation)은 html문서의 element들을 변경, 모습이 변하는 효과를 뜻한다.</li>
+<li>즉 transform이란 element의 모양새(shape)를 바꾸는 것이다.</li>
+<li><code>Transition</code>과 같이 합쳐서 사용할 수 있다. (즉 하나의 state에서 다른 state로 변할 때의 그 state에서의 모양새를 변경할 수 있다.)</li>
+</ol>
+<h3 id="Example-1"><a href="#Example-1" class="headerlink" title="Example"></a>Example</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">500px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">500px</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: red;</span><br><span class="line">  <span class="attribute">transition</span>: transform <span class="number">0.5s</span> ease-in-out;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.box</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">skew</span>(<span class="number">30deg</span>, <span class="number">20deg</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>이렇게 되면 <code>.box</code>에 해당하는 element에 마우스를 올려놓았을 때 0.5s 초 안에 해당 element가<br>설정한 [<code>skew(...)</code>] 모습으로 변화한다.</p>
+<p>또한 <code>transform</code> 설정을 복수로 결합하여 사용할 수 있다.</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">transform</span>: <span class="selector-tag">rotate</span>(1<span class="selector-tag">turn</span>) <span class="selector-tag">scale</span>(0<span class="selector-class">.5</span>, 0<span class="selector-class">.5</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="Reference-1"><a href="#Reference-1" class="headerlink" title="Reference"></a>Reference</h3><ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transform" target="_blank" rel="noopener">CSS Transform Documentation</a></li>
+</ul>
+<hr>
+<h2 id="What-is-Animation"><a href="#What-is-Animation" class="headerlink" title="What is Animation?"></a>What is Animation?</h2><ul>
+<li><strong>Keyframe</strong> 은 CSS로 하여금 사용자가 animation을 생성했다는 것을 알려준다.</li>
+</ul>
+<blockquote>
+<p><strong>First step</strong>: Default status<br><strong>Second step</strong>: The element that Something changes</p>
+</blockquote>
+<ul>
+<li>Animation status가 2개만 필요할 때는 <code>from</code> ~ <code>to</code>만 작성하면 된다.</li>
+<li>더 세부적인 각 단계별 status step를 작성하고 싶을 때는 <strong>0% ~ 100%</strong> 까지 작성하면 된다.</li>
+</ul>
+<h3 id="Example-2"><a href="#Example-2" class="headerlink" title="Example"></a>Example</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span>Text<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">70px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">70px</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: red;</span><br><span class="line">  <span class="attribute">animation</span>: <span class="number">1.5s</span> ScaleAndRotateSquare infinite ease-in-out;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@keyframes</span> ScaleAndRotateSquare &#123;</span><br><span class="line">  0% &#123;</span><br><span class="line">    <span class="attribute">transform</span>: none;</span><br><span class="line">  &#125;</span><br><span class="line">  50% &#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">rotate</span>(<span class="number">1turn</span>) <span class="built_in">scale</span>(<span class="number">0.5</span>, <span class="number">0.5</span>);</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  100% &#123;</span><br><span class="line">    <span class="attribute">transform</span>: none;</span><br><span class="line">    <span class="attribute">color</span>: blue;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="What-is-media-query"><a href="#What-is-media-query" class="headerlink" title="What is media query?"></a>What is media query?</h2><blockquote>
+<p>Media queries are conditions that let me change the CSS based on the size of the browser</p>
+</blockquote>
+<ol>
+<li><code>media query</code>는 사용자의 디스플레이 환경에 따른 CSS 설정을 바꾸어 줄 수 있는 기능이다.</li>
+<li>mobile - desktop 환경에 따른 디자인 변경을 가능하게 해준다.</li>
+<li>반응형 웹 디자인에 유용</li>
+</ol>
+<h3 id="Example-3"><a href="#Example-3" class="headerlink" title="Example"></a>Example</h3><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: green;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">min-width:</span> <span class="number">320px</span>) <span class="keyword">and</span> (<span class="attribute">max-width:</span> <span class="number">640px</span>) &#123;</span><br><span class="line">  <span class="selector-tag">body</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: blue;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
         var options = {
             selector: '.gallery-item'
@@ -3989,84 +4071,6 @@ merge newbranch
       </categories>
       <tags>
         <tag>Programming</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Advanced CSS</title>
-    <url>/2020/01/14/2020-01-14-Advanced%20CSS/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
-<h2 id="What-is-Transitions"><a href="#What-is-Transitions" class="headerlink" title="What is Transitions?"></a>What is Transitions?</h2><ol>
-<li>트랜지션(Transitions)이란 element의 이동 및 변경을 멋지게 보여주는 효과들이다.</li>
-<li>트랜지션은 focus, active, hover에서 효과적으로 사용된다.</li>
-<li>즉 <strong>transition</strong> 이란 element가 하나의 state에서 다른 state로 넘어갈 때의 효과를 말한다.</li>
-</ol>
-<h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span>Text<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight css"><figcaption><span>CSS</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: green;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">  <span class="attribute">transition</span>: background-color <span class="number">5s</span> ease-in-out;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>여기서,</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">transition</span>: <span class="selector-tag">background-color</span> 5<span class="selector-tag">s</span> <span class="selector-tag">ease-in-out</span>;</span><br></pre></td></tr></table></figure>
-
-<ol>
-<li>위 코드의 의미는 배경색(background-color)를 <code>5s</code> 안에 <strong>ease-in-out</strong> 애니메이션 효과를 적용하여 바꾸라는 의미이다.</li>
-<li>또한 이렇게 <strong>transition</strong> 앞에 바꾸고 싶은 property 값을 명시해주면 그 속성 값만 특정 효과를 적용하여 바꾸는 것이며, 만약 1개 이상의 설정값을 바꾸고 싶다면 transition 앞에 <code>all</code>이라고 적으면 된다.</li>
-</ol>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">transition</span>: <span class="selector-tag">all</span> 5<span class="selector-tag">s</span> <span class="selector-tag">ease-in-out</span>;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a href="https://developer.mozilla.org/en/docs/Web/CSS/transition" target="_blank" rel="noopener">Official Transition Documentation</a></p>
-<hr>
-<h2 id="What-is-Transformation"><a href="#What-is-Transformation" class="headerlink" title="What is Transformation?"></a>What is Transformation?</h2><ol>
-<li>트랜스포매이션(Transformation)은 html문서의 element들을 변경, 모습이 변하는 효과를 뜻한다.</li>
-<li>즉 transform이란 element의 모양새(shape)를 바꾸는 것이다.</li>
-<li><code>Transition</code>과 같이 합쳐서 사용할 수 있다. (즉 하나의 state에서 다른 state로 변할 때의 그 state에서의 모양새를 변경할 수 있다.)</li>
-</ol>
-<h3 id="Example-1"><a href="#Example-1" class="headerlink" title="Example"></a>Example</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">500px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">500px</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: red;</span><br><span class="line">  <span class="attribute">transition</span>: transform <span class="number">0.5s</span> ease-in-out;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.box</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">skew</span>(<span class="number">30deg</span>, <span class="number">20deg</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>이렇게 되면 <code>.box</code>에 해당하는 element에 마우스를 올려놓았을 때 0.5s 초 안에 해당 element가<br>설정한 [<code>skew(...)</code>] 모습으로 변화한다.</p>
-<p>또한 <code>transform</code> 설정을 복수로 결합하여 사용할 수 있다.</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">transform</span>: <span class="selector-tag">rotate</span>(1<span class="selector-tag">turn</span>) <span class="selector-tag">scale</span>(0<span class="selector-class">.5</span>, 0<span class="selector-class">.5</span>);</span><br></pre></td></tr></table></figure>
-
-<h3 id="Reference-1"><a href="#Reference-1" class="headerlink" title="Reference"></a>Reference</h3><ul>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transform" target="_blank" rel="noopener">CSS Transform Documentation</a></li>
-</ul>
-<hr>
-<h2 id="What-is-Animation"><a href="#What-is-Animation" class="headerlink" title="What is Animation?"></a>What is Animation?</h2><ul>
-<li><strong>Keyframe</strong> 은 CSS로 하여금 사용자가 animation을 생성했다는 것을 알려준다.</li>
-</ul>
-<blockquote>
-<p><strong>First step</strong>: Default status<br><strong>Second step</strong>: The element that Something changes</p>
-</blockquote>
-<ul>
-<li>Animation status가 2개만 필요할 때는 <code>from</code> ~ <code>to</code>만 작성하면 된다.</li>
-<li>더 세부적인 각 단계별 status step를 작성하고 싶을 때는 <strong>0% ~ 100%</strong> 까지 작성하면 된다.</li>
-</ul>
-<h3 id="Example-2"><a href="#Example-2" class="headerlink" title="Example"></a>Example</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span>Text<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">70px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">70px</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: red;</span><br><span class="line">  <span class="attribute">animation</span>: <span class="number">1.5s</span> ScaleAndRotateSquare infinite ease-in-out;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@keyframes</span> ScaleAndRotateSquare &#123;</span><br><span class="line">  0% &#123;</span><br><span class="line">    <span class="attribute">transform</span>: none;</span><br><span class="line">  &#125;</span><br><span class="line">  50% &#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">rotate</span>(<span class="number">1turn</span>) <span class="built_in">scale</span>(<span class="number">0.5</span>, <span class="number">0.5</span>);</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  100% &#123;</span><br><span class="line">    <span class="attribute">transform</span>: none;</span><br><span class="line">    <span class="attribute">color</span>: blue;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="What-is-media-query"><a href="#What-is-media-query" class="headerlink" title="What is media query?"></a>What is media query?</h2><blockquote>
-<p>Media queries are conditions that let me change the CSS based on the size of the browser</p>
-</blockquote>
-<ol>
-<li><code>media query</code>는 사용자의 디스플레이 환경에 따른 CSS 설정을 바꾸어 줄 수 있는 기능이다.</li>
-<li>mobile - desktop 환경에 따른 디자인 변경을 가능하게 해준다.</li>
-<li>반응형 웹 디자인에 유용</li>
-</ol>
-<h3 id="Example-3"><a href="#Example-3" class="headerlink" title="Example"></a>Example</h3><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: green;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">min-width:</span> <span class="number">320px</span>) <span class="keyword">and</span> (<span class="attribute">max-width:</span> <span class="number">640px</span>) &#123;</span><br><span class="line">  <span class="selector-tag">body</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: blue;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
-        var options = {
-            selector: '.gallery-item'
-        };
-        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
-        }</script>]]></content>
-      <categories>
-        <category>HTML5</category>
-        <category>CSS3</category>
-      </categories>
-      <tags>
-        <tag>CSS3</tag>
       </tags>
   </entry>
   <entry>
