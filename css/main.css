@@ -863,6 +863,7 @@ pre .javascript .function {
 .post-body .note.primary h5,
 .post-body .note.primary h6 {
   color: #6f42c1;
+  margin: 0.5em 0 1em 0;
 }
 .post-body .note.primary:not(.no-icon)::before {
   content: "\f055";
@@ -1298,7 +1299,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #a1ff08;
+  background: #cf41be;
   border-radius: 50%;
   content: ' ';
   display: inline-block;

@@ -1,6 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>가상 메모리란</title>
+    <url>/2020/06/14/2020-06-14-virtual_memory/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
+<h2 id="가상-메모리란"><a href="#가상-메모리란" class="headerlink" title="가상 메모리란?"></a>가상 메모리란?</h2><p>가상 메모리는 프로세스 전체가 메모리 내에 올라오지 않더라도 실행이 가능하도록 만들어주는 기법이다.</p>
+<p>즉, 메모리를 관리하는 방법의 하나로, 각 프로그램에 실제 메모리 주소가 아닌 가상의 메모리 주소를 주는 방식을 말한다.</p>
+<h2 id="가상-메모리의-특징"><a href="#가상-메모리의-특징" class="headerlink" title="가상 메모리의 특징"></a>가상 메모리의 특징</h2><p>가상 메모리는 어떤 프로세스가 실행될 때 프로세스 전체가 메모리에 적재되지 않고도 실행 가능하도록 만들어 준다.</p>
+<p>어떤 프로세스가 차지하는 메모리가 전체 메모리 용량보다 크더라도 지금 현재 필요한 부분만 메모리에 적재되면 실행이 가능하기 때문에 (또한 실행시 필요한 부분만 적재시킴으로서) 물리 메모리 용량을 초과하는 프로그램도 동작시킬 수 있다는 장점이 있다. 이는 부족한 시스템 메모리를 보조해주는 역할을 해준다.</p>
+<p>그러나 실제로 메모리의 용량이 늘어난 것은 아니다. 어디까지나 가상 메모리이기 때문에 만약 실제 메모리 공간이 가득차서 용량이 부족하게 된다면 실제 메모리에 저장되어 있는 내용 중 당장 사용되지 않는 내용들을 미리 준비된 하드 디스크의 페이징 파일(Pagefile.sys)로 옮겨 실제 메모리에 여유 공간을 확보한다. 그러다 페이징 파일에 옮겨둔 내용이 필요한 상황이 오면 다시 실제 메모리로 옮겨서 사용한다.</p>
+<p>실제로 Windows의 가상 메모리는 프로그램의 사용 상황에 맞춰 실제 메모리와 가상 메모리 사이에서 데이터를 Swap하는 방식으로 부족한 실제 메모리의 공간을 알맞게 조절하는 기능을 가지고 있다.</p>
+<p>가상 메모리는 실제 메모리의 남은 공간이 부족하게 되면 사용하는 임시 공간으로써 만약 실제 메모리 용량이 충분하다면 거의 사용되지 않는다.</p>
+<p>이러한 방식은 Multi-Tasking OS에서 흔히 사용되며, 실제 주 기억 장치보다 큰 메모리 영역을 제공하는 방법으로 사용된다.</p>
+<h2 id="예제"><a href="#예제" class="headerlink" title="예제"></a>예제</h2><p>이제 실재로 가상 메모리를 Windows 운영체제에서 어떻게 설정하는지 알아보자.</p>
+<p><a href="../../../../img/virtual_memory/virtual_setting.png" title="Virtual Memory Setting" class="gallery-item"><img src="../../../../img/virtual_memory/virtual_setting.png" alt="Virtual Memory Setting"></a></p>
+<p>시작에서 고급 시스템 설정을 검색해서 들어가면 위의 사진과 같이 시스템 속성창이 뜬다. 이때 고급 속성에 들어가면 가상 메모리 설정창으로 들어갈 수 있다.</p>
+<p>현재 내 노트북에서는 페이지 파일의 위치는 <strong>D:\pagefile.sys</strong>에 위치해 있고, 위 그림에서 볼 수 있듯이 현재 모든 드라이브에서 사용하는 총 페이지 파일의 크기를 확인할 수 있다.</p>
+<p>이제 여기서 페이지 파일을 사용하지 않음으로 설정하고 철권을 실행시켜 비교해 보겠다.</p>
+<p><a href="../../../../img/virtual_memory/virtual_setting_after.png" title="Virtual Memory Setting" class="gallery-item"><img src="../../../../img/virtual_memory/virtual_setting_after.png" alt="Virtual Memory Setting"></a></p>
+<ul>
+<li><p>가상 메모리를 켰을 때<br><a href="../../../../img/virtual_memory/memory_error-tekken7_after_reset_memory_2.JPG" title="Virtual Memory Setting" class="gallery-item"><img src="../../../../img/virtual_memory/memory_error-tekken7_after_reset_memory_2.JPG" alt="Virtual Memory Setting"></a></p>
+</li>
+<li><p>가상 메모리를 껐을 때<br><a href="../../../../img/virtual_memory/memory_error-tekken7_start.JPG" title="Virtual Memory Setting" class="gallery-item"><img src="../../../../img/virtual_memory/memory_error-tekken7_start.JPG" alt="Virtual Memory Setting"></a></p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>총 실제 메모리</th>
+<th>사용가능한 실제 메모리</th>
+<th>가상메모리: 최대 크기</th>
+<th>가상메모리: 사용 가능</th>
+<th>가상 메모리: 사용 중</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>끄기 전</td>
+<td>8,107MB</td>
+<td>2,503MB</td>
+<td>10,016MB</td>
+<td>2,302MB</td>
+<td>7,714MB</td>
+</tr>
+<tr>
+<td>끈 후</td>
+<td>8,107MB</td>
+<td>2,432MB</td>
+<td>8,107MB</td>
+<td>837MB</td>
+<td>7,270MB</td>
+</tr>
+</tbody></table>
+<p>표를 통해 알 수 있듯이 가상 메모리 기능을 끈다고 완전히 못쓰는 건 아니었다. 그러나 가상메모리의 사용 가능 크기와 최대 크기가 감소한 것을 알 수 있었다.</p>
+<p><a href="../../../../img/virtual_memory/tekken_select.JPG" title="Virtual Memory Setting" class="gallery-item"><img src="../../../../img/virtual_memory/tekken_select.JPG" alt="Virtual Memory Setting"></a></p>
+<p>이제 여기서 본격적으로 게임을 해보기로 했다. 이제 캐릭터를 선택하고 게임을 실행시켰다.</p>
+<p><a href="../../../../img/virtual_memory/memory_error.JPG" title="Virtual Memory Setting" class="gallery-item"><img src="../../../../img/virtual_memory/memory_error.JPG" alt="Virtual Memory Setting"></a></p>
+<p>그러자 이렇게 에러 메세지가 뜨면서 게임이 강제 종료가 됐다.</p>
+<div class="note no-icon">
+            <p>Out of video memory trying to allocate a texture! Make sure your video card has the minimum required memory, try lowering the resolution and/or closing other applications that are running. Existing…</p>
+          </div>
+
+<p>또한 게임을 막 실행시켰을 때 메모리의 상태는 아래와 같았다.</p>
+<p><a href="../../../../img/virtual_memory/memory_error-tekken7_after_error.JPG" title="Virtual Memory Setting" class="gallery-item"><img src="../../../../img/virtual_memory/memory_error-tekken7_after_error.JPG" alt="Virtual Memory Setting"></a></p>
+<p>가상메모리 사용가능 크기가 837MB에서 78MB로 줄어든 것을 확인할 수 있었다.</p>
+<p>찾아보니 이는 비디오 카드의 메모리가 부족해서 나타나는 현상이라고 한다. 이는 즉 가상 메모리를 쓰지 않음으로써 메모리 공간이 부족해서 튕긴 것이다. (노트북 자체가 성능이 좋지 못한 것도 한몫한 것 같다. 아무 프로그램도 실행시키지 않은 상태였으니…)</p>
+<p>PC판 철권7의 용량은 55 ~ 60GB라고 한다. 물론 그 많은 용량이 한번에 다 올라가는 것은 아니겠지만 아무래도 가상 메모리를 사용하지 않다보니 용량이 부족해진 것 같다. 또한 가상 메모리를 사용하지 않는다면 PC의 RAM 만을 사용한다고 한다. (내 컴퓨터의 RAM이 8GB짜리이기 때문에 어떻게 보면 안되는 것이 당연하다.)</p>
+<p>이를 통해 내 노트북도 기본적으로 가상 메모리를 사용함을 알 수 있었으며, RAM 용량이 작더라도 가상 메모리 기법을 사용함으로써 멀티 테스킹 및 용량이 큰 프로그램을 실행 시킬 수 있게 해줌을 직접 볼 수 있었다.</p>
+<h2 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h2><ul>
+<li><a href="https://pastimelife.com/1493" target="_blank" rel="noopener">윈도우 가상메모리 삭제하기.</a></li>
+<li><a href="https://dora-guide.com/virtual-memory/" target="_blank" rel="noopener">윈도우10 가상메모리 설정 방법 - 단점 및 수명</a></li>
+<li><a href="https://faithpac27.tistory.com/entry/%EA%B0%80%EC%83%81%EB%A9%94%EB%AA%A8%EB%A6%AC%EB%9E%80-virtual-memory" target="_blank" rel="noopener">가상메모리란? (virtual memory)</a></li>
+<li><a href="https://bogus919.tistory.com/entry/%EB%8F%84%EC%9A%B0%EC%9D%98-%EA%B0%80%EC%83%81-%EB%A9%94%EB%AA%A8%EB%A6%AC%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80-%EA%B0%80%EC%83%81-%EB%A9%94%EB%AA%A8%EB%A6%AC%ED%8E%98%EC%9D%B4%EC%A7%95-%ED%8C%8C%EC%9D%BC-%EA%B4%80%EB%A6%AC%ED%95%98%EA%B8%B0" target="_blank" rel="noopener">도우의 가상 메모리란 무엇인가? - 가상 메모리(페이징 파일) 관리하기</a></li>
+</ul>
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>]]></content>
+      <categories>
+        <category>Computer Architecture</category>
+      </categories>
+      <tags>
+        <tag>Computer Architecture</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Cfaq 정리</title>
     <url>/2020/06/13/2020-06-13-cfaq_note_1/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
@@ -101,6 +187,75 @@
       </tags>
   </entry>
   <entry>
+    <title>다양한 예제로 시작하는 포인터</title>
+    <url>/2020/06/13/2020-06-14-c_pointer_pratice/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
+<h2 id="자료형과-변수-상수에-대한-정리"><a href="#자료형과-변수-상수에-대한-정리" class="headerlink" title="자료형과 변수, 상수에 대한 정리"></a>자료형과 변수, 상수에 대한 정리</h2><ul>
+<li><strong>자료형</strong>: 일정 길이의 메모리에 저장되어 있는 데이터를 해석하는 방법, 또는 형식을 말한다. (즉, 메모리를 사용할 때 몇 바이트의 메모리를 사용할 것인지를 명시해주는 것이다.) [메모리를 표현하는 단위]</li>
+<li><strong>변수</strong>: 정해지지 않은 수/ 변할 수 있는 수, 일정 길이의 메모리에 저장되어 있는 데이터가 있을 때, 그 특정 메모리 공간에 붙여진 이름(또는 공간 자체)을 말한다.</li>
+<li><strong>상수</strong>: 값이 정해진수, 프로그램에서 값이 변경되지 않는 요소이다. (e.g.s 리터럴 상수, 이름이 있는 매크로 상수, const 지정 변수 등)</li>
+</ul>
+<h2 id="시작주소란"><a href="#시작주소란" class="headerlink" title="시작주소란?"></a>시작주소란?</h2><p>모든 변수는 메모리 공간의 주소를 가지고 있고, 이때 그 변수를 대표하는 주소를 시작 주소라고 한다.</p>
+<h2 id="컴퓨터의-메모리"><a href="#컴퓨터의-메모리" class="headerlink" title="컴퓨터의 메모리"></a>컴퓨터의 메모리</h2><ul>
+<li>메모리는 데이터를 저장할 수 있는 저장 장치이다.</li>
+<li>주 기억 장치 (RAM/ROM), 보조 기억 장치 (HDD, FDD, CD-ROM) 등을 말한다.</li>
+<li>프로그램에서는 데이터의 저장을 주로 주 기억 장치인 RAM에서 하게 되고 보통 프로그램에서 메모리라고 하면 RAM의 기억 공간을 의미한다.</li>
+<li>메모리의 주소는 보통 1바이트의 저장 공간을 가지며, 1바이트는 8비트이다.</li>
+<li>주소 값의 범위는 OS에 따라 차이가 있는데, 32-bit OS에서는 32 비트를 넘지 않으며, 64-bit OS에서는 64비트를 넘지 않는다.</li>
+<li>모든 변수는 메모리 공간에 할당되고 변수의 크기는 자료형으로 결정된다. (따라서 자료형을 보면 변수의 크기와 메모리 주소의 사용 개수를 알 수 있다.)</li>
+</ul>
+<h2 id="변수의-주소"><a href="#변수의-주소" class="headerlink" title="변수의 주소"></a>변수의 주소</h2><p>변수들의 주소는 자료형에 따라 주소의 의미가 다르다.</p>
+<ul>
+<li>예를 들어 변수의 주소에 정수를 덧셈하면 변수의 자료형의 크기만큼 메모리 공간을 건너뛴 다음 메모리의 주소를 구한다.</li>
+<li>즉, <code>char</code>형 주소는 1바이트에 데이터를 가지고 있는 시작 주소이고, <code>int</code>형 주소는 4바이트 데이터를 가지고 있는 시작 주소이기 때문에 가지고 있는 데이터만큼 건너 뛰게 된다.</li>
+</ul>
+<p>즉, 시작 주소(대표 주소)마다 그 의미가 다르다 –&gt; 프로그래머 관점</p>
+<h2 id="주소의-형-변환"><a href="#주소의-형-변환" class="headerlink" title="주소의 형 변환"></a>주소의 형 변환</h2><p>형 변환은 암묵적인 형 변환과 명시적인 형 변환이 있다.</p>
+<table>
+<thead>
+<tr>
+<th>암묵적 형 변환</th>
+<th>명시적 형 변환</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>컴파일러에 의해 자동 변환</td>
+<td>() 연산자(casting)를 사용해 변환</td>
+</tr>
+</tbody></table>
+<p>작은 자료형을 큰 자료형으로 변환하는 경우 컴파일러는 자동으로 형 변환을 수행한다. –&gt; 컴파일러가 내부적으로 형 변환</p>
+<p>또한 변수의 주소도 자료 형식이 존재한다. 따라서 주소도 변수의 자료형과 마찬가지로 명시적인 형 변환이 가능하다.</p>
+<div class="tabs" id="array_prac1-second"><ul class="nav-tabs"><li class="tab active"><a href="#array_prac1-second-1">code</a></li><li class="tab"><a href="#array_prac1-second-2">output</a></li></ul><div class="tab-content"><div class="tab-pane active" id="array_prac1-second-1"><ol>
+<li><code>&amp;ch</code>에 (char*)과 (int*)을 붙여 각각 주소 형 변환을 하고 있다.</li>
+<li>이때, &amp;ch의 원래 타입은 <code>char*</code>이다. 따라서 (char*)을 붙여도 형 변환이 되질 않는다.</li>
+<li><code>int*</code> 타입의 주소로 형변환을 시켰을 때 그 주소 값에 1을 더하면 주소가 4바이트씩 증가됨을 알 수 있다.</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">char</span> ch = <span class="string">'A'</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"Addr    : %x, %x, %x\n"</span>, &amp;ch, (<span class="keyword">char</span>*)&amp;ch, (<span class="keyword">int</span>*)&amp;ch);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"Addr + 1: %x, %x, %x\n"</span>, &amp;ch + <span class="number">1</span>, (<span class="keyword">char</span>*)&amp;ch + <span class="number">1</span>, (<span class="keyword">int</span>*)&amp;ch + <span class="number">1</span>);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"Addr + 2: %x, %x, %x\n"</span>, &amp;ch + <span class="number">2</span>, (<span class="keyword">char</span>*)&amp;ch + <span class="number">2</span>, (<span class="keyword">int</span>*)&amp;ch + <span class="number">2</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="array_prac1-second-2"><p>Addr    : 240ff67, 240ff67, 240ff67<br>Addr + 1: 240ff68, 240ff68, 240ff6b<br>Addr + 2: 240ff69, 240ff69, 240ff6f</p></div></div></div>
+
+<p>이를 응용하면 배열을 쓰듯이 <code>int</code> 타입의 변수를 <code>char[4]</code> 비슷하게 이용 가능하다.</p>
+<div class="tabs" id="array_prac2-second"><ul class="nav-tabs"><li class="tab active"><a href="#array_prac2-second-1">code</a></li><li class="tab"><a href="#array_prac2-second-2">output</a></li></ul><div class="tab-content"><div class="tab-pane active" id="array_prac2-second-1"><p>아래 코드 처럼 <code>buf</code>는 int형 변수지만, 주소값을 형변환시킴으로써 char형 배열로도 쓸 수 있고 문자열처럼 사용가능하다.</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> buf = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Use 'buf' like type char array (char[4])</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="keyword">sizeof</span>(buf); i++) &#123;</span><br><span class="line">        *((<span class="keyword">char</span>*)&amp;buf + i) = <span class="string">'A'</span> + i;    </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="keyword">sizeof</span>(buf); i++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"buf[%d] = %c\n"</span>, i, *((<span class="keyword">char</span>*)&amp;buf + i));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Use 'buf' like string. (const char*)</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="keyword">sizeof</span>(buf) - <span class="number">1</span>; i++) &#123;</span><br><span class="line">        *((<span class="keyword">char</span>*)&amp;buf + i) = <span class="string">'A'</span> + i;</span><br><span class="line">    &#125;</span><br><span class="line">    *((<span class="keyword">char</span>*)&amp;buf + i) = <span class="string">'\0'</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"buf = %s\n"</span>, (<span class="keyword">const</span> <span class="keyword">char</span>*)&amp;buf);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="array_prac2-second-2"><p>buf[0] = A<br>buf[1] = B<br>buf[2] = C<br>buf[3] = D<br>buf = ABC</p></div></div></div>
+
+<div class="note primary no-icon">
+            <h2 id="정리"><a href="#정리" class="headerlink" title="정리"></a>정리</h2><ol><li>모든 자료형의 주소는 의미를 가지고 있다.</li><li>변수의 주소도 형식이 있다.</li></ol>
+          </div>
+
+<h2 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h2><p><a href="http://emart.ssg.com/item/itemView.ssg?itemId=1000004506730&siteNo=6001" target="_blank" rel="noopener">열혈강의 C 포인터 - 다양한 예제로 완성하는 포인터</a></p>
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>]]></content>
+      <categories>
+        <category>Programming</category>
+        <category>C</category>
+      </categories>
+      <tags>
+        <tag>C</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Neural Networks</title>
     <url>/2020/05/02/2020-05-02-csci343-challenge-final/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
@@ -155,6 +310,267 @@
       </categories>
       <tags>
         <tag>CSCI 343</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Searching and Sorting [1/2]</title>
+    <url>/2020/04/28/2020-04-28-csci356-lec5-1/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
+<h2 id="Topics"><a href="#Topics" class="headerlink" title="Topics"></a>Topics</h2><ul>
+<li>Searching Algorithms</li>
+<li>Sorting Algorithms</li>
+</ul>
+<h2 id="Searching"><a href="#Searching" class="headerlink" title="Searching"></a>Searching</h2><ul>
+<li><strong>Searching</strong> is the process of finding a particular item in a collection of items.</li>
+<li>A search typically finds out whether the item is present (<ins>membership</ins>).</li>
+<li>In Python, we can use the <code>in</code> operator to check whether an item is in a list of items.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">3</span> <span class="keyword">in</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Sequential-Search"><a href="#Sequential-Search" class="headerlink" title="Sequential Search"></a>Sequential Search</h2><ul>
+<li>When items are stored in an ordered collection such as a list, we say that they have a linear or sequential relationship.</li>
+<li><strong>Sequential search:</strong> start at the 1<sup>st</sup> item, move from item to item, following the sequential order until we either find the item we are looking for (present) or run out of items (not present).</li>
+</ul>
+<a href="https://media.geeksforgeeks.org/wp-content/cdn-uploads/Linear-Search.png" title="Sequential Search" class="gallery-item"><img src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/Linear-Search.png" class="" width="500" title="Sequential Search" alt="Sequential Search"></a>
+
+<h3 id="Sequential-Search-Cont’d"><a href="#Sequential-Search-Cont’d" class="headerlink" title="Sequential Search (Cont’d)"></a>Sequential Search (Cont’d)</h3><p>The search needs the list and the item we are looking for and returns a Boolean value as to whether the item is present in the list.</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sequential_search</span><span class="params">(aList, item)</span>:</span></span><br><span class="line">    found = <span class="literal">False</span></span><br><span class="line">    pos = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> pos &lt; len(aList) <span class="keyword">and</span> <span class="keyword">not</span> found:</span><br><span class="line">        <span class="keyword">if</span> aList[pos] == item:</span><br><span class="line">            found = <span class="literal">True</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            pos += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> found</span><br></pre></td></tr></table></figure>
+
+<h2 id="Binary-Search"><a href="#Binary-Search" class="headerlink" title="Binary Search"></a>Binary Search</h2><ul>
+<li>If the list of items is <strong>ordered</strong>, is there a better way to do the search?</li>
+<li>Instead of searching the list in sequence, a binary search will start by examine the <strong>middle</strong> item.</li>
+<li>If the middle item is <strong>equal to</strong> the item we are searching for, we are done.</li>
+<li>If the item is <strong>less than</strong> the middle element, we only need to search the item in the first half of the list.</li>
+<li>If the item is <strong>greater than</strong> the middle element, we only need to search the item in the second half of the list.</li>
+</ul>
+<h3 id="Binary-Search-Cont’d"><a href="#Binary-Search-Cont’d" class="headerlink" title="Binary Search (Cont’d)"></a>Binary Search (Cont’d)</h3><p>Assume an ordered list of integers as below, we can quickly find 54 in the list using binary search:</p>
+<a href="https://www.geeksforgeeks.org/wp-content/uploads/Binary-Search.png" title="Binary Search" class="gallery-item"><img src="https://www.geeksforgeeks.org/wp-content/uploads/Binary-Search.png" class="" width="500" title="Binary Search" alt="Binary Search"></a>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">binary_search</span><span class="params">(alist, item)</span>:</span></span><br><span class="line">  first = <span class="number">0</span></span><br><span class="line">  last = len(alist) - <span class="number">1</span></span><br><span class="line">  idx = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> first &lt;= last <span class="keyword">and</span> alist[idx] != item:</span><br><span class="line">    mid = (last + first) // <span class="number">2</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> alist[mid] &lt;center item:</span><br><span class="line">      first = mid + <span class="number">1</span></span><br><span class="line">    <span class="keyword">elif</span> alist[mid] == item:</span><br><span class="line">      idx = mid</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">      last = mid - <span class="number">1</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> idx</span><br></pre></td></tr></table></figure>
+
+<h2 id="Analysis-of-Searching-Algorithms"><a href="#Analysis-of-Searching-Algorithms" class="headerlink" title="Analysis of Searching Algorithms"></a>Analysis of Searching Algorithms</h2><p>Big-O efficiency of the searching algorithms:</p>
+<table>
+<thead>
+<tr>
+<th>Searching Algorithms</th>
+<th>Big-O Efficiency</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Sequential Search</td>
+<td>$O(n)$</td>
+</tr>
+<tr>
+<td>Binary Search</td>
+<td>$O(\log n)$</td>
+</tr>
+</tbody></table>
+<h2 id="Hashing"><a href="#Hashing" class="headerlink" title="Hashing"></a>Hashing</h2><ul>
+<li>A <strong>hash table</strong> is used to store a collection of items so that they can be easily found later.</li>
+<li>Each position of the hash table, called a <strong>slot</strong>, can hold an item and is named by an integer value starting at <code>0</code>.</li>
+<li>Initially, the hash table contains no items so every slot is empty (<strong>None</strong>).</li>
+</ul>
+<h3 id="Hashing-Cont’d-1-3"><a href="#Hashing-Cont’d-1-3" class="headerlink" title="Hashing (Cont’d) [1/3]"></a>Hashing (Cont’d) [1/3]</h3><p>Below is a hash table with 11 empty slots:</p>
+<a href="https://runestone.academy/runestone/books/published/pythonds/_images/hashtable.png" title="Hash Table" class="gallery-item"><img src="https://runestone.academy/runestone/books/published/pythonds/_images/hashtable.png" class="" title="Hash Table" alt="Hash Table"></a>
+
+<ul>
+<li><p>The mapping between an item and the slot where that item belongs in the hash table is done by the <strong>hash function</strong>.</p>
+</li>
+<li><p>The hash function will take any item in the collection and return an integer in the range of slot names, between <strong>0</strong> and <strong>m-1</strong> (there are <strong>m</strong> slots in the table).</p>
+</li>
+<li><p>Our first hash function is referred to as the <strong>“remainder method”</strong>.</p>
+</li>
+<li><p>The method takes an item and divides it by the table size, returning the remainder as its hash value: </p>
+</li>
+</ul>
+<p>$$ h(item) = item \bmod 11 $$</p>
+<table>
+<thead>
+<tr>
+<th align="left">Item</th>
+<th align="left">Hash Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">54</td>
+<td align="left">10</td>
+</tr>
+<tr>
+<td align="left">26</td>
+<td align="left">4</td>
+</tr>
+<tr>
+<td align="left">93</td>
+<td align="left">5</td>
+</tr>
+<tr>
+<td align="left">17</td>
+<td align="left">6</td>
+</tr>
+<tr>
+<td align="left">77</td>
+<td align="left">0</td>
+</tr>
+<tr>
+<td align="left">31</td>
+<td align="left">9</td>
+</tr>
+</tbody></table>
+<ul>
+<li>Hash table with six items:</li>
+</ul>
+<a href="https://runestone.academy/runestone/books/published/pythonds/_images/hashtable2.png" title="Hash Table" class="gallery-item"><img src="https://runestone.academy/runestone/books/published/pythonds/_images/hashtable2.png" class="" title="Hash Table" alt="Hash Table"></a>
+
+<ul>
+<li><strong>Load factor</strong> is an indicator of how many keys are mapped to an average bucket on a hashtable.</li>
+<li>In this example, the load factor is $\frac{6}{11}$.</li>
+</ul>
+<center>load factor = #OfItems / tableSize</center>
+
+<h3 id="Hashing-Cont’d-2-3"><a href="#Hashing-Cont’d-2-3" class="headerlink" title="Hashing (Cont’d) [2/3]"></a>Hashing (Cont’d) [2/3]</h3><ul>
+<li>Now when we want to search for an item, we simply use the hash function to compute the slot number for the item, and then check the hash table to see if it is present.</li>
+<li>This searching operation is $O(1)$; if everything is where is should be, we have found a <strong>constant time</strong> search algorithm.</li>
+<li>The problem is: what if two or more items need to be in the same slot? This is referred to as a <strong>collision</strong> (or a clash).</li>
+</ul>
+<h4 id="Perfect-hash-function"><a href="#Perfect-hash-function" class="headerlink" title="Perfect hash function"></a>Perfect hash function</h4><ul>
+<li>A hash function that maps each item into a unique slot is called a <strong>perfect hash function</strong>.</li>
+<li>One solution to the collision problem is to <strong>increase the size</strong> of the hash table so that each possible value in the range can be accommodated (i.e. each item has a unique slot).</li>
+<li>If we have a large number of items, then this solution will require an enormous amount of memory.</li>
+</ul>
+<h3 id="Hashing-Cont’d-3-3"><a href="#Hashing-Cont’d-3-3" class="headerlink" title="Hashing (Cont’d) [3/3]"></a>Hashing (Cont’d) [3/3]</h3><p>Are there other methods to construct hash functions?</p>
+<ul>
+<li><strong>Folding method:</strong> divide the item into equal-size pieces, these pieces are added together to give the resulting hash value.</li>
+</ul>
+<div class="note no-icon">
+            <p>E.g., given a phone number: <strong>662-915-1234</strong>, we would divide them into (66, 29, 15, 12, 34), add them up, we get 156. If the hash table has 11 slots, then <code>156 % 11 = 2</code>, so the phone number hashes to slot 2.</p>
+          </div>
+
+<ul>
+<li><strong>Mid-square method:</strong> first square the item, then extract some portion of the resulting digits.</li>
+</ul>
+<div class="note no-icon">
+            <p>E.g., given a number 44, compute <code>44^2 = 1936</code>. By extracting the middle two digits, <code>93</code>, perform the remainder step, <code>93 % 11 = 5</code>, so the number hashes to slot 5.</p>
+          </div>
+
+<h2 id="Solutions"><a href="#Solutions" class="headerlink" title="Solutions"></a>Solutions</h2><div class="tabs" id="second-hashing_quiz-unique-names"><ul class="nav-tabs"><li class="tab active"><a href="#second-hashing_quiz-unique-names-1">Quiz contents</a></li><li class="tab"><a href="#second-hashing_quiz-unique-names-2">Quiz Solution</a></li></ul><div class="tab-content"><div class="tab-pane active" id="second-hashing_quiz-unique-names-1"><p>The table below shows items under the three methods, assuming our hash table has 11 slots.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Item</th>
+<th align="left">Remainder</th>
+<th align="left">Folding</th>
+<th align="left">Mid-Square</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">54</td>
+<td align="left">10</td>
+<td align="left">9</td>
+<td align="left">3</td>
+</tr>
+<tr>
+<td align="left">26</td>
+<td align="left">4</td>
+<td align="left">8</td>
+<td align="left">7</td>
+</tr>
+<tr>
+<td align="left">93</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">9</td>
+</tr>
+<tr>
+<td align="left">77</td>
+<td align="left">0</td>
+<td align="left">3</td>
+<td align="left">4</td>
+</tr>
+<tr>
+<td align="left">31</td>
+<td align="left">9</td>
+<td align="left">4</td>
+<td align="left">6</td>
+</tr>
+</tbody></table></div><div class="tab-pane" id="second-hashing_quiz-unique-names-2"><p><strong>Item and Remainder:</strong><br>$$54 \bmod 11 = 10$$<br>$$26 \bmod 11 = 4$$<br>$$93 \bmod 11 = 5$$<br>$$…$$<br>$$31 \bmod 11 = 9$$</p>
+<p><strong>Folding Method:</strong><br>$$54 \rightarrow 5 + 4 = 9  \bmod 11 = 9$$<br>$$26 \rightarrow 2 + 6 = 8  \bmod 11 = 8$$<br>$$93 \rightarrow 9 + 3 = 12 \bmod 11 = 1$$<br>$$…$$</p>
+<p><strong>Square Method:</strong></p>
+<p>$$54^{2} = 2,916 \rightarrow 91 \bmod 11 = 3$$<br>$$26^{2} =   676 \rightarrow  7 \bmod 11 = 7$$<br>$$94^{2} = 8,649 \rightarrow 64 \bmod 11 = 9$$<br>$$…$$</p></div></div></div>
+
+<h3 id="Hashing-Cont’d-4-5"><a href="#Hashing-Cont’d-4-5" class="headerlink" title="Hashing (Cont’d) [4/5]"></a>Hashing (Cont’d) [4/5]</h3><ul>
+<li>We can also create hash functions for characterbased items such as strings.</li>
+<li>A string can be thought of as a sequence of ordinal values.</li>
+</ul>
+<div class="note no-icon">
+            <p>E.g. “cat”<br>ord(‘c’) -&gt; 99<br>ord(‘a’) -&gt; 97<br>ord(‘t’) -&gt; 116</p><p>99 + 97 + 116 = 312 % 11 = 4</p>
+          </div>
+
+<h3 id="Hashing-Cont’d-5-5"><a href="#Hashing-Cont’d-5-5" class="headerlink" title="Hashing (Cont’d) [5/5]"></a>Hashing (Cont’d) [5/5]</h3><p>Now write a function called <strong>hashString</strong> that takes a string and a table size, and returns the hash value of the string.</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hash_string</span><span class="params">(string, tableSize)</span>:</span></span><br><span class="line">    s = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> ch <span class="keyword">in</span> string:</span><br><span class="line">        s += ord(ch)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> s % tableSize</span><br></pre></td></tr></table></figure>
+
+<h3 id="Hashing-Cont’d-6-6"><a href="#Hashing-Cont’d-6-6" class="headerlink" title="Hashing (Cont’d) [6/6]"></a>Hashing (Cont’d) [6/6]</h3><ul>
+<li>What about anagrams (words with the same letters)? They will have the same hash value based on the previous function.</li>
+<li>To remedy this, we can use the position of the character as a weighting factor.</li>
+</ul>
+<div class="note no-icon">
+            <table><thead><tr><th align="center">1</th><th align="center">2</th><th align="center">3</th></tr></thead><tbody><tr><td align="center">c</td><td align="center">a</td><td align="center">t</td></tr></tbody></table><p>$$<br>ord(c) \cdot 1 + ord(a) \cdot 2 + ord(t) \cdot 3 = 641 \pmod{11} = 2<br>$$</p><p>-&gt; 99 + 97 + 116 = 312 % 11 = 4</p>
+          </div>
+
+<h3 id="Hashing-Cont’d-7-7"><a href="#Hashing-Cont’d-7-7" class="headerlink" title="Hashing (Cont’d) [7/7]"></a>Hashing (Cont’d) [7/7]</h3><ul>
+<li>There are a number of other methods to construct hash functions for items in a collection.</li>
+<li>The important thing to remember is that the hash function has to be <strong>efficient</strong>.</li>
+<li>If the hash function is too complex, then it becomes more work to compute the slot number than it would be simply do a basic sequential or binary search.</li>
+</ul>
+<h3 id="Hashing-Cont’d-8-8"><a href="#Hashing-Cont’d-8-8" class="headerlink" title="Hashing (Cont’d) [8/8]"></a>Hashing (Cont’d) [8/8]</h3><ul>
+<li>When two items hash to the same slot (collision), we must have a systematic way for placing the 2<sup>nd</sup> item in the hash table. This process is called <strong>collision resolution</strong>.</li>
+<li><strong>Linear probing:</strong> start at the original hash position, move one slot at a time until we find an empty slot.</li>
+</ul>
+<h3 id="Hashing-Cont’d-9-9"><a href="#Hashing-Cont’d-9-9" class="headerlink" title="Hashing (Cont’d) [9/9]"></a>Hashing (Cont’d) [9/9]</h3><ul>
+<li>One problem for linear probing is the tendency of <strong>clustering</strong>: items become clustered in the table.</li>
+<li>If collisions occur at the same hash value, a number of surrounding slots will be filled, this will have an impact on other items that are being added.</li>
+<li>A cluster of items for slot 0 (below pic.)</li>
+<li>This will have an impact on other items that are being inserted, as we saw when we tried to add the item 20 above.</li>
+<li>A cluster of values hashing to 0 had to be skipped to finally find an open position. This cluster is shown below.</li>
+</ul>
+<a href="https://runestone.academy/runestone/books/published/pythonds/_images/clustering.png" title="A Cluster of Items for Slot 0" class="gallery-item"><img src="https://runestone.academy/runestone/books/published/pythonds/_images/clustering.png" class="" title="A Cluster of Items for Slot 0" alt="A Cluster of Items for Slot 0"></a>
+
+<ul>
+<li>One way to deal with clustering is to <ins>extend the linear probing</ins>: instead of checking sequentially, we use a “plus 3” probe (i.e., look at every third slot until we find an empty one). (54, 26, 93, 17, 77, 31, <strong>44, 55, 20</strong>)</li>
+</ul>
+<a href="https://runestone.academy/runestone/books/published/pythonds/_images/hashtable2.png" title="Hash Table with Six Items" class="gallery-item"><img src="https://runestone.academy/runestone/books/published/pythonds/_images/hashtable2.png" class="" title="Hash Table with Six Items" alt="Hash Table with Six Items"></a>
+
+<ul>
+<li>Collision resolution using “plus 3” (below)</li>
+</ul>
+<a href="https://runestone.academy/runestone/books/published/pythonds/_images/linearprobing2.png" title="Collision Resolution Using “Plus 3”" class="gallery-item"><img src="https://runestone.academy/runestone/books/published/pythonds/_images/linearprobing2.png" class="" title="Collision Resolution Using “Plus 3”" alt="Collision Resolution Using “Plus 3”"></a>
+
+<ul>
+<li>This will potentially reduce the clustering that occurs.</li>
+<li>Top image shows the items when collision resolution is done with a “plus 3” probe.</li>
+<li>This means that once a collision occurs, we will look at every third slot until we find one that is empty.</li>
+</ul>
+<h3 id="Hashing-Cont’d-10-10"><a href="#Hashing-Cont’d-10-10" class="headerlink" title="Hashing (Cont’d) [10/10]"></a>Hashing (Cont’d) [10/10]</h3><ul>
+<li>The process of looking for another slot after a collision is generally called <strong>rehashing</strong>.</li>
+<li>With <strong>simple linear probing</strong>, the rehash function is:</li>
+</ul>
+<p>$$newHashValue = rehash(oldHashValue) \text{  where   } rehash(pos)$$<br>$$ = (pos+1) \bmod tableSize$$</p>
+<ul>
+<li>With “plus 3” linear probing, the rehash function is:</li>
+</ul>
+<p>$$<br>rehash(pos) = (pos+3) \bmod tableSize<br>$$</p>
+<h2 id="HashTable-implementation-in-Python"><a href="#HashTable-implementation-in-Python" class="headerlink" title="HashTable implementation in Python"></a>HashTable implementation in Python</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HashTable</span>:</span></span><br><span class="line">      <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, size)</span>:</span></span><br><span class="line">          self.slots = [<span class="literal">None</span>] * size</span><br><span class="line">          self.data = [<span class="literal">None</span>] * size</span><br><span class="line"></span><br><span class="line">      <span class="function"><span class="keyword">def</span> <span class="title">store</span><span class="params">(self, key, data)</span>:</span></span><br><span class="line">          hashValue = self.hashFunction(key, len(self.slots))</span><br><span class="line"></span><br><span class="line">          <span class="keyword">if</span> self.slots[hashValue] == <span class="literal">None</span>:</span><br><span class="line">              self.slots[hashValue] = key</span><br><span class="line">              self.data[hashValue] = data</span><br><span class="line">          <span class="keyword">else</span>:</span><br><span class="line">              nextSlot = self.rehash(hashValue, len(self.slots))</span><br><span class="line"></span><br><span class="line">              <span class="keyword">while</span> self.slots[nextSlot] != <span class="literal">None</span>:</span><br><span class="line">                 nextSlot = self.rehash(nextSlot, len(self.slots))</span><br><span class="line">              </span><br><span class="line">              self.slots[hashValue] = key</span><br><span class="line">              self.data[hashValue] = data</span><br><span class="line"></span><br><span class="line">      <span class="function"><span class="keyword">def</span> <span class="title">hashFunction</span><span class="params">(self, key, size)</span>:</span></span><br><span class="line">          <span class="keyword">return</span> key % size</span><br><span class="line"></span><br><span class="line">      <span class="function"><span class="keyword">def</span> <span class="title">rehash</span><span class="params">(self, oldHash, size)</span>:</span></span><br><span class="line">          <span class="keyword">return</span> (oldHash + <span class="number">1</span>) % size</span><br></pre></td></tr></table></figure>
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>]]></content>
+      <categories>
+        <category>Olemiss</category>
+        <category>CSCI 356</category>
+      </categories>
+      <tags>
+        <tag>CSCI 356</tag>
       </tags>
   </entry>
   <entry>
@@ -586,267 +1002,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Searching and Sorting [1/2]</title>
-    <url>/2020/04/28/2020-04-28-csci356-lec5-1/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
-<h2 id="Topics"><a href="#Topics" class="headerlink" title="Topics"></a>Topics</h2><ul>
-<li>Searching Algorithms</li>
-<li>Sorting Algorithms</li>
-</ul>
-<h2 id="Searching"><a href="#Searching" class="headerlink" title="Searching"></a>Searching</h2><ul>
-<li><strong>Searching</strong> is the process of finding a particular item in a collection of items.</li>
-<li>A search typically finds out whether the item is present (<ins>membership</ins>).</li>
-<li>In Python, we can use the <code>in</code> operator to check whether an item is in a list of items.</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">3</span> <span class="keyword">in</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Sequential-Search"><a href="#Sequential-Search" class="headerlink" title="Sequential Search"></a>Sequential Search</h2><ul>
-<li>When items are stored in an ordered collection such as a list, we say that they have a linear or sequential relationship.</li>
-<li><strong>Sequential search:</strong> start at the 1<sup>st</sup> item, move from item to item, following the sequential order until we either find the item we are looking for (present) or run out of items (not present).</li>
-</ul>
-<a href="https://media.geeksforgeeks.org/wp-content/cdn-uploads/Linear-Search.png" title="Sequential Search" class="gallery-item"><img src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/Linear-Search.png" class="" width="500" title="Sequential Search" alt="Sequential Search"></a>
-
-<h3 id="Sequential-Search-Cont’d"><a href="#Sequential-Search-Cont’d" class="headerlink" title="Sequential Search (Cont’d)"></a>Sequential Search (Cont’d)</h3><p>The search needs the list and the item we are looking for and returns a Boolean value as to whether the item is present in the list.</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sequential_search</span><span class="params">(aList, item)</span>:</span></span><br><span class="line">    found = <span class="literal">False</span></span><br><span class="line">    pos = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> pos &lt; len(aList) <span class="keyword">and</span> <span class="keyword">not</span> found:</span><br><span class="line">        <span class="keyword">if</span> aList[pos] == item:</span><br><span class="line">            found = <span class="literal">True</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            pos += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> found</span><br></pre></td></tr></table></figure>
-
-<h2 id="Binary-Search"><a href="#Binary-Search" class="headerlink" title="Binary Search"></a>Binary Search</h2><ul>
-<li>If the list of items is <strong>ordered</strong>, is there a better way to do the search?</li>
-<li>Instead of searching the list in sequence, a binary search will start by examine the <strong>middle</strong> item.</li>
-<li>If the middle item is <strong>equal to</strong> the item we are searching for, we are done.</li>
-<li>If the item is <strong>less than</strong> the middle element, we only need to search the item in the first half of the list.</li>
-<li>If the item is <strong>greater than</strong> the middle element, we only need to search the item in the second half of the list.</li>
-</ul>
-<h3 id="Binary-Search-Cont’d"><a href="#Binary-Search-Cont’d" class="headerlink" title="Binary Search (Cont’d)"></a>Binary Search (Cont’d)</h3><p>Assume an ordered list of integers as below, we can quickly find 54 in the list using binary search:</p>
-<a href="https://www.geeksforgeeks.org/wp-content/uploads/Binary-Search.png" title="Binary Search" class="gallery-item"><img src="https://www.geeksforgeeks.org/wp-content/uploads/Binary-Search.png" class="" width="500" title="Binary Search" alt="Binary Search"></a>
-
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">binary_search</span><span class="params">(alist, item)</span>:</span></span><br><span class="line">  first = <span class="number">0</span></span><br><span class="line">  last = len(alist) - <span class="number">1</span></span><br><span class="line">  idx = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> first &lt;= last <span class="keyword">and</span> alist[idx] != item:</span><br><span class="line">    mid = (last + first) // <span class="number">2</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> alist[mid] &lt;center item:</span><br><span class="line">      first = mid + <span class="number">1</span></span><br><span class="line">    <span class="keyword">elif</span> alist[mid] == item:</span><br><span class="line">      idx = mid</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">      last = mid - <span class="number">1</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> idx</span><br></pre></td></tr></table></figure>
-
-<h2 id="Analysis-of-Searching-Algorithms"><a href="#Analysis-of-Searching-Algorithms" class="headerlink" title="Analysis of Searching Algorithms"></a>Analysis of Searching Algorithms</h2><p>Big-O efficiency of the searching algorithms:</p>
-<table>
-<thead>
-<tr>
-<th>Searching Algorithms</th>
-<th>Big-O Efficiency</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Sequential Search</td>
-<td>$O(n)$</td>
-</tr>
-<tr>
-<td>Binary Search</td>
-<td>$O(\log n)$</td>
-</tr>
-</tbody></table>
-<h2 id="Hashing"><a href="#Hashing" class="headerlink" title="Hashing"></a>Hashing</h2><ul>
-<li>A <strong>hash table</strong> is used to store a collection of items so that they can be easily found later.</li>
-<li>Each position of the hash table, called a <strong>slot</strong>, can hold an item and is named by an integer value starting at <code>0</code>.</li>
-<li>Initially, the hash table contains no items so every slot is empty (<strong>None</strong>).</li>
-</ul>
-<h3 id="Hashing-Cont’d-1-3"><a href="#Hashing-Cont’d-1-3" class="headerlink" title="Hashing (Cont’d) [1/3]"></a>Hashing (Cont’d) [1/3]</h3><p>Below is a hash table with 11 empty slots:</p>
-<a href="https://runestone.academy/runestone/books/published/pythonds/_images/hashtable.png" title="Hash Table" class="gallery-item"><img src="https://runestone.academy/runestone/books/published/pythonds/_images/hashtable.png" class="" title="Hash Table" alt="Hash Table"></a>
-
-<ul>
-<li><p>The mapping between an item and the slot where that item belongs in the hash table is done by the <strong>hash function</strong>.</p>
-</li>
-<li><p>The hash function will take any item in the collection and return an integer in the range of slot names, between <strong>0</strong> and <strong>m-1</strong> (there are <strong>m</strong> slots in the table).</p>
-</li>
-<li><p>Our first hash function is referred to as the <strong>“remainder method”</strong>.</p>
-</li>
-<li><p>The method takes an item and divides it by the table size, returning the remainder as its hash value: </p>
-</li>
-</ul>
-<p>$$ h(item) = item \bmod 11 $$</p>
-<table>
-<thead>
-<tr>
-<th align="left">Item</th>
-<th align="left">Hash Value</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">54</td>
-<td align="left">10</td>
-</tr>
-<tr>
-<td align="left">26</td>
-<td align="left">4</td>
-</tr>
-<tr>
-<td align="left">93</td>
-<td align="left">5</td>
-</tr>
-<tr>
-<td align="left">17</td>
-<td align="left">6</td>
-</tr>
-<tr>
-<td align="left">77</td>
-<td align="left">0</td>
-</tr>
-<tr>
-<td align="left">31</td>
-<td align="left">9</td>
-</tr>
-</tbody></table>
-<ul>
-<li>Hash table with six items:</li>
-</ul>
-<a href="https://runestone.academy/runestone/books/published/pythonds/_images/hashtable2.png" title="Hash Table" class="gallery-item"><img src="https://runestone.academy/runestone/books/published/pythonds/_images/hashtable2.png" class="" title="Hash Table" alt="Hash Table"></a>
-
-<ul>
-<li><strong>Load factor</strong> is an indicator of how many keys are mapped to an average bucket on a hashtable.</li>
-<li>In this example, the load factor is $\frac{6}{11}$.</li>
-</ul>
-<center>load factor = #OfItems / tableSize</center>
-
-<h3 id="Hashing-Cont’d-2-3"><a href="#Hashing-Cont’d-2-3" class="headerlink" title="Hashing (Cont’d) [2/3]"></a>Hashing (Cont’d) [2/3]</h3><ul>
-<li>Now when we want to search for an item, we simply use the hash function to compute the slot number for the item, and then check the hash table to see if it is present.</li>
-<li>This searching operation is $O(1)$; if everything is where is should be, we have found a <strong>constant time</strong> search algorithm.</li>
-<li>The problem is: what if two or more items need to be in the same slot? This is referred to as a <strong>collision</strong> (or a clash).</li>
-</ul>
-<h4 id="Perfect-hash-function"><a href="#Perfect-hash-function" class="headerlink" title="Perfect hash function"></a>Perfect hash function</h4><ul>
-<li>A hash function that maps each item into a unique slot is called a <strong>perfect hash function</strong>.</li>
-<li>One solution to the collision problem is to <strong>increase the size</strong> of the hash table so that each possible value in the range can be accommodated (i.e. each item has a unique slot).</li>
-<li>If we have a large number of items, then this solution will require an enormous amount of memory.</li>
-</ul>
-<h3 id="Hashing-Cont’d-3-3"><a href="#Hashing-Cont’d-3-3" class="headerlink" title="Hashing (Cont’d) [3/3]"></a>Hashing (Cont’d) [3/3]</h3><p>Are there other methods to construct hash functions?</p>
-<ul>
-<li><strong>Folding method:</strong> divide the item into equal-size pieces, these pieces are added together to give the resulting hash value.</li>
-</ul>
-<div class="note no-icon">
-            <p>E.g., given a phone number: <strong>662-915-1234</strong>, we would divide them into (66, 29, 15, 12, 34), add them up, we get 156. If the hash table has 11 slots, then <code>156 % 11 = 2</code>, so the phone number hashes to slot 2.</p>
-          </div>
-
-<ul>
-<li><strong>Mid-square method:</strong> first square the item, then extract some portion of the resulting digits.</li>
-</ul>
-<div class="note no-icon">
-            <p>E.g., given a number 44, compute <code>44^2 = 1936</code>. By extracting the middle two digits, <code>93</code>, perform the remainder step, <code>93 % 11 = 5</code>, so the number hashes to slot 5.</p>
-          </div>
-
-<h2 id="Solutions"><a href="#Solutions" class="headerlink" title="Solutions"></a>Solutions</h2><div class="tabs" id="second-hashing_quiz-unique-names"><ul class="nav-tabs"><li class="tab active"><a href="#second-hashing_quiz-unique-names-1">Quiz contents</a></li><li class="tab"><a href="#second-hashing_quiz-unique-names-2">Quiz Solution</a></li></ul><div class="tab-content"><div class="tab-pane active" id="second-hashing_quiz-unique-names-1"><p>The table below shows items under the three methods, assuming our hash table has 11 slots.</p>
-<table>
-<thead>
-<tr>
-<th align="left">Item</th>
-<th align="left">Remainder</th>
-<th align="left">Folding</th>
-<th align="left">Mid-Square</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">54</td>
-<td align="left">10</td>
-<td align="left">9</td>
-<td align="left">3</td>
-</tr>
-<tr>
-<td align="left">26</td>
-<td align="left">4</td>
-<td align="left">8</td>
-<td align="left">7</td>
-</tr>
-<tr>
-<td align="left">93</td>
-<td align="left">5</td>
-<td align="left">1</td>
-<td align="left">9</td>
-</tr>
-<tr>
-<td align="left">77</td>
-<td align="left">0</td>
-<td align="left">3</td>
-<td align="left">4</td>
-</tr>
-<tr>
-<td align="left">31</td>
-<td align="left">9</td>
-<td align="left">4</td>
-<td align="left">6</td>
-</tr>
-</tbody></table></div><div class="tab-pane" id="second-hashing_quiz-unique-names-2"><p><strong>Item and Remainder:</strong><br>$$54 \bmod 11 = 10$$<br>$$26 \bmod 11 = 4$$<br>$$93 \bmod 11 = 5$$<br>$$…$$<br>$$31 \bmod 11 = 9$$</p>
-<p><strong>Folding Method:</strong><br>$$54 \rightarrow 5 + 4 = 9  \bmod 11 = 9$$<br>$$26 \rightarrow 2 + 6 = 8  \bmod 11 = 8$$<br>$$93 \rightarrow 9 + 3 = 12 \bmod 11 = 1$$<br>$$…$$</p>
-<p><strong>Square Method:</strong></p>
-<p>$$54^{2} = 2,916 \rightarrow 91 \bmod 11 = 3$$<br>$$26^{2} =   676 \rightarrow  7 \bmod 11 = 7$$<br>$$94^{2} = 8,649 \rightarrow 64 \bmod 11 = 9$$<br>$$…$$</p></div></div></div>
-
-<h3 id="Hashing-Cont’d-4-5"><a href="#Hashing-Cont’d-4-5" class="headerlink" title="Hashing (Cont’d) [4/5]"></a>Hashing (Cont’d) [4/5]</h3><ul>
-<li>We can also create hash functions for characterbased items such as strings.</li>
-<li>A string can be thought of as a sequence of ordinal values.</li>
-</ul>
-<div class="note no-icon">
-            <p>E.g. “cat”<br>ord(‘c’) -&gt; 99<br>ord(‘a’) -&gt; 97<br>ord(‘t’) -&gt; 116</p><p>99 + 97 + 116 = 312 % 11 = 4</p>
-          </div>
-
-<h3 id="Hashing-Cont’d-5-5"><a href="#Hashing-Cont’d-5-5" class="headerlink" title="Hashing (Cont’d) [5/5]"></a>Hashing (Cont’d) [5/5]</h3><p>Now write a function called <strong>hashString</strong> that takes a string and a table size, and returns the hash value of the string.</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hash_string</span><span class="params">(string, tableSize)</span>:</span></span><br><span class="line">    s = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> ch <span class="keyword">in</span> string:</span><br><span class="line">        s += ord(ch)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> s % tableSize</span><br></pre></td></tr></table></figure>
-
-<h3 id="Hashing-Cont’d-6-6"><a href="#Hashing-Cont’d-6-6" class="headerlink" title="Hashing (Cont’d) [6/6]"></a>Hashing (Cont’d) [6/6]</h3><ul>
-<li>What about anagrams (words with the same letters)? They will have the same hash value based on the previous function.</li>
-<li>To remedy this, we can use the position of the character as a weighting factor.</li>
-</ul>
-<div class="note no-icon">
-            <table><thead><tr><th align="center">1</th><th align="center">2</th><th align="center">3</th></tr></thead><tbody><tr><td align="center">c</td><td align="center">a</td><td align="center">t</td></tr></tbody></table><p>$$<br>ord(c) \cdot 1 + ord(a) \cdot 2 + ord(t) \cdot 3 = 641 \pmod{11} = 2<br>$$</p><p>-&gt; 99 + 97 + 116 = 312 % 11 = 4</p>
-          </div>
-
-<h3 id="Hashing-Cont’d-7-7"><a href="#Hashing-Cont’d-7-7" class="headerlink" title="Hashing (Cont’d) [7/7]"></a>Hashing (Cont’d) [7/7]</h3><ul>
-<li>There are a number of other methods to construct hash functions for items in a collection.</li>
-<li>The important thing to remember is that the hash function has to be <strong>efficient</strong>.</li>
-<li>If the hash function is too complex, then it becomes more work to compute the slot number than it would be simply do a basic sequential or binary search.</li>
-</ul>
-<h3 id="Hashing-Cont’d-8-8"><a href="#Hashing-Cont’d-8-8" class="headerlink" title="Hashing (Cont’d) [8/8]"></a>Hashing (Cont’d) [8/8]</h3><ul>
-<li>When two items hash to the same slot (collision), we must have a systematic way for placing the 2<sup>nd</sup> item in the hash table. This process is called <strong>collision resolution</strong>.</li>
-<li><strong>Linear probing:</strong> start at the original hash position, move one slot at a time until we find an empty slot.</li>
-</ul>
-<h3 id="Hashing-Cont’d-9-9"><a href="#Hashing-Cont’d-9-9" class="headerlink" title="Hashing (Cont’d) [9/9]"></a>Hashing (Cont’d) [9/9]</h3><ul>
-<li>One problem for linear probing is the tendency of <strong>clustering</strong>: items become clustered in the table.</li>
-<li>If collisions occur at the same hash value, a number of surrounding slots will be filled, this will have an impact on other items that are being added.</li>
-<li>A cluster of items for slot 0 (below pic.)</li>
-<li>This will have an impact on other items that are being inserted, as we saw when we tried to add the item 20 above.</li>
-<li>A cluster of values hashing to 0 had to be skipped to finally find an open position. This cluster is shown below.</li>
-</ul>
-<a href="https://runestone.academy/runestone/books/published/pythonds/_images/clustering.png" title="A Cluster of Items for Slot 0" class="gallery-item"><img src="https://runestone.academy/runestone/books/published/pythonds/_images/clustering.png" class="" title="A Cluster of Items for Slot 0" alt="A Cluster of Items for Slot 0"></a>
-
-<ul>
-<li>One way to deal with clustering is to <ins>extend the linear probing</ins>: instead of checking sequentially, we use a “plus 3” probe (i.e., look at every third slot until we find an empty one). (54, 26, 93, 17, 77, 31, <strong>44, 55, 20</strong>)</li>
-</ul>
-<a href="https://runestone.academy/runestone/books/published/pythonds/_images/hashtable2.png" title="Hash Table with Six Items" class="gallery-item"><img src="https://runestone.academy/runestone/books/published/pythonds/_images/hashtable2.png" class="" title="Hash Table with Six Items" alt="Hash Table with Six Items"></a>
-
-<ul>
-<li>Collision resolution using “plus 3” (below)</li>
-</ul>
-<a href="https://runestone.academy/runestone/books/published/pythonds/_images/linearprobing2.png" title="Collision Resolution Using “Plus 3”" class="gallery-item"><img src="https://runestone.academy/runestone/books/published/pythonds/_images/linearprobing2.png" class="" title="Collision Resolution Using “Plus 3”" alt="Collision Resolution Using “Plus 3”"></a>
-
-<ul>
-<li>This will potentially reduce the clustering that occurs.</li>
-<li>Top image shows the items when collision resolution is done with a “plus 3” probe.</li>
-<li>This means that once a collision occurs, we will look at every third slot until we find one that is empty.</li>
-</ul>
-<h3 id="Hashing-Cont’d-10-10"><a href="#Hashing-Cont’d-10-10" class="headerlink" title="Hashing (Cont’d) [10/10]"></a>Hashing (Cont’d) [10/10]</h3><ul>
-<li>The process of looking for another slot after a collision is generally called <strong>rehashing</strong>.</li>
-<li>With <strong>simple linear probing</strong>, the rehash function is:</li>
-</ul>
-<p>$$newHashValue = rehash(oldHashValue) \text{  where   } rehash(pos)$$<br>$$ = (pos+1) \bmod tableSize$$</p>
-<ul>
-<li>With “plus 3” linear probing, the rehash function is:</li>
-</ul>
-<p>$$<br>rehash(pos) = (pos+3) \bmod tableSize<br>$$</p>
-<h2 id="HashTable-implementation-in-Python"><a href="#HashTable-implementation-in-Python" class="headerlink" title="HashTable implementation in Python"></a>HashTable implementation in Python</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HashTable</span>:</span></span><br><span class="line">      <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, size)</span>:</span></span><br><span class="line">          self.slots = [<span class="literal">None</span>] * size</span><br><span class="line">          self.data = [<span class="literal">None</span>] * size</span><br><span class="line"></span><br><span class="line">      <span class="function"><span class="keyword">def</span> <span class="title">store</span><span class="params">(self, key, data)</span>:</span></span><br><span class="line">          hashValue = self.hashFunction(key, len(self.slots))</span><br><span class="line"></span><br><span class="line">          <span class="keyword">if</span> self.slots[hashValue] == <span class="literal">None</span>:</span><br><span class="line">              self.slots[hashValue] = key</span><br><span class="line">              self.data[hashValue] = data</span><br><span class="line">          <span class="keyword">else</span>:</span><br><span class="line">              nextSlot = self.rehash(hashValue, len(self.slots))</span><br><span class="line"></span><br><span class="line">              <span class="keyword">while</span> self.slots[nextSlot] != <span class="literal">None</span>:</span><br><span class="line">                 nextSlot = self.rehash(nextSlot, len(self.slots))</span><br><span class="line">              </span><br><span class="line">              self.slots[hashValue] = key</span><br><span class="line">              self.data[hashValue] = data</span><br><span class="line"></span><br><span class="line">      <span class="function"><span class="keyword">def</span> <span class="title">hashFunction</span><span class="params">(self, key, size)</span>:</span></span><br><span class="line">          <span class="keyword">return</span> key % size</span><br><span class="line"></span><br><span class="line">      <span class="function"><span class="keyword">def</span> <span class="title">rehash</span><span class="params">(self, oldHash, size)</span>:</span></span><br><span class="line">          <span class="keyword">return</span> (oldHash + <span class="number">1</span>) % size</span><br></pre></td></tr></table></figure>
-</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
-        var options = {
-            selector: '.gallery-item'
-        };
-        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
-        }</script>]]></content>
-      <categories>
-        <category>Olemiss</category>
-        <category>CSCI 356</category>
-      </categories>
-      <tags>
-        <tag>CSCI 356</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>File I/O</title>
     <url>/2020/04/19/2020-04-19-csci259-lec5-3/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
@@ -1227,28 +1382,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Loops and Files [2/2]</title>
-    <url>/2020/03/31/2020-03-31-csci259-lec5-2/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
-<h2 id="Exercises-for-Nested-Loops"><a href="#Exercises-for-Nested-Loops" class="headerlink" title="Exercises for Nested Loops"></a>Exercises for Nested Loops</h2><div class="tabs" id="third-ex1-unique-name"><ul class="nav-tabs"><li class="tab active"><a href="#third-ex1-unique-name-1">Problem</a></li><li class="tab"><a href="#third-ex1-unique-name-2">Answer</a></li><li class="tab"><a href="#third-ex1-unique-name-3">Result</a></li></ul><div class="tab-content"><div class="tab-pane active" id="third-ex1-unique-name-1"><h3 id="Diamond"><a href="#Diamond" class="headerlink" title="Diamond"></a>Diamond</h3><p>Write a nested for-loop to print out the following:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">     *</span><br><span class="line">    ***</span><br><span class="line">   *****</span><br><span class="line">  *******</span><br><span class="line"> *********</span><br><span class="line">***********</span><br><span class="line"> *********</span><br><span class="line">  *******</span><br><span class="line">   *****</span><br><span class="line">    ***</span><br><span class="line">     *</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="third-ex1-unique-name-2"><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> ROW_SIZE =  <span class="number">6</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> DIA_ROWSIZ = (<span class="number">2</span> * ROW_SIZE - <span class="number">1</span>) / <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = DIA_ROWSIZ; i &gt;= -DIA_ROWSIZ; i--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="built_in">abs</span>(i); j++)</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">' '</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">2</span> * (DIA_ROWSIZ - <span class="built_in">abs</span>(i)) + <span class="number">1</span>; j++)</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">'*'</span>;</span><br><span class="line">    </span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="third-ex1-unique-name-3"><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">     *</span><br><span class="line">    ***</span><br><span class="line">   *****</span><br><span class="line">  *******</span><br><span class="line"> *********</span><br><span class="line">***********</span><br><span class="line"> *********</span><br><span class="line">  *******</span><br><span class="line">   *****</span><br><span class="line">    ***</span><br><span class="line">     *</span><br></pre></td></tr></table></figure></div></div></div>
-
-<div class="tabs" id="third-ex2-unique-name"><ul class="nav-tabs"><li class="tab active"><a href="#third-ex2-unique-name-1">Problem</a></li><li class="tab"><a href="#third-ex2-unique-name-2">Answer</a></li><li class="tab"><a href="#third-ex2-unique-name-3">Result</a></li></ul><div class="tab-content"><div class="tab-pane active" id="third-ex2-unique-name-1"><h3 id="Finding-out-whether-a-word-is-a-palindrome"><a href="#Finding-out-whether-a-word-is-a-palindrome" class="headerlink" title="Finding out whether a word is a palindrome"></a>Finding out whether a word is a palindrome</h3><p>Write a program that prompts the user to enter a word and decide whether that word is a palindrome</p></div><div class="tab-pane" id="third-ex2-unique-name-2"><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">string</span> word;</span><br><span class="line">    <span class="keyword">size_t</span> i, length;</span><br><span class="line">    <span class="keyword">bool</span> flag = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Enter the string: "</span>;</span><br><span class="line">    getline(<span class="built_in">cin</span>, word);</span><br><span class="line">    </span><br><span class="line">    length = word.length();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length/<span class="number">2</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (word[i] != word[length - i - <span class="number">1</span>])</span><br><span class="line">        &#123;</span><br><span class="line">            flag = <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (flag)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"palindrome\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Not palindrome\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="third-ex2-unique-name-3"><p>Enter the string: racecar<br>palindrome</p></div></div></div>
-</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
-        var options = {
-            selector: '.gallery-item'
-        };
-        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
-        }</script>]]></content>
-      <categories>
-        <category>Olemiss</category>
-        <category>CSCI 259</category>
-      </categories>
-      <tags>
-        <tag>CSCI 259</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Making Decisions</title>
     <url>/2020/03/31/2020-03-31-csci259-lec4/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
@@ -1402,6 +1535,28 @@
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">Enter two characters: M1</span><br><span class="line">Mathematics Freshman</span><br><span class="line">&gt;&gt;</span><br><span class="line">Enter two characters: C3</span><br><span class="line">Computer Science Junior</span><br><span class="line">&gt;&gt;</span><br><span class="line">Enter two characters: T3</span><br><span class="line">Invalid input</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="third-case1-unique-name-2"><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> major;</span><br><span class="line">    <span class="keyword">char</span> number;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Enter two characters: "</span>;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; major &gt;&gt; number;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> ((major == <span class="string">'M'</span> || major == <span class="string">'C'</span> || major == <span class="string">'I'</span>) &amp;&amp; (number &gt;= <span class="string">'1'</span> &amp;&amp; number &lt;= <span class="string">'4'</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">switch</span> (major)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'M'</span>:</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; <span class="string">"Mathematics "</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'C'</span>:</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; <span class="string">"Computer Science "</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'I'</span>:</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; <span class="string">"Information Technology "</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">switch</span> (number)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'1'</span>:</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; <span class="string">"Freshman\n"</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'2'</span>:</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; <span class="string">"Sophomore\n"</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'3'</span>:</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; <span class="string">"Junior\n"</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'4'</span>:</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; <span class="string">"Senior\n"</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Invaild Input\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="third-case1-unique-name-3"><p>Enter two characters: C3<br>Computer Science Junior</p></div></div></div>
 
 <div class="tabs" id="fourth-case2-unique-name"><ul class="nav-tabs"><li class="tab active"><a href="#fourth-case2-unique-name-1">Problem</a></li><li class="tab"><a href="#fourth-case2-unique-name-2">Answer1</a></li><li class="tab"><a href="#fourth-case2-unique-name-3">Answer2</a></li><li class="tab"><a href="#fourth-case2-unique-name-4">Result</a></li></ul><div class="tab-content"><div class="tab-pane active" id="fourth-case2-unique-name-1"><h3 id="Converting-a-Hexadecimal-Digit-to-a-Decimal-Value"><a href="#Converting-a-Hexadecimal-Digit-to-a-Decimal-Value" class="headerlink" title="Converting a Hexadecimal Digit to a Decimal Value"></a>Converting a Hexadecimal Digit to a Decimal Value</h3><p>Write a program that converts a hexadecimal digit into a decimal value.</p></div><div class="tab-pane" id="fourth-case2-unique-name-2"><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cctype&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">string</span> hexa_decimal;</span><br><span class="line">    <span class="keyword">int</span> decimal = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> base = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Enter the Hexadecimal digits: "</span>;</span><br><span class="line">    getline(<span class="built_in">cin</span>, hexa_decimal);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = hexa_decimal.length()<span class="number">-1</span>; i &gt;= <span class="number">0</span> ; i--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">isdigit</span>(hexa_decimal[i]))</span><br><span class="line">        &#123;</span><br><span class="line">            decimal += (hexa_decimal[i] - <span class="number">48</span>)*base;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">islower</span>(hexa_decimal[i]))</span><br><span class="line">        &#123;</span><br><span class="line">            decimal += (hexa_decimal[i] - <span class="number">87</span>)*base;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            decimal += (hexa_decimal[i] - <span class="number">55</span>)*base;</span><br><span class="line">        &#125;</span><br><span class="line">        base *= <span class="number">16</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Result: "</span> &lt;&lt; decimal &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="fourth-case2-unique-name-3"><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> nums;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Enter the Hexadecimal digits: "</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; <span class="built_in">std</span>::hex &gt;&gt; nums;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Result: "</span> &lt;&lt; nums;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="fourth-case2-unique-name-4"><p>Enter the Hexadecimal digits: FF<br>Result: 255</p></div></div></div>
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>]]></content>
+      <categories>
+        <category>Olemiss</category>
+        <category>CSCI 259</category>
+      </categories>
+      <tags>
+        <tag>CSCI 259</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Loops and Files [2/2]</title>
+    <url>/2020/03/31/2020-03-31-csci259-lec5-2/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
+<h2 id="Exercises-for-Nested-Loops"><a href="#Exercises-for-Nested-Loops" class="headerlink" title="Exercises for Nested Loops"></a>Exercises for Nested Loops</h2><div class="tabs" id="third-ex1-unique-name"><ul class="nav-tabs"><li class="tab active"><a href="#third-ex1-unique-name-1">Problem</a></li><li class="tab"><a href="#third-ex1-unique-name-2">Answer</a></li><li class="tab"><a href="#third-ex1-unique-name-3">Result</a></li></ul><div class="tab-content"><div class="tab-pane active" id="third-ex1-unique-name-1"><h3 id="Diamond"><a href="#Diamond" class="headerlink" title="Diamond"></a>Diamond</h3><p>Write a nested for-loop to print out the following:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">     *</span><br><span class="line">    ***</span><br><span class="line">   *****</span><br><span class="line">  *******</span><br><span class="line"> *********</span><br><span class="line">***********</span><br><span class="line"> *********</span><br><span class="line">  *******</span><br><span class="line">   *****</span><br><span class="line">    ***</span><br><span class="line">     *</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="third-ex1-unique-name-2"><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> ROW_SIZE =  <span class="number">6</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> DIA_ROWSIZ = (<span class="number">2</span> * ROW_SIZE - <span class="number">1</span>) / <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = DIA_ROWSIZ; i &gt;= -DIA_ROWSIZ; i--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="built_in">abs</span>(i); j++)</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">' '</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">2</span> * (DIA_ROWSIZ - <span class="built_in">abs</span>(i)) + <span class="number">1</span>; j++)</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">'*'</span>;</span><br><span class="line">    </span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="third-ex1-unique-name-3"><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">     *</span><br><span class="line">    ***</span><br><span class="line">   *****</span><br><span class="line">  *******</span><br><span class="line"> *********</span><br><span class="line">***********</span><br><span class="line"> *********</span><br><span class="line">  *******</span><br><span class="line">   *****</span><br><span class="line">    ***</span><br><span class="line">     *</span><br></pre></td></tr></table></figure></div></div></div>
+
+<div class="tabs" id="third-ex2-unique-name"><ul class="nav-tabs"><li class="tab active"><a href="#third-ex2-unique-name-1">Problem</a></li><li class="tab"><a href="#third-ex2-unique-name-2">Answer</a></li><li class="tab"><a href="#third-ex2-unique-name-3">Result</a></li></ul><div class="tab-content"><div class="tab-pane active" id="third-ex2-unique-name-1"><h3 id="Finding-out-whether-a-word-is-a-palindrome"><a href="#Finding-out-whether-a-word-is-a-palindrome" class="headerlink" title="Finding out whether a word is a palindrome"></a>Finding out whether a word is a palindrome</h3><p>Write a program that prompts the user to enter a word and decide whether that word is a palindrome</p></div><div class="tab-pane" id="third-ex2-unique-name-2"><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">string</span> word;</span><br><span class="line">    <span class="keyword">size_t</span> i, length;</span><br><span class="line">    <span class="keyword">bool</span> flag = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Enter the string: "</span>;</span><br><span class="line">    getline(<span class="built_in">cin</span>, word);</span><br><span class="line">    </span><br><span class="line">    length = word.length();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length/<span class="number">2</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (word[i] != word[length - i - <span class="number">1</span>])</span><br><span class="line">        &#123;</span><br><span class="line">            flag = <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (flag)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"palindrome\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Not palindrome\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="third-ex2-unique-name-3"><p>Enter the string: racecar<br>palindrome</p></div></div></div>
 </div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
         var options = {
             selector: '.gallery-item'
@@ -3715,46 +3870,6 @@ merge newbranch
       </tags>
   </entry>
   <entry>
-    <title>10989 수 정렬하기 3</title>
-    <url>/2020/02/15/2020-02-15-Baekjoon-10989/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<h2 id="Setting"><a href="#Setting" class="headerlink" title="Setting"></a>Setting</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> CNT_INFO[<span class="number">151</span>]; <span class="comment">// count of numbers</span></span><br><span class="line"><span class="keyword">char</span> buf[<span class="number">30</span>];      <span class="comment">// store &amp; output area</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>buf[30] (10 * 4 + 4 = 44) [if all data is stored once.]</p>
-</blockquote>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">+-----+</span><br><span class="line">| 10  |   Size</span><br><span class="line">+-----+----------+</span><br><span class="line">| 10  |          |</span><br><span class="line">+-----+          |</span><br><span class="line">| 20  |          |</span><br><span class="line">+-----+          |</span><br><span class="line">| 30  |          |</span><br><span class="line">+-----+          |</span><br><span class="line">| 40  |          |</span><br><span class="line">+-----+          -</span><br><span class="line">| 100 |          D</span><br><span class="line">+-----+          A</span><br><span class="line">| 100 |          T</span><br><span class="line">+-----+          A</span><br><span class="line">| 100 |          -</span><br><span class="line">+-----+          |</span><br><span class="line">| 120 |          |</span><br><span class="line">+-----+          |</span><br><span class="line">| 130 |          |</span><br><span class="line">+-----+          |</span><br><span class="line">| 140 |          |</span><br><span class="line">+-----+----------+</span><br></pre></td></tr></table></figure>
-
-<h2 id="If-statement"><a href="#If-statement" class="headerlink" title="If-statement"></a>If-statement</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (buf + sz - p - <span class="number">1</span> &lt; j)</span><br><span class="line">&#123;</span><br><span class="line">    fwrite(buf, <span class="keyword">sizeof</span>(<span class="keyword">char</span>), p - buf, <span class="built_in">stdout</span>);</span><br><span class="line">    p = buf;</span><br><span class="line">    <span class="keyword">goto</span> check_1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>만약 현재의 저장소 <code>buf</code>보다 더 많은 입력을 했다면 이 경우 예외 처리가 필요하다.</li>
-<li>따라서 현재까지 정렬된 저장소를 현재 문제가 발생된 부분을 제외하고 출력한다.</li>
-<li>또한 현재 포인터 p를 다시 저장소의 처음 주소로 이동한다.</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">check_1:</span><br><span class="line">    <span class="built_in">memcpy</span>(p, STR_INFO[num], j);</span><br><span class="line">    s = p;</span><br><span class="line">    p += j;</span><br><span class="line">    CNT_INFO[num]--;</span><br><span class="line">    f = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>이때 현재 값<code>STR_INFO[num]</code>을 처음 주소로 옮긴다.</li>
-<li>그리고 현재 포인터 p를 다음 주소로 옮긴다.</li>
-</ul>
-<h2 id="Source-Code"><a href="#Source-Code" class="headerlink" title="Source Code"></a>Source Code</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;memory.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// include user-defind memory</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"dataset.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//number: 1 ~ 150</span></span><br><span class="line"><span class="comment">//store area: 30</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _BUFSIZ 30</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _LENG 151</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> CNT_INFO[_LENG];</span><br><span class="line"><span class="keyword">char</span> buf[_BUFSIZ];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span>* p;</span><br><span class="line">    <span class="keyword">int</span> sz, remain;</span><br><span class="line">    <span class="keyword">int</span> num;</span><br><span class="line"></span><br><span class="line">    fread(buf, <span class="keyword">sizeof</span>(<span class="keyword">char</span>), _BUFSIZ, <span class="built_in">stdin</span>);</span><br><span class="line">    p = buf;</span><br><span class="line">    sz = <span class="keyword">sizeof</span>(buf);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Read size</span></span><br><span class="line">    <span class="keyword">for</span> (C = <span class="number">0</span>; *p++ &gt;= <span class="number">48</span>;)</span><br><span class="line">    &#123;</span><br><span class="line">        C = C * <span class="number">10</span> + (p[<span class="number">-1</span>] - <span class="number">48</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// store the values in array</span></span><br><span class="line">    <span class="keyword">while</span> (C--)</span><br><span class="line">    &#123;</span><br><span class="line">        remain = buf + sz - p;</span><br><span class="line">        <span class="keyword">if</span> (remain &lt; <span class="number">6</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">memcpy</span>(buf, p, remain);</span><br><span class="line">            fread(buf + remain, <span class="keyword">sizeof</span>(<span class="keyword">char</span>), sz - remain, <span class="built_in">stdin</span>);</span><br><span class="line">            p = buf;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (num = <span class="number">0</span>; *p++ &gt;= <span class="number">48</span>;)</span><br><span class="line">        &#123;</span><br><span class="line">            num = num * <span class="number">10</span> + (p[<span class="number">-1</span>] - <span class="number">48</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        CNT_INFO[num]++;</span><br><span class="line">    &#125;</span><br><span class="line">    p = buf;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (num = <span class="number">1</span>; num &lt; _LENG; num++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> f, c, k, j;</span><br><span class="line">        <span class="keyword">char</span>* s;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// To get the length of number</span></span><br><span class="line">        <span class="keyword">for</span> (k = num, j = <span class="number">1</span>; k &gt; <span class="number">0</span>; k /= <span class="number">10</span>, j++);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (CNT_INFO[num])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//if current remain size is not enough to store the current number</span></span><br><span class="line">            <span class="keyword">if</span> (buf + sz - p - <span class="number">1</span> &lt; j)</span><br><span class="line">            &#123;</span><br><span class="line">                fwrite(buf, <span class="keyword">sizeof</span>(<span class="keyword">char</span>), p - buf, <span class="built_in">stdout</span>);</span><br><span class="line">                p = buf;</span><br><span class="line">                <span class="keyword">goto</span> check_1;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        check_1:</span><br><span class="line">            <span class="built_in">memcpy</span>(p, STR_INFO[num], j);</span><br><span class="line">            s = p;</span><br><span class="line">            p += j;</span><br><span class="line">            CNT_INFO[num]--;</span><br><span class="line">            f = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// If still remain the count of number (it means, number &gt; 1).</span></span><br><span class="line">            <span class="keyword">while</span> (CNT_INFO[num] &gt; <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (CNT_INFO[num] &gt;= f)</span><br><span class="line">                &#123;</span><br><span class="line">                    c = f;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    c = CNT_INFO[num];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// if current remain size is not enough to store current sample numbers..</span></span><br><span class="line">                <span class="keyword">if</span> (buf + sz - p - <span class="number">1</span> &lt; j * c)</span><br><span class="line">                &#123;</span><br><span class="line">                    fwrite(buf, <span class="keyword">sizeof</span>(<span class="keyword">char</span>), p - buf, <span class="built_in">stdout</span>);</span><br><span class="line">                    p = buf;</span><br><span class="line">                    <span class="keyword">goto</span> check_1;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="built_in">memcpy</span>(p, s, j * c);</span><br><span class="line">                p += j * c;</span><br><span class="line">                CNT_INFO[num] -= c;</span><br><span class="line">                f += c;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    fwrite(buf, <span class="keyword">sizeof</span>(<span class="keyword">char</span>), p - buf, <span class="built_in">stdout</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://www.acmicpc.net/source/17694817" target="_blank" rel="noopener">My source #1</a><br><a href="https://www.acmicpc.net/source/17694757" target="_blank" rel="noopener">My source #2</a></p>
-</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
-        var options = {
-            selector: '.gallery-item'
-        };
-        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
-        }</script>]]></content>
-      <categories>
-        <category>Algorithm</category>
-        <category>Baekjoon</category>
-      </categories>
-      <tags>
-        <tag>Baekjoon</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Kakao clone coding</title>
     <url>/2020/02/15/2020-02-15-Kakao-clone-coding/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<p>Preview: <a href="https://sokhyg9016.github.io/Nomad-kakao-clone-2.0/">Link</a></p>
@@ -3858,121 +3973,31 @@ merge newbranch
       </tags>
   </entry>
   <entry>
-    <title>Position property</title>
-    <url>/2020/01/14/2020-01-14-position%20property%20note/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
-<h2 id="static"><a href="#static" class="headerlink" title="static"></a>static</h2><blockquote>
-<p>Default position value</p>
-</blockquote>
-<p><code>Default</code>로 모든 박스는 포지션이 static이다. 이 뜻은<br>그 element를 거기 놓으면 거기 있을 것이다~라는 뜻이다.</p>
-<hr>
-<h2 id="fixed"><a href="#fixed" class="headerlink" title="fixed"></a>fixed</h2><blockquote>
-<p>Fixed stays with me while I scroll.</p>
-</blockquote>
-<p>포지션이 fixed 라면 화면 상에 표시되는 위치에 고정되어 스크롤해도 사라지지 않는다.<br>즉, element가 그 위치에 overwrap해서 고정된다.</p>
-<hr>
-<h2 id="absolute"><a href="#absolute" class="headerlink" title="absolute"></a>absolute</h2><ul>
-<li>absolute는 fixed와 비슷하다. 어디에든 붙일 수 있지만 스크롤한다고 보이지는 않는다.</li>
-<li>포지션을 absolute로 설정하고 설정 값을 주면 html 상에서 부모(father)에 해당하는 박스를 찾지 못할 수도 있다.</li>
-<li>따라서 <code>relative</code> 포지션이 없는 경우, absolute는 문서의 본무 body에 맞춰서 포지션을 잡게 된다.</li>
-</ul>
+    <title>10989 수 정렬하기 3</title>
+    <url>/2020/02/15/2020-02-15-Baekjoon-10989/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<h2 id="Setting"><a href="#Setting" class="headerlink" title="Setting"></a>Setting</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> CNT_INFO[<span class="number">151</span>]; <span class="comment">// count of numbers</span></span><br><span class="line"><span class="keyword">char</span> buf[<span class="number">30</span>];      <span class="comment">// store &amp; output area</span></span><br></pre></td></tr></table></figure>
+
 <blockquote>
-<p>즉, <code>position: absolute;</code>가 설정되면 html 상에서 해당 element와 관계가 있는 (relative - 부모박스) element를 살펴보고 이에 상응해서 포지션이 결정된다. 이 경우 부모 박스가 상응하는 관계가 없어서 그냥 우리가 설정한 값대로 움직이게 됨으로 부모에 해당하는 박스를 찾지 못한다는 뜻이다.</p>
+<p>buf[30] (10 * 4 + 4 = 44) [if all data is stored once.]</p>
 </blockquote>
-<p>그렇기 때문에 만약 부모 박스가 없으면 child box는 문서 본문 body에 맞춰서 position을 잡을 것이다. 반대로 부모 박스에 <strong>position: relative;</strong> 를 설정하면 child box는 그에 상대해서 <code>absolute</code> 포지션을 잡을 것이다.</p>
-<blockquote>
-<ol>
-<li>Not stays with me while I scroll.</li>
-<li>Positioning relative to relative.</li>
-</ol>
-</blockquote>
-<hr>
-<h3 id="NOTE"><a href="#NOTE" class="headerlink" title="NOTE"></a>NOTE</h3><ol>
-<li>주의해야 할 점은 <code>absolute</code> 포지션을 부모 element에 상대적으로 사용하려면 부모 element에서 <code>relative</code> 포지션을 먼저 설정해줘야 한다.</li>
-<li>그게 설정되어야 차일즈 element는 부모 element 안에 위치할 수 있다.</li>
-</ol>
-<hr>
-<h2 id="position-html"><a href="#position-html" class="headerlink" title="position.html"></a>position.html</h2><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"ie=edge"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Position property<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">      /*</span><br><span class="line">            각 브라우저 마다 가지고 있는 Default 값을 상쇄하기 위해서</span><br><span class="line">            아래와 같은 설정을 해준다. </span><br><span class="line">        */</span><br><span class="line">      body,</span><br><span class="line">      html &#123;</span><br><span class="line">        height: 100%;</span><br><span class="line">        margin: 0;</span><br><span class="line">        padding: 0;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      body &#123;</span><br><span class="line">        height: 100%;</span><br><span class="line">        background-color: gray;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">      <span class="selector-class">.abs-box</span> &#123;</span></span><br><span class="line">        width: 400px;</span><br><span class="line">        height: 400px;</span><br><span class="line">        background-color: yellow;</span><br><span class="line">        position: relative;</span><br><span class="line">        top: 300px;</span><br><span class="line">        left: 50%;</span><br><span class="line">        transform: translate(-50%, -50%);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">      <span class="selector-class">.abs-child</span> &#123;</span></span><br><span class="line">        width: 100px;</span><br><span class="line">        height: 100px;</span><br><span class="line">        background-color: green;</span><br><span class="line">        position: absolute;</span><br><span class="line">        top: 10px;</span><br><span class="line">        left: 10px;</span><br><span class="line">      &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"abs-box"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"abs-child"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">+-----+</span><br><span class="line">| 10  |   Size</span><br><span class="line">+-----+----------+</span><br><span class="line">| 10  |          |</span><br><span class="line">+-----+          |</span><br><span class="line">| 20  |          |</span><br><span class="line">+-----+          |</span><br><span class="line">| 30  |          |</span><br><span class="line">+-----+          |</span><br><span class="line">| 40  |          |</span><br><span class="line">+-----+          -</span><br><span class="line">| 100 |          D</span><br><span class="line">+-----+          A</span><br><span class="line">| 100 |          T</span><br><span class="line">+-----+          A</span><br><span class="line">| 100 |          -</span><br><span class="line">+-----+          |</span><br><span class="line">| 120 |          |</span><br><span class="line">+-----+          |</span><br><span class="line">| 130 |          |</span><br><span class="line">+-----+          |</span><br><span class="line">| 140 |          |</span><br><span class="line">+-----+----------+</span><br></pre></td></tr></table></figure>
 
-<p><a href="../../../../img/position_property.png" title="Image description" class="gallery-item"><img src="../../../../img/position_property.png" alt="Image description"></a></p>
-</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
-        var options = {
-            selector: '.gallery-item'
-        };
-        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
-        }</script>]]></content>
-      <categories>
-        <category>HTML5</category>
-        <category>CSS3</category>
-      </categories>
-      <tags>
-        <tag>CSS3</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Advanced CSS</title>
-    <url>/2020/01/14/2020-01-14-Advanced%20CSS/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
-<h2 id="What-is-Transitions"><a href="#What-is-Transitions" class="headerlink" title="What is Transitions?"></a>What is Transitions?</h2><ol>
-<li>트랜지션(Transitions)이란 element의 이동 및 변경을 멋지게 보여주는 효과들이다.</li>
-<li>트랜지션은 focus, active, hover에서 효과적으로 사용된다.</li>
-<li>즉 <strong>transition</strong> 이란 element가 하나의 state에서 다른 state로 넘어갈 때의 효과를 말한다.</li>
-</ol>
-<h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span>Text<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="If-statement"><a href="#If-statement" class="headerlink" title="If-statement"></a>If-statement</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (buf + sz - p - <span class="number">1</span> &lt; j)</span><br><span class="line">&#123;</span><br><span class="line">    fwrite(buf, <span class="keyword">sizeof</span>(<span class="keyword">char</span>), p - buf, <span class="built_in">stdout</span>);</span><br><span class="line">    p = buf;</span><br><span class="line">    <span class="keyword">goto</span> check_1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight css"><figcaption><span>CSS</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: green;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">  <span class="attribute">transition</span>: background-color <span class="number">5s</span> ease-in-out;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>여기서,</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">transition</span>: <span class="selector-tag">background-color</span> 5<span class="selector-tag">s</span> <span class="selector-tag">ease-in-out</span>;</span><br></pre></td></tr></table></figure>
-
-<ol>
-<li>위 코드의 의미는 배경색(background-color)를 <code>5s</code> 안에 <strong>ease-in-out</strong> 애니메이션 효과를 적용하여 바꾸라는 의미이다.</li>
-<li>또한 이렇게 <strong>transition</strong> 앞에 바꾸고 싶은 property 값을 명시해주면 그 속성 값만 특정 효과를 적용하여 바꾸는 것이며, 만약 1개 이상의 설정값을 바꾸고 싶다면 transition 앞에 <code>all</code>이라고 적으면 된다.</li>
-</ol>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">transition</span>: <span class="selector-tag">all</span> 5<span class="selector-tag">s</span> <span class="selector-tag">ease-in-out</span>;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a href="https://developer.mozilla.org/en/docs/Web/CSS/transition" target="_blank" rel="noopener">Official Transition Documentation</a></p>
-<hr>
-<h2 id="What-is-Transformation"><a href="#What-is-Transformation" class="headerlink" title="What is Transformation?"></a>What is Transformation?</h2><ol>
-<li>트랜스포매이션(Transformation)은 html문서의 element들을 변경, 모습이 변하는 효과를 뜻한다.</li>
-<li>즉 transform이란 element의 모양새(shape)를 바꾸는 것이다.</li>
-<li><code>Transition</code>과 같이 합쳐서 사용할 수 있다. (즉 하나의 state에서 다른 state로 변할 때의 그 state에서의 모양새를 변경할 수 있다.)</li>
-</ol>
-<h3 id="Example-1"><a href="#Example-1" class="headerlink" title="Example"></a>Example</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">500px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">500px</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: red;</span><br><span class="line">  <span class="attribute">transition</span>: transform <span class="number">0.5s</span> ease-in-out;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.box</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">skew</span>(<span class="number">30deg</span>, <span class="number">20deg</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>이렇게 되면 <code>.box</code>에 해당하는 element에 마우스를 올려놓았을 때 0.5s 초 안에 해당 element가<br>설정한 [<code>skew(...)</code>] 모습으로 변화한다.</p>
-<p>또한 <code>transform</code> 설정을 복수로 결합하여 사용할 수 있다.</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">transform</span>: <span class="selector-tag">rotate</span>(1<span class="selector-tag">turn</span>) <span class="selector-tag">scale</span>(0<span class="selector-class">.5</span>, 0<span class="selector-class">.5</span>);</span><br></pre></td></tr></table></figure>
-
-<h3 id="Reference-1"><a href="#Reference-1" class="headerlink" title="Reference"></a>Reference</h3><ul>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transform" target="_blank" rel="noopener">CSS Transform Documentation</a></li>
-</ul>
-<hr>
-<h2 id="What-is-Animation"><a href="#What-is-Animation" class="headerlink" title="What is Animation?"></a>What is Animation?</h2><ul>
-<li><strong>Keyframe</strong> 은 CSS로 하여금 사용자가 animation을 생성했다는 것을 알려준다.</li>
-</ul>
-<blockquote>
-<p><strong>First step</strong>: Default status<br><strong>Second step</strong>: The element that Something changes</p>
-</blockquote>
 <ul>
-<li>Animation status가 2개만 필요할 때는 <code>from</code> ~ <code>to</code>만 작성하면 된다.</li>
-<li>더 세부적인 각 단계별 status step를 작성하고 싶을 때는 <strong>0% ~ 100%</strong> 까지 작성하면 된다.</li>
+<li>만약 현재의 저장소 <code>buf</code>보다 더 많은 입력을 했다면 이 경우 예외 처리가 필요하다.</li>
+<li>따라서 현재까지 정렬된 저장소를 현재 문제가 발생된 부분을 제외하고 출력한다.</li>
+<li>또한 현재 포인터 p를 다시 저장소의 처음 주소로 이동한다.</li>
 </ul>
-<h3 id="Example-2"><a href="#Example-2" class="headerlink" title="Example"></a>Example</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span>Text<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">check_1:</span><br><span class="line">    <span class="built_in">memcpy</span>(p, STR_INFO[num], j);</span><br><span class="line">    s = p;</span><br><span class="line">    p += j;</span><br><span class="line">    CNT_INFO[num]--;</span><br><span class="line">    f = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">70px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">70px</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: red;</span><br><span class="line">  <span class="attribute">animation</span>: <span class="number">1.5s</span> ScaleAndRotateSquare infinite ease-in-out;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@keyframes</span> ScaleAndRotateSquare &#123;</span><br><span class="line">  0% &#123;</span><br><span class="line">    <span class="attribute">transform</span>: none;</span><br><span class="line">  &#125;</span><br><span class="line">  50% &#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">rotate</span>(<span class="number">1turn</span>) <span class="built_in">scale</span>(<span class="number">0.5</span>, <span class="number">0.5</span>);</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  100% &#123;</span><br><span class="line">    <span class="attribute">transform</span>: none;</span><br><span class="line">    <span class="attribute">color</span>: blue;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>이때 현재 값<code>STR_INFO[num]</code>을 처음 주소로 옮긴다.</li>
+<li>그리고 현재 포인터 p를 다음 주소로 옮긴다.</li>
+</ul>
+<h2 id="Source-Code"><a href="#Source-Code" class="headerlink" title="Source Code"></a>Source Code</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;memory.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// include user-defind memory</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"dataset.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//number: 1 ~ 150</span></span><br><span class="line"><span class="comment">//store area: 30</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _BUFSIZ 30</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _LENG 151</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> CNT_INFO[_LENG];</span><br><span class="line"><span class="keyword">char</span> buf[_BUFSIZ];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span>* p;</span><br><span class="line">    <span class="keyword">int</span> sz, remain;</span><br><span class="line">    <span class="keyword">int</span> num;</span><br><span class="line"></span><br><span class="line">    fread(buf, <span class="keyword">sizeof</span>(<span class="keyword">char</span>), _BUFSIZ, <span class="built_in">stdin</span>);</span><br><span class="line">    p = buf;</span><br><span class="line">    sz = <span class="keyword">sizeof</span>(buf);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Read size</span></span><br><span class="line">    <span class="keyword">for</span> (C = <span class="number">0</span>; *p++ &gt;= <span class="number">48</span>;)</span><br><span class="line">    &#123;</span><br><span class="line">        C = C * <span class="number">10</span> + (p[<span class="number">-1</span>] - <span class="number">48</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// store the values in array</span></span><br><span class="line">    <span class="keyword">while</span> (C--)</span><br><span class="line">    &#123;</span><br><span class="line">        remain = buf + sz - p;</span><br><span class="line">        <span class="keyword">if</span> (remain &lt; <span class="number">6</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">memcpy</span>(buf, p, remain);</span><br><span class="line">            fread(buf + remain, <span class="keyword">sizeof</span>(<span class="keyword">char</span>), sz - remain, <span class="built_in">stdin</span>);</span><br><span class="line">            p = buf;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (num = <span class="number">0</span>; *p++ &gt;= <span class="number">48</span>;)</span><br><span class="line">        &#123;</span><br><span class="line">            num = num * <span class="number">10</span> + (p[<span class="number">-1</span>] - <span class="number">48</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        CNT_INFO[num]++;</span><br><span class="line">    &#125;</span><br><span class="line">    p = buf;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (num = <span class="number">1</span>; num &lt; _LENG; num++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> f, c, k, j;</span><br><span class="line">        <span class="keyword">char</span>* s;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// To get the length of number</span></span><br><span class="line">        <span class="keyword">for</span> (k = num, j = <span class="number">1</span>; k &gt; <span class="number">0</span>; k /= <span class="number">10</span>, j++);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (CNT_INFO[num])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//if current remain size is not enough to store the current number</span></span><br><span class="line">            <span class="keyword">if</span> (buf + sz - p - <span class="number">1</span> &lt; j)</span><br><span class="line">            &#123;</span><br><span class="line">                fwrite(buf, <span class="keyword">sizeof</span>(<span class="keyword">char</span>), p - buf, <span class="built_in">stdout</span>);</span><br><span class="line">                p = buf;</span><br><span class="line">                <span class="keyword">goto</span> check_1;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        check_1:</span><br><span class="line">            <span class="built_in">memcpy</span>(p, STR_INFO[num], j);</span><br><span class="line">            s = p;</span><br><span class="line">            p += j;</span><br><span class="line">            CNT_INFO[num]--;</span><br><span class="line">            f = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// If still remain the count of number (it means, number &gt; 1).</span></span><br><span class="line">            <span class="keyword">while</span> (CNT_INFO[num] &gt; <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (CNT_INFO[num] &gt;= f)</span><br><span class="line">                &#123;</span><br><span class="line">                    c = f;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    c = CNT_INFO[num];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// if current remain size is not enough to store current sample numbers..</span></span><br><span class="line">                <span class="keyword">if</span> (buf + sz - p - <span class="number">1</span> &lt; j * c)</span><br><span class="line">                &#123;</span><br><span class="line">                    fwrite(buf, <span class="keyword">sizeof</span>(<span class="keyword">char</span>), p - buf, <span class="built_in">stdout</span>);</span><br><span class="line">                    p = buf;</span><br><span class="line">                    <span class="keyword">goto</span> check_1;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="built_in">memcpy</span>(p, s, j * c);</span><br><span class="line">                p += j * c;</span><br><span class="line">                CNT_INFO[num] -= c;</span><br><span class="line">                f += c;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    fwrite(buf, <span class="keyword">sizeof</span>(<span class="keyword">char</span>), p - buf, <span class="built_in">stdout</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="What-is-media-query"><a href="#What-is-media-query" class="headerlink" title="What is media query?"></a>What is media query?</h2><blockquote>
-<p>Media queries are conditions that let me change the CSS based on the size of the browser</p>
-</blockquote>
-<ol>
-<li><code>media query</code>는 사용자의 디스플레이 환경에 따른 CSS 설정을 바꾸어 줄 수 있는 기능이다.</li>
-<li>mobile - desktop 환경에 따른 디자인 변경을 가능하게 해준다.</li>
-<li>반응형 웹 디자인에 유용</li>
-</ol>
-<h3 id="Example-3"><a href="#Example-3" class="headerlink" title="Example"></a>Example</h3><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: green;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">min-width:</span> <span class="number">320px</span>) <span class="keyword">and</span> (<span class="attribute">max-width:</span> <span class="number">640px</span>) &#123;</span><br><span class="line">  <span class="selector-tag">body</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: blue;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://www.acmicpc.net/source/17694817" target="_blank" rel="noopener">My source #1</a><br><a href="https://www.acmicpc.net/source/17694757" target="_blank" rel="noopener">My source #2</a></p>
 </div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
         var options = {
             selector: '.gallery-item'
@@ -3980,11 +4005,11 @@ merge newbranch
         lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
         }</script>]]></content>
       <categories>
-        <category>HTML5</category>
-        <category>CSS3</category>
+        <category>Algorithm</category>
+        <category>Baekjoon</category>
       </categories>
       <tags>
-        <tag>CSS3</tag>
+        <tag>Baekjoon</tag>
       </tags>
   </entry>
   <entry>
@@ -4071,6 +4096,136 @@ merge newbranch
       </categories>
       <tags>
         <tag>Programming</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Advanced CSS</title>
+    <url>/2020/01/14/2020-01-14-Advanced%20CSS/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
+<h2 id="What-is-Transitions"><a href="#What-is-Transitions" class="headerlink" title="What is Transitions?"></a>What is Transitions?</h2><ol>
+<li>트랜지션(Transitions)이란 element의 이동 및 변경을 멋지게 보여주는 효과들이다.</li>
+<li>트랜지션은 focus, active, hover에서 효과적으로 사용된다.</li>
+<li>즉 <strong>transition</strong> 이란 element가 하나의 state에서 다른 state로 넘어갈 때의 효과를 말한다.</li>
+</ol>
+<h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span>Text<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><figcaption><span>CSS</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: green;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">  <span class="attribute">transition</span>: background-color <span class="number">5s</span> ease-in-out;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>여기서,</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">transition</span>: <span class="selector-tag">background-color</span> 5<span class="selector-tag">s</span> <span class="selector-tag">ease-in-out</span>;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>위 코드의 의미는 배경색(background-color)를 <code>5s</code> 안에 <strong>ease-in-out</strong> 애니메이션 효과를 적용하여 바꾸라는 의미이다.</li>
+<li>또한 이렇게 <strong>transition</strong> 앞에 바꾸고 싶은 property 값을 명시해주면 그 속성 값만 특정 효과를 적용하여 바꾸는 것이며, 만약 1개 이상의 설정값을 바꾸고 싶다면 transition 앞에 <code>all</code>이라고 적으면 된다.</li>
+</ol>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">transition</span>: <span class="selector-tag">all</span> 5<span class="selector-tag">s</span> <span class="selector-tag">ease-in-out</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a href="https://developer.mozilla.org/en/docs/Web/CSS/transition" target="_blank" rel="noopener">Official Transition Documentation</a></p>
+<hr>
+<h2 id="What-is-Transformation"><a href="#What-is-Transformation" class="headerlink" title="What is Transformation?"></a>What is Transformation?</h2><ol>
+<li>트랜스포매이션(Transformation)은 html문서의 element들을 변경, 모습이 변하는 효과를 뜻한다.</li>
+<li>즉 transform이란 element의 모양새(shape)를 바꾸는 것이다.</li>
+<li><code>Transition</code>과 같이 합쳐서 사용할 수 있다. (즉 하나의 state에서 다른 state로 변할 때의 그 state에서의 모양새를 변경할 수 있다.)</li>
+</ol>
+<h3 id="Example-1"><a href="#Example-1" class="headerlink" title="Example"></a>Example</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">500px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">500px</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: red;</span><br><span class="line">  <span class="attribute">transition</span>: transform <span class="number">0.5s</span> ease-in-out;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.box</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">skew</span>(<span class="number">30deg</span>, <span class="number">20deg</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>이렇게 되면 <code>.box</code>에 해당하는 element에 마우스를 올려놓았을 때 0.5s 초 안에 해당 element가<br>설정한 [<code>skew(...)</code>] 모습으로 변화한다.</p>
+<p>또한 <code>transform</code> 설정을 복수로 결합하여 사용할 수 있다.</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">transform</span>: <span class="selector-tag">rotate</span>(1<span class="selector-tag">turn</span>) <span class="selector-tag">scale</span>(0<span class="selector-class">.5</span>, 0<span class="selector-class">.5</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="Reference-1"><a href="#Reference-1" class="headerlink" title="Reference"></a>Reference</h3><ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transform" target="_blank" rel="noopener">CSS Transform Documentation</a></li>
+</ul>
+<hr>
+<h2 id="What-is-Animation"><a href="#What-is-Animation" class="headerlink" title="What is Animation?"></a>What is Animation?</h2><ul>
+<li><strong>Keyframe</strong> 은 CSS로 하여금 사용자가 animation을 생성했다는 것을 알려준다.</li>
+</ul>
+<blockquote>
+<p><strong>First step</strong>: Default status<br><strong>Second step</strong>: The element that Something changes</p>
+</blockquote>
+<ul>
+<li>Animation status가 2개만 필요할 때는 <code>from</code> ~ <code>to</code>만 작성하면 된다.</li>
+<li>더 세부적인 각 단계별 status step를 작성하고 싶을 때는 <strong>0% ~ 100%</strong> 까지 작성하면 된다.</li>
+</ul>
+<h3 id="Example-2"><a href="#Example-2" class="headerlink" title="Example"></a>Example</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span>Text<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">70px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">70px</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: red;</span><br><span class="line">  <span class="attribute">animation</span>: <span class="number">1.5s</span> ScaleAndRotateSquare infinite ease-in-out;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@keyframes</span> ScaleAndRotateSquare &#123;</span><br><span class="line">  0% &#123;</span><br><span class="line">    <span class="attribute">transform</span>: none;</span><br><span class="line">  &#125;</span><br><span class="line">  50% &#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">rotate</span>(<span class="number">1turn</span>) <span class="built_in">scale</span>(<span class="number">0.5</span>, <span class="number">0.5</span>);</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  100% &#123;</span><br><span class="line">    <span class="attribute">transform</span>: none;</span><br><span class="line">    <span class="attribute">color</span>: blue;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="What-is-media-query"><a href="#What-is-media-query" class="headerlink" title="What is media query?"></a>What is media query?</h2><blockquote>
+<p>Media queries are conditions that let me change the CSS based on the size of the browser</p>
+</blockquote>
+<ol>
+<li><code>media query</code>는 사용자의 디스플레이 환경에 따른 CSS 설정을 바꾸어 줄 수 있는 기능이다.</li>
+<li>mobile - desktop 환경에 따른 디자인 변경을 가능하게 해준다.</li>
+<li>반응형 웹 디자인에 유용</li>
+</ol>
+<h3 id="Example-3"><a href="#Example-3" class="headerlink" title="Example"></a>Example</h3><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: green;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">min-width:</span> <span class="number">320px</span>) <span class="keyword">and</span> (<span class="attribute">max-width:</span> <span class="number">640px</span>) &#123;</span><br><span class="line">  <span class="selector-tag">body</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: blue;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>]]></content>
+      <categories>
+        <category>HTML5</category>
+        <category>CSS3</category>
+      </categories>
+      <tags>
+        <tag>CSS3</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Position property</title>
+    <url>/2020/01/14/2020-01-14-position%20property%20note/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<hr>
+<h2 id="static"><a href="#static" class="headerlink" title="static"></a>static</h2><blockquote>
+<p>Default position value</p>
+</blockquote>
+<p><code>Default</code>로 모든 박스는 포지션이 static이다. 이 뜻은<br>그 element를 거기 놓으면 거기 있을 것이다~라는 뜻이다.</p>
+<hr>
+<h2 id="fixed"><a href="#fixed" class="headerlink" title="fixed"></a>fixed</h2><blockquote>
+<p>Fixed stays with me while I scroll.</p>
+</blockquote>
+<p>포지션이 fixed 라면 화면 상에 표시되는 위치에 고정되어 스크롤해도 사라지지 않는다.<br>즉, element가 그 위치에 overwrap해서 고정된다.</p>
+<hr>
+<h2 id="absolute"><a href="#absolute" class="headerlink" title="absolute"></a>absolute</h2><ul>
+<li>absolute는 fixed와 비슷하다. 어디에든 붙일 수 있지만 스크롤한다고 보이지는 않는다.</li>
+<li>포지션을 absolute로 설정하고 설정 값을 주면 html 상에서 부모(father)에 해당하는 박스를 찾지 못할 수도 있다.</li>
+<li>따라서 <code>relative</code> 포지션이 없는 경우, absolute는 문서의 본무 body에 맞춰서 포지션을 잡게 된다.</li>
+</ul>
+<blockquote>
+<p>즉, <code>position: absolute;</code>가 설정되면 html 상에서 해당 element와 관계가 있는 (relative - 부모박스) element를 살펴보고 이에 상응해서 포지션이 결정된다. 이 경우 부모 박스가 상응하는 관계가 없어서 그냥 우리가 설정한 값대로 움직이게 됨으로 부모에 해당하는 박스를 찾지 못한다는 뜻이다.</p>
+</blockquote>
+<p>그렇기 때문에 만약 부모 박스가 없으면 child box는 문서 본문 body에 맞춰서 position을 잡을 것이다. 반대로 부모 박스에 <strong>position: relative;</strong> 를 설정하면 child box는 그에 상대해서 <code>absolute</code> 포지션을 잡을 것이다.</p>
+<blockquote>
+<ol>
+<li>Not stays with me while I scroll.</li>
+<li>Positioning relative to relative.</li>
+</ol>
+</blockquote>
+<hr>
+<h3 id="NOTE"><a href="#NOTE" class="headerlink" title="NOTE"></a>NOTE</h3><ol>
+<li>주의해야 할 점은 <code>absolute</code> 포지션을 부모 element에 상대적으로 사용하려면 부모 element에서 <code>relative</code> 포지션을 먼저 설정해줘야 한다.</li>
+<li>그게 설정되어야 차일즈 element는 부모 element 안에 위치할 수 있다.</li>
+</ol>
+<hr>
+<h2 id="position-html"><a href="#position-html" class="headerlink" title="position.html"></a>position.html</h2><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"ie=edge"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Position property<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">      /*</span><br><span class="line">            각 브라우저 마다 가지고 있는 Default 값을 상쇄하기 위해서</span><br><span class="line">            아래와 같은 설정을 해준다. </span><br><span class="line">        */</span><br><span class="line">      body,</span><br><span class="line">      html &#123;</span><br><span class="line">        height: 100%;</span><br><span class="line">        margin: 0;</span><br><span class="line">        padding: 0;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      body &#123;</span><br><span class="line">        height: 100%;</span><br><span class="line">        background-color: gray;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">      <span class="selector-class">.abs-box</span> &#123;</span></span><br><span class="line">        width: 400px;</span><br><span class="line">        height: 400px;</span><br><span class="line">        background-color: yellow;</span><br><span class="line">        position: relative;</span><br><span class="line">        top: 300px;</span><br><span class="line">        left: 50%;</span><br><span class="line">        transform: translate(-50%, -50%);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">      <span class="selector-class">.abs-child</span> &#123;</span></span><br><span class="line">        width: 100px;</span><br><span class="line">        height: 100px;</span><br><span class="line">        background-color: green;</span><br><span class="line">        position: absolute;</span><br><span class="line">        top: 10px;</span><br><span class="line">        left: 10px;</span><br><span class="line">      &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"abs-box"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"abs-child"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><a href="../../../../img/position_property.png" title="Image description" class="gallery-item"><img src="../../../../img/position_property.png" alt="Image description"></a></p>
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>]]></content>
+      <categories>
+        <category>HTML5</category>
+        <category>CSS3</category>
+      </categories>
+      <tags>
+        <tag>CSS3</tag>
       </tags>
   </entry>
   <entry>
