@@ -1,3 +1,4 @@
+@import url("https://cdn.jsdelivr.net/npm/font-kopub@1.0/kopubdotum.min.css");
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400&display=swap");
 @import url("https://cdn.jsdelivr.net/font-iropke-batang/1.2/font-iropke-batang.css");
 @import url("https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&display=swap&subset=korean");
@@ -19,10 +20,11 @@ body {
 }
 main {
   display: block;
+  margin-top: 80px;
 }
 @media (max-width: 767px) {
   main {
-    margin-top: 50px;
+    margin-top: 120px;
   }
 }
 h1 {
@@ -207,7 +209,7 @@ h6 {
   font-family: 'NanumSquare', 'NanumSquare', "PingFang SC", "Microsoft YaHei", sans-serif;
   font-weight: bold;
   line-height: 1.5;
-  margin: 20px 0 15px;
+  margin-bottom: 15px;
 }
 h1 {
   font-size: 1.5em;
@@ -1172,8 +1174,8 @@ pre .javascript .function {
 }
 .menu {
   margin-top: 20px;
-  padding-left: 0;
-  text-align: center;
+  padding-right: 5px;
+  text-align: right;
 }
 .menu-item {
   display: inline-block;
@@ -1299,7 +1301,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #cf41be;
+  background: #ffff40;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1747,7 +1749,7 @@ pre .javascript .function {
   border-bottom: 1px solid #ddd;
 }
 .post-body table {
-  font-size: 0.9em;
+  font-size: 0.9rem;
 }
 .post-body table>thead {
   border-left: none;
@@ -2042,7 +2044,7 @@ pre .javascript .function {
   display: none;
 }
 .posts-expand {
-  margin: 0 135px;
+  margin: 0 120px;
 }
 @media (max-width: 767px) {
   .posts-expand {
@@ -2166,9 +2168,19 @@ pre .javascript .function {
 .post-body h4,
 .post-body h5,
 .post-body h6 {
-  margin-top: 2.5rem;
+  margin-top: 60px;
   color: #3c4146;
   word-break: break-word;
+}
+@media (max-width: 767px) {
+  .post-body h1,
+  .post-body h2:not(.event-summary),
+  .post-body h3,
+  .post-body h4,
+  .post-body h5,
+  .post-body h6 {
+    margin-top: 2.5rem;
+  }
 }
 .post-body h1 .header-anchor,
 .post-body h2:not(.event-summary) .header-anchor,
@@ -2801,7 +2813,7 @@ hr {
   margin-top: 10px;
   margin-bottom: 10px;
   background: #fff;
-  box-shadow: 0 20px 50px -10px rgba(0,50,50,0.2), 0 18px 36px -18px rgba(0,0,100,0.25);
+  box-shadow: 0 1px 3px 1px rgba(60,64,67,0.15);
   padding-bottom: 80px;
 }
 @media (max-width: 767px) {
@@ -2840,6 +2852,15 @@ hr {
 .header {
   background: #fff;
   border-bottom: 1px solid #ccc;
+  position: fixed;
+  width: 100%;
+  top: 0%;
+  z-index: 999;
+  transition: ease 0.5s;
+  -webkit-transition: ease 0.5s;
+}
+.header.active {
+  box-shadow: rgba(60,64,67,0.15) 0px 1px 3px 1px;
 }
 .header-inner {
   align-items: center;
