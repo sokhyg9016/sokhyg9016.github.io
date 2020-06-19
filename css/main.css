@@ -190,6 +190,11 @@ body {
     padding-right: 0 !important;
   }
 }
+@media (min-width: 768px) and (max-width: 991px) {
+  body {
+    background: #fff;
+  }
+}
 @media (max-width: 767px) {
   h2,
   h3,
@@ -1301,7 +1306,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ffff40;
+  background: #8c3838;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2046,6 +2051,22 @@ pre .javascript .function {
 .posts-expand {
   margin: 0 120px;
 }
+@media (min-width: 768px) and (max-width: 991px) {
+  .posts-expand {
+    margin: 0 80px;
+  }
+  .posts-expand pre {
+    font-size: 1.1em;
+  }
+}
+@media (min-width: 1600px) {
+  .posts-expand pre {
+    font-size: 1.15em;
+  }
+  .posts-expand table {
+    font-size: 0.9em;
+  }
+}
 @media (max-width: 767px) {
   .posts-expand {
     padding-top: 0px;
@@ -2155,6 +2176,16 @@ pre .javascript .function {
 @media (min-width: 992px) {
   .post-body {
     text-align: left;
+  }
+}
+@media (min-width: 1200px) {
+  .post-body {
+    font-size: 1.1rem;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .post-body {
+    font-size: 1.1rem;
   }
 }
 @media (max-width: 991px) {
@@ -2818,6 +2849,14 @@ hr {
 }
 @media (max-width: 767px) {
   .main-inner {
+    margin-top: 0px;
+    box-shadow: none;
+    width: auto;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .main-inner {
+    background: none;
     margin-top: 0px;
     box-shadow: none;
     width: auto;
