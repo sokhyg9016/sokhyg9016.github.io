@@ -1306,7 +1306,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #8c3838;
+  background: #6c1d99;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2053,7 +2053,7 @@ pre .javascript .function {
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .posts-expand {
-    margin: 0 80px;
+    margin: 0 7em;
   }
   .posts-expand pre {
     font-size: 1.1em;
